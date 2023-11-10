@@ -1,0 +1,16 @@
+.wrapper-kode-ticket {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #5A6A85;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid #DFE5EF;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 7px;
+}
