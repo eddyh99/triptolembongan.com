@@ -13,8 +13,8 @@ class Ticket extends CI_Controller
     {
         $data = array(
             'title'             => NAMETITLE . ' - Daftar Ticket',
-            'content'           => 'admin/daftar_ticket/index',
-            'extra'             => 'admin/daftar_ticket/js/_js_index',
+            'content'           => 'admin/ticket/index',
+            'extra'             => 'admin/ticket/js/_js_index',
             'ticket_active'     => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);
@@ -24,8 +24,8 @@ class Ticket extends CI_Controller
     {
         $data = array(
             'title'             => NAMETITLE . ' - Tambah Ticket',
-            'content'           => 'admin/daftar_ticket/tambah_ticket',
-            'extra'             => 'admin/daftar_ticket/js/_js_index',
+            'content'           => 'admin/ticket/tambah_ticket',
+            'extra'             => 'admin/ticket/js/_js_index',
             'ticket_active'     => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);

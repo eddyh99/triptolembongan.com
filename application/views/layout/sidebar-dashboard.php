@@ -30,19 +30,43 @@
                     <span class="hide-menu">MASTER</span>
                 </li>
                 <li class="sidebar-item">
-                <a class="sidebar-link <?= @$agent_active?>" href="<?= base_url()?>agent" aria-expanded="false">
-                    <span>
-                        <i class="ti ti-user-plus"></i>
-                    </span>
-                    <span class="hide-menu">Agent</span>
-                </a>
+                    <a class="sidebar-link <?= @$agent_active?>" href="<?= base_url()?>agent" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-user-plus"></i>
+                        </span>
+                        <span class="hide-menu">Agent</span>
+                    </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$ticket_active?>" href="<?= base_url()?>ticket" aria-expanded="false">
                         <span>
                             <i class="ti ti-ticket"></i>
                         </span>
-                        <span class="hide-menu">Ticket</span>
+                        <span class="hide-menu">Setup Ticket</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$paket_active?>" href="<?= base_url()?>" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-file-barcode"></i>
+                        </span>
+                        <span class="hide-menu">Setup Paket</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$tpa_active?>" href="<?= base_url()?>" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-currency-dollar"></i>
+                        </span>
+                        <span class="hide-menu">Ticket per Agent</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$ppa_active?>" href="<?= base_url()?>" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-file-dollar"></i>
+                        </span>
+                        <span class="hide-menu">Paket per Agent</span>
                     </a>
                 </li>
                 <li class="nav-small-cap">
@@ -50,12 +74,20 @@
                     <span class="hide-menu">TRANSAKSI</span>
                 </li>
                 <li class="sidebar-item">
-                <a class="sidebar-link <?= @$order_active?>" href="<?= base_url()?>order" aria-expanded="false">
-                    <span>
-                        <i class="ti ti-article"></i>
-                    </span>
-                    <span class="hide-menu">Order Ticket</span>
-                </a>
+                    <a class="sidebar-link <?= @$order_active?>" href="<?= base_url()?>order" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">Order Ticket</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$order_active?>" href="<?= base_url()?>order" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-article"></i>
+                        </span>
+                        <span class="hide-menu">Booking Paket</span>
+                    </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$laporan_active?>" href="<?= base_url()?>laporan" aria-expanded="false">
