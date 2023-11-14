@@ -7,10 +7,12 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->load->model("Auth_model", 'auth');
 	}
 
 	public function index()
-	{
+	{	
 		$data = array(
 			'title'     => NAMETITLE . ' - Login',
 			'content'   => 'auth/login/index',
@@ -22,44 +24,45 @@ class Auth extends CI_Controller
 
 	public function auth_login()
 	{
-		$this->form_validation->set_rules('uname', 'Username', 'trim|required');
-		$this->form_validation->set_rules('pass', 'Password', 'trim|required');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[10]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+		// $this->form_validation->set_rules('role_login', 'Role', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
+			$this->session->set_flashdata('error_validation', $this->message->error_msg(validation_errors()));
 			redirect("/");
 			return;
 		}
 
-		$uname = $this->security->xss_clean($this->input->post('uname'));
-		$pass = $this->security->xss_clean($this->input->post('pass'));
+		$input = $this->input;
+		$username = $this->security->xss_clean($input->post('username'));
+		$password = $this->security->xss_clean($input->post('password'));
+		// $role_login = $this->security->xss_clean($input->post('role_login'));
 
-		$result = $this->auth->VerifyLogin($uname, $pass);
-		if (!empty($result)) {
-			$session_data = array(
-				'username'  => $uname,
-				'nama'      => $result->nama,
+		$datas = array(
+			'username'	=> $username,
+			'password'	=> $password,
+			// 'role'		=> $role_login
+		);
+
+		$result = $this->auth->VerifyLogin($datas);
+
+		if(!empty($result)){
+			$temp_session = array(
+				'username'  => $result->username,
 				'role'      => $result->role,
 				'is_login'  => true
 			);
-			$this->session->set_userdata('logged_status', $session_data);
-			if ($result->role == 'pengayah') {
-				redirect('reservasi');
-			}elseif ($result->role=='kasir'){
-				$store=$this->assignstaff->getStoreID($uname);
-				if (!empty($store)){
-					$_SESSION['logged_status']["storeid"]=$store->storeid;
-					redirect('store/penjualan');	
-				}else{
-					redirect('transaksi');
-				}
-			}
+			$this->session->set_userdata('logged_status', $temp_session);
+			$this->session->set_flashdata('success_log', "Selamat datang <b>".$result->username."</b>");
 			redirect('dashboard');
-		} else {
-			$this->session->set_flashdata('error', "username atau password salah, mohon periksa ulang");
-			redirect("/");
-			return;
+		}else{
+			$this->session->set_flashdata('error', "Username atau Password anda salah, coba lagi..");
+			redirect('/');
 		}
+
+		// echo "<pre>".print_r($result,true)."</pre>";
+        // die;
 	}
 
 	public function logout()

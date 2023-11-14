@@ -98,3 +98,23 @@
 <!-- MAIN CONTENT END -->
 
 
+<!-- SWEET ALERT START -->
+<script>
+<?php if(isset($_SESSION["success_log"])) { ?>
+    setTimeout(function() {
+        Swal.fire({
+            html: '<?= $_SESSION['success_log'] ?>',
+            position: 'top',
+            timer: 3000,
+            showCloseButton: true,
+            showConfirmButton: false,
+            icon: 'info',
+            timer: 2000,
+            timerProgressBar: true,
+        });
+    }, 100);
+<?php } ?>
+</script>
+<!-- SWEET ALERT END -->
+
+
