@@ -13,11 +13,22 @@
 	<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="<?= base_url()?>assets/js/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/1.8.2/autoNumeric.js"></script>
 	<?php
 		if (isset($extra)) {
 			$this->load->view($extra);
 		}
 	?>
+
+	<script>
+		$(".money-input").autoNumeric('init', {
+			aSep: ',',
+			aDec: '.',
+			aForm: true,
+			vMax: '99999999999.99',
+			vMin: '0.00'
+		});
+	</script>
 </body>
 
 </html>

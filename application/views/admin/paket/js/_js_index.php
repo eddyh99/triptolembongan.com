@@ -1,7 +1,14 @@
+<style>
+	.th-keteranga-paket {
+		width: 500px;
+	}
+</style>
+
 <script type="text/javascript">
     $(document).ready( function () {
         $('#table_list_paket').DataTable({
             "scrollX": true,
+			"responsive": true,
 			"ajax": {
 				"url": "<?=base_url()?>paket/list_paket",
 				"type": "POST",
@@ -22,8 +29,8 @@
             "aoColumnDefs": [{	
 				"aTargets": [3],
 				"mRender": function (data, type, full, meta){
-					button='<a href="<?=base_url()?>paket/edit_paket/'+encodeURI(btoa(full.id))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></i></a>'
-					button = button + '<a href="<?=base_url()?>paket/hapus/'+encodeURI(btoa(full.id))+'" class="del-data btn btn-danger mx-1"><i class="ti ti-trash"></i></a>';
+					button='<a href="<?=base_url()?>paket/edit_paket/'+encodeURI(btoa(full.id))+'" class="btn btn-success m-1"><i class="ti ti-pencil-minus fs-4"></i></a>'
+					button = button + '<a href="<?=base_url()?>paket/hapus/'+encodeURI(btoa(full.id))+'" class="del-data btn btn-danger m-1"><i class="ti ti-trash"></i></a>';
 					return button;
 				}
 			}],

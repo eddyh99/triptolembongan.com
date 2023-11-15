@@ -21,8 +21,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Nama Agent</th>
                                 <th>Tujuan</th>
                                 <th>Jam</th>
+                                <th>Berlaku</th>
+                                <th>Harga</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -31,8 +34,11 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
+                                <th>Nama Agent</th>
                                 <th>Tujuan</th>
                                 <th>Jam</th>
+                                <th>Berlaku</th>
+                                <th>Harga</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

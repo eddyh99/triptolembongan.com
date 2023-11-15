@@ -21,25 +21,27 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php } ?>
-                    <h5 class="card-title fw-semibold mb-4">Tambah Ticket</h5>
-                    <form action="<?= base_url()?>ticket/tambah_process" method="POST">
+                    <h5 class="card-title fw-semibold mb-4">Edit Ticket</h5>
+                    <form action="<?= base_url()?>ticket/edit_process" method="POST">
+                        <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                        <input type="hidden" name="id_edit" value="<?= $ticket->id?>">
                         <div class="mb-3">
                             <label for="tujuan" class="form-label">Tujuan</label>
                             <select name="tujuan" id="tujuan" class="form-select">
-                                <option value="Sanur-Lembongan">Sanur - Lembongan</option>
-                                <option value="Lembongan-Sanur">Lembongan - Sanur</option>
+                                <option value="Sanur-Lembongan" <?=($ticket->tujuan=="Sanur-Lembongan")?"selected":""?>>Sanur - Lembongan</option>
+                                <option value="Lembongan-Sanur"  <?=($ticket->tujuan=="Lembongan-Sanur")?"selected":""?>>Lembongan - Sanur</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="jam_keberangkatan" class="form-label">Jam Keberangkatan</label>
-                            <input type="text" class="form-control jam_keberangkatan" id="jam_keberangkatan" name="jam_keberangkatan" >
+                            <input type="text" class="form-control jam_keberangkatan" id="jam_keberangkatan" name="jam_keberangkatan" value="<?= $ticket->berangkat?>">
                         </div>
 
                         <!-- <div class="mb-3">
                             <label for="harga" class="form-label ">Harga</label>
                             <input type="text" class="form-control money-input" id="harga" name="harga" >
                         </div> -->
-                        <button type="submit" class="btn btn-primary mt-3">Tambah Ticket</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update Ticket</button>
                   </form>
                 </div>
             </div>

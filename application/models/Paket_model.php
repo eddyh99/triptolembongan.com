@@ -17,7 +17,7 @@ class Paket_model extends CI_Model{
     public function insert_paket($datas)
     {
         $result = $this->db->insert("tbl_paket", $datas);
-        // print_r($this->db->insert(paket_TBL, $datas));
+        // print_r($result);
         // die;
         if ($result == 1){
             return array(

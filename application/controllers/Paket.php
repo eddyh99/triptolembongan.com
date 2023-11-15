@@ -8,7 +8,7 @@ class Paket extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('paket_model', 'paket');
+        $this->load->model('Paket_model', 'paket');
     }
 
     public function index()
@@ -66,6 +66,8 @@ class Paket extends CI_Controller
         );
 
         $result = $this->paket->insert_paket($datas);
+        // echo "<pre>".print_r($datas,true)."</pre>";
+        // die;
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', $this->message->success_msg());
 			redirect('paket');
@@ -161,7 +163,17 @@ class Paket extends CI_Controller
             return;
         }
 
+    }
 
+    public function paket_agent()
+    {
+        $data = array(
+            'title'             => NAMETITLE . ' - Paket per Agent',
+            'content'           => 'admin/paket_per_agent/index',
+            'extra'             => 'admin/paket_per_agent/js/_js_index',
+            'tpp_active'        => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
     }
 
 }

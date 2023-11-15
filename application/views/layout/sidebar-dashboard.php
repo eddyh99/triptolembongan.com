@@ -30,11 +30,19 @@
                     <span class="hide-menu">MASTER</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$agent_active?>" href="<?= base_url()?>agent" aria-expanded="false">
+                    <a class="sidebar-link <?= @$user_active?>" href="<?= base_url()?>user" aria-expanded="false">
                         <span>
                             <i class="ti ti-user-plus"></i>
                         </span>
-                        <span class="hide-menu">Agent</span>
+                        <span class="hide-menu">Setup User</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$agent_active?>" href="<?= base_url()?>agent" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-address-book"></i>
+                        </span>
+                        <span class="hide-menu">Setup Agent</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -46,7 +54,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$paket_active?>" href="<?= base_url()?>" aria-expanded="false">
+                    <a class="sidebar-link <?= @$paket_active?>" href="<?= base_url()?>paket" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-barcode"></i>
                         </span>
@@ -54,7 +62,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$tpa_active?>" href="<?= base_url()?>" aria-expanded="false">
+                    <a class="sidebar-link <?= @$tpa_active?>" href="<?= base_url()?>ticket/ticket_agent" aria-expanded="false">
                         <span>
                             <i class="ti ti-currency-dollar"></i>
                         </span>
@@ -62,7 +70,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$ppa_active?>" href="<?= base_url()?>" aria-expanded="false">
+                    <a class="sidebar-link <?= @$ppa_active?>" href="<?= base_url()?>paket/paket_agent" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-dollar"></i>
                         </span>
