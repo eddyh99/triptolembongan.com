@@ -23,6 +23,7 @@
                     <?php } ?>
                     <h5 class="card-title fw-semibold mb-4">Tambah Ticket</h5>
                     <form action="<?= base_url()?>ticket/tambah_process" method="POST">
+                        <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="mb-3">
                             <label for="tujuan" class="form-label">Tujuan</label>
                             <select name="tujuan" id="tujuan" class="form-select">
@@ -34,11 +35,6 @@
                             <label for="jam_keberangkatan" class="form-label">Jam Keberangkatan</label>
                             <input type="text" class="form-control jam_keberangkatan" id="jam_keberangkatan" name="jam_keberangkatan" >
                         </div>
-
-                        <!-- <div class="mb-3">
-                            <label for="harga" class="form-label ">Harga</label>
-                            <input type="text" class="form-control money-input" id="harga" name="harga" >
-                        </div> -->
                         <button type="submit" class="btn btn-primary mt-3">Tambah Ticket</button>
                   </form>
                 </div>

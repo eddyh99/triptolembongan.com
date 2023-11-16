@@ -23,10 +23,10 @@
 	<script>
 		$(".money-input").autoNumeric('init', {
 			aSep: ',',
-			aDec: '.',
+			// aDec: '.',
 			aForm: true,
-			vMax: '99999999999.99',
-			vMin: '0.00'
+			vMax: '99999999999',
+			vMin: '0'
 		});
 	</script>
 </body>

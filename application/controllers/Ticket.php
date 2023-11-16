@@ -9,6 +9,8 @@ class Ticket extends CI_Controller
         parent::__construct();
 
         $this->load->model('Ticket_model', 'ticket');
+        $this->load->model('Harga_model', 'harga');
+        $this->load->model('Agent_model', 'agent');
     }
 
     public function index()
@@ -159,11 +161,96 @@ class Ticket extends CI_Controller
 
     public function ticket_agent()
     {
+        
         $data = array(
             'title'             => NAMETITLE . ' - Ticket per Agent',
             'content'           => 'admin/ticket_per_agent/index',
             'extra'             => 'admin/ticket_per_agent/js/_js_index',
             'tpa_active'        => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function list_ticket_agent()
+    {
+        $result = $this->harga->tiketharga();
+        echo json_encode($result);
+    }
+
+    public function tambah_ticket_agent()
+    {
+        $agents = $this->agent->get_agent();
+        $tickets = $this->ticket->get_ticket();
+        
+        $data = array(
+            'title'         => NAMETITLE . ' - Tambah Ticket per Agent',
+            'content'       => 'admin/ticket_per_agent/tambah_ticket_agent',
+            'extra'         => 'admin/ticket_per_agent/js/_js_index',
+            'agents'         => $agents,
+            'tickets'        => $tickets,
+            'tpa_active'    => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function tambah_ticket_agent_process()
+    {
+        $this->form_validation->set_rules('id_agent', 'Nama Agent', 'trim|required');
+		$this->form_validation->set_rules('id_ticket', 'Ticket', 'trim|required');
+		$this->form_validation->set_rules('berlaku', 'Berlaku', 'trim|required');
+		$this->form_validation->set_rules('harga', 'Harga', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
+            redirect('ticket/tambah_ticket_agent_process');
+			return;
+		}
+
+        $harga = $this->input->post("harga");
+        $new_harga = str_replace(array('\'', '"', ',', ';', '<', '>'), '', $harga);
+        $_POST["harga"]=$new_harga;
+        
+        $input = $this->input;
+        $id_agent = $this->security->xss_clean($input->post('id_agent'));
+        $id_ticket = $this->security->xss_clean($input->post('id_ticket'));
+        $berlaku = $this->security->xss_clean($input->post('berlaku'));
+        $harga = $this->security->xss_clean($input->post('harga'));
+
+        $berlaku_final  = date_format(date_create($berlaku), "Y-m-d");
+
+
+        $datas = array(
+            'id_agen'   => $id_agent,
+            'id_tiket'  => $id_ticket,
+            'berlaku'   => $berlaku_final,
+            'harga'     => $harga,
+            "userid"    => $_SESSION["logged_status"]["username"],
+            "created_at"=> date("Y-m-d H:i:s"),
+        );
+
+        $result = $this->harga->set_hargatiket($datas);
+        
+        if($result['code'] = 200){
+            $this->session->set_flashdata('success', $this->message->success_msg());
+			redirect('ticket/ticket_agent');
+			return;
+        }else{
+            $this->session->set_flashdata('error', $this->message->error_delete_msg());
+            redirect('ticket/tambah_ticket_agent');
+            return;
+        }
+    }
+    
+    public function edit_ticket_agent()
+    {
+        $agents = $this->agent->get_agent();
+        $tickets = $this->ticket->get_ticket();
+        
+        $data = array(
+            'title'         => NAMETITLE . ' - Edit Ticket per Agent',
+            'content'       => 'admin/ticket_per_agent/edit_ticket_agent',
+            'extra'         => 'admin/ticket_per_agent/js/_js_index',
+            'tpa_active'    => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);
     }

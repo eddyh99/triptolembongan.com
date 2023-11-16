@@ -3,7 +3,7 @@
     <!--  Row Daftar User Agent -->
     <div class="row my-4">
         <div class="col-lg-12 d-flex align-items-strech">
-            <a href="<?= base_url()?>ticket/tambah_ticket" class="btn btn-primary d-flex align-items-center">
+            <a href="<?= base_url()?>paket/tambah_paket_agent" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
                     Tambah Ticket
@@ -17,14 +17,14 @@
             <div class="card w-100">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">List Ticket</h5>
-                    <table id="table_list_ticket" class="table table-striped" style="width:100%">
+                    <table id="table_list_paket_agent" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Paket</th>
                                 <th>Keterangan</th>
                                 <th>Nama Agent</th>
-                                <th>Kontak</th>
+                                <th>No.Telp</th>
                                 <th>Harga</th>
                                 <th>Aksi</th>
                             </tr>
@@ -37,7 +37,7 @@
                                 <th>Paket</th>
                                 <th>Keterangan</th>
                                 <th>Nama Agent</th>
-                                <th>Kontak</th>
+                                <th>No.Telp</th>
                                 <th>Harga</th>
                                 <th>Aksi</th>
                             </tr>
