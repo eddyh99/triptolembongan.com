@@ -82,15 +82,15 @@
                     <span class="hide-menu">TRANSAKSI</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$order_active?>" href="<?= base_url()?>order" aria-expanded="false">
+                    <a class="sidebar-link <?= @$bookticket_active?>" href="<?= base_url()?>booking" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>
                         </span>
-                        <span class="hide-menu">Order Ticket</span>
+                        <span class="hide-menu">Booking Ticket</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$order_active?>" href="<?= base_url()?>order" aria-expanded="false">
+                    <a class="sidebar-link <?= @$bookpaket_active?>" href="<?= base_url()?>order/paket" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>
                         </span>

@@ -25,35 +25,16 @@
                     <form action="<?= base_url()?>ticket/tambah_ticket_agent_process" method="POST">
                         <div class="row">
                             <div class="mb-4 col-6">
-                                <label for="berlaku" class="form-label">Pilih Agent</label>
+                                <label for="berlaku" class="form-label">Nama Agent</label>
                                 <select class="nama-agent" name="id_agent">
-                                    <option ></option>
-                                    <?php foreach($agents as $agent){?>
-                                        <option value="<?= $agent['id']?>"><?= $agent['nama']?></option>
-                                    <?php }?>
+                                    <option value="<?= $tiket_agent['0']['id_nama']?>"><?= $tiket_agent['0']['nama']?></option>
                                 </select>
                             </div>
                             <div class="mb-4 col-6">
-                            <label for="berlaku" class="form-label">Pilih Ticket</label>
+                            <label for="berlaku" class="form-label">Ticket Agent</label>
                                 <select class="ticket" name="id_ticket">
-                                    <option ></option>
-                                    <?php foreach($tickets as $ticket){?>
-                                        <option value="<?= $ticket['id']?>"><?= $ticket['tujuan']?> | <?= $ticket['berangkat']?></option>
-                                    <?php }?>
+                                <option value="<?= $tiket_agent['0']['id']?>"><?= $tiket_agent['0']['tujuan'] ?> | <?= $tiket_agent['0']['berangkat'] ?></option>
                                 </select>
-                            </div>
-                            <div class="mb-4 col-6">
-                                <div>
-                                    <label for="berlaku" class="form-label">Berlaku Sampai</label>
-                                    <div class="input-group date">
-                                        <input type="text" class="form-control" id="berlaku" name="berlaku" placeholder="berlaku sampai tanggal..."/>
-                                        <label for="berlaku" class="icon-berlaku">
-                                            <span class="input-group-text bg-light d-block">
-                                                <i class="ti ti-calendar-event fs-5"></i>
-                                            </span>
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
                           
                             <div class="mb-3 col-6">

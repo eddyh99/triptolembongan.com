@@ -35,11 +35,11 @@
 				}
 			},
 			"columns": [
-				{ 	data: 'id',
-					// "sortable": false, 
-       				// 	render: function (data, type, row, meta) {
-                 	// 	return meta.row + meta.settings._iDisplayStart + 1;
-                	// }
+				{ 	data: null,
+					"sortable": false, 
+       					render: function (data, type, row, meta) {
+                 		return meta.row + meta.settings._iDisplayStart + 1;
+                	}
 				},
 				{ data: 'namapaket' },
 				{ data: 'keterangan' },
@@ -50,7 +50,7 @@
             "aoColumnDefs": [{	
 				"aTargets": [6],
 				"mRender": function (data, type, full, meta){
-					button='<a href="<?=base_url()?>paket/edit_paket_agent/'+encodeURI(btoa(full.id))+'" class="btn btn-success">'+full.id+'<i class="ti ti-pencil-minus fs-4"></i></a>'
+					button='<a href="<?=base_url()?>paket/edit_paket_agent/'+encodeURI(btoa(full.id))+'/'+encodeURI(btoa(full.id_nama))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></i></a>'
 					// button = button + '<a href="<?=base_url()?>ticket/hapus/'+encodeURI(btoa(full.id))+'" class="del-data btn btn-danger mx-1"><i class="ti ti-trash"></i></a>';
 					return button;
 				}
@@ -62,13 +62,11 @@
 
         $('.nama-agent').select2({
             placeholder: "Nama Agent",
-            allowClear: true,
             theme: "bootstrap",
         });
 
         $('.paket').select2({
             placeholder: "Paket",
-            allowClear: true,
             theme: "bootstrap",
         });
 

@@ -204,7 +204,6 @@ class Paket extends CI_Controller
     {
         $this->form_validation->set_rules('id_agent', 'Nama Agent', 'trim|required');
 		$this->form_validation->set_rules('id_paket', 'Paket', 'trim|required');
-		$this->form_validation->set_rules('berlaku', 'Berlaku', 'trim|required');
 		$this->form_validation->set_rules('harga', 'Harga', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -220,16 +219,14 @@ class Paket extends CI_Controller
         $input = $this->input;
         $id_agent = $this->security->xss_clean($input->post('id_agent'));
         $id_paket = $this->security->xss_clean($input->post('id_paket'));
-        $berlaku = $this->security->xss_clean($input->post('berlaku'));
         $harga = $this->security->xss_clean($input->post('harga'));
 
-        $berlaku_final  = date_format(date_create($berlaku), "Y-m-d");
 
 
         $datas = array(
             'id_agen'   => $id_agent,
             'id_paket'  => $id_paket,
-            'berlaku'   => $berlaku_final,
+            'berlaku'   => date("Y:m-d H:i:s"),
             'harga'     => $harga,
             "userid"    => $_SESSION["logged_status"]["username"],
             "created_at"=> date("Y-m-d H:i:s"),
@@ -248,23 +245,17 @@ class Paket extends CI_Controller
         }
     }
 
-    public function edit_paket_agent($id)
+    public function edit_paket_agent($id, $id_nama)
     {
         $id	= base64_decode($this->security->xss_clean($id));
-        $agents = $this->agent->get_agent();
-        $pakets = $this->paket->get_paket();
-        $paket_agent = $this->harga->get_edit_hargapaket($id);
-
-        // $berlaku_final  = date_format(date_create($paket_agent->berlaku), "d-m-Y");
+        $id_nama	= base64_decode($this->security->xss_clean($id_nama));
+        $paket_agent = $this->harga->get_edit_hargapaket($id, $id_nama);
 
         $data = array(
             'title'         => NAMETITLE . ' - Edit paket per Agent',
             'content'       => 'admin/paket_per_agent/edit_paket_agent',
             'extra'         => 'admin/paket_per_agent/js/_js_index',
-            'agents'         => $agents,
-            'pakets'        => $pakets,
             'paket_agent'   => $paket_agent,
-            // 'tanggal'       => $berlaku_final,
             'ppa_active'    => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);

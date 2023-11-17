@@ -43,7 +43,7 @@
                                     <?php }?>
                                 </select>
                             </div>
-                            <div class="mb-4 col-6">
+                            <!-- <div class="mb-4 col-6">
                                 <div>
                                     <label for="berlaku" class="form-label">Berlaku Sampai</label>
                                     <div class="input-group date">
@@ -55,7 +55,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                           
                             <div class="mb-3 col-6">
                                 <label for="harga" class="form-label ">Harga</label>

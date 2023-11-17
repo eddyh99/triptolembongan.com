@@ -197,7 +197,6 @@ class Ticket extends CI_Controller
     {
         $this->form_validation->set_rules('id_agent', 'Nama Agent', 'trim|required');
 		$this->form_validation->set_rules('id_ticket', 'Ticket', 'trim|required');
-		$this->form_validation->set_rules('berlaku', 'Berlaku', 'trim|required');
 		$this->form_validation->set_rules('harga', 'Harga', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
@@ -213,16 +212,14 @@ class Ticket extends CI_Controller
         $input = $this->input;
         $id_agent = $this->security->xss_clean($input->post('id_agent'));
         $id_ticket = $this->security->xss_clean($input->post('id_ticket'));
-        $berlaku = $this->security->xss_clean($input->post('berlaku'));
         $harga = $this->security->xss_clean($input->post('harga'));
 
-        $berlaku_final  = date_format(date_create($berlaku), "Y-m-d");
 
 
         $datas = array(
             'id_agen'   => $id_agent,
             'id_tiket'  => $id_ticket,
-            'berlaku'   => $berlaku_final,
+            'berlaku'   => date("Y:m:d H:i:s"),
             'harga'     => $harga,
             "userid"    => $_SESSION["logged_status"]["username"],
             "created_at"=> date("Y-m-d H:i:s"),
@@ -241,18 +238,26 @@ class Ticket extends CI_Controller
         }
     }
     
-    public function edit_ticket_agent()
+    public function edit_ticket_agent($id, $id_nama)
     {
-        $agents = $this->agent->get_agent();
-        $tickets = $this->ticket->get_ticket();
-        
+        $id	= base64_decode($this->security->xss_clean($id));
+        $id_nama	= base64_decode($this->security->xss_clean($id_nama));
+        $result = $this->harga->get_edit_hargatiket($id, $id_nama);
+
         $data = array(
             'title'         => NAMETITLE . ' - Edit Ticket per Agent',
             'content'       => 'admin/ticket_per_agent/edit_ticket_agent',
             'extra'         => 'admin/ticket_per_agent/js/_js_index',
+            'tiket_agent'   => $result,
             'tpa_active'    => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function edit_detail()
+    {
+        $result = $this->harga->get_edit_hargatiket(11, 38);
+        echo json_encode($result);
     }
 
 }

@@ -50,7 +50,7 @@
             "aoColumnDefs": [{	
 				"aTargets": [6],
 				"mRender": function (data, type, full, meta){
-					button='<a href="<?=base_url()?>ticket/edit_ticket_agent/'+encodeURI(btoa(full.id))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></i></a>'
+					button='<a href="<?=base_url()?>ticket/edit_ticket_agent/'+encodeURI(btoa(full.id))+'/'+encodeURI(btoa(full.id_nama))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></i></a>'
 					// button = button + '<a href="<?=base_url()?>ticket/hapus/'+encodeURI(btoa(full.id))+'" class="del-data btn btn-danger mx-1"><i class="ti ti-trash"></i></a>';
 					return button;
 				}
@@ -61,14 +61,12 @@
     $(document).ready(function() {
 
         $('.nama-agent').select2({
-            placeholder: "Nama Agent",
-            allowClear: true,
+            placeholder: "Nama Agent", 
             theme: "bootstrap",
         });
 
         $('.ticket').select2({
-            placeholder: "Ticket",
-            allowClear: true,
+            placeholder: "Ticket", 
             theme: "bootstrap",
         });
 
