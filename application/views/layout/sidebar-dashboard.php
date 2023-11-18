@@ -97,7 +97,7 @@
                         <span class="hide-menu">Booking Paket</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item mb-5 pb-5">
                     <a class="sidebar-link <?= @$laporan_active?>" href="<?= base_url()?>laporan" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-analytics"></i>

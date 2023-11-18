@@ -8,52 +8,143 @@ class Booking extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Booking_model', 'booking');
+        $this->load->model('Ticket_model', 'ticket');
+        $this->load->model('Agent_model', 'agent');
     }
 
     public function index()
     {
+
+        $get_ticket = $this->ticket->get_ticket();
+        $get_agent  = $this->agent->get_agent();
+        // echo "<pre>".print_r($get_ticket,true)."</pre>";
+        // die;
         $data = array(
             'title'             => NAMETITLE . ' - Booking Ticket',
             'content'           => 'admin/booking_ticket/index',
+            'ticket'            => $get_ticket,
+            'agent'             => $get_agent,
             'extra'             => 'admin/booking_ticket/_js_index',
             'bookticket_active' => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);
     }
 
+
     public function booking_tiket_proses()
     {
-        $input          = $this->input;
-        $kode_ticket    = $this->security->xss_clean($input->post('kode_ticket'));
-        $nama_agen      = $this->security->xss_clean($input->post('nama_agen'));
-        $nama_tamu      = $this->security->xss_clean($input->post('nama_tamu'));
-        $nasionality    = $this->security->xss_clean($input->post('nasionality'));
-        $jenis_penumpang = $this->security->xss_clean($input->post('jenis_penumpang'));
+        $input              = $this->input;
+        $kode_ticket        = $this->security->xss_clean($input->post('kode_ticket'));
+        $nama_agent          = $this->security->xss_clean($input->post('nama_agent'));
 
-        $temp_detail = array();
-        foreach($nama_tamu as $keytamu=>$valuetamu){
-            $temp['namatamu']   = $valuetamu;    
-            foreach($nasionality as $keynas=>$valuenas){
-                $temp['nasionality']   = $valuenas;
-                $temp['jenis']   = $jenis_penumpang;
-                if($keytamu == $keynas){
-                    array_push($temp_detail, $temp);
+        // Tamu Dewasa
+        $nama_tamu_dewasa   = $this->security->xss_clean($input->post('nama_tamu_dewasa'));
+        $nasionality_dewasa = $this->security->xss_clean($input->post('nasionality_dewasa'));
+
+        // Tamu Anak-anak
+        $nama_tamu_anak     = $this->security->xss_clean($input->post('nama_tamu_anak'));
+        $nasionality_anak   = $this->security->xss_clean($input->post('nasionality_anak'));
+  
+        // Tamu FOC
+        $nama_tamu_foc      = $this->security->xss_clean($input->post('nama_tamu_foc'));
+        $nasionality_foc    = $this->security->xss_clean($input->post('nasionality_foc'));
+
+        $depart             = $this->security->xss_clean($input->post('depart'));
+        $return_from        = $this->security->xss_clean($input->post('return_from'));
+
+        $tglberangkat       = $this->security->xss_clean($input->post('tglberangkat'));
+        $newTglBerangkat    = date("Y-m-d", strtotime($tglberangkat));  
+        $tglkembali         = $this->security->xss_clean($input->post('tglkembali'));
+        $newTglKembali      = date("Y-m-d", strtotime($tglkembali)); 
+        
+        $pickup             = $this->security->xss_clean($input->post('pickup'));
+        $dropoff            = $this->security->xss_clean($input->post('dropoff'));
+        $remarks            = $this->security->xss_clean($input->post('catatan'));
+  
+        // echo "<pre>".print_r($nama_tamu_dewasa,true)."</pre>";
+        // echo "<pre>".print_r($depart,true)."</pre>";
+        // die;
+        
+        
+        $temp_dewasa = array();
+        $temp_anak = array();
+        $temp_foc = array();
+        // Looping nama tamu Dewasa
+        if(array_filter($nama_tamu_dewasa)){
+            foreach($nama_tamu_dewasa as $keytamu=>$valuetamu){
+                $temp['namatamu']   = $valuetamu;    
+                foreach($nasionality_dewasa as $keynas=>$valuenas){
+                    $temp['nasionality']   = $valuenas;
+                    $temp['jenis']   = 'dewasa';
+                    if($keytamu == $keynas){
+                        array_push($temp_dewasa, $temp);
+                    }
+    
                 }
-
             }
         }
 
-        
+        // Looping nama tamu Anak
+        if(array_filter($nama_tamu_anak)){
+            foreach($nama_tamu_anak as $keytamu=>$valuetamu){
+                $temp['namatamu']   = $valuetamu;    
+                foreach($nasionality_anak as $keynas=>$valuenas){
+                    $temp['nasionality']   = $valuenas;
+                    $temp['jenis']   = 'anak';
+                    if($keytamu == $keynas){
+                        array_push($temp_anak, $temp);
+                    }
+    
+                }
+            }
+        }
+
+        // Looping nama tamu FOC
+        if(array_filter($nama_tamu_foc)){
+            foreach($nama_tamu_foc as $keytamu=>$valuetamu){
+                $temp['namatamu']   = $valuetamu;    
+                foreach($nasionality_foc as $keynas=>$valuenas){
+                    $temp['nasionality']   = $valuenas;
+                    $temp['jenis']   = 'foc';
+                    if($keytamu == $keynas){
+                        array_push($temp_foc, $temp);
+                    }
+    
+                }
+            }
+        }
+
+        $detail_booking = array_merge($temp_dewasa, $temp_anak, $temp_foc);
         $datas = array(
             'kode_tiket'    => $kode_ticket,
-            'nama_agen'     => $nama_agen,
+            'tgl_pesan'     => date("Y:m:d H:i:s"),
+            'berangkat'     => $newTglBerangkat,
+            'kembali'       => $newTglKembali,
+            'pickup'        => $pickup,
+            'dropoff'       => $dropoff,
+            'depart'        => $depart,
+            'return_from'   => $return_from,
+            'agentid'       => $nama_agent,
+            'remarks'       => $remarks,
+            'userid'        => $_SESSION["logged_status"]["username"],
+            'created_at'    => date("Y:m:d H:i:s"),
+            'update_at'    => date("Y:m:d H:i:s"),
         );
         
-        echo "<pre>".print_r($temp_detail,true)."</pre>";
-        die;
-        $this->booking->insert_booking_ticket($datas, $temp_detail);
+        // echo "<pre>".print_r(array_merge($temp_dewasa, $temp_anak),true)."</pre>";
+        // echo "<pre>".print_r($jenis_tamu,true)."</pre>";
+        // die;
+        $result = $this->booking->insert_booking_ticket($datas, $detail_booking);
 
-
+        if($result['code'] == 200) {
+            $this->session->set_flashdata('success', $this->message->success_msg());
+			redirect('booking');
+			return;
+        }else{
+            $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
+			redirect('booking');
+			return;
+        }
     }
 
 

@@ -72,13 +72,13 @@
 
     });
     $(function() {
-            $( "#berlaku" ).datepicker({
-                dateFormat: 'dd-mm-yy',
-                // timeFormat:  "hh:mm:ss",
-                changeYear: true,
-                changeMonth: true,
-                minDate: 0,
-                yearRange: "-100:+20",
-            });
+        $( "#berlaku" ).datepicker({
+            dateFormat: 'dd-mm-yy',
+            // timeFormat:  "hh:mm:ss",
+            changeYear: true,
+            changeMonth: true,
+            minDate: 0,
+            yearRange: "-100:+20",
         });
+    });
 </script>

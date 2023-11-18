@@ -19,52 +19,115 @@
                     <h5 class="card-title fw-semibold mb-4">Booking Ticket</h5>
                     <form action="<?= base_url()?>booking/booking_tiket_proses" method="POST">
                         <div class="row">
-                            <div class="mb-4 col-12 col-md-6">
-                                <label for="kode_ticket" class="form-label">Kode Ticket</label>
-                                <div class="wrapper-kode-ticket d-flex align-items-center justify-content-between">
-                                    <input type="text" class="fw-bold fs-5 text-success border-0" id="kode_ticket" name="kode_ticket" readonly value="TIX345"/>
-                                    <i class="ti ti-ticket fs-8 text-success"></i>
-                                </div>
-                            </div>
-                            <div class="mb-4 col-12 col-md-6 ">
-                                <label for="freecharge" class="form-label">Pilih Agen</label>
-                                <select class="agent-select2" name="nama_agen">
-                                    <option ></option>
-                                    <option value="ari">Ari</option>
-                                    <option value="pramana">Pramana</option>
-                                    <option value="putra">Putra</option>
-                                </select>
-                            </div>
-
-                            <div class="row wraping-add-booking">
-                                <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
-                                    <label for="nama_tamu" class="form-label">Nama Tamu</label>
-                                    <div class="d-flex align-items-center">
-                                        <input type="text" class="form-control" id="nama_tamu" name="nama_tamu[]" placeholder="masukkan nama tamu...">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="mb-4 col-12 col-md-6">
+                                        <label for="kode_ticket" class="form-label">Kode Ticket</label>
+                                        <div class="wrapper-kode-ticket d-flex align-items-center justify-content-between">
+                                            <input type="text" class="fw-bold fs-5 text-success border-0" id="kode_ticket" name="kode_ticket" readonly 
+                                                value="TIX<?php $num = mt_rand(100000,999999); printf("%d", $num);?>"/>
+                                            <i class="ti ti-ticket fs-6 text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-5 ">
+                                        <label for="freecharge" class="form-label">Pilih Agen</label>
+                                        <select class="agent-select2" name="nama_agent">
+                                            <option ></option>
+                                            <?php foreach($agent as $ag){?>
+                                                <option value="<?= $ag['id']?>"><?= $ag['nama']?></option>
+                                            <?php }?>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="mb-4 col-12 col-md-5 wrap-nasionality">
-                                    <label for="nasionality" class="form-label">Nasionality</label>
-                                    <select name="nasionality[]" id="nasionality-select2" class="nasionality-select2">
-                                        <option value=""></option>
-                                        <?php foreach($list_negara as $dt){?>
-                                            <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                                <div class="col-md-1 d-flex align-items-center">
-                                    <i class="ti ti-circle-plus add-nama-tamu fs-8 ms-2" style="cursor: pointer;"></i>
+                            </div>
+                            
+                            <!-- DEWASA -->
+                            <div class="row wraping-add-booking-dewasa">
+                                <div class="row">
+                                    <h4 class="fw-bolder text-decoration-underline">Dewasa</h4>
+                                    <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                                        <label for="nama_tamu_dewasa" class="form-label">Nama Tamu</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="nama_tamu_dewasa" class="nama-tamu-select2" name="nama_tamu_dewasa[]">
+                                                <option></option>
+                                            </select>
+                                            <!-- <input type="text" class="form-control " id="nama_tamu_dewasa" name="nama_tamu_dewasa[]" placeholder="masukkan nama tamu..."> -->
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                                        <label for="nasionality-select2" class="form-label">Nasionality</label>
+                                        <select name="nasionality_dewasa[]" id="nasionality-dewasa-select2" class="nasionality-select2">
+                                            <option value=""></option>
+                                            <?php foreach($list_negara as $dt){?>
+                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-center">
+                                        <i class="ti ti-circle-plus add-nama-tamu-dewasa fs-8" style="cursor: pointer;"></i>
+                                        <!-- <input type="submit"> -->
+                                        <!-- <i class="ti ti-circle-check save-tamu-dewasa fs-8 text-success" id="save-tamu-dewasa" style="cursor: pointer;"></i> -->
+                                    </div>
                                 </div>
                             </div>
-                            <div class="mb-4 col-12 col-md-6 wrap-jenis-penumpang">
-                                <label for="freecharge" class="form-label">Jenis Penumpang</label>
-                                <div class="d-flex align-items-center ">
-                                    <select class="jenis-penumpang-select2" name="jenis_penumpang">
-                                        <option ></option>
-                                        <option value="Dewasa">Dewasa</option>
-                                        <option value="Anak-Anak">Anak-Anak</option>
-                                        <option value="FOC">FOC</option>
-                                    </select>
+    
+                            <hr>
+
+                            <!-- ANAK -->
+                            <div class="row wraping-add-booking-anak">
+                                <div class="row">
+                                    <h4 class="fw-bolder text-decoration-underline">Anak-anak</h4>
+                                    <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                                        <label for="nama_tamu_anak" class="form-label">Nama Tamu</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="nama_tamu_anak" class="nama-tamu-select2" name="nama_tamu_anak[]">
+                                                <option></option>
+                                            </select>
+                                            <!-- <input type="text" class="form-control" id="nama_tamu_anak" name="nama_tamu_anak[]" placeholder="masukkan nama tamu..."> -->
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                                        <label for="nasionality" class="form-label">Nasionality</label>
+                                        <select name="nasionality_anak[]" id="nasionality-anak-select2" class="nasionality-select2">
+                                            <option value=""></option>
+                                            <?php foreach($list_negara as $dt){?>
+                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-center">
+                                        <i class="ti ti-circle-plus add-nama-tamu-anak fs-8" style="cursor: pointer;"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <!-- FOC -->
+                            <div class="row wraping-add-booking-foc mb-3">
+                                <div class="row">
+                                    <h4 class="fw-bolder text-decoration-underline">Free of Charge</h4>
+                                    <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                                        <label for="nama_tamu_foc" class="form-label">Nama Tamu</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="nama_tamu_foc" class="nama-tamu-select2" name="nama_tamu_foc[]">
+                                                <option></option>
+                                            </select>
+                                            <!-- <input type="text" class="form-control" id="nama_tamu_foc" name="nama_tamu_foc[]" placeholder="masukkan nama tamu..."> -->
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                                        <label for="nasionality" class="form-label">Nasionality</label>
+                                        <select name="nasionality_foc[]" id="nasionality-foc-select2" class="nasionality-select2">
+                                            <option value=""></option>
+                                            <?php foreach($list_negara as $dt){?>
+                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 d-flex align-items-center">
+                                        <i class="ti ti-circle-plus add-nama-tamu-foc fs-8" style="cursor: pointer;"></i>
+                                    </div>
                                 </div>
                             </div>
 
@@ -309,7 +372,9 @@
                                 <label for="child" class="form-label">Penumpang Child</label>
                                 <input type="number" class="form-control" id="child" name="child" placeholder="masukkan jumlah penumpang anak-anak...">
                             </div>  -->
-                            <!-- <div class="mb-4 col-12 col-md-6 ">
+
+
+                            <div class="mb-4 col-12 col-md-6 ">
                                 <label for="freecharge" class="form-label">Tujuan</label>
                                 <div class="d-flex ">
                                     <div class="form-check">
@@ -327,62 +392,45 @@
                                 </div>
 
                                 <div class="mt-3">
-                                    <select class="depart-select2" name="state">
+                                    <select class="depart-select2" name="depart">
                                         <option ></option>
-                                        <option value="ls08">Lembongan - Sanur || 08:30</option>
-                                        <option value="sl09">Sanur - Lembongan || 09:30</option>
-                                        <option value="ls13">Lembongan - Sanur || 13:00</option>
-                                        <option value="sl14">Sanur - Lembongan || 14:30</option>
-                                        <option value="ls16">Lembongan - Sanur || 16:00</option>
-                                        <option value="sl17">Sanur - Lembongan || 17:30</option>
+                                        <?php foreach($ticket as $tk){?>
+                                            <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
+                                        <?php }?>
+       
                                     </select>
                                 </div>
 
                                 <div class="mt-3">
-                                    <select class="return-select2" name="state">
+                                    <select class="return-select2" name="return_from">
                                         <option ></option>
-                                        <option value="ls08">Lembongan - Sanur || 08:30</option>
-                                        <option value="sl09">Sanur - Lembongan || 09:30</option>
-                                        <option value="ls13">Lembongan - Sanur || 13:00</option>
-                                        <option value="sl14">Sanur - Lembongan || 14:30</option>
-                                        <option value="ls16">Lembongan - Sanur || 16:00</option>
-                                        <option value="sl17">Sanur - Lembongan || 17:30</option>
+                                        <?php foreach($ticket as $tk){?>
+                                            <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
+                                        <?php }?>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="mb-4 col-12 col-md-6 ">
                                 <div>
-                                    <label for="freecharge" class="form-label">Tanggal Keberangkatan</label>
-                                    <div class="input-group date" id="tglberangkat">
-                                        <input type="text" class="form-control" id="date" placeholder="pilih tanggal keberangkatan..."/>
-                                        <span class="input-group-append">
-                                            <span class="input-group-text bg-light d-block">
-                                                <i class="ti ti-calendar-event fs-5"></i>
-                                            </span>
-                                        </span>
+                                    <label for="tglberangkat" class="form-label">Tanggal Keberangkatan</label>
+                                    <div class="form-control d-flex">
+                                        <input type="text" class="w-100 border-0 cursor-pointer" name="tglberangkat" id="tglberangkat" autocomplete="off">
+                                        <label for="tglberangkat" class="cursor-pointer">
+                                            <i class="ti ti-calendar-event fs-6"></i>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <label for="freecharge" class="form-label">Tanggal Kembali</label>
-                                    <div class="input-group date" id="tglkembali">
-                                        <input type="text" class="form-control" id="date" placeholder="pilih tanggal kembali..."/>
-                                        <span class="input-group-append">
-                                            <span class="input-group-text bg-light d-block">
-                                                <i class="ti ti-calendar-event fs-5"></i>
-                                            </span>
-                                        </span>
+                                    <label for="tglkembali" class="form-label">Tanggal Kembali</label>
+                                    <div class="form-control d-flex">
+                                        <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off">
+                                        <label for="tglkembali" class="cursor-pointer">
+                                            <i class="ti ti-calendar-event fs-6"></i>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="mb-4 col-12 col-md-6">
-                                <label for="freecharge" class="form-label">Free of Charge</label>
-                                <input type="number" class="form-control" id="freecharge" name="freecharge" placeholder="masukkan diskon...">
-                            </div>
-
-
-
 
                             <div class="mb-4 col-12 col-md-6 ">
                                 <label for="pickup" class="form-label">Pickup Lembongan</label>
@@ -397,7 +445,7 @@
                             <div class="mb-4 col-12 col-md-6 ">
                                 <label for="catatan" class="form-label">Remarks</label>
                                 <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu...">
-                            </div> -->
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Order Sekarang</button>
                   </form>
@@ -408,3 +456,24 @@
 
 </div>
 <!-- MAIN CONTENT END -->
+
+<!-- SWEET ALERT START -->
+<?php if(isset($_SESSION["success"])) { ?>
+    <script>
+        setTimeout(function() {
+            Swal.fire({
+                html: '<?= $_SESSION['success'] ?>',
+                position: 'top',
+                timer: 3000,
+                showCloseButton: true,
+                showConfirmButton: false,
+                icon: 'success',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+        }, 100);
+    </script>
+<?php } ?>
+<!-- SWEET ALERT END -->
+
+
