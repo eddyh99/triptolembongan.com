@@ -222,10 +222,10 @@
     $(document).ready(function(){
         $('.form-check-input').change(function(){
             let selected_value = $("input[name='tipetujuan']:checked").val();
-            if(selected_value == 'onewayradio'){
+            if(selected_value == 'One Way'){
                 $(".return-select2").prop("disabled", true);
             }
-            if(selected_value == 'returnradio'){
+            if(selected_value == 'Return'){
                 $(".return-select2").prop("disabled", false);
             }
         });
@@ -329,6 +329,7 @@
             var getDepart =  $('#depart_select2').find(":selected").text();
             var getReturn =  $('#return_select2').find(":selected").text();
 
+
             
             var inpt_tamu_dewasa = document.getElementsByName('nama_tamu_dewasa[]');
             var inpt_nasionality_dewasa = document.getElementsByName('nasionality_dewasa[]');
@@ -387,7 +388,7 @@
                     });
                 }, 100);
             }else{
-                if((getTujuan === 'returnradio') && hargaDepart !== undefined &&  hargaReturn !== undefined ){
+                if((getTujuan === 'Return') && hargaDepart !== undefined &&  hargaReturn !== undefined ){
                     if(
                         ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) && 
                         ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
@@ -443,12 +444,13 @@
                         $(".display-nama-agent").text(getNamaAgent);
                         $(".display-tgl-berangkat").text(getTglBerangkat);
                         $(".display-tgl-kembali").text(getTglKembali);
+                        $(".display-tujuan").text(getTujuan);
                         $(".display-depart").text(getDepart);
                         $(".display-return").text(getReturn);
                         $(".display-total-harga-final").text(harga.toLocaleString("en"));
                         harga = 0;
                     }
-                }else if(getTujuan === 'onewayradio' && hargaDepart !== undefined){
+                }else if(getTujuan === 'One Way' && hargaDepart !== undefined){
 
                     if(
                         ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) &&
@@ -469,7 +471,6 @@
                         }, 100);
                     }else {
                         if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
-                            console.log("ONEWAY DES");
                             hargaDewasa = 0;
                             $(".display-dewasa-jumlah").text(0);
                             $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
@@ -481,7 +482,6 @@
                         }
 
                         if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
-                            console.log("ONEWAY ANAK");
                             hargaAnak = 0;
                             $(".display-anak-jumlah").text(0);
                             $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
@@ -494,7 +494,6 @@
                         }
     
                         if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
-                            console.log("ONEWAY FOC");
                             hargaFOC = 0;
                             $(".display-foc-jumlah").text(0);
                             $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
@@ -506,6 +505,7 @@
                         $(".display-nama-agent").text(getNamaAgent);
                         $(".display-tgl-berangkat").text(getTglBerangkat);
                         $(".display-tgl-kembali").text(getTglKembali);
+                        $(".display-tujuan").text(getTujuan);
                         $(".display-depart").text(getDepart);
                         $(".display-return").text('-');
                         $(".display-total-harga-final").text(harga.toLocaleString("en"));

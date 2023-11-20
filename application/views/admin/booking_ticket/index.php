@@ -39,13 +39,13 @@
                                         <label for="freecharge" class="form-label">Tujuan</label>
                                         <div class="d-flex ">
                                             <div class="form-check">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="onewayradio" >
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="One Way" >
                                                 <label class="form-check-label cursor-pointer" for="onewayradio">
                                                     One Way
                                                 </label>
                                             </div>
                                             <div class="form-check ms-3">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="returnradio" checked="checked">
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="Return" checked="checked">
                                                 <label class="form-check-label cursor-pointer" for="returnradio">
                                                     Return
                                                 </label>
@@ -234,7 +234,9 @@
                                                 <div class="card shadow-none mt-1 mb-0">
                                                     <div class="d-flex align-items-center gap-3 py-3">
                                                         <div>
-                                                            <h6 class="mb-0 fw-semibold">Tujuan: Return</h6>
+                                                            <h6 class="mb-0 fw-semibold">
+                                                                Tujuan: <span class="display-tujuan">-</span>
+                                                            </h6>
                                                             <span class="fs-2">
                                                                 Depart: <span class="display-depart">-</span>
                                                             </span>

@@ -8,6 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Booking Paket</h5>
                     <form action="<?= base_url()?>booking/booking_paket_proses" method="POST">
+                        <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="row">
                             <div class="row">
                                 <div class="row">
