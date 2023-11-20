@@ -98,10 +98,6 @@
                         <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-anak"></i>
                     </div>
                 `);
-                // $(".wrap-nama-tamu").append('<div class="d-flex align-items-center mt-2 nama-tamu-add"><input type="text" class="form-control" id="nama_tamu" name="nama_tamu[]" placeholder="masukkan nama tamu..."></div>'); //add input box
-                // $(".wrap-nasionality").append('<div class="d-flex align-items-center mt-2"><select name="nasionality[]" class="nasionality-select2"><?php foreach($list_negara as $dt){?><option value="<?= $dt['name']?>"><?= $dt['name']?></option><?php }?></select></div>'); 
-                // $(".wrap-jenis-penumpang").append('<div class="d-flex align-items-center mt-2"> <select class="jenis-penumpang-select2" name="jenis_penumpang[]"><option ></option><option value="Dewasa">Dewasa</option><option value="Anak-Anak">Anak-Anak</option><option value="FOC">FOC</option></select><i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-booking"></i></div>'); 
-                // $(".wrap-jenis-penumpang").append('<i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-book"></i>'); 
             } else {
                 alert('You Reached the limits')
             }
@@ -144,10 +140,6 @@
                         <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-foc"></i>
                     </div>
                 `);
-                // $(".wrap-nama-tamu").append('<div class="d-flex align-items-center mt-2 nama-tamu-add"><input type="text" class="form-control" id="nama_tamu" name="nama_tamu[]" placeholder="masukkan nama tamu..."></div>'); //add input box
-                // $(".wrap-nasionality").append('<div class="d-flex align-items-center mt-2"><select name="nasionality[]" class="nasionality-select2"><?php foreach($list_negara as $dt){?><option value="<?= $dt['name']?>"><?= $dt['name']?></option><?php }?></select></div>'); 
-                // $(".wrap-jenis-penumpang").append('<div class="d-flex align-items-center mt-2"> <select class="jenis-penumpang-select2" name="jenis_penumpang[]"><option ></option><option value="Dewasa">Dewasa</option><option value="foc-foc">foc-foc</option><option value="FOC">FOC</option></select><i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-booking"></i></div>'); 
-                // $(".wrap-jenis-penumpang").append('<i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-book"></i>'); 
             } else {
                 alert('You Reached the limits')
             }
@@ -181,6 +173,7 @@
     //     return span;
     // }
 
+    // Render Select2 After Append Add Nama tamu and Nasionality
     function renderSelect2() {
         $('.nasionality-select2').select2({
             placeholder: "nasionality",
@@ -203,6 +196,7 @@
     renderSelect2();
 
 
+    // General Select2
     $(document).ready(function() {
 
         $('.depart-select2').select2({
@@ -224,6 +218,7 @@
         });
     });
 
+    // Condition Tujuan and Initial Tgl Berangkat - Kembali
     $(document).ready(function(){
         $('.form-check-input').change(function(){
             let selected_value = $("input[name='tipetujuan']:checked").val();
@@ -238,7 +233,6 @@
         $(function() {
             $( "#tglberangkat" ).datepicker({
                 dateFormat: 'dd-mm-yy',
-                // timeFormat:  "hh:mm:ss",
                 changeYear: true,
                 changeMonth: true,
                 minDate: 0,
@@ -247,18 +241,16 @@
 
             $( "#tglkembali" ).datepicker({
                 dateFormat: 'dd-mm-yy',
-                // timeFormat:  "hh:mm:ss",
                 changeYear: true,
                 changeMonth: true,
                 minDate: 0,
                 yearRange: "-100:+20",
             });
         });
-        // $('#tglberangkat').datepicker();
-        // $('#tglkembali').datepicker();
     });
 
 
+    // Call Ajax Nama Agent
     $("select.agent-select2").on("change",function(e){
         e.preventDefault();
         var id_agen = $(this).val();
@@ -306,7 +298,7 @@
             });
     });
 
-    // On Change DEPART OR RETURN FOR PRICE
+    // Main Summary 
     var hargaDepart;
     var hargaReturn;
     var harga = 0;
@@ -314,6 +306,8 @@
     var hargaAnak = 0;
     var hargaFOC = 0;
     $(function() {
+
+        // On Change Harga Depart & Return
         $("#depart_select2").change(function(){
             hargaDepart = $('#depart_select2 option:selected').attr('hargaDepart');
         }); 
@@ -322,6 +316,7 @@
             hargaReturn = $('#return_select2 option:selected').attr('hargaReturn');
         }); 
 
+        // Click Cek Harga For Trigger Summary
         $("#cekHarga").click(function(e) {
             e.preventDefault();
     
@@ -331,6 +326,8 @@
             var getTglBerangkat = $('#tglberangkat').val();
             var getTglKembali = $('#tglkembali').val();
 
+            var getDepart =  $('#depart_select2').find(":selected").text();
+            var getReturn =  $('#return_select2').find(":selected").text();
 
             
             var inpt_tamu_dewasa = document.getElementsByName('nama_tamu_dewasa[]');
@@ -446,6 +443,8 @@
                         $(".display-nama-agent").text(getNamaAgent);
                         $(".display-tgl-berangkat").text(getTglBerangkat);
                         $(".display-tgl-kembali").text(getTglKembali);
+                        $(".display-depart").text(getDepart);
+                        $(".display-return").text(getReturn);
                         $(".display-total-harga-final").text(harga.toLocaleString("en"));
                         harga = 0;
                     }
@@ -504,6 +503,11 @@
                             $(".display-foc-jumlah").text(tempInput_foc.length);
                             $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
                         }
+                        $(".display-nama-agent").text(getNamaAgent);
+                        $(".display-tgl-berangkat").text(getTglBerangkat);
+                        $(".display-tgl-kembali").text(getTglKembali);
+                        $(".display-depart").text(getDepart);
+                        $(".display-return").text('-');
                         $(".display-total-harga-final").text(harga.toLocaleString("en"));
                         harga = 0;
                     }

@@ -7,6 +7,10 @@ class Booking extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!isset($this->session->userdata['logged_status'])) {
+			redirect('/');
+		}
+
         $this->load->model('Booking_model', 'booking');
         $this->load->model('Ticket_model', 'ticket');
         $this->load->model('Agent_model', 'agent');
@@ -141,12 +145,12 @@ class Booking extends CI_Controller
         );
         
         // echo "<pre>".print_r(array_merge($temp_dewasa, $temp_anak),true)."</pre>";
-        // echo "<pre>".print_r($jenis_tamu,true)."</pre>";
-        // die;
         $result = $this->booking->insert_booking_ticket($datas, $detail_booking);
+        // echo "<pre>".print_r($result,true)."</pre>";
+        // die;
 
         if($result['code'] == 200) {
-            $this->session->set_flashdata('success', $this->message->success_msg());
+            $this->session->set_flashdata('success', 'Data Berhasil Diinputkan');
 			redirect('booking');
 			return;
         }else{
@@ -154,6 +158,24 @@ class Booking extends CI_Controller
 			redirect('booking');
 			return;
         }
+    }
+
+
+    public function booking_paket()
+    {
+        $get_ticket = $this->ticket->get_ticket();
+        $get_agent  = $this->agent->get_agent();
+        // echo "<pre>".print_r($get_ticket,true)."</pre>";
+        // die;
+        $data = array(
+            'title'             => NAMETITLE . ' - Booking Paket',
+            'content'           => 'admin/booking_paket/index',
+            'ticket'            => $get_ticket,
+            'agent'             => $get_agent,
+            'extra'             => 'admin/booking_paket/_js_index',
+            'bookpaket_active'  => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
     }
 
 

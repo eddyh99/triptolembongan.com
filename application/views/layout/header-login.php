@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title?></title>
-    <link rel="shortcut icon" type="image/png" href="<?= base_url()?>assets/img/favicon.jpg" />
+    <link rel="shortcut icon" type="image/png" href="<?= base_url()?>assets/img/favicon.png" />
     <link rel="stylesheet" href="<?= base_url()?>assets/css/styles.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">

@@ -7,6 +7,9 @@ class Ticket extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!isset($this->session->userdata['logged_status'])) {
+			redirect('/');
+		}
 
         $this->load->model('Ticket_model', 'ticket');
         $this->load->model('Harga_model', 'harga');

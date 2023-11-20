@@ -43,7 +43,7 @@
                                 <input type="text" class="form-control money-input" id="harga" name="harga" >
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Tambah Ticket</button>
+                        <button type="submit" class="btn btn-primary mt-3">Edit Paket</button>
                   </form>
                 </div>
             </div>
