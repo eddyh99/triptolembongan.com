@@ -19,6 +19,7 @@
                     <h5 class="card-title fw-semibold mb-4">Booking Ticket</h5>
                     <form action="<?= base_url()?>booking/booking_tiket_proses" method="POST">
                         <div class="row">
+
                             <div class="row">
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-6">
@@ -29,10 +30,10 @@
                                             <i class="ti ti-ticket fs-6 text-success"></i>
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-5 ">
+                                    <div class="mb-4 col-12 col-md-6 ">
                                         <label for="freecharge" class="form-label">Pilih Agen</label>
-                                        <select class="agent-select2" name="nama_agent">
-                                            <option ></option>
+                                        <select class="agent-select2" id="nama_agent" name="nama_agent">
+                                            <option value="undefined"></option>
                                             <?php foreach($agent as $ag){?>
                                                 <option value="<?= $ag['id']?>"><?= $ag['nama']?></option>
                                             <?php }?>
@@ -41,6 +42,71 @@
                                 </div>
                             </div>
                             
+                            <!-- Tujuan & Tanggal Keberangkatan -->
+                            <div class="row">
+                                <div class="row">
+                                    <div class="mb-4 col-12 col-md-6 ">
+                                        <label for="freecharge" class="form-label">Tujuan</label>
+                                        <div class="d-flex ">
+                                            <div class="form-check">
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="onewayradio" >
+                                                <label class="form-check-label cursor-pointer" for="onewayradio">
+                                                    One Way
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="returnradio" checked="checked">
+                                                <label class="form-check-label cursor-pointer" for="returnradio">
+                                                    Return
+                                                </label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="mt-3">
+                                            <select id="depart_select2" class="depart-select2" name="depart" required>
+                                                <option ></option>
+                                                <!-- <?php foreach($ticket as $tk){?>
+                                                    <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
+                                                <?php }?> -->
+               
+                                            </select>
+                                        </div>
+        
+                                        <div class="mt-3">
+                                            <select id="return_select2" class="return-select2" name="return_from" required>
+                                                <option></option>
+                                                <!-- <?php foreach($ticket as $tk){?>
+                                                    <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
+                                                <?php }?> -->
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tanggal Keberangkatan | Kembalii -->
+                                    <div class="mb-4 mt-3 col-12 col-md-6 ">
+                                        <div>
+                                            <label for="tglberangkat" class="form-label">Tanggal Keberangkatan</label>
+                                            <div class="form-control d-flex">
+                                                <input type="text" class="w-100 border-0 cursor-pointer" name="tglberangkat" id="tglberangkat" autocomplete="off">
+                                                <label for="tglberangkat" class="cursor-pointer">
+                                                    <i class="ti ti-calendar-event fs-6"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="tglkembali" class="form-label">Tanggal Kembali</label>
+                                            <div class="form-control d-flex">
+                                                <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off">
+                                                <label for="tglkembali" class="cursor-pointer">
+                                                    <i class="ti ti-calendar-event fs-6"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
                             <!-- DEWASA -->
                             <div class="row wraping-add-booking-dewasa">
                                 <div class="row">
@@ -130,7 +196,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- <button id="cekHarga" class="btn btn-dark mt-3">Cek Harga</button> -->
 
+                       
                             <!-- <select class="nasionality-select2" name="nasionality[]">
                                 <option ></option>
                                 <option value="AF" data-capital="Kabul">Afghanistan</option>
@@ -372,82 +440,175 @@
                                 <label for="child" class="form-label">Penumpang Child</label>
                                 <input type="number" class="form-control" id="child" name="child" placeholder="masukkan jumlah penumpang anak-anak...">
                             </div>  -->
-
-
-                            <div class="mb-4 col-12 col-md-6 ">
-                                <label for="freecharge" class="form-label">Tujuan</label>
-                                <div class="d-flex ">
-                                    <div class="form-check">
-                                        <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="onewayradio" >
-                                        <label class="form-check-label cursor-pointer" for="onewayradio">
-                                            One Way
-                                        </label>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="mb-4 col-12 col-md-4">
+                                        <label for="pickup" class="form-label">Pickup Lembongan</label>
+                                        <input type="text" class="form-control" id="pickup" name="pickup"  placeholder="masukkan pickup Lembongan...">
                                     </div>
-                                    <div class="form-check ms-3">
-                                        <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="returnradio" checked>
-                                        <label class="form-check-label cursor-pointer" for="returnradio">
-                                            Return
-                                        </label>
+        
+                                    <div class="mb-4 col-12 col-md-4 ">
+                                        <label for="dropoff" class="form-label">Drop off Bali</label>
+                                        <input type="text" class="form-control" id="dropoff" name="dropoff" placeholder="masukkan drop off Bali...">
                                     </div>
-                                </div>
-
-                                <div class="mt-3">
-                                    <select class="depart-select2" name="depart">
-                                        <option ></option>
-                                        <?php foreach($ticket as $tk){?>
-                                            <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
-                                        <?php }?>
-       
-                                    </select>
-                                </div>
-
-                                <div class="mt-3">
-                                    <select class="return-select2" name="return_from">
-                                        <option ></option>
-                                        <?php foreach($ticket as $tk){?>
-                                            <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="mb-4 col-12 col-md-6 ">
-                                <div>
-                                    <label for="tglberangkat" class="form-label">Tanggal Keberangkatan</label>
-                                    <div class="form-control d-flex">
-                                        <input type="text" class="w-100 border-0 cursor-pointer" name="tglberangkat" id="tglberangkat" autocomplete="off">
-                                        <label for="tglberangkat" class="cursor-pointer">
-                                            <i class="ti ti-calendar-event fs-6"></i>
-                                        </label>
+        
+                                    <div class="mb-4 col-12 col-md-4 ">
+                                        <label for="catatan" class="form-label">Remarks</label>
+                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu...">
                                     </div>
+                                    <!-- <div class="mb-4 col-12 col-md-4 ">
+                                        <div class="col-12 d-flex align-items-strech">
+                                            <div class="card w-100">
+                                                <div class="card-body p-4">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                    <h5 class="card-title fw-semibold">Trending Creator</h5>
+                                                    <p class="card-subtitle mb-0">The Benefits of Being a Trending Creator</p>
+                                                    </div>
+                                                    <a href="javascript:void(0)" class="text-dark fs-6 position-relative nav-icon-hover z-index-5 text-decoration-none"><i class="ti ti-dots-vertical"></i></a>
+                                                </div>
+                                                <div class="card shadow-none mt-3 mb-0">
+                                                    <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                                                    <img src="../assets/images/profile/user-5.jpg" class="rounded-circle" alt="user" width="40">
+                                                    <div>
+                                                        <h6 class="mb-0 fw-semibold">Project Solona</h6>
+                                                        <span class="fs-2">12.200 Items</span>
+                                                    </div>
+                                                    <div class="ms-auto text-end">
+                                                        <h6 class="mb-0 fw-semibold">$300,000+</h6>
+                                                        <span class="fs-2">Total USD</span>
+                                                    </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                                                    <img src="../assets/images/profile/user-3.jpg" class="rounded-circle" alt="user" width="40">
+                                                    <div>
+                                                        <h6 class="mb-0 fw-semibold">The Aston Lix</h6>
+                                                        <span class="fs-2">10.150 Items</span>
+                                                    </div>
+                                                    <div class="ms-auto text-end">
+                                                        <h6 class="mb-0 fw-semibold">$250,000+</h6>
+                                                        <span class="fs-2">Total USD</span>
+                                                    </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-3 py-3">
+                                                    <img src="../assets/images/profile/user-4.jpg" class="rounded-circle" alt="user" width="40">
+                                                    <div>
+                                                        <h6 class="mb-0 fw-semibold">Barly X Dipa</h6>
+                                                        <span class="fs-2">10.100 Items</span>
+                                                    </div>
+                                                    <div class="ms-auto text-end">
+                                                        <h6 class="mb-0 fw-semibold">$230,000+</h6>
+                                                        <span class="fs-2">Total USD</span>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
                                 </div>
-                                <div class="mt-3">
-                                    <label for="tglkembali" class="form-label">Tanggal Kembali</label>
-                                    <div class="form-control d-flex">
-                                        <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off">
-                                        <label for="tglkembali" class="cursor-pointer">
-                                            <i class="ti ti-calendar-event fs-6"></i>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-4 col-12 col-md-6 ">
-                                <label for="pickup" class="form-label">Pickup Lembongan</label>
-                                <input type="text" class="form-control" id="pickup" name="pickup"  placeholder="masukkan pickup Lembongan...">
-                            </div>
-
-                            <div class="mb-4 col-12 col-md-6 ">
-                                <label for="dropoff" class="form-label">Drop off Bali</label>
-                                <input type="text" class="form-control" id="dropoff" name="dropoff" placeholder="masukkan drop off Bali...">
-                            </div>
-
-                            <div class="mb-4 col-12 col-md-6 ">
-                                <label for="catatan" class="form-label">Remarks</label>
-                                <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu...">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Order Sekarang</button>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-4">
+                                    <button id="cekHarga" class="btn btn-dark mt-3">Cek Harga</button>
+                                    <button type="submit" class="btn btn-primary mt-3">Order Sekarang</button>
+                                </div>
+                                <div class="col-8">
+                                    <div class="mb-4 col-12">
+                                        <div class="col-12 d-flex align-items-strech">
+                                            <div class="card w-100">
+                                                <div class="card-body p-4">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <h5 class="card-title fw-semibold">Summary Booking Ticket</h5>
+                                                        <p class="card-subtitle mb-2">
+                                                            Agen: <span class="fw-bolder display-nama-agent">-</span>
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="card-subtitle mb-2">
+                                                            Keberangkatan: <span class="display-tgl-berangkat">-</span>
+                                                        </p>
+                                                        <p class="card-subtitle mb-2">
+                                                            Kembali: <span class="display-tgl-kembali">-</span>
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="card shadow-none mt-1 mb-0">
+                                                    <div class="d-flex align-items-center gap-3 py-3">
+                                                        <div>
+                                                            <h6 class="mb-0 fw-semibold">Tujuan: Return</h6>
+                                                            <span class="fs-2">Lembongan Sanur - 10:00</span>
+                                                            <br>
+                                                            <span class="fs-2">Sanur Lembongan - 10:00</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                                                        <div>
+                                                            <h6 class="mb-0 fw-semibold">Dewasa</h6>
+                                                            <span class="fs-2">
+                                                                <span class="display-dewasa-jumlah">0</span> Orang
+                                                            </span>
+                                                        </div>
+                                                        <div class="ms-auto text-end">
+                                                            <span class="fs-2">Total Dewasa</span>
+                                                            <h6 class="mb-0 fw-semibold">
+                                                                Rp.<span class="display-total-harga-dewasa">0</span>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                                                        <div>
+                                                            <h6 class="mb-0 fw-semibold">Anak - Anak</h6>
+                                                            <span class="fs-2">
+                                                                <span class="display-anak-jumlah">0</span> Orang
+                                                            </span>
+                                                        </div>
+                                                        <div class="ms-auto text-end">
+                                                            <span class="fs-2">Total Anak - Anak</span>
+                                                            <h6 class="mb-0 fw-semibold">
+                                                                Rp.<span class="display-total-harga-anak">0</span>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+                                                        <div>
+                                                            <h6 class="mb-0 fw-semibold">Free of Charge</h6>
+                                                            <span class="fs-2">
+                                                                <span class="display-foc-jumlah">0</span> Orang    
+                                                            </span>
+                                                        </div>
+                                                        <div class="ms-auto text-end">
+                                                            <span class="fs-2">Total Free of Charge</span>
+                                                            <h6 class="mb-0 fw-semibold">
+                                                                Rp.<span class="display-total-harga-foc">0</span>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center gap-3 py-3">
+                                                        <div>
+                                                            <h6 class="mb-0 fw-semibold">Total Keseluruhan</h6>
+                                                            <!-- <span class="fs-2">2 Orang</span> -->
+                                                        </div>
+                                                        <div class="ms-auto text-end">
+                                                            <!-- <span class="fs-2">Rp.2.200,000</span> -->
+                                                            <h6 class="mb-0 fw-semibold">
+                                                                Rp.<span class="display-total-harga-final">0</span>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <button id="cekHarga" class="btn btn-dark mt-3">CEK HARGA</button> -->
                   </form>
                 </div>
             </div>

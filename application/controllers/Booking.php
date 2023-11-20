@@ -10,6 +10,7 @@ class Booking extends CI_Controller
         $this->load->model('Booking_model', 'booking');
         $this->load->model('Ticket_model', 'ticket');
         $this->load->model('Agent_model', 'agent');
+        $this->load->model('Harga_model', 'harga');
     }
 
     public function index()
@@ -28,6 +29,14 @@ class Booking extends CI_Controller
             'bookticket_active' => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function get_ticket_agent($id_nama)
+    {
+        $result = $this->booking->get_ticket_agent($id_nama);
+        //  echo "<pre>".print_r($result,true)."</pre>";
+        // die;
+        echo json_encode($result);
     }
 
 
@@ -123,7 +132,7 @@ class Booking extends CI_Controller
             'pickup'        => $pickup,
             'dropoff'       => $dropoff,
             'depart'        => $depart,
-            'return_from'   => $return_from,
+            'return_from'   => empty($return_from) ? null : $return_from,
             'agentid'       => $nama_agent,
             'remarks'       => $remarks,
             'userid'        => $_SESSION["logged_status"]["username"],

@@ -84,7 +84,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$bookticket_active?>" href="<?= base_url()?>booking" aria-expanded="false">
                         <span>
-                            <i class="ti ti-article"></i>
+                            <i class="ti ti-book"></i>
                         </span>
                         <span class="hide-menu">Booking Ticket</span>
                     </a>

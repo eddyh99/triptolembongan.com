@@ -163,8 +163,6 @@
     });
     
 
-
-
     // function addCountry(item, state) {
     //     if (!item.id) {
     //         return item.text;
@@ -246,10 +244,289 @@
                 minDate: 0,
                 yearRange: "-100:+20",
             });
+
+            $( "#tglkembali" ).datepicker({
+                dateFormat: 'dd-mm-yy',
+                // timeFormat:  "hh:mm:ss",
+                changeYear: true,
+                changeMonth: true,
+                minDate: 0,
+                yearRange: "-100:+20",
+            });
         });
         // $('#tglberangkat').datepicker();
-        $('#tglkembali').datepicker();
+        // $('#tglkembali').datepicker();
     });
+
+
+    $("select.agent-select2").on("change",function(e){
+        e.preventDefault();
+        var id_agen = $(this).val();
+            $.ajax({  
+                url: "<?=base_url()?>booking/get_ticket_agent/"+id_agen,
+                type: "post",
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    $('.remove-depart-option').remove()
+                    if(data.length === 0){ 
+                        setTimeout(function() {
+                            Swal.fire({
+                                html: '<p>Data Ticket per Agent Kosong</p>',
+                                position: 'top',
+                                timer: 3000,
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                                icon: 'error',
+                                timer: 2000,
+                                timerProgressBar: true,
+                            });
+                        }, 100);
+                    } else {
+                        data.forEach((el) => {
+                            $('.depart-select2').append(`<option class="remove-depart-option"  hargaDepart="${el.harga}" value="${el.id}">${el.tujuan} || ${el.berangkat}</option>`);
+                            $('.return-select2').append(`<option class="remove-depart-option" hargaReturn="${el.harga}" value="${el.id}">${el.tujuan} || ${el.berangkat}</option>`);
+                        });
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                    setTimeout(function() {
+                            Swal.fire({
+                                html: `<p>Error ${textStatus}</p>`,
+                                position: 'top',
+                                timer: 3000,
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                                icon: 'error',
+                                timer: 2000,
+                                timerProgressBar: true,
+                            });
+                        }, 100);
+                }
+            });
+    });
+
+    // On Change DEPART OR RETURN FOR PRICE
+    var hargaDepart;
+    var hargaReturn;
+    var harga = 0;
+    var hargaDewasa = 0;
+    var hargaAnak = 0;
+    var hargaFOC = 0;
+    $(function() {
+        $("#depart_select2").change(function(){
+            hargaDepart = $('#depart_select2 option:selected').attr('hargaDepart');
+        }); 
+
+        $("#return_select2").change(function(){
+            hargaReturn = $('#return_select2 option:selected').attr('hargaReturn');
+        }); 
+
+        $("#cekHarga").click(function(e) {
+            e.preventDefault();
+    
+            var getAgent =  $('#nama_agent').find(":selected").val();
+            var getNamaAgent =  $('#nama_agent').find(":selected").text();
+            var getTujuan = $('input[name="tipetujuan"]:checked').val();
+            var getTglBerangkat = $('#tglberangkat').val();
+            var getTglKembali = $('#tglkembali').val();
+
+
+            
+            var inpt_tamu_dewasa = document.getElementsByName('nama_tamu_dewasa[]');
+            var inpt_nasionality_dewasa = document.getElementsByName('nasionality_dewasa[]');
+            var inpt_tamu_anak = document.getElementsByName('nama_tamu_anak[]');
+            var inpt_nasionality_anak = document.getElementsByName('nasionality_anak[]');
+            var inpt_tamu_foc = document.getElementsByName('nama_tamu_foc[]');
+            var inpt_nasionality_foc = document.getElementsByName('nasionality_foc[]');
+
+
+            var tempInput_dewasa = [];
+            for (var i = 0; i < inpt_tamu_dewasa.length; i++) {
+                var inpt = inpt_tamu_dewasa[i];
+                tempInput_dewasa.push(inpt.value);
+            }
+
+            var tempInputNas_dewasa = [];
+            for (var i = 0; i < inpt_nasionality_dewasa.length; i++) {
+                var inpt = inpt_nasionality_dewasa[i];
+                tempInputNas_dewasa.push(inpt.value);
+            }
+
+            var tempInput_anak = [];
+            for (var i = 0; i < inpt_tamu_anak.length; i++) {
+                var inpt = inpt_tamu_anak[i];
+                tempInput_anak.push(inpt.value);
+            }
+            var tempInputNas_anak = [];
+            for (var i = 0; i < inpt_nasionality_anak.length; i++) {
+                var inpt = inpt_nasionality_anak[i];
+                tempInputNas_anak.push(inpt.value);
+            }
+
+            var tempInput_foc = [];
+            for (var i = 0; i < inpt_tamu_foc.length; i++) {
+                var inpt = inpt_tamu_foc[i];
+                tempInput_foc.push(inpt.value);
+            }
+            var tempInputNas_foc = [];
+            for (var i = 0; i < inpt_nasionality_foc.length; i++) {
+                var inpt = inpt_nasionality_foc[i];
+                tempInputNas_foc.push(inpt.value);
+            }
+
+            if(getAgent == 'undefined'){
+                // alert("TOLONG DIISI AGENT");
+                setTimeout(function() {
+                    Swal.fire({
+                        html: '<p>Pilih Agen terlebih dahulu</p>',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'error',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
+            }else{
+                if((getTujuan === 'returnradio') && hargaDepart !== undefined &&  hargaReturn !== undefined ){
+                    if(
+                        ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) && 
+                        ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
+                        ((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)) 
+                    ){
+                        setTimeout(function() {
+                            Swal.fire({
+                                html: '<p>Nama tamu atau Nasionality belum diinputkan</p>',
+                                position: 'top',
+                                timer: 3000,
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                                icon: 'error',
+                                timer: 2000,
+                                timerProgressBar: true,
+                            });
+                        }, 100);
+                        
+                    }else {
+                        
+                        if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
+                            hargaDewasa = 0;
+                            $(".display-dewasa-jumlah").text(0);
+                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                        }else{
+                            hargaDewasa = (hargaDepart * tempInput_dewasa.length) + (hargaReturn * tempInput_dewasa.length);
+                            harga += hargaDewasa;
+                            $(".display-dewasa-jumlah").text(tempInput_dewasa.length);
+                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                        }
+                        
+                        if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
+                            hargaAnak = 0;
+                            $(".display-anak-jumlah").text(0);
+                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                        }else{
+                            hargaAnak = (hargaDepart * tempInput_anak.length) + (hargaReturn * tempInput_anak.length);
+                            harga += hargaAnak;
+                            $(".display-anak-jumlah").text(tempInput_anak.length);
+                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                        }
+
+                        if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
+                            hargaFOC = 0;
+                            $(".display-foc-jumlah").text(0);
+                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                        }else{
+                            hargaFOC = (hargaDepart * tempInput_foc.length) + (hargaReturn * tempInput_foc.length);
+                            $(".display-foc-jumlah").text(tempInput_foc.length);
+                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                        }
+                        // alert(harga);
+                        $(".display-nama-agent").text(getNamaAgent);
+                        $(".display-tgl-berangkat").text(getTglBerangkat);
+                        $(".display-tgl-kembali").text(getTglKembali);
+                        $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                        harga = 0;
+                    }
+                }else if(getTujuan === 'onewayradio' && hargaDepart !== undefined){
+
+                    if(
+                        ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) &&
+                        ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
+                        ((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null))
+                    ){
+                        setTimeout(function() {
+                            Swal.fire({
+                                html: '<p>Nama tamu atau Nasionality belum diinputkan</p>',
+                                position: 'top',
+                                timer: 3000,
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                                icon: 'error',
+                                timer: 2000,
+                                timerProgressBar: true,
+                            });
+                        }, 100);
+                    }else {
+                        if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
+                            console.log("ONEWAY DES");
+                            hargaDewasa = 0;
+                            $(".display-dewasa-jumlah").text(0);
+                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                        }else{
+                            hargaDewasa = (hargaDepart * tempInput_dewasa.length);
+                            harga += hargaDewasa;
+                            $(".display-dewasa-jumlah").text(tempInput_dewasa.length);
+                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                        }
+
+                        if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
+                            console.log("ONEWAY ANAK");
+                            hargaAnak = 0;
+                            $(".display-anak-jumlah").text(0);
+                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                        }else{
+                            hargaAnak = (hargaDepart * tempInput_anak.length);
+                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                            hargaAnak = 0;
+                            harga += hargaAnak;
+                            $(".display-anak-jumlah").text(tempInput_anak.length);
+                        }
+    
+                        if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
+                            console.log("ONEWAY FOC");
+                            hargaFOC = 0;
+                            $(".display-foc-jumlah").text(0);
+                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                        }else{
+                            hargaFOC = (hargaDepart * tempInput_foc.length);
+                            $(".display-foc-jumlah").text(tempInput_foc.length);
+                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                        }
+                        $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                        harga = 0;
+                    }
+
+                } else {
+                    setTimeout(function() {
+                        Swal.fire({
+                            html: '<p>Pilih Tujuan Dengan Benar</p>',
+                            position: 'top',
+                            timer: 3000,
+                            showCloseButton: true,
+                            showConfirmButton: false,
+                            icon: 'error',
+                            timer: 2000,
+                            timerProgressBar: true,
+                        });
+                    }, 100);
+                    // alert("TOLONG TUJUAN DIISI DENGAN BENAR")
+                }
+            }
+        })
+    })
+
 
 
 
