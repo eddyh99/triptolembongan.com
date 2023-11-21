@@ -82,7 +82,7 @@
                     <span class="hide-menu">TRANSAKSI</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$bookticket_active?>" href="<?= base_url()?>booking" aria-expanded="false">
+                    <a class="sidebar-link <?= @$bookticket_active?>" href="<?= base_url()?>booking/list_booking_ticket" aria-expanded="false">
                         <span>
                             <i class="ti ti-book"></i>
                         </span>

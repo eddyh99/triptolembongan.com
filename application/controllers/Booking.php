@@ -35,6 +35,17 @@ class Booking extends CI_Controller
         $this->load->view('layout/wrapper-dashboard', $data);
     }
 
+    public function list_booking_ticket()
+    {
+        $data = array(
+            'title'             => NAMETITLE . ' - Booking Ticket',
+            'content'           => 'admin/booking_ticket/list_booking',
+            'extra'             => 'admin/booking_ticket/_js_index',
+            'bookticket_active' => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
     public function get_ticket_agent($id_nama)
     {
         $result = $this->booking->get_ticket_agent($id_nama);
@@ -150,8 +161,8 @@ class Booking extends CI_Controller
         // die;
 
         if($result['code'] == 200) {
-            $this->session->set_flashdata('success', 'Data Berhasil Diinputkan');
-			redirect('booking');
+            $this->session->set_flashdata('success', 'Berhasil Booking');
+			redirect('booking/list_booking_ticket');
 			return;
         }else{
             $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
