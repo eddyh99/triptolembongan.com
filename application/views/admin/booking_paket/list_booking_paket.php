@@ -3,10 +3,10 @@
     <!--  Row Daftar User Agent -->
     <div class="row my-4">
         <div class="col-lg-12 d-flex align-items-strech">
-            <a href="<?= base_url()?>paket/tambah_paket_agent" class="btn btn-primary d-flex align-items-center">
+            <a href="<?= base_url()?>booking/booking_paket" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Paket per Agent
+                    Booking Paket
                 </span>
             </a>
         </div>
@@ -16,16 +16,16 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">List Ticket</h5>
-                    <table id="table_list_paket_agent" class="table table-striped" style="width:100%">
+                    <h5 class="card-title fw-semibold mb-4">List Booking Paket</h5>
+                    <table id="table_list_booking_paket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Kode</th>
+                                <th>Berangkat</th>
+                                <th>Kembali</th>
                                 <th>Paket</th>
-                                <th>Keterangan</th>
-                                <th>Nama Agent</th>
-                                <th>No.Telp</th>
-                                <th>Harga</th>
+                                <th class="th-keteranga-paket">Keterangan</th>
+                                <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -33,12 +33,12 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
+                                <th>Kode</th>
+                                <th>Berangkat</th>
+                                <th>Kembali</th>
                                 <th>Paket</th>
                                 <th>Keterangan</th>
-                                <th>Nama Agent</th>
-                                <th>No.Telp</th>
-                                <th>Harga</th>
+                                <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -68,6 +68,5 @@
     </script>
 <?php } ?>
 <!-- SWEET ALERT END -->
-
 
 

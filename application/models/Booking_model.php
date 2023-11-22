@@ -2,6 +2,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Booking_model extends CI_Model{
+
+    public function list_ticket_agent()
+    {
+        $sql="SELECT a.id,kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff FROM tbl_booking a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_tiket c ON a.depart=c.id 
+        LEFT JOIN tbl_tiket d ON a.return_from=d.id";
+        $query=$this->db->query($sql);
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
     public function get_ticket_agent($id_nama)
     {
         $sql="SELECT a.id, a.tujuan, a.berangkat, c.id as 'id_nama', c.nama, c.kontak,x.harga FROM 
@@ -59,19 +78,82 @@ class Booking_model extends CI_Model{
 
     }
 
-    // public function summary_booking_ticket()
-    // {
-    //     $sql = "SELECT a.id as hallo, a.kode_tiket, a.depart, COUNT(*) AS id_detail
-    //     FROM tbl_booking a 
-    //     LEFT JOIN tbl_booking_detail x ON a.id=x.id
-    //     WHERE a.id=51
-    //     GROUP BY a.id, a.kode_tiket, a.depart";
-    //     $query = $this->db->query($sql);
-	// 	if ($query){
-	// 		return $query->row();
-	// 	}else{
-	// 		return $this->db->error();
-	// 	}
-    // }
+    // ================= =================== ====================
+    // ================= BOOKING PAKET MODEL ====================
+    // ================= =================== ====================
+
+    public function list_paket_agent()
+    {
+        $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan,
+            (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff FROM tbl_booking_paket a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_paket c ON a.id_paket=c.id";
+        $query=$this->db->query($sql);
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+    
+    public function get_paket_agent($id_nama)
+    {
+        $sql="SELECT a.id, a.namapaket, a.keterangan, c.id as 'id_nama', c.nama, c.kontak, x.harga FROM 
+        tbl_paket a INNER JOIN ( 
+            SELECT a.harga, a.id_agen, a.id_paket FROM tbl_agenpaket a 
+            INNER JOIN (
+                SELECT MAX(berlaku) as tanggal,id_agen,id_paket FROM tbl_agenpaket GROUP BY id_agen,id_paket
+            ) x ON a.id_agen=x.id_agen AND a.id_paket=x.id_paket AND a.berlaku=x.tanggal
+        ) x ON a.id=x.id_paket
+        INNER JOIN tbl_agen c ON c.id=x.id_agen
+        WHERE a.is_deleted='no' AND c.id=?";
+        $query=$this->db->query($sql, array($id_nama));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
+    public function insert_booking_paket($datas, $detail_booking_paket)
+    {
+        $this->db->trans_start();
+        $this->db->insert("tbl_booking_paket", $datas);
+		$error = $this->db->error();
+		$id = $this->db->insert_id();
+
+        $detail = array();
+        foreach($detail_booking_paket as $dt){
+            $temp['id']             = $id;
+            $temp['namatamu']       = $dt['namatamu'];
+            $temp['nasionality']    = $dt['nasionality'];
+            $temp['jenis']          = $dt['jenis'];
+            array_push($detail, $temp);
+        }
+        // echo "<pre>".print_r($detail,true)."</pre>";
+        // die;
+        $this->db->insert_batch('tbl_booking_paket_detail', $detail);
+        $this->db->trans_complete();
+
+		if ($this->db->trans_status() == FALSE) {
+			$this->db->trans_rollback();
+            echo $error["message"];
+			return array(
+                "code" => 511, 
+                "message" => $error["message"]
+            );
+		} else {
+			$this->db->trans_commit();
+            echo "SUKSES";
+			return array(
+                "code" => 200, 
+                "message" => ""
+            );
+		}
+
+    }
 }
 ?>

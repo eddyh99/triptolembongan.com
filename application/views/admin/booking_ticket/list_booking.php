@@ -17,13 +17,14 @@
             <div class="card w-100">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">List Booking Ticket</h5>
-                    <table id="table_list_agent" class="table table-striped" style="width:100%">
+                    <table id="table_list_booking_ticket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Kode</th>
-                                <th>Tujuan</th>
                                 <th>Berangkat</th>
                                 <th>Kembali</th>
+                                <th>Depart</th>
+                                <th>Return</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
@@ -33,9 +34,10 @@
                         <tfoot>
                             <tr>
                                 <th>Kode</th>
-                                <th>Tujuan</th>
                                 <th>Berangkat</th>
                                 <th>Kembali</th>
+                                <th>Depart</th>
+                                <th>Return</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>

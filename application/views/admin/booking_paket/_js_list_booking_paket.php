@@ -1,23 +1,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
+<style>
+    .th-keteranga-paket {
+		width: 300px;
+	}
+</style>
 <script type="text/javascript">
         
         $(document).ready( function () {
-            $('#table_list_booking_ticket').DataTable({
+            $('#table_list_booking_paket').DataTable({
                 "scrollX": true,
                 "ajax": {
-                    "url": "<?=base_url()?>booking/get_list_ticket_agent",
+                    "url": "<?=base_url()?>booking/get_list_paket_agent",
                     "type": "POST",
                     "dataSrc":function (data){
-                        // var date = moment();
-                        // var currentDate = date.format('YYYY-MM-D');
-                        // console.log(typeof data[5].kembali);
-                        // console.log(typeof currentDate);
-                        // if(moment(data[5].berangkat).isAfter(currentDate)){
-                        //     console.log("MASIH");
-                        // }else{
-                        //     console.log("BERAKHIR");
-                        // }
+                        console.log(data);
                         return data;							
                     }
                 },
@@ -41,8 +37,8 @@
                  		    return kembali;
                 	    }
                     },
-                    { data: 'depart' },
-                    { data: 'return_from' },
+                    { data: 'namapaket' },
+                    { data: 'keterangan' },
                 ],
                 "aoColumnDefs": [
                     {

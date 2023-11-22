@@ -199,16 +199,10 @@
     // General Select2
     $(document).ready(function() {
 
-        $('.depart-select2').select2({
-            placeholder: "Depart",
+        $('.paket-select2').select2({
+            placeholder: "Paket",
             allowClear: true,
             theme: "bootstrap",
-        });
-
-        $('.return-select2').select2({
-            placeholder: "Return",
-            allowClear: true,
-            theme: "bootstrap"
         });
 
         $('.agent-select2').select2({
@@ -255,15 +249,15 @@
         e.preventDefault();
         var id_agen = $(this).val();
             $.ajax({  
-                url: "<?=base_url()?>booking/get_ticket_agent/"+id_agen,
+                url: "<?=base_url()?>booking/get_paket_agent/"+id_agen,
                 type: "post",
                 success: function(response) {
                     var data = JSON.parse(response);
-                    $('.remove-depart-option').remove()
+                    $('.remove-paket-option').remove()
                     if(data.length === 0){ 
                         setTimeout(function() {
                             Swal.fire({
-                                html: '<p>Data Ticket per Agent Kosong</p>',
+                                html: '<p>Data Paket per Agent Kosong</p>',
                                 position: 'top',
                                 timer: 3000,
                                 showCloseButton: true,
@@ -275,8 +269,7 @@
                         }, 100);
                     } else {
                         data.forEach((el) => {
-                            $('.depart-select2').append(`<option class="remove-depart-option"  hargaDepart="${el.harga}" value="${el.id}">${el.tujuan} || ${el.berangkat}</option>`);
-                            $('.return-select2').append(`<option class="remove-depart-option" hargaReturn="${el.harga}" value="${el.id}">${el.tujuan} || ${el.berangkat}</option>`);
+                            $('.paket-select2').append(`<option class="remove-paket-option" hargaPaket="${el.harga}" value="${el.id}">${el.namapaket}</option>`);
                         });
                     }
                 },
@@ -299,8 +292,7 @@
     });
 
     // Main Summary 
-    var hargaDepart;
-    var hargaReturn;
+    var hargaPaket;
     var harga = 0;
     var hargaDewasa = 0;
     var hargaAnak = 0;
@@ -308,12 +300,8 @@
     $(function() {
 
         // On Change Harga Depart & Return
-        $("#depart_select2").change(function(){
-            hargaDepart = $('#depart_select2 option:selected').attr('hargaDepart');
-        }); 
-
-        $("#return_select2").change(function(){
-            hargaReturn = $('#return_select2 option:selected').attr('hargaReturn');
+        $("#paket_select2").change(function(){
+            hargaPaket = $('#paket_select2 option:selected').attr('hargaPaket');
         }); 
 
         // Click Cek Harga For Trigger Summary
@@ -322,12 +310,9 @@
     
             var getAgent =  $('#nama_agent').find(":selected").val();
             var getNamaAgent =  $('#nama_agent').find(":selected").text();
-            var getTujuan = $('input[name="tipetujuan"]:checked').val();
             var getTglBerangkat = $('#tglberangkat').val();
             var getTglKembali = $('#tglkembali').val();
-
-            var getDepart =  $('#depart_select2').find(":selected").text();
-            var getReturn =  $('#return_select2').find(":selected").text();
+            var getPaket =  $('#paket_select2').find(":selected").text();
 
             
             var inpt_tamu_dewasa = document.getElementsByName('nama_tamu_dewasa[]');
@@ -387,135 +372,14 @@
                     });
                 }, 100);
             }else{
-                if((getTujuan === 'returnradio') && hargaDepart !== undefined &&  hargaReturn !== undefined ){
-                    if(
-                        ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) && 
-                        ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
-                        ((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)) 
-                    ){
-                        setTimeout(function() {
-                            Swal.fire({
-                                html: '<p>Nama tamu atau Nasionality belum diinputkan</p>',
-                                position: 'top',
-                                timer: 3000,
-                                showCloseButton: true,
-                                showConfirmButton: false,
-                                icon: 'error',
-                                timer: 2000,
-                                timerProgressBar: true,
-                            });
-                        }, 100);
-                        
-                    }else {
-                        
-                        if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
-                            hargaDewasa = 0;
-                            $(".display-dewasa-jumlah").text(0);
-                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
-                        }else{
-                            hargaDewasa = (hargaDepart * tempInput_dewasa.length) + (hargaReturn * tempInput_dewasa.length);
-                            harga += hargaDewasa;
-                            $(".display-dewasa-jumlah").text(tempInput_dewasa.length);
-                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
-                        }
-                        
-                        if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
-                            hargaAnak = 0;
-                            $(".display-anak-jumlah").text(0);
-                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
-                        }else{
-                            hargaAnak = (hargaDepart * tempInput_anak.length) + (hargaReturn * tempInput_anak.length);
-                            harga += hargaAnak;
-                            $(".display-anak-jumlah").text(tempInput_anak.length);
-                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
-                        }
-
-                        if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
-                            hargaFOC = 0;
-                            $(".display-foc-jumlah").text(0);
-                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
-                        }else{
-                            hargaFOC = (hargaDepart * tempInput_foc.length) + (hargaReturn * tempInput_foc.length);
-                            $(".display-foc-jumlah").text(tempInput_foc.length);
-                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
-                        }
-                        // alert(harga);
-                        $(".display-nama-agent").text(getNamaAgent);
-                        $(".display-tgl-berangkat").text(getTglBerangkat);
-                        $(".display-tgl-kembali").text(getTglKembali);
-                        $(".display-depart").text(getDepart);
-                        $(".display-return").text(getReturn);
-                        $(".display-total-harga-final").text(harga.toLocaleString("en"));
-                        harga = 0;
-                    }
-                }else if(getTujuan === 'onewayradio' && hargaDepart !== undefined){
-
-                    if(
-                        ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) &&
-                        ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
-                        ((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null))
-                    ){
-                        setTimeout(function() {
-                            Swal.fire({
-                                html: '<p>Nama tamu atau Nasionality belum diinputkan</p>',
-                                position: 'top',
-                                timer: 3000,
-                                showCloseButton: true,
-                                showConfirmButton: false,
-                                icon: 'error',
-                                timer: 2000,
-                                timerProgressBar: true,
-                            });
-                        }, 100);
-                    }else {
-                        if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
-                            console.log("ONEWAY DES");
-                            hargaDewasa = 0;
-                            $(".display-dewasa-jumlah").text(0);
-                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
-                        }else{
-                            hargaDewasa = (hargaDepart * tempInput_dewasa.length);
-                            harga += hargaDewasa;
-                            $(".display-dewasa-jumlah").text(tempInput_dewasa.length);
-                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
-                        }
-
-                        if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
-                            console.log("ONEWAY ANAK");
-                            hargaAnak = 0;
-                            $(".display-anak-jumlah").text(0);
-                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
-                        }else{
-                            hargaAnak = (hargaDepart * tempInput_anak.length);
-                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
-                            hargaAnak = 0;
-                            harga += hargaAnak;
-                            $(".display-anak-jumlah").text(tempInput_anak.length);
-                        }
-    
-                        if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
-                            console.log("ONEWAY FOC");
-                            hargaFOC = 0;
-                            $(".display-foc-jumlah").text(0);
-                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
-                        }else{
-                            hargaFOC = (hargaDepart * tempInput_foc.length);
-                            $(".display-foc-jumlah").text(tempInput_foc.length);
-                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
-                        }
-                        $(".display-nama-agent").text(getNamaAgent);
-                        $(".display-tgl-berangkat").text(getTglBerangkat);
-                        $(".display-tgl-kembali").text(getTglKembali);
-                        $(".display-depart").text(getDepart);
-                        $(".display-return").text('-');
-                        $(".display-total-harga-final").text(harga.toLocaleString("en"));
-                        harga = 0;
-                    }
-
-                } else {
+                if(
+                    ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) && 
+                    ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
+                    ((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)) 
+                ){
                     setTimeout(function() {
                         Swal.fire({
-                            html: '<p>Pilih Tujuan Dengan Benar</p>',
+                            html: '<p>Nama tamu atau Nasionality belum diinputkan</p>',
                             position: 'top',
                             timer: 3000,
                             showCloseButton: true,
@@ -525,7 +389,47 @@
                             timerProgressBar: true,
                         });
                     }, 100);
-                    // alert("TOLONG TUJUAN DIISI DENGAN BENAR")
+                    
+                }else {
+                    
+                    if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
+                        hargaDewasa = 0;
+                        $(".display-dewasa-jumlah").text(0);
+                        $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                    }else{
+                        hargaDewasa = (hargaPaket * tempInput_dewasa.length);
+                        harga += hargaDewasa;
+                        $(".display-dewasa-jumlah").text(tempInput_dewasa.length);
+                        $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                    }
+                    
+                    if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
+                        hargaAnak = 0;
+                        $(".display-anak-jumlah").text(0);
+                        $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                    }else{
+                        hargaAnak = (hargaPaket * tempInput_anak.length);
+                        harga += hargaAnak;
+                        $(".display-anak-jumlah").text(tempInput_anak.length);
+                        $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                    }
+
+                    if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
+                        hargaFOC = 0;
+                        $(".display-foc-jumlah").text(0);
+                        $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                    }else{
+                        hargaFOC = (hargaPaket * tempInput_foc.length);
+                        $(".display-foc-jumlah").text(tempInput_foc.length);
+                        $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                    }
+                    // alert(harga);
+                    $(".display-nama-agent").text(getNamaAgent);
+                    $(".display-tgl-berangkat").text(getTglBerangkat);
+                    $(".display-tgl-kembali").text(getTglKembali);
+                    $(".display-namapaket").text(getPaket);
+                    $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                    harga = 0;
                 }
             }
         })

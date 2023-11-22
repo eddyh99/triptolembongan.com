@@ -90,7 +90,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$bookpaket_active?>" href="<?= base_url()?>booking/booking_paket" aria-expanded="false">
+                    <a class="sidebar-link <?= @$bookpaket_active?>" href="<?= base_url()?>booking/list_booking_paket" aria-expanded="false">
                         <span>
                             <i class="ti ti-article"></i>
                         </span>

@@ -35,45 +35,14 @@
                             <!-- Tujuan & Tanggal Keberangkatan -->
                             <div class="row">
                                 <div class="row">
-                                    <div class="mb-4 col-12 col-md-6 ">
-                                        <label for="freecharge" class="form-label">Tujuan</label>
-                                        <div class="d-flex ">
-                                            <div class="form-check">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="onewayradio" >
-                                                <label class="form-check-label cursor-pointer" for="onewayradio">
-                                                    One Way
-                                                </label>
-                                            </div>
-                                            <div class="form-check ms-3">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="returnradio" checked="checked">
-                                                <label class="form-check-label cursor-pointer" for="returnradio">
-                                                    Return
-                                                </label>
-                                            </div>
-                                        </div>
-        
-                                        <div class="mt-3">
-                                            <select id="depart_select2" class="depart-select2" name="depart" required>
-                                                <option ></option>
-                                                <!-- <?php foreach($ticket as $tk){?>
-                                                    <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
-                                                <?php }?> -->
-               
-                                            </select>
-                                        </div>
-        
-                                        <div class="mt-3">
-                                            <select id="return_select2" class="return-select2" name="return_from" required>
-                                                <option></option>
-                                                <!-- <?php foreach($ticket as $tk){?>
-                                                    <option value="<?= $tk['id']?>"><?= $tk['tujuan']?> || <?= $tk['berangkat']?></option>
-                                                <?php }?> -->
-                                            </select>
-                                        </div>
+                                    <div class="mb-4 col-12 col-md-4 ">
+                                        <label for="paket-select2" class="form-label">Pilih Paket</label>
+                                        <select name="paket" id="paket_select2" class="paket-select2">
+                                            <option></option>
+                                        </select>
                                     </div>
 
-                                    <!-- Tanggal Keberangkatan | Kembalii -->
-                                    <div class="mb-4 mt-3 col-12 col-md-6 ">
+                                    <div class="mb-4 col-12 col-md-4 ">
                                         <div>
                                             <label for="tglberangkat" class="form-label">Tanggal Keberangkatan</label>
                                             <div class="form-control d-flex">
@@ -83,7 +52,11 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="mt-3">
+                                    </div>
+
+                                    <!-- Tanggal Keberangkatan | Kembalii -->
+                                    <div class="mb-4 col-12 col-md-4 ">
+                                        <div class="">
                                             <label for="tglkembali" class="form-label">Tanggal Kembali</label>
                                             <div class="form-control d-flex">
                                                 <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off" required>
@@ -234,14 +207,9 @@
                                                 <div class="card shadow-none mt-1 mb-0">
                                                     <div class="d-flex align-items-center gap-3 py-3">
                                                         <div>
-                                                            <h6 class="mb-0 fw-semibold">Tujuan: Return</h6>
-                                                            <span class="fs-2">
-                                                                Depart: <span class="display-depart">-</span>
-                                                            </span>
-                                                            <br>
-                                                            <span class="fs-2">
-                                                                Return: <span class="display-return">-</span>
-                                                            </span>
+                                                            <h6 class="mb-0 fw-semibold">Paket: 
+                                                                <span class="display-namapaket"></span>
+                                                            </h6>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
