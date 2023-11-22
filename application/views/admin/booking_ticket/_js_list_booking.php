@@ -5,6 +5,7 @@
         $(document).ready( function () {
             $('#table_list_booking_ticket').DataTable({
                 "scrollX": true,
+                "order": [[ 0, "desc" ]],
                 "ajax": {
                     "url": "<?=base_url()?>booking/get_list_ticket_agent",
                     "type": "POST",
@@ -13,7 +14,17 @@
                     }
                 },
                 "columns": [
-                    { data: 'kode_tiket' },
+                    { 	
+                        data: null,
+                        "sortable": true, 
+                            render: function (data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+				    },
+                    {   
+                        data: 'kode_tiket',
+                        "sortable": false,  
+                    },
                     { 
                         data: null, 
                         "sortable": false, 
@@ -32,8 +43,14 @@
                  		    return kembali;
                 	    }
                     },
-                    { data: 'depart' },
-                    { data: 'return_from' },
+                    {   
+                        data: 'depart',
+                        "sortable": false,  
+                    },
+                    {   
+                        data: 'return_from', 
+                        "sortable": false, 
+                    },
                 ],
                 "aoColumnDefs": [
                     {
@@ -42,10 +59,10 @@
                             jumlah = Number(row.dws) + Number(row.anak) + Number(row.foc);
                             return jumlah;
                         },
-                        "targets": 5
+                        "targets": 6
                     },
                     {	
-                        "aTargets": [6],
+                        "aTargets": [7],
                         "mRender": function (data, type, full, meta, row){
                             var btnCancel = '<a href="#" class="del-data btn btn-danger "><i class="ti ti-trash"></i></a>';
                             var btnInfo = `<div class="dropdown me-1">
@@ -56,6 +73,11 @@
                                                     <li><a class="dropdown-item" href="#">Nama Agen: <b>${full.namaagen}</b></a></li>
                                                     <li><a class="dropdown-item" href="#">Pickup: <b>${full.pickup}</b></a></li>
                                                     <li><a class="dropdown-item" href="#">Drop off: <b>${full.dropoff}</b></a></li>
+                                                    <li>
+                                                        <div class="dropdown-item">
+                                                            <a class="btn btn-primary" href="<?= base_url()?>booking/download_ticket/${full.kode_tiket }">Download Ticket</a>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>`;
                             var date = moment();
@@ -67,11 +89,6 @@
                                 temp = btnInfo;
                             }
                             return temp;
-                            // if(full.berangkat == currentDate){
-                            //     return "BERAKHIR";
-                            // }else{
-                            //     return "MASIH";
-                            // }
                         }
                     },
                 ],

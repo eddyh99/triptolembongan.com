@@ -21,6 +21,7 @@
                         <thead>
                             <tr>
                                 <th>Kode</th>
+                                <th>Kode</th>
                                 <th>Berangkat</th>
                                 <th>Kembali</th>
                                 <th>Paket</th>
@@ -33,6 +34,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>Kode</th>
                                 <th>Kode</th>
                                 <th>Berangkat</th>
                                 <th>Kembali</th>

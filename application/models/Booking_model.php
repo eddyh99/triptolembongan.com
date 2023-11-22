@@ -83,7 +83,9 @@ class Booking_model extends CI_Model{
         $sql="SELECT a.id, a.kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
-            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
+            (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu, 
+            (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
             nama as namaagen, pickup, dropoff, remarks FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
@@ -96,6 +98,7 @@ class Booking_model extends CI_Model{
             return $query->row();
         }
     }
+
 
     // ================= =================== ====================
     // ================= BOOKING PAKET MODEL ====================

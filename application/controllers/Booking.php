@@ -185,8 +185,6 @@ class Booking extends CI_Controller
     {
 
         $result = $this->booking->preview_ticket($tiket);
-        // print_r($result);
-        // die;
 
         if(!empty($result)){
 
@@ -205,17 +203,21 @@ class Booking extends CI_Controller
             $white = imagecolorallocate($img, 255, 255, 255);
     
             $font = FCPATH . '/assets/font/arial.ttf';
+            $fontBold = FCPATH . '/assets/font/arial_bold.ttf';
+
+            $newberangkat = date("d-m-Y", strtotime($result->berangkat));
+            $newkembali = date("d-m-Y", strtotime($result->kembali));
     
-            imagettftext($img, 24, 0, 70, 125, $white, $font, $result->kode_tiket);
-            imagettftext($img, $size, 0, 363, 63, $black, $font, $result->namaagen);
-            imagettftext($img, $size, 0, 363, 195, $black, $font, "Ari Pramana");
-            imagettftext($img, $size, 0, 435, 227, $black, $font, "Indonesia");
-            imagettftext($img, $size, 0, 280, 328, $black, $font, $result->berangkat);
-            imagettftext($img, $size, 0, 525, 328, $black, $font, $result->kembali);
+            imagettftext($img, 24, 0, 50, 125, $white, $fontBold, $result->kode_tiket);
+            imagettftext($img, $size, 0, 363, 62, $black, $font, $result->namaagen);
+            imagettftext($img, $size, 0, 363, 195, $black, $font, $result->namatamu);
+            imagettftext($img, $size, 0, 435, 227, $black, $font, $result->nasionality);
+            imagettftext($img, $size, 0, 280, 328, $black, $font, $newberangkat);
+            imagettftext($img, $size, 0, 525, 328, $black, $font, $newkembali);
             imagettftext($img, 12, 0, 270, 362, $black, $font, $result->depart);
             imagettftext($img, 12, 0, 505, 362, $black, $font, $result->return_from);
             
-            imagettftext($img, 24, 0, 60, 700, $black, $font, $result->kode_tiket);
+            imagettftext($img, 24, 0, 50, 700, $black, $fontBold, $result->kode_tiket);
             imagettftext($img, 16, 0, 410, 600, $black, $font, $result->dws);
             imagettftext($img, 16, 0, 410, 638, $black, $font, $result->anak);
             imagettftext($img, 16, 0, 385, 674, $black, $font, $result->foc);
@@ -233,22 +235,22 @@ class Booking extends CI_Controller
                 imagecopy($img, $img2, 280, 250, 0, 0, (imagesx($img2)), (imagesy($img2)));
             }
 
-            imagepng($img, FCPATH . '/assets/img/new_ticket.png');
-
-            imagepng($img);
- 
+            imagepng($img, FCPATH . '/assets/tiket/'. $result->kode_tiket .'_ticket.png');
+            // imagepng($img);
+            $this->session->set_flashdata('success', 'Berhasil Booking');
+			redirect('booking/list_booking_ticket');
         }
 
-        $data = array(
-            'title'             => NAMETITLE . ' - Preview Ticket',
-            'content'           => 'admin/preview_ticket/index',
-            // 'ticket'            => $get_ticket,
-            // 'agent'             => $get_agent,
-            'img'               => $imagefinal,
-            'extra'             => 'admin/booking_paket/_js_index',
-            'bookticket_active' => 'active',
-        );
-        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function download_ticket($kode_ticket)
+    {
+
+        $srcref = base_url() . 'assets/tiket/' . $kode_ticket . '_ticket.png';
+        $pdf = new FPDF('P','cm',[26, 26]);
+        $pdf->AddPage();
+        $pdf->Image($srcref,0,0,0,0,'PNG');
+        $pdf->Output($kode_ticket . '_ticket.pdf', 'D');
     }
 
 

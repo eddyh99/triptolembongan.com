@@ -20,6 +20,7 @@
                     <table id="table_list_booking_ticket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Kode</th>
                                 <th>Berangkat</th>
                                 <th>Kembali</th>
@@ -33,6 +34,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>ID</th>
                                 <th>Kode</th>
                                 <th>Berangkat</th>
                                 <th>Kembali</th>
