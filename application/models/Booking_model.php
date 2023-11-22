@@ -78,6 +78,25 @@ class Booking_model extends CI_Model{
 
     }
 
+    public function preview_ticket($tiket)
+    {
+        $sql="SELECT a.id, a.kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff, remarks FROM tbl_booking a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_tiket c ON a.depart=c.id 
+        LEFT JOIN tbl_tiket d ON a.return_from=d.id
+        WHERE a.is_deleted='no' AND a.kode_tiket=?";
+        $query=$this->db->query($sql, array($tiket));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->row();
+        }
+    }
+
     // ================= =================== ====================
     // ================= BOOKING PAKET MODEL ====================
     // ================= =================== ====================

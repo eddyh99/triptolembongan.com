@@ -9,15 +9,6 @@
                     "url": "<?=base_url()?>booking/get_list_ticket_agent",
                     "type": "POST",
                     "dataSrc":function (data){
-                        // var date = moment();
-                        // var currentDate = date.format('YYYY-MM-D');
-                        // console.log(typeof data[5].kembali);
-                        // console.log(typeof currentDate);
-                        // if(moment(data[5].berangkat).isAfter(currentDate)){
-                        //     console.log("MASIH");
-                        // }else{
-                        //     console.log("BERAKHIR");
-                        // }
                         return data;							
                     }
                 },

@@ -172,7 +172,7 @@ class Booking extends CI_Controller
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
-			redirect('booking/list_booking_ticket');
+			redirect('booking/preview_ticket/'.$kode_ticket);
 			return;
         }else{
             $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
@@ -181,6 +181,81 @@ class Booking extends CI_Controller
         }
     }
 
+    public function preview_ticket($tiket)
+    {
+
+        $result = $this->booking->preview_ticket($tiket);
+        // print_r($result);
+        // die;
+
+        if(!empty($result)){
+
+            header( "Content-type: image/png" );
+
+            $img = imagecreatefrompng(base_url()."assets/img/template_ticket.png");
+            $img2 = imagecreatefrompng(base_url()."assets/img/check.png");
+            // $check = imagecreatefromstring(base_url()."assets/img/check.png");
+
+            $size = 14; 
+            $angel = 0; 
+            $x = 100; 
+            $y = 60; 
+            $quality = 100;
+            $black = imagecolorallocate($img, 0, 0, 0);
+            $white = imagecolorallocate($img, 255, 255, 255);
+    
+            $font = FCPATH . '/assets/font/arial.ttf';
+    
+            imagettftext($img, 24, 0, 70, 125, $white, $font, $result->kode_tiket);
+            imagettftext($img, $size, 0, 363, 63, $black, $font, $result->namaagen);
+            imagettftext($img, $size, 0, 363, 195, $black, $font, "Ari Pramana");
+            imagettftext($img, $size, 0, 435, 227, $black, $font, "Indonesia");
+            imagettftext($img, $size, 0, 280, 328, $black, $font, $result->berangkat);
+            imagettftext($img, $size, 0, 525, 328, $black, $font, $result->kembali);
+            imagettftext($img, 12, 0, 270, 362, $black, $font, $result->depart);
+            imagettftext($img, 12, 0, 505, 362, $black, $font, $result->return_from);
+            
+            imagettftext($img, 24, 0, 60, 700, $black, $font, $result->kode_tiket);
+            imagettftext($img, 16, 0, 410, 600, $black, $font, $result->dws);
+            imagettftext($img, 16, 0, 410, 638, $black, $font, $result->anak);
+            imagettftext($img, 16, 0, 385, 674, $black, $font, $result->foc);
+            imagettftext($img, 16, 0, 420, 715, $black, $font, $result->pickup);
+            imagettftext($img, 16, 0, 448, 753, $black, $font, $result->dropoff);
+            imagettftext($img, 16, 0, 440, 790, $black, $font, $result->remarks);
+            // imagettftext($img, $size, $angel, $x, $y, $black, $font, "Ari Pramana");
+
+            // $img_width = imagesx($img);
+            // $img_height = imagesy($img);
+
+            if(!empty($result->depart) && !empty($result->return_from)){
+                imagecopy($img, $img2, 415, 250, 0, 0, (imagesx($img2)), (imagesy($img2)));
+            }else {
+                imagecopy($img, $img2, 280, 250, 0, 0, (imagesx($img2)), (imagesy($img2)));
+            }
+
+            imagepng($img, FCPATH . '/assets/img/new_ticket.png');
+
+            imagepng($img);
+ 
+        }
+
+        $data = array(
+            'title'             => NAMETITLE . ' - Preview Ticket',
+            'content'           => 'admin/preview_ticket/index',
+            // 'ticket'            => $get_ticket,
+            // 'agent'             => $get_agent,
+            'img'               => $imagefinal,
+            'extra'             => 'admin/booking_paket/_js_index',
+            'bookticket_active' => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+
+
+    // ================= ========================= ===================
+    // ================= BOOKING PAKET CONTROLLER  ===================
+    // ================= ========================= ===================
 
 
     public function list_booking_paket()
@@ -330,7 +405,7 @@ class Booking extends CI_Controller
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
-			redirect('booking/list_booking_paket');
+			redirect('booking');
 			return;
         }else{
             $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
@@ -338,7 +413,6 @@ class Booking extends CI_Controller
 			return;
         }
     }
-
 
 
 }
