@@ -224,9 +224,12 @@
             let selected_value = $("input[name='tipetujuan']:checked").val();
             if(selected_value == 'One Way'){
                 $(".return-select2").prop("disabled", true);
+                $("#tglkembali").val('');
+                $("#tglkembali").prop("disabled", true);
             }
             if(selected_value == 'Return'){
                 $(".return-select2").prop("disabled", false);
+                $("#tglkembali").prop("disabled", false);
             }
         });
 

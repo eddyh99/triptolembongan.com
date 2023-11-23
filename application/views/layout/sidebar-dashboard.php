@@ -44,6 +44,14 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$payment_active?>" href="<?= base_url()?>payment" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-address-book"></i>
+                        </span>
+                        <span class="hide-menu">Setup Payment</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link <?= @$ticket_active?>" href="<?= base_url()?>ticket" aria-expanded="false">
                         <span>
                             <i class="ti ti-ticket"></i>
@@ -96,7 +104,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$laporan_active?>" href="<?= base_url()?>laporan" aria-expanded="false">
+                    <a class="sidebar-link <?= @$laporan_active?>" href="<?= base_url()?>laporan/tiketlist" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-analytics"></i>
                         </span>
