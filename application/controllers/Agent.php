@@ -169,8 +169,6 @@ class Agent extends CI_Controller
             redirect('agent');
             return;
         }
-
-
     }
 
 }

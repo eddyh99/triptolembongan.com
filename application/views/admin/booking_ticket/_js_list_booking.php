@@ -1,4 +1,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<style>
+    .th-depart-ticket {
+		width: 200px;
+	}
+    .th-return-ticket {
+		width: 200px;
+	}
+</style>
+
 
 <script type="text/javascript">
         
@@ -64,7 +73,13 @@
                     {	
                         "aTargets": [7],
                         "mRender": function (data, type, full, meta, row){
-                            var btnCancel = '<a href="#" class="del-data btn btn-danger "><i class="ti ti-trash"></i></a>';
+                            var btnCancel;
+                            if(full.del == 'no'){
+                                btnCancel = '<a href="<?=base_url()?>booking/hapus_booking_ticket/'+encodeURI(btoa(full.id))+'" class="del-data btn btn-danger "><i class="ti ti-trash"></i></a>';
+                            }else if(full.del == 'yes') {
+                                btnCancel = '<button disabled class="del-data btn btn-warning"><i class="ti ti-x"></i></button>';
+                            }
+
                             var btnInfo = `<div class="dropdown me-1">
                                                 <button class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="ti ti-info-circle"></i>

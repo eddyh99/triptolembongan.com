@@ -9,7 +9,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id";
@@ -99,6 +99,18 @@ class Booking_model extends CI_Model{
         }
     }
 
+    public function hapus_booking_ticket($id, $data)
+    {
+        $this->db->where("id",$id);
+		if ($this->db->update("tbl_booking", $data)){
+            return array(
+                "code"      => 200, 
+                "message"   => ""
+            );
+		}else{
+            return $this->db->error();
+		}
+    }
 
     // ================= =================== ====================
     // ================= BOOKING PAKET MODEL ====================
@@ -110,7 +122,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id";
         $query=$this->db->query($sql);
@@ -177,5 +189,39 @@ class Booking_model extends CI_Model{
 		}
 
     }
+
+    public function preview_paket($tiket)
+    {
+        $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, c.namapaket,
+                    (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+                    (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
+                    (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
+                    (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as namatamu, 
+                    (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
+                    nama as namaagen, pickup, dropoff, remarks FROM tbl_booking_paket a 
+            LEFT JOIN tbl_agen b ON a.agentid=b.id 
+            INNER JOIN tbl_paket c ON a.id_paket=c.id
+            WHERE a.is_deleted='no' AND a.kode_tiket=?";
+        $query=$this->db->query($sql, array($tiket));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->row();
+        }
+    }
+
+    public function hapus_booking_paket($id, $data)
+    {
+        $this->db->where("id",$id);
+		if ($this->db->update("tbl_booking_paket ", $data)){
+            return array(
+                "code"      => 200, 
+                "message"   => ""
+            );
+		}else{
+            return $this->db->error();
+		}
+    }
+
 }
 ?>

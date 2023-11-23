@@ -48,19 +48,16 @@ class Booking extends CI_Controller
         $this->load->view('layout/wrapper-dashboard', $data);
     }
 
-        public function get_list_ticket_agent()
-        {
-            $result = $this->booking->list_ticket_agent();
-            // echo "<pre>".print_r($result,true)."</pre>";
-            // die;
-            echo json_encode($result);
-        }
+    public function get_list_ticket_agent()
+    {
+        $result = $this->booking->list_ticket_agent();
+        echo json_encode($result);
+    }
+
 
     public function get_ticket_agent($id_nama)
     {
         $result = $this->booking->get_ticket_agent($id_nama);
-        //  echo "<pre>".print_r($result,true)."</pre>";
-        // die;
         echo json_encode($result);
     }
 
@@ -243,6 +240,29 @@ class Booking extends CI_Controller
 
     }
 
+    
+    public function hapus_booking_ticket($id)
+    {
+        $data = array(
+			"is_deleted"  => 'yes',
+            "update_at"   => date("Y-m-d H:i:s"),
+		);
+
+        $id_delete = base64_decode($this->security->xss_clean($id));
+        $result = $this->booking->hapus_booking_ticket($id_delete, $data);
+
+        if($result['code'] = 200){
+            $this->session->set_flashdata('success', $this->message->delete_msg());
+			redirect('booking/list_booking_ticket');
+			return;
+        }else{
+            $this->session->set_flashdata('error', $this->message->error_delete_msg());
+            redirect('booking/list_booking_ticket');
+            return;
+        }
+    }
+    
+
     public function download_ticket($kode_ticket)
     {
 
@@ -252,6 +272,7 @@ class Booking extends CI_Controller
         $pdf->Image($srcref,0,0,0,0,'PNG');
         $pdf->Output($kode_ticket . '_ticket.pdf', 'D');
     }
+
 
 
 
@@ -407,7 +428,7 @@ class Booking extends CI_Controller
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
-			redirect('booking');
+			redirect('booking/preview_paket/'.$kode_ticket);
 			return;
         }else{
             $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
@@ -415,6 +436,83 @@ class Booking extends CI_Controller
 			return;
         }
     }
+
+    public function preview_paket($tiket)
+    {
+
+        $result = $this->booking->preview_paket($tiket);
+        // print_r(json_encode($result));
+        // die;
+
+        if(!empty($result)){
+
+            header( "Content-type: image/png" );
+
+            $img = imagecreatefrompng(base_url()."assets/img/template_paket.png");
+            $img2 = imagecreatefrompng(base_url()."assets/img/check.png");
+            // $check = imagecreatefromstring(base_url()."assets/img/check.png");
+
+            $size = 14; 
+            $angel = 0; 
+            $x = 100; 
+            $y = 60; 
+            $quality = 100;
+            $black = imagecolorallocate($img, 0, 0, 0);
+            $white = imagecolorallocate($img, 255, 255, 255);
+    
+            $font = FCPATH . '/assets/font/arial.ttf';
+            $fontBold = FCPATH . '/assets/font/arial_bold.ttf';
+
+            $newberangkat = date("d-m-Y", strtotime($result->berangkat));
+            $newkembali = date("d-m-Y", strtotime($result->kembali));
+    
+            imagettftext($img, 24, 0, 50, 125, $white, $fontBold, $result->kode_tiket);
+            imagettftext($img, $size, 0, 363, 62, $black, $font, $result->namaagen);
+            imagettftext($img, $size, 0, 363, 195, $black, $font, $result->namatamu);
+            imagettftext($img, $size, 0, 440, 241, $black, $font, $result->nasionality);
+            imagettftext($img, $size, 0, 374, 285, $black, $font, $result->namapaket);
+            imagettftext($img, $size, 0, 282, 365, $black, $font, $newberangkat);
+            imagettftext($img, $size, 0, 483, 365, $black, $font, $newkembali);
+            
+            imagettftext($img, 24, 0, 50, 700, $black, $fontBold, $result->kode_tiket);
+            imagettftext($img, 16, 0, 410, 600, $black, $font, $result->dws);
+            imagettftext($img, 16, 0, 410, 638, $black, $font, $result->anak);
+            imagettftext($img, 16, 0, 385, 674, $black, $font, $result->foc);
+            imagettftext($img, 16, 0, 420, 715, $black, $font, $result->pickup);
+            imagettftext($img, 16, 0, 448, 753, $black, $font, $result->dropoff);
+            imagettftext($img, 16, 0, 440, 790, $black, $font, $result->remarks);
+
+
+            imagepng($img, FCPATH . '/assets/tiket/'. $result->kode_tiket .'_ticket.png');
+            // imagepng($img);
+            $this->session->set_flashdata('success', 'Berhasil Booking');
+			redirect('booking/list_booking_paket');
+        }
+
+    }
+
+        
+    public function hapus_booking_paket($id)
+    {
+        $data = array(
+			"is_deleted"  => 'yes',
+            "update_at"   => date("Y-m-d H:i:s"),
+		);
+
+        $id_delete = base64_decode($this->security->xss_clean($id));
+        $result = $this->booking->hapus_booking_paket($id_delete, $data);
+
+        if($result['code'] = 200){
+            $this->session->set_flashdata('success', $this->message->delete_msg());
+			redirect('booking/list_booking_paket');
+			return;
+        }else{
+            $this->session->set_flashdata('error', $this->message->error_delete_msg());
+            redirect('booking/list_booking_paket');
+            return;
+        }
+    }
+    
 
 
 }

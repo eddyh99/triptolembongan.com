@@ -160,18 +160,18 @@
                             <div class="row">
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-4">
-                                        <label for="pickup" class="form-label">Pickup Lembongan</label>
-                                        <input type="text" class="form-control" id="pickup" name="pickup"  placeholder="masukkan pickup Lembongan..." autocomplete="off">
+                                        <label for="pickup" class="form-label">Pickup</label>
+                                        <input type="text" class="form-control" id="pickup" name="pickup"  placeholder="masukkan pickup dimana..." autocomplete="off" maxlength="45">
                                     </div>
         
                                     <div class="mb-4 col-12 col-md-4 ">
-                                        <label for="dropoff" class="form-label">Drop off Bali</label>
-                                        <input type="text" class="form-control" id="dropoff" name="dropoff" placeholder="masukkan drop off Bali..." autocomplete="off">
+                                        <label for="dropoff" class="form-label">Drop off</label>
+                                        <input type="text" class="form-control" id="dropoff" name="dropoff" placeholder="masukkan drop off dimana..." autocomplete="off" maxlength="45">
                                     </div>
         
                                     <div class="mb-4 col-12 col-md-4 ">
                                         <label for="catatan" class="form-label">Remarks</label>
-                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off">
+                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off" maxlength="45">
                                     </div>
                                 </div>
                             </div>
