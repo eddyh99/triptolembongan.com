@@ -1,7 +1,7 @@
 <div class="card mb-0">
     <div class="card-body">
         <a href="" class="text-nowrap logo-img text-center d-block py-3 w-100">
-            <img src="<?= base_url()?>assets/img/logo.jpg" width="180" alt="" data-aos="flip-up" data-aos-duration="2000">
+            <img src="<?= base_url()?>assets/img/logo.png" width="180" alt="" data-aos="flip-up" data-aos-duration="2000">
         </a>
         <form action="<?= base_url()?>auth/auth_login" method="POST">
             <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">

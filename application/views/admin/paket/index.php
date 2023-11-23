@@ -22,7 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Paket</th>
-                                <th>Keterangan</th>
+                                <th class="th-keteranga-paket">Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

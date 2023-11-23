@@ -7,6 +7,9 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!isset($this->session->userdata['logged_status'])) {
+			redirect('/');
+		}
     }
 
     public function index()

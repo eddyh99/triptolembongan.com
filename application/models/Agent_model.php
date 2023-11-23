@@ -5,7 +5,7 @@ class Agent_model extends CI_Model{
 
     public function get_agent()
     {		
-		$sql = "SELECT id, nama, alamat, kota, kontak FROM ". AGENT_TBL ." WHERE is_deleted='no'";
+		$sql = "SELECT id, nama, alamat, kota, kontak FROM tbl_agen WHERE is_deleted='no'";
 		$query = $this->db->query($sql);
 		if ($query){
 			return $query->result_array();
@@ -16,8 +16,8 @@ class Agent_model extends CI_Model{
 
     public function insert_agent($datas)
     {
-        $result = $this->db->insert(AGENT_TBL, $datas);
-        // print_r($this->db->insert(AGENT_TBL, $datas));
+        $result = $this->db->insert("tbl_agen", $datas);
+        // print_r($result);
         // die;
         if ($result == 1){
             return array(
@@ -31,7 +31,7 @@ class Agent_model extends CI_Model{
 
     public function get_edit_agent($id)
     {
-        $sql = "SELECT id, nama, alamat, kota, kontak FROM " . AGENT_TBL . " WHERE id=? AND is_deleted='no'";
+        $sql = "SELECT id, nama, alamat, kota, kontak FROM tbl_agen WHERE id=? AND is_deleted='no'";
         $query = $this->db->query($sql, $id);
 		if ($query){
 			return $query->row();
@@ -44,7 +44,7 @@ class Agent_model extends CI_Model{
     {
         $this->db->where("id",$id);
 
-		if ($this->db->update(AGENT_TBL, $datas)){
+		if ($this->db->update("tbl_agen", $datas)){
             return array(
                 "code"      => 200, 
                 "message"   => ""
@@ -57,7 +57,7 @@ class Agent_model extends CI_Model{
     public function hapus_agent($id, $data)
     {
         $this->db->where("id",$id);
-		if ($this->db->update(AGENT_TBL, $data)){
+		if ($this->db->update("tbl_agen", $data)){
             return array(
                 "code"      => 200, 
                 "message"   => ""

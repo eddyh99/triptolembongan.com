@@ -16,24 +16,30 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
+                    <?php if (@isset($_SESSION["error"])) { ?>
+                        <div class="col-12 alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="notif-login f-poppins"><?= $_SESSION["error"] ?></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php } ?>
                     <h5 class="card-title fw-semibold mb-4">Tambah Agent</h5>
                     <form action="<?= base_url()?>agent/tambah_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="mb-3">
                             <label for="nama_agent" class="form-label">Nama Agent</label>
-                            <input type="text" class="form-control" id="nama_agent" name="nama_agent" placeholder="masukkan nama agent..." required>
+                            <input type="text" class="form-control" id="nama_agent" name="nama_agent" placeholder="masukkan nama agent...">
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="masukkan alamat..." required>
+                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="masukkan alamat..." >
                         </div>
                         <div class="mb-3">
                             <label for="kota" class="form-label">Kota</label>
-                            <input type="text" class="form-control" id="kota" name="kota" placeholder="masukkan kota..." required>
+                            <input type="text" class="form-control" id="kota" name="kota" placeholder="masukkan kota..." >
                         </div>
                         <div class="mb-3">
                             <label for="kontak" class="form-label">Kontak</label>
-                            <input type="number" class="form-control" id="kontak" name="kontak" placeholder="masukkan kontak..." required>
+                            <input type="number" class="form-control" id="kontak" name="kontak" placeholder="masukkan kontak..." >
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Daftar</button>
                   </form>
@@ -44,43 +50,5 @@
 
 </div>
 <!-- MAIN CONTENT END -->
-
-<!-- SWEET ALERT START -->
-<?php if (isset($_SESSION["error_validation"])) { ?>
-    <script>
-        setTimeout(function() {
-            Swal.fire({
-                html: '<?= trim(str_replace('"', '', json_encode($_SESSION['error_validation']))) ?>',
-                position: 'top',
-                showCloseButton: true,
-                showConfirmButton: false,
-                icon: 'error',
-                timer: 2500,
-                timerProgressBar: true,
-            });
-        }, 100);
-    </script>
-<?php 
-    } 
-    if(isset($_SESSION["error"])) { 
-?>
-    <script>
-        setTimeout(function() {
-            Swal.fire({
-                html: '<?= $_SESSION['error'] ?>',
-                position: 'top',
-                timer: 3000,
-                showCloseButton: true,
-                showConfirmButton: false,
-                icon: 'error',
-                timer: 2000,
-                timerProgressBar: true,
-            });
-        }, 100);
-    </script>
-<?php } ?>
-
-
-<!-- SWEET ALERT END -->
 
 

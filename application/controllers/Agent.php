@@ -7,6 +7,9 @@ class Agent extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!isset($this->session->userdata['logged_status'])) {
+			redirect('/');
+		}
 
         $this->load->model('Agent_model', 'agent');
     }
@@ -50,7 +53,7 @@ class Agent extends CI_Controller
 
 
         if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('error_validation', $this->message->error_msg(validation_errors()));
+			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
 			redirect("agent/tambah_agent");
 			return;
 		}
@@ -67,10 +70,13 @@ class Agent extends CI_Controller
             "alamat"    => $alamat,
             "kota"      => $kota,
             "kontak"    => $kontak,
-            "userid"    => $_SESSION["logged_status"]["username"]
+            "userid"    => $_SESSION["logged_status"]["username"],
+            "created_at"   => date("Y-m-d H:i:s"),
         );
 
         $result = $this->agent->insert_agent($datas);
+        // echo "<pre>".print_r($result,true)."</pre>";
+        // die;
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', $this->message->success_msg());
 			redirect('agent');
@@ -81,8 +87,7 @@ class Agent extends CI_Controller
 			return;
         }
         // redirect('agent/tambah_agent');
-        // echo "<pre>".print_r($datas,true)."</pre>";
-        // die;
+      
 
     }
 
@@ -109,13 +114,13 @@ class Agent extends CI_Controller
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('kontak', 'Kontak', 'trim|required');
 
+        $id_edit    = $this->security->xss_clean($input->post('id_edit'));
 
         if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('error_validation', $this->message->error_msg(validation_errors()));
+			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
             redirect('agent/edit_agent/'.base64_encode($id_edit));
 			return;
 		}
-
 
         $input      = $this->input;
         $nama_agent = $this->security->xss_clean($input->post('nama_agent'));
@@ -123,13 +128,13 @@ class Agent extends CI_Controller
         $kota       = $this->security->xss_clean($input->post('kota'));
         $kontak     = $this->security->xss_clean($input->post('kontak'));
 
-        $id_edit    = $this->security->xss_clean($input->post('id_edit'));
 
         $datas = array(
             "nama"      => $nama_agent,
             "alamat"    => $alamat,
             "kota"      => $kota,
             "kontak"    => $kontak,
+            "update_at"   => date("Y-m-d H:i:s"),
         );
 
         $result = $this->agent->edit_agent($id_edit, $datas);
@@ -149,6 +154,7 @@ class Agent extends CI_Controller
     {
         $data = array(
 			"is_deleted"  => 'yes',
+            "update_at"   => date("Y-m-d H:i:s"),
 		);
 
         $id_delete = base64_decode($this->security->xss_clean($id));
@@ -163,8 +169,6 @@ class Agent extends CI_Controller
             redirect('agent');
             return;
         }
-
-
     }
 
 }

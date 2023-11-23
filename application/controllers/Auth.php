@@ -13,6 +13,7 @@ class Auth extends CI_Controller
 
 	public function index()
 	{	
+
 		$data = array(
 			'title'     => NAMETITLE . ' - Login',
 			'content'   => 'auth/login/index',
