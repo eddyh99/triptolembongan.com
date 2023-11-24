@@ -43,7 +43,10 @@
                                     <td><?=$dt["dws"]?></td>
                                     <td><?=$dt["anak"]?></td>
                                     <td><?=$dt["foc"]?></td>
-                                    <td><?=$dt["foc"]?></td>
+                                    <td style="text-align:right"><?php
+                                            $total=$dt["dws"]+$dt["anak"];
+                                            echo number_format($total*$dt["harga"],0,".",",");
+                                    ?></td>
                                 </tr>                                    
                             <?php } ?>
                         </tbody>

@@ -31,14 +31,14 @@
             ], 
             "drawCallback": function () {
                 var api = this.api();
-                var dws=api.column( 4,{filter:'applied'} ).data().sum();
-                var anak=api.column( 5,{filter:'applied'} ).data().sum();
-                var foc=api.column( 6,{filter:'applied'} ).data().sum();
-                var total=api.column( 7,{filter:'applied'} ).data().sum();
-                $( api.column( 4 ).footer() ).html(dws);
-                $( api.column( 5 ).footer() ).html(anak);
-                $( api.column( 6 ).footer() ).html(foc);
-                $( api.column( 7 ).footer() ).html(total.toLocaleString('en'));
+                var dws=api.column( 2,{filter:'applied'} ).data().sum();
+                var anak=api.column( 3,{filter:'applied'} ).data().sum();
+                var foc=api.column( 4,{filter:'applied'} ).data().sum();
+                var total=api.column( 5,{filter:'applied'} ).data().sum();
+                $( api.column( 2 ).footer() ).html(dws);
+                $( api.column( 3 ).footer() ).html(anak);
+                $( api.column( 4 ).footer() ).html(foc);
+                $( api.column( 5 ).footer() ).html(total.toLocaleString('en'));
             },
         });
     });

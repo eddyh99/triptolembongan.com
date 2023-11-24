@@ -116,7 +116,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Ticket</span>
+                                <span class="hide-menu">Pendapatan Ticket</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -124,7 +124,23 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Paket</span>
+                                <span class="hide-menu">Pendapatan Paket</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url()?>laporan/peragentiket" class="sidebar-link <?= @$dropdown_agentiket?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Transaksi Tiket per Agen</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url()?>laporan/peragenpaket" class="sidebar-link <?= @$dropdown_agenpaket?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Transaksi Paket per Agen</span>
                             </a>
                         </li>
                     </ul>

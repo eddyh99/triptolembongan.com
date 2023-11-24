@@ -30,13 +30,61 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, y.harga as brkt, z.harga as kmbl, a.is_deleted as del FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
+        INNER JOIN (
+            SELECT a.harga, a.id_agen, a.id_tiket FROM tbl_agentiket a 
+                    INNER JOIN (
+                        SELECT MAX(berlaku) as tanggal,id_agen,id_tiket FROM tbl_agentiket GROUP BY id_agen,id_tiket
+                    ) x ON a.id_agen=x.id_agen AND a.id_tiket=x.id_tiket AND a.berlaku=x.tanggal
+                ) y
+        ON b.id=y.id_agen AND a.depart=y.id_tiket
+        LEFT JOIN (
+            SELECT a.harga, a.id_agen, a.id_tiket FROM tbl_agentiket a 
+                    INNER JOIN (
+                        SELECT MAX(berlaku) as tanggal,id_agen,id_tiket FROM tbl_agentiket GROUP BY id_agen,id_tiket
+                    ) x ON a.id_agen=x.id_agen AND a.id_tiket=x.id_tiket AND a.berlaku=x.tanggal
+                ) z
+        ON b.id=z.id_agen AND a.return_from=z.id_tiket
         WHERE a.tgl_pesan BETWEEN ? AND ?
         ";
         $query=$this->db->query($sql,array($start,$end));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
+    public function list_ticket_byagendate($start,$end,$idagen)
+    {
+        $sql="SELECT a.id,a.tgl_pesan,kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff, y.harga as brkt, z.harga as kmbl, a.is_deleted as del FROM tbl_booking a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_tiket c ON a.depart=c.id 
+        LEFT JOIN tbl_tiket d ON a.return_from=d.id
+        INNER JOIN (
+            SELECT a.harga, a.id_agen, a.id_tiket FROM tbl_agentiket a 
+                    INNER JOIN (
+                        SELECT MAX(berlaku) as tanggal,id_agen,id_tiket FROM tbl_agentiket GROUP BY id_agen,id_tiket
+                    ) x ON a.id_agen=x.id_agen AND a.id_tiket=x.id_tiket AND a.berlaku=x.tanggal
+                ) y
+        ON b.id=y.id_agen AND a.depart=y.id_tiket
+        LEFT JOIN (
+            SELECT a.harga, a.id_agen, a.id_tiket FROM tbl_agentiket a 
+                    INNER JOIN (
+                        SELECT MAX(berlaku) as tanggal,id_agen,id_tiket FROM tbl_agentiket GROUP BY id_agen,id_tiket
+                    ) x ON a.id_agen=x.id_agen AND a.id_tiket=x.id_tiket AND a.berlaku=x.tanggal
+                ) z
+        ON b.id=z.id_agen AND a.return_from=z.id_tiket
+        WHERE a.tgl_pesan BETWEEN ? AND ? AND a.agentid=?
+        ";
+        $query=$this->db->query($sql,array($start,$end,$idagen));
         if (!$query){
             return $this->db->error();
         }else{
@@ -163,12 +211,45 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff,y.harga FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
+        INNER JOIN (
+            SELECT a.harga, a.id_agen, a.id_paket FROM tbl_agenpaket a 
+                    INNER JOIN (
+                        SELECT MAX(berlaku) as tanggal, id_agen, id_paket FROM tbl_agenpaket GROUP BY id_agen,id_paket
+                    ) x ON a.id_agen=x.id_agen AND a.id_paket=x.id_paket AND a.berlaku=x.tanggal
+            ) y
+        ON b.id=y.id_agen
         WHERE a.tgl_pesan BETWEEN ? AND ?
         ";
         $query=$this->db->query($sql,array($start,$end));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
+    public function list_paket_byagendate($start,$end,$idagen)
+    {
+        $sql="SELECT a.id, a.tgl_pesan, a.kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan,
+            (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff,y.harga FROM tbl_booking_paket a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_paket c ON a.id_paket=c.id
+        INNER JOIN (
+            SELECT a.harga, a.id_agen, a.id_paket FROM tbl_agenpaket a 
+                    INNER JOIN (
+                        SELECT MAX(berlaku) as tanggal, id_agen, id_paket FROM tbl_agenpaket GROUP BY id_agen,id_paket
+                    ) x ON a.id_agen=x.id_agen AND a.id_paket=x.id_paket AND a.berlaku=x.tanggal
+            ) y
+        ON b.id=y.id_agen
+        WHERE a.tgl_pesan BETWEEN ? AND ? AND a.agentid=?
+        ";
+        $query=$this->db->query($sql,array($start,$end,$idagen));
         if (!$query){
             return $this->db->error();
         }else{
