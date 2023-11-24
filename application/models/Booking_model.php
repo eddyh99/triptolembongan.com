@@ -5,15 +5,38 @@ class Booking_model extends CI_Model{
 
     public function list_ticket_agent()
     {
-        $sql="SELECT a.id,kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
+        $sql="SELECT a.id,kode_tiket, a.berangkat, a.kembali, 
+            concat(c.tujuan,' - ',c.berangkat) as depart, 
+            concat(d.tujuan,' - ',d.berangkat) as return_from, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
             nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
-        LEFT JOIN tbl_tiket d ON a.return_from=d.id";
+        LEFT JOIN tbl_tiket d ON a.return_from=d.id
+        INNER JOIN tbl_payment e ON a.payment=e.id";
         $query=$this->db->query($sql);
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
+    public function list_ticket_bydate($start,$end)
+    {
+        $sql="SELECT a.id,a.tgl_pesan,kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_tiket c ON a.depart=c.id 
+        LEFT JOIN tbl_tiket d ON a.return_from=d.id
+        WHERE a.tgl_pesan BETWEEN ? AND ?
+        ";
+        $query=$this->db->query($sql,array($start,$end));
         if (!$query){
             return $this->db->error();
         }else{
@@ -118,13 +141,14 @@ class Booking_model extends CI_Model{
 
     public function list_paket_agent()
     {
-        $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan,
+        $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan, d.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
             nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
-        INNER JOIN tbl_paket c ON a.id_paket=c.id";
+        INNER JOIN tbl_paket c ON a.id_paket=c.id
+        INNER JOIN tbl_payment d ON a.payment=d.id";
         $query=$this->db->query($sql);
         if (!$query){
             return $this->db->error();
@@ -132,7 +156,26 @@ class Booking_model extends CI_Model{
             return $query->result_array();
         }
     }
-    
+
+    public function list_paket_bydate($start,$end)
+    {
+        $sql="SELECT a.id, a.tgl_pesan, a.kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan,
+            (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
+            nama as namaagen, pickup, dropoff FROM tbl_booking_paket a 
+        LEFT JOIN tbl_agen b ON a.agentid=b.id 
+        INNER JOIN tbl_paket c ON a.id_paket=c.id
+        WHERE a.tgl_pesan BETWEEN ? AND ?
+        ";
+        $query=$this->db->query($sql,array($start,$end));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
     public function get_paket_agent($id_nama)
     {
         $sql="SELECT a.id, a.namapaket, a.keterangan, c.id as 'id_nama', c.nama, c.kontak, x.harga FROM 

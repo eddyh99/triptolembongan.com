@@ -15,6 +15,7 @@ class Booking extends CI_Controller
         $this->load->model('Ticket_model', 'ticket');
         $this->load->model('Agent_model', 'agent');
         $this->load->model('Harga_model', 'harga');
+        $this->load->model('Payment_model', 'payment');
     }
 
     public function index()
@@ -22,6 +23,7 @@ class Booking extends CI_Controller
 
         $get_ticket = $this->ticket->get_ticket();
         $get_agent  = $this->agent->get_agent();
+        $get_payment= $this->payment->get_payment();
         // echo "<pre>".print_r($get_ticket,true)."</pre>";
         // die;
         $data = array(
@@ -29,6 +31,7 @@ class Booking extends CI_Controller
             'content'           => 'admin/booking_ticket/index',
             'ticket'            => $get_ticket,
             'agent'             => $get_agent,
+            'payment'           => $get_payment,
             'extra'             => 'admin/booking_ticket/_js_index',
             'bookticket_active' => 'active',
         );
@@ -91,6 +94,8 @@ class Booking extends CI_Controller
         $pickup             = $this->security->xss_clean($input->post('pickup'));
         $dropoff            = $this->security->xss_clean($input->post('dropoff'));
         $remarks            = $this->security->xss_clean($input->post('catatan'));
+
+        $payment            = $this->security->xss_clean($input->post('payment'));
   
         // echo "<pre>".print_r($nama_tamu_dewasa,true)."</pre>";
         // echo "<pre>".print_r($depart,true)."</pre>";
@@ -154,6 +159,7 @@ class Booking extends CI_Controller
             'pickup'        => $pickup,
             'dropoff'       => $dropoff,
             'depart'        => $depart,
+            'payment'       => $payment,
             'return_from'   => empty($return_from) ? null : $return_from,
             'agentid'       => $nama_agent,
             'remarks'       => $remarks,
@@ -305,6 +311,8 @@ class Booking extends CI_Controller
     {
         $get_ticket = $this->ticket->get_ticket();
         $get_agent  = $this->agent->get_agent();
+        $get_payment= $this->payment->get_payment();
+
         // echo "<pre>".print_r($get_ticket,true)."</pre>";
         // die;
         $data = array(
@@ -312,6 +320,7 @@ class Booking extends CI_Controller
             'content'           => 'admin/booking_paket/index',
             'ticket'            => $get_ticket,
             'agent'             => $get_agent,
+            'payment'           => $get_payment,
             'extra'             => 'admin/booking_paket/_js_index',
             'bookpaket_active'  => 'active',
         );
@@ -354,7 +363,8 @@ class Booking extends CI_Controller
         $pickup             = $this->security->xss_clean($input->post('pickup'));
         $dropoff            = $this->security->xss_clean($input->post('dropoff'));
         $remarks            = $this->security->xss_clean($input->post('catatan'));
-  
+        
+        $payment            = $this->security->xss_clean($input->post('payment'));
         
         
         $temp_dewasa = array();
@@ -413,6 +423,7 @@ class Booking extends CI_Controller
             'kembali'       => $newTglKembali,
             'pickup'        => $pickup,
             'dropoff'       => $dropoff,
+            'payment'       => $payment,
             'id_paket'      => $id_paket,
             'agentid'       => $nama_agent,
             'remarks'       => $remarks,

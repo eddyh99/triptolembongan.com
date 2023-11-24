@@ -114,6 +114,7 @@ class Agent extends CI_Controller
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('kontak', 'Kontak', 'trim|required');
 
+        $input      = $this->input;
         $id_edit    = $this->security->xss_clean($input->post('id_edit'));
 
         if ($this->form_validation->run() == FALSE) {
@@ -122,7 +123,6 @@ class Agent extends CI_Controller
 			return;
 		}
 
-        $input      = $this->input;
         $nama_agent = $this->security->xss_clean($input->post('nama_agent'));
         $alamat     = $this->security->xss_clean($input->post('alamat'));
         $kota       = $this->security->xss_clean($input->post('kota'));

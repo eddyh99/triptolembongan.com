@@ -206,6 +206,12 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-4">
+                                    <label for="payment" class="form-label">Payment</label>
+                                    <select name="payment" id="payment" class="form-select">
+                                        <?php foreach ($payment as $dt){?>
+                                            <option value="<?=$dt["id"]?>"><?=$dt["payment"]?></option>
+                                        <?php }?>
+                                    </select>
                                     <button id="cekHarga" class="btn btn-dark mt-3">Cek Harga</button>
                                     <button type="submit" class="btn btn-primary mt-3">Booking Sekarang</button>
                                 </div>
