@@ -6,17 +6,17 @@
             <div class="card w-100">
                 <div class="card-body">
                     <form action="<?=base_url()?>laporan/tiketlist" method="post">
-                    <div class="row d-flex justify-content-end align-items-end form-group mb-3">
-                        <div class="col-4">
-                            <label class="text-start d-block mb-2">Range Tanggal</label>
-                            <input type="text" id="tanggal" name="tanggal" class="form-control" value="" autocomplete="off">
+                        <div class="row d-flex justify-content-end align-items-end form-group mb-3">
+                            <div class="col-4">
+                                <label class="text-start d-block mb-2">Range Tanggal</label>
+                                <input type="text" id="tanggal" name="tanggal" class="form-control" value="" autocomplete="off">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group mb-3">
-                        <div class="col text-end">
-                            <button type="submit" class="btn btn-info">Lihat</button>
+                        <div class="row form-group mb-3">
+                            <div class="col text-end">
+                                <button type="submit" class="btn btn-info">Lihat</button>
+                            </div>
                         </div>
-                    </div>
                     </form>
                     <hr>
                     <h5 class="card-title fw-semibold mb-4">Laporan</h5>

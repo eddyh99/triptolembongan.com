@@ -14,7 +14,7 @@
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Home</span>
-                    </li>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$dash_active?>" href="<?= base_url()?>dashboard" aria-expanded="false">
                         <span>
@@ -104,13 +104,40 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow <?= @$laporan_active?>" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-file-analytics"></i>
+                        </span>
+                        <span class="hide-menu">Laporan</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item active">
+                            <a href="<?= base_url()?>laporan/tiketlist" class="sidebar-link <?= @$dropdown_tiket?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Ticket</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url()?>laporan/paketlist" class="sidebar-link <?= @$dropdown_paket?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Paket</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="sidebar-item">
                     <a class="sidebar-link <?= @$laporan_active?>" href="<?= base_url()?>laporan/tiketlist" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-analytics"></i>
                         </span>
                         <span class="hide-menu">Laporan</span>
                     </a>
-                </li>
+                </li> -->
+            
                 <li class="sidebar-item mb-5 pb-5">
                     <a class="sidebar-link" href="<?= base_url()?>auth/logout" aria-expanded="false">
                         <span>

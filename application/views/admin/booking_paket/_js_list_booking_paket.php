@@ -84,6 +84,7 @@
                                                     <li><a class="dropdown-item" href="#">Nama Agen: <b>${full.namaagen}</b></a></li>
                                                     <li><a class="dropdown-item" href="#">Pickup: <b>${full.pickup}</b></a></li>
                                                     <li><a class="dropdown-item" href="#">Drop off: <b>${full.dropoff}</b></a></li>
+                                                    <li><a class="dropdown-item" href="#">Payment: <b>${full.payment}</b></a></li>
                                                     <li>
                                                         <div class="dropdown-item">
                                                             <a class="btn btn-primary" href="<?= base_url()?>booking/download_ticket/${full.kode_tiket }">Download Ticket</a>
@@ -100,11 +101,6 @@
                                 temp = btnInfo;
                             }
                             return temp;
-                            // if(full.berangkat == currentDate){
-                            //     return "BERAKHIR";
-                            // }else{
-                            //     return "MASIH";
-                            // }
                         }
                     },
                 ],
