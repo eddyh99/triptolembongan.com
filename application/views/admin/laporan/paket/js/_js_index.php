@@ -12,8 +12,8 @@
 <script>
     $(document).ready(function() {
         $('#tanggal').daterangepicker({
-            startDate: moment().startOf('month'),
-            endDate: moment().endOf('month'),
+            startDate: moment(),
+            endDate: moment(),
             opens: 'right',
             locale: {
                 format: 'DD MMM YYYY'
@@ -29,6 +29,15 @@
             buttons: [
                 'csv', 'pdf',
             ],
+            "drawCallback": function () {
+                var api = this.api();
+                var dws=api.column( 4,{filter:'applied'} ).data().sum();
+                var anak=api.column( 5,{filter:'applied'} ).data().sum();
+                var foc=api.column( 6,{filter:'applied'} ).data().sum();
+                $( api.column( 4 ).footer() ).html(dws);
+                $( api.column( 5 ).footer() ).html(anak);
+                $( api.column( 6 ).footer() ).html(foc);
+            },
         });
     });
 

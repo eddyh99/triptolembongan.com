@@ -31,11 +31,36 @@ class Laporan extends CI_Controller
             'content'           => 'admin/laporan/tiket/index',
             'extra'             => 'admin/laporan/tiket/js/_js_index',
             'laporan'           => $result,
-            'laptiket_active'   => 'active',
+            // 'laporan_active'    => 'active',
+            'dropdown_tiket'   => 'text-primary'
         );
         $this->load->view('layout/wrapper-dashboard', $data);
-
     }
+
+    public function paketlist(){
+        $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
+        // print_r($tanggal);
+        // die;
+        if (empty($tanggal)){
+            $awal   = date("Y-m-d");
+            $akhir  = date("Y-m-d");
+        }else{
+            $tanggal	= explode("-",$tanggal);
+            $awal       = date_format(date_create($tanggal[0]),"Y-m-d");
+            $akhir      = date_format(date_create($tanggal[1]),"Y-m-d");
+        }
+        $result     = $this->booking->list_paket_bydate($awal,$akhir);
+        $data = array(
+            'title'             => NAMETITLE . ' - Laporan',
+            'content'           => 'admin/laporan/paket/index',
+            'extra'             => 'admin/laporan/paket/js/_js_index',
+            'laporan'           => $result,
+            // 'laporan_active'    => 'active',
+            'dropdown_paket'   => 'text-primary'
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
 
 
     public function paketindex()
@@ -51,10 +76,11 @@ class Laporan extends CI_Controller
     }
 
     public function get_listpaket(){
-        $tanggal	= explode("-",$this->security->xss_clean($this->input->post('tanggal')));
+        $tanggal	= $this->security->xss_clean($this->input->post('tanggal'));
+        $tanggal	= explode("-",$tanggal);
         $awal       = date_format(date_create($tanggal[0]),"Y-m-d");
         $akhir      = date_format(date_create($tanggal[1]),"Y-m-d");
-        $result     = $this->booking->list_ticket_bydate($awal,$akhir);
+        $result     = $this->booking->list_paket_bydate($awal,$akhir);
         echo json_encode($result);
 
     }
