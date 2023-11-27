@@ -67,6 +67,30 @@ class Booking extends CI_Controller
 
     public function booking_tiket_proses()
     {
+
+        $this->form_validation->set_rules('kode_ticket', 'Kode Tiket', 'trim|required');
+		$this->form_validation->set_rules('nama_agent', 'Nama Agent', 'trim|required');
+		$this->form_validation->set_rules('depart', 'Depart', 'trim|required');
+		$this->form_validation->set_rules('return_from', 'Return From', 'trim');
+		$this->form_validation->set_rules('nama_tamu_dewasa', 'Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nasionality_dewasa', 'Nasionality Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nama_tamu_anak', 'Tamu anak', 'trim');
+		$this->form_validation->set_rules('nasionality_anak', 'Nasionality Tamu anak', 'trim');
+		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu foc', 'trim');
+		$this->form_validation->set_rules('nasionality_foc', 'Nasionality Tamu foc', 'trim');
+		$this->form_validation->set_rules('tglberangkat', 'Tanggal Berangkat', 'trim|required');
+		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim|required');
+		$this->form_validation->set_rules('pickup', 'Pickup', 'trim|required');
+		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim|required');
+		$this->form_validation->set_rules('catatan', 'Remarks', 'trim|required');
+		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
+            redirect('booking');
+			return;
+		}
+
         $input              = $this->input;
         $kode_ticket        = $this->security->xss_clean($input->post('kode_ticket'));
         $nama_agent          = $this->security->xss_clean($input->post('nama_agent'));
@@ -97,9 +121,6 @@ class Booking extends CI_Controller
 
         $payment            = $this->security->xss_clean($input->post('payment'));
   
-        // echo "<pre>".print_r($nama_tamu_dewasa,true)."</pre>";
-        // echo "<pre>".print_r($depart,true)."</pre>";
-        // die;
         
         
         $temp_dewasa = array();
@@ -168,10 +189,7 @@ class Booking extends CI_Controller
             'update_at'    => date("Y:m:d H:i:s"),
         );
         
-        // echo "<pre>".print_r(array_merge($temp_dewasa, $temp_anak),true)."</pre>";
         $result = $this->booking->insert_booking_ticket($datas, $detail_booking);
-        // echo "<pre>".print_r($result,true)."</pre>";
-        // die;
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
@@ -301,8 +319,6 @@ class Booking extends CI_Controller
     public function get_list_paket_agent()
     {
         $result = $this->booking->list_paket_agent();
-        // echo "<pre>".print_r($result,true)."</pre>";
-        // die;
         echo json_encode($result);
     }
 
@@ -313,8 +329,6 @@ class Booking extends CI_Controller
         $get_agent  = $this->agent->get_agent();
         $get_payment= $this->payment->get_payment();
 
-        // echo "<pre>".print_r($get_ticket,true)."</pre>";
-        // die;
         $data = array(
             'title'             => NAMETITLE . ' - Booking Paket',
             'content'           => 'admin/booking_paket/index',
@@ -330,13 +344,33 @@ class Booking extends CI_Controller
     public function get_paket_agent($id_nama)
     {
         $result = $this->booking->get_paket_agent($id_nama);
-        //  echo "<pre>".print_r($result,true)."</pre>";
-        // die;
         echo json_encode($result);
     }
     
     public function booking_paket_proses()
     {
+        $this->form_validation->set_rules('kode_ticket', 'Kode Tiket', 'trim|required');
+		$this->form_validation->set_rules('nama_agent', 'Nama Agent', 'trim|required');
+		$this->form_validation->set_rules('paket', 'Paket', 'trim|required');
+		$this->form_validation->set_rules('nama_tamu_dewasa', 'Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nasionality_dewasa', 'Nasionality Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nama_tamu_anak', 'Tamu anak', 'trim');
+		$this->form_validation->set_rules('nasionality_anak', 'Nasionality Tamu anak', 'trim');
+		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu foc', 'trim');
+		$this->form_validation->set_rules('nasionality_foc', 'Nasionality Tamu foc', 'trim');
+		$this->form_validation->set_rules('tglberangkat', 'Tanggal Berangkat', 'trim|required');
+		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim|required');
+		$this->form_validation->set_rules('pickup', 'Pickup', 'trim|required');
+		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim|required');
+		$this->form_validation->set_rules('catatan', 'Remarks', 'trim|required');
+		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
+            redirect('booking/booking_paket');
+			return;
+		}
+
         $input              = $this->input;
         $kode_ticket        = $this->security->xss_clean($input->post('kode_ticket'));
         $nama_agent          = $this->security->xss_clean($input->post('nama_agent'));
@@ -432,10 +466,8 @@ class Booking extends CI_Controller
             'update_at'    => date("Y:m:d H:i:s"),
         );
         
-        // echo "<pre>".print_r(array_merge($temp_dewasa, $temp_anak),true)."</pre>";
+
         $result = $this->booking->insert_booking_paket($datas, $detail_booking_paket);
-        // echo "<pre>".print_r($result,true)."</pre>";
-        // die;
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');

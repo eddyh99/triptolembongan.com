@@ -16,6 +16,12 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
+                    <?php if (@isset($_SESSION["error"])) { ?>
+                        <div class="col-12 alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="notif-login f-poppins"><?= $_SESSION["error"] ?></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php } ?>
                     <h5 class="card-title fw-semibold mb-4">Edit Paket</h5>
                     <form action="<?= base_url()?>paket/edit_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
@@ -37,43 +43,5 @@
 
 </div>
 <!-- MAIN CONTENT END -->
-
-<!-- SWEET ALERT START -->
-<?php if (isset($_SESSION["error_validation"])) { ?>
-    <script>
-        setTimeout(function() {
-            Swal.fire({
-                html: '<?= trim(str_replace('"', '', json_encode($_SESSION['error_validation']))) ?>',
-                position: 'top',
-                showCloseButton: true,
-                showConfirmButton: false,
-                icon: 'error',
-                timer: 2500,
-                timerProgressBar: true,
-            });
-        }, 100);
-    </script>
-<?php 
-    } 
-    if(isset($_SESSION["error"])) { 
-?>
-    <script>
-        setTimeout(function() {
-            Swal.fire({
-                html: '<?= $_SESSION['error'] ?>',
-                position: 'top',
-                timer: 3000,
-                showCloseButton: true,
-                showConfirmButton: false,
-                icon: 'error',
-                timer: 2000,
-                timerProgressBar: true,
-            });
-        }, 100);
-    </script>
-<?php } ?>
-
-
-<!-- SWEET ALERT END -->
 
 

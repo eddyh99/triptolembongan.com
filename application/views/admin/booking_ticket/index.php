@@ -6,6 +6,12 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
+                    <?php if (@isset($_SESSION["error"])) { ?>
+                        <div class="col-12 alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="notif-login f-poppins"><?= $_SESSION["error"] ?></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php } ?>
                     <h5 class="card-title fw-semibold mb-4">Booking Ticket</h5>
                     <form action="<?= base_url()?>booking/booking_tiket_proses" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
@@ -104,7 +110,7 @@
                                     <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
                                         <label for="nama_tamu_dewasa" class="form-label">Nama Tamu</label>
                                         <div class="d-flex align-items-center">
-                                            <select id="nama_tamu_dewasa" class="nama-tamu-select2" name="nama_tamu_dewasa[]">
+                                            <select id="nama_tamu_dewasa" class="nama-tamu-select2" name="nama_tamu_dewasa[]" required>
                                                 <option></option>
                                             </select>
                                         </div>
@@ -188,7 +194,7 @@
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-4">
                                         <label for="pickup" class="form-label">Pickup</label>
-                                        <input type="text" class="form-control" id="pickup" name="pickup"  placeholder="masukkan pickup dimana..." autocomplete="off" maxlength="45">
+                                        <input type="text" class="form-control" id="pickup" name="pickup" placeholder="masukkan pickup dimana..." autocomplete="off" maxlength="45">
                                     </div>
         
                                     <div class="mb-4 col-12 col-md-4 ">
@@ -323,24 +329,5 @@
 
 </div>
 <!-- MAIN CONTENT END -->
-
-<!-- SWEET ALERT START -->
-<?php if(isset($_SESSION["success"])) { ?>
-    <script>
-        setTimeout(function() {
-            Swal.fire({
-                html: '<p><?= $_SESSION["success"]?></p>',
-                position: 'top',
-                timer: 3000,
-                showCloseButton: true,
-                showConfirmButton: false,
-                icon: 'success',
-                timer: 2000,
-                timerProgressBar: true,
-            });
-        }, 100);
-    </script>
-<?php } ?>
-<!-- SWEET ALERT END -->
 
 

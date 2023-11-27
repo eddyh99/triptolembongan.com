@@ -26,7 +26,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY DEWASA
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-dewasa").click(function(e) {
             e.preventDefault();
@@ -72,7 +72,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY ANAK
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-anak").click(function(e) {
             e.preventDefault();
@@ -114,7 +114,7 @@
     
     // ADDING FOR NAMA TAMU & NATIONALITY FOC
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-foc").click(function(e) {
             e.preventDefault();
@@ -212,18 +212,8 @@
         });
     });
 
-    // Condition Tujuan and Initial Tgl Berangkat - Kembali
+    // Initial Tgl Berangkat - Kembali
     $(document).ready(function(){
-        $('.form-check-input').change(function(){
-            let selected_value = $("input[name='tipetujuan']:checked").val();
-            if(selected_value == 'onewayradio'){
-                $(".return-select2").prop("disabled", true);
-            }
-            if(selected_value == 'returnradio'){
-                $(".return-select2").prop("disabled", false);
-            }
-        });
-
         $(function() {
             $( "#tglberangkat" ).datepicker({
                 dateFormat: 'dd-mm-yy',
@@ -297,8 +287,8 @@
     var hargaDewasa = 0;
     var hargaAnak = 0;
     var hargaFOC = 0;
+    
     $(function() {
-
         // On Change Harga Depart & Return
         $("#paket_select2").change(function(){
             hargaPaket = $('#paket_select2 option:selected').attr('hargaPaket');

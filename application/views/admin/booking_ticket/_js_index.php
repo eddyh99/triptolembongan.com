@@ -26,7 +26,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY DEWASA
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-dewasa").click(function(e) {
             e.preventDefault();
@@ -72,7 +72,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY ANAK
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-anak").click(function(e) {
             e.preventDefault();
@@ -114,7 +114,7 @@
     
     // ADDING FOR NAMA TAMU & NATIONALITY FOC
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-foc").click(function(e) {
             e.preventDefault();
@@ -224,8 +224,6 @@
             let selected_value = $("input[name='tipetujuan']:checked").val();
             if(selected_value == 'One Way'){
                 $(".return-select2").prop("disabled", true);
-                $("#tglkembali").val('');
-                $("#tglkembali").prop("disabled", true);
             }
             if(selected_value == 'Return'){
                 $(".return-select2").prop("disabled", false);
