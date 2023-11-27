@@ -9,7 +9,7 @@
         $(document).ready( function () {
             $('#table_list_booking_paket').DataTable({
                 "scrollX": true,
-                "order": [[ 0, "asc" ]],
+                "order": [[ 0, "desc" ]],
                 "ajax": {
                     "url": "<?=base_url()?>booking/get_list_paket_agent",
                     "type": "POST",

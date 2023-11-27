@@ -57,7 +57,18 @@
                 // $(".wrap-jenis-penumpang").append('<div class="d-flex align-items-center mt-2"> <select class="jenis-penumpang-select2" name="jenis_penumpang[]"><option ></option><option value="Dewasa">Dewasa</option><option value="Anak-Anak">Anak-Anak</option><option value="FOC">FOC</option></select><i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-booking"></i></div>'); 
                 // $(".wrap-jenis-penumpang").append('<i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-book"></i>'); 
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Dewasa Sudah Maximal, Buat Booking Ticket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -99,7 +110,18 @@
                     </div>
                 `);
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Anak Sudah Maximal, Buat Booking Ticket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -141,7 +163,18 @@
                     </div>
                 `);
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu FOC Sudah Maximal, Buat Booking Ticket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
