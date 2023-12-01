@@ -25,6 +25,23 @@
                     <h5 class="card-title fw-semibold mb-4">Tambah Agent</h5>
                     <form action="<?= base_url()?>agent/tambah_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                        <div class="mb-4 col-12 col-md-6 ">
+                            <label for="freecharge" class="form-label">Tipe Agent</label>
+                            <div class="d-flex ">
+                                <div class="form-check">
+                                    <input class="form-check-input cursor-pointer" type="radio" name="tipe" id="onewayradio" value="general" >
+                                    <label class="form-check-label cursor-pointer" for="onewayradio">
+                                        General
+                                    </label>
+                                </div>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input cursor-pointer" type="radio" name="tipe" id="returnradio" value="company" checked="checked">
+                                    <label class="form-check-label cursor-pointer" for="returnradio">
+                                        Company
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="nama_agent" class="form-label">Nama Agent</label>
                             <input type="text" class="form-control" id="nama_agent" name="nama_agent" placeholder="masukkan nama agent...">
