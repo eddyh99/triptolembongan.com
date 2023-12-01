@@ -71,6 +71,7 @@ class Agent extends CI_Controller
             "alamat"    => $alamat,
             "kota"      => $kota,
             "kontak"    => $kontak,
+            'tipe'      => $tipe,
             "userid"    => $_SESSION["logged_status"]["username"],
             "created_at"   => date("Y-m-d H:i:s"),
         );
