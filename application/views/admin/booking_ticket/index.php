@@ -56,6 +56,12 @@
                                                     Return
                                                 </label>
                                             </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="openradio" value="Open">
+                                                <label class="form-check-label cursor-pointer" for="returnradio">
+                                                    Open
+                                                </label>
+                                            </div>
                                         </div>
         
                                         <div class="mt-3">
@@ -191,6 +197,7 @@
                             </div>
 
                             <div class="row">
+                                <h2>Berangkat</h2>
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-4">
                                         <label for="pickup" class="form-label">Pickup</label>
@@ -208,6 +215,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <h2>Kembali</h2>
+                                <div class="row">
+                                    <div class="mb-4 col-12 col-md-4">
+                                        <label for="pickup" class="form-label">Pickup</label>
+                                        <input type="text" class="form-control" id="pickup" name="r_pickup"  placeholder="masukkan pickup dimana..." autocomplete="off" maxlength="45">
+                                    </div>
+        
+                                    <div class="mb-4 col-12 col-md-4 ">
+                                        <label for="dropoff" class="form-label">Drop off</label>
+                                        <input type="text" class="form-control" id="dropoff" name="r_dropoff" placeholder="masukkan drop off dimana..." autocomplete="off" maxlength="45">
+                                    </div>
+        
+                                    <div class="mb-4 col-12 col-md-4 ">
+                                        <label for="catatan" class="form-label">Remarks</label>
+                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off" maxlength="45">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="row">
                             <div class="row">
@@ -265,12 +292,12 @@
                                                                 <span class="display-dewasa-jumlah">0</span> Orang
                                                             </span>
                                                         </div>
-                                                        <div class="ms-auto text-end">
+                                                        <!-- <div class="ms-auto text-end">
                                                             <span class="fs-2">Total Dewasa</span>
                                                             <h6 class="mb-0 fw-semibold">
                                                                 Rp.<span class="display-total-harga-dewasa">0</span>
                                                             </h6>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
                                                         <div>
@@ -279,12 +306,12 @@
                                                                 <span class="display-anak-jumlah">0</span> Orang
                                                             </span>
                                                         </div>
-                                                        <div class="ms-auto text-end">
+                                                        <!-- <div class="ms-auto text-end">
                                                             <span class="fs-2">Total Anak - Anak</span>
                                                             <h6 class="mb-0 fw-semibold">
                                                                 Rp.<span class="display-total-harga-anak">0</span>
                                                             </h6>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
                                                         <div>
@@ -293,12 +320,12 @@
                                                                 <span class="display-foc-jumlah">0</span> Orang    
                                                             </span>
                                                         </div>
-                                                        <div class="ms-auto text-end">
+                                                        <!-- <div class="ms-auto text-end">
                                                             <span class="fs-2">Total Free of Charge</span>
                                                             <h6 class="mb-0 fw-semibold">
                                                                 Rp.<span class="display-total-harga-foc">0</span>
                                                             </h6>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3">
                                                         <div>
@@ -308,7 +335,7 @@
                                                         <div class="ms-auto text-end">
                                                             <!-- <span class="fs-2">Rp.2.200,000</span> -->
                                                             <h6 class="mb-0 fw-semibold">
-                                                                Rp.<span class="display-total-harga-final">0</span>
+                                                                Rp.<span class="display-total-harga-final"><input type="number" class="form-control" name="total"></span>
                                                             </h6>
                                                         </div>
                                                     </div>

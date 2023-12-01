@@ -143,6 +143,22 @@
                                 <span class="hide-menu">Transaksi Paket per Agen</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url()?>laporan/peragenpaket" class="sidebar-link <?= @$dropdown_agenpaket?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Rekap Komisi Tiket per Agen</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url()?>laporan/peragenpaket" class="sidebar-link <?= @$dropdown_agenpaket?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Rekap Komisi Paket per Agen</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- <li class="sidebar-item">

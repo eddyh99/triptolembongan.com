@@ -64,12 +64,14 @@ class Agent extends CI_Controller
         $alamat     = $this->security->xss_clean($input->post('alamat'));
         $kota       = $this->security->xss_clean($input->post('kota'));
         $kontak     = $this->security->xss_clean($input->post('kontak'));
+        $tipe       = $this->security->xss_clean($input->post('tipe'));
 
         $datas = array(
             "nama"      => $nama_agent, 
             "alamat"    => $alamat,
             "kota"      => $kota,
             "kontak"    => $kontak,
+            'tipe'      => $tipe,
             "userid"    => $_SESSION["logged_status"]["username"],
             "created_at"   => date("Y-m-d H:i:s"),
         );

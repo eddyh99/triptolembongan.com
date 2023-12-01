@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Booking_model extends CI_Model{
 
     public function list_ticket_agent()
-    {
+    {        
         $sql="SELECT a.id,kode_tiket, a.berangkat, a.kembali, 
             concat(c.tujuan,' - ',c.berangkat) as depart, 
             concat(d.tujuan,' - ',d.berangkat) as return_from, e.payment as payment,
@@ -15,7 +15,8 @@ class Booking_model extends CI_Model{
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
-        INNER JOIN tbl_payment e ON a.payment=e.id";
+        INNER JOIN tbl_payment e ON a.payment=e.id
+        ";
         $query=$this->db->query($sql);
         if (!$query){
             return $this->db->error();
@@ -64,7 +65,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff, y.harga as brkt, z.harga as kmbl, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, y.harga as brkt, z.harga as kmbl, a.is_deleted as del,a.charge FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -237,7 +238,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff,y.harga FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff,y.harga, a.charge FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
         INNER JOIN (

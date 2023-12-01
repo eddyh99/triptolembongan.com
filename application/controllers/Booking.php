@@ -112,15 +112,23 @@ class Booking extends CI_Controller
 
         $tglberangkat       = $this->security->xss_clean($input->post('tglberangkat'));
         $newTglBerangkat    = date("Y-m-d", strtotime($tglberangkat));  
+
         $tglkembali         = $this->security->xss_clean($input->post('tglkembali'));
         $newTglKembali      = date("Y-m-d", strtotime($tglkembali)); 
         
         $pickup             = $this->security->xss_clean($input->post('pickup'));
         $dropoff            = $this->security->xss_clean($input->post('dropoff'));
+        $r_pickup           = $this->security->xss_clean($input->post('r_pickup'));
+        $r_dropoff          = $this->security->xss_clean($input->post('r_dropoff'));
+
         $remarks            = $this->security->xss_clean($input->post('catatan'));
+        $tipetujuan         = $this->security->xss_clean($input->post('tipetujuan'));
 
         $payment            = $this->security->xss_clean($input->post('payment'));
-  
+        $charge             = $this->security->xss_clean($input->post('total'));
+        // echo "<pre>".print_r($nama_tamu_dewasa,true)."</pre>";
+        // echo "<pre>".print_r($depart,true)."</pre>";
+        // die;
         
         
         $temp_dewasa = array();
@@ -175,8 +183,11 @@ class Booking extends CI_Controller
         $datas = array(
             'kode_tiket'    => $kode_ticket,
             'tgl_pesan'     => date("Y:m:d H:i:s"),
-            'berangkat'     => $newTglBerangkat,
-            'kembali'       => $newTglKembali,
+            'berangkat'     => ($tipetujuan=="open")?null:$newTglBerangkat,
+            'kembali'       => ($tipetujuan=="open")?null:$newTglKembali,
+            'is_open'       => ($tipetujuan=="open")?"yes":"no",
+            'r_pirckup'     => $r_pickup,
+            'r_dropoff'     => $r_dropoff,
             'pickup'        => $pickup,
             'dropoff'       => $dropoff,
             'depart'        => $depart,
@@ -184,6 +195,7 @@ class Booking extends CI_Controller
             'return_from'   => empty($return_from) ? null : $return_from,
             'agentid'       => $nama_agent,
             'remarks'       => $remarks,
+            'charge'        => $charge,
             'userid'        => $_SESSION["logged_status"]["username"],
             'created_at'    => date("Y:m:d H:i:s"),
             'update_at'    => date("Y:m:d H:i:s"),
