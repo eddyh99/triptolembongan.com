@@ -26,7 +26,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY DEWASA
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-dewasa").click(function(e) {
             e.preventDefault();
@@ -57,7 +57,18 @@
                 // $(".wrap-jenis-penumpang").append('<div class="d-flex align-items-center mt-2"> <select class="jenis-penumpang-select2" name="jenis_penumpang[]"><option ></option><option value="Dewasa">Dewasa</option><option value="Anak-Anak">Anak-Anak</option><option value="FOC">FOC</option></select><i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-booking"></i></div>'); 
                 // $(".wrap-jenis-penumpang").append('<i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-book"></i>'); 
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Dewasa Sudah Maximal, Buat Booking Paket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -72,7 +83,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY ANAK
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-anak").click(function(e) {
             e.preventDefault();
@@ -99,7 +110,18 @@
                     </div>
                 `);
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Anak Sudah Maximal, Buat Booking Paket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -114,7 +136,7 @@
     
     // ADDING FOR NAMA TAMU & NATIONALITY FOC
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-foc").click(function(e) {
             e.preventDefault();
@@ -141,7 +163,18 @@
                     </div>
                 `);
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu FOC Sudah Maximal, Buat Booking Paket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -212,18 +245,8 @@
         });
     });
 
-    // Condition Tujuan and Initial Tgl Berangkat - Kembali
+    // Initial Tgl Berangkat - Kembali
     $(document).ready(function(){
-        $('.form-check-input').change(function(){
-            let selected_value = $("input[name='tipetujuan']:checked").val();
-            if(selected_value == 'onewayradio'){
-                $(".return-select2").prop("disabled", true);
-            }
-            if(selected_value == 'returnradio'){
-                $(".return-select2").prop("disabled", false);
-            }
-        });
-
         $(function() {
             $( "#tglberangkat" ).datepicker({
                 dateFormat: 'dd-mm-yy',
@@ -297,8 +320,8 @@
     var hargaDewasa = 0;
     var hargaAnak = 0;
     var hargaFOC = 0;
+    
     $(function() {
-
         // On Change Harga Depart & Return
         $("#paket_select2").change(function(){
             hargaPaket = $('#paket_select2 option:selected').attr('hargaPaket');

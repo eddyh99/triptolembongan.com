@@ -14,7 +14,7 @@
         $(document).ready( function () {
             $('#table_list_booking_ticket').DataTable({
                 "scrollX": true,
-                "order": [[ 0, "desc" ]],
+                "order": [[ 0, "asc" ]],
                 "ajax": {
                     "url": "<?=base_url()?>booking/get_list_ticket_agent",
                     "type": "POST",

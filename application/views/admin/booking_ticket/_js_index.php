@@ -26,7 +26,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY DEWASA
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-dewasa").click(function(e) {
             e.preventDefault();
@@ -57,7 +57,18 @@
                 // $(".wrap-jenis-penumpang").append('<div class="d-flex align-items-center mt-2"> <select class="jenis-penumpang-select2" name="jenis_penumpang[]"><option ></option><option value="Dewasa">Dewasa</option><option value="Anak-Anak">Anak-Anak</option><option value="FOC">FOC</option></select><i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-booking"></i></div>'); 
                 // $(".wrap-jenis-penumpang").append('<i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-book"></i>'); 
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Dewasa Sudah Maximal, Buat Booking Ticket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -72,7 +83,7 @@
 
     // ADDING FOR NAMA TAMU & NATIONALITY ANAK
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-anak").click(function(e) {
             e.preventDefault();
@@ -99,7 +110,18 @@
                     </div>
                 `);
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Anak Sudah Maximal, Buat Booking Ticket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -114,7 +136,7 @@
     
     // ADDING FOR NAMA TAMU & NATIONALITY FOC
     $(document).ready(function() {
-        var max_taps = 5;
+        var max_taps = 30;
         var tap = 1;
         $(".add-nama-tamu-foc").click(function(e) {
             e.preventDefault();
@@ -141,7 +163,18 @@
                     </div>
                 `);
             } else {
-                alert('You Reached the limits')
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu FOC Sudah Maximal, Buat Booking Ticket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
             }
             renderSelect2();
         });
@@ -224,8 +257,6 @@
             let selected_value = $("input[name='tipetujuan']:checked").val();
             if(selected_value == 'One Way'){
                 $(".return-select2").prop("disabled", true);
-                $("#tglkembali").val('');
-                $("#tglkembali").prop("disabled", true);
             }
             if(selected_value == 'Return'){
                 $(".return-select2").prop("disabled", false);
