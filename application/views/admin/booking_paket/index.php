@@ -233,10 +233,10 @@
                                                             </span>
                                                         </div>
                                                         <div class="ms-auto text-end">
-                                                            <span class="fs-2">Total Dewasa</span>
+                                                            <!-- <span class="fs-2">Total Dewasa</span>
                                                             <h6 class="mb-0 fw-semibold">
                                                                 Rp.<span class="display-total-harga-dewasa">0</span>
-                                                            </h6>
+                                                            </h6> -->
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
@@ -247,10 +247,10 @@
                                                             </span>
                                                         </div>
                                                         <div class="ms-auto text-end">
-                                                            <span class="fs-2">Total Anak - Anak</span>
+                                                            <!-- <span class="fs-2">Total Anak - Anak</span>
                                                             <h6 class="mb-0 fw-semibold">
                                                                 Rp.<span class="display-total-harga-anak">0</span>
-                                                            </h6>
+                                                            </h6> -->
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
@@ -261,21 +261,23 @@
                                                             </span>
                                                         </div>
                                                         <div class="ms-auto text-end">
-                                                            <span class="fs-2">Total Free of Charge</span>
+                                                            <!-- <span class="fs-2">Total Free of Charge</span>
                                                             <h6 class="mb-0 fw-semibold">
                                                                 Rp.<span class="display-total-harga-foc">0</span>
-                                                            </h6>
+                                                            </h6> -->
                                                         </div>
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3">
                                                         <div>
                                                             <h6 class="mb-0 fw-semibold">Total Keseluruhan</h6>
-                                                            <!-- <span class="fs-2">2 Orang</span> -->
                                                         </div>
                                                         <div class="ms-auto text-end">
                                                             <!-- <span class="fs-2">Rp.2.200,000</span> -->
-                                                            <h6 class="mb-0 fw-semibold">
-                                                                Rp.<span class="display-total-harga-final">0</span>
+                                                            <h6 class="mb-0 fw-semibold d-flex align-items-center">
+                                                                <span>Rp.</span>
+                                                                <span class="display-total-harga-final">
+                                                                    <input type="text" class="form-control money-input input-total-rangkuman" name="total">
+                                                                </span>
                                                             </h6>
                                                         </div>
                                                     </div>

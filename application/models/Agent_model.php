@@ -5,7 +5,7 @@ class Agent_model extends CI_Model{
 
     public function get_agent()
     {		
-		$sql = "SELECT id, nama, alamat, kota, kontak FROM tbl_agen WHERE is_deleted='no'";
+		$sql = "SELECT id, nama, alamat, kota, kontak, tipe FROM tbl_agen WHERE is_deleted='no'";
 		$query = $this->db->query($sql);
 		if ($query){
 			return $query->result_array();
@@ -31,7 +31,7 @@ class Agent_model extends CI_Model{
 
     public function get_edit_agent($id)
     {
-        $sql = "SELECT id, nama, alamat, kota, kontak FROM tbl_agen WHERE id=? AND is_deleted='no'";
+        $sql = "SELECT id, nama, alamat, kota, kontak, tipe FROM tbl_agen WHERE id=? AND is_deleted='no'";
         $query = $this->db->query($sql, $id);
 		if ($query){
 			return $query->row();

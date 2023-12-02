@@ -22,10 +22,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Kode</th>
-                                <th>Berangkat</th>
-                                <th>Kembali</th>
                                 <th>Depart</th>
+                                <th>Date Depart</th>
                                 <th>Return</th>
+                                <th>Date Return</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
@@ -36,10 +36,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Kode</th>
-                                <th>Berangkat</th>
-                                <th>Kembali</th>
                                 <th class="th-depart-ticket">Depart</th>
+                                <th>Date Depart</th>
                                 <th class="th-return-ticket">Return</th>
+                                <th>Date Return</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>

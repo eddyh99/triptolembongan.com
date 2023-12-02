@@ -5,13 +5,15 @@ class Booking_model extends CI_Model{
 
     public function list_ticket_agent()
     {        
-        $sql="SELECT a.id,kode_tiket, a.berangkat, a.kembali, 
-            concat(c.tujuan,' - ',c.berangkat) as depart, 
-            concat(d.tujuan,' - ',d.berangkat) as return_from, e.payment as payment,
+        $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
+            concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
-            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking a 
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
+            (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
+            (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.is_deleted as del FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -31,7 +33,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff, y.harga as brkt, z.harga as kmbl, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, charge,  y.harga as brkt, z.harga as kmbl, a.is_deleted as del FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -93,6 +95,7 @@ class Booking_model extends CI_Model{
         }
     }
 
+    
     public function get_ticket_agent($id_nama)
     {
         $sql="SELECT a.id, a.tujuan, a.berangkat, c.id as 'id_nama', c.nama, c.kontak,x.harga FROM 
@@ -194,7 +197,9 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff, a.is_deleted as del FROM tbl_booking_paket a 
+            (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as namatamu, 
+            (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as nasionality,  
+            nama as namaagen, pickup, dropoff, charge,  a.is_deleted as del FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
         INNER JOIN tbl_payment d ON a.payment=d.id";
@@ -212,7 +217,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff,y.harga FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff, charge, y.harga FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
         INNER JOIN (
@@ -238,7 +243,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
-            nama as namaagen, pickup, dropoff,y.harga, a.charge FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff, charge, y.harga, a.charge FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
         INNER JOIN (

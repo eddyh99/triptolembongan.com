@@ -57,3 +57,13 @@
     border-color: var(--bs-white);
     transform: rotate(-135deg) translate(0, -50%);
 }
+
+.input-total-rangkuman {
+    border-radius: 0px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid #000000;
+    height: 20px;
+    padding: 15px;
+}

@@ -144,7 +144,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="<?= base_url()?>laporan/peragenpaket" class="sidebar-link <?= @$dropdown_agenpaket?>">
+                            <a href="<?= base_url()?>laporan/komisi_tiket_agen" class="sidebar-link <?= @$dropdown_komisi_agentiket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>
@@ -152,7 +152,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="<?= base_url()?>laporan/peragenpaket" class="sidebar-link <?= @$dropdown_agenpaket?>">
+                            <a href="<?= base_url()?>laporan/komisi_paket_agen" class="sidebar-link <?= @$dropdown_komisi_agenpaket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>

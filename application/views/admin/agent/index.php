@@ -25,6 +25,7 @@
                                 <th>Alamat</th>
                                 <th>Kota</th>
                                 <th>Kontak</th>
+                                <th>Tipe</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -37,6 +38,7 @@
                                 <th>Alamat</th>
                                 <th>Kota</th>
                                 <th>Kontak</th>
+                                <th>Tipe</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

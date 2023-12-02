@@ -26,6 +26,23 @@
                     <form action="<?= base_url()?>agent/edit_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <input type="hidden" name="id_edit" value="<?= $agent->id?>">
+                        <div class="mb-4 col-12 col-md-6 ">
+                            <label for="freecharge" class="form-label">Tipe Agent</label>
+                            <div class="d-flex ">
+                                <div class="form-check">
+                                    <input class="form-check-input cursor-pointer" type="radio" name="tipe" id="general" value="general" checked="<?php echo ($agent->tipe == 'general') ? 'checked' : ''?>">
+                                    <label class="form-check-label cursor-pointer" for="general">
+                                        General
+                                    </label>
+                                </div>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input cursor-pointer" type="radio" name="tipe" id="company" value="company" checked="<?php echo ($agent->tipe == 'company') ? 'checked' : ''?>">
+                                    <label class="form-check-label cursor-pointer" for="company">
+                                        Company
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="nama_agent" class="form-label">Nama Agent</label>
                             <input type="text" class="form-control" id="nama_agent" name="nama_agent" value="<?= $agent->nama?>" placeholder="masukkan nama agent..." required>

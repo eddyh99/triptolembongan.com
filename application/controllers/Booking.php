@@ -79,17 +79,24 @@ class Booking extends CI_Controller
 		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu foc', 'trim');
 		$this->form_validation->set_rules('nasionality_foc', 'Nasionality Tamu foc', 'trim');
 		$this->form_validation->set_rules('tglberangkat', 'Tanggal Berangkat', 'trim|required');
-		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim|required');
-		$this->form_validation->set_rules('pickup', 'Pickup', 'trim|required');
-		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim|required');
-		$this->form_validation->set_rules('catatan', 'Remarks', 'trim|required');
+		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim');
+		$this->form_validation->set_rules('pickup', 'Pickup', 'trim');
+		$this->form_validation->set_rules('r_pickup', 'Return Pickup', 'trim');
+		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim');
+		$this->form_validation->set_rules('r_dropoff', 'Return Drop Off', 'trim');
+		$this->form_validation->set_rules('catatan', 'Remarks', 'trim');
 		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
+		$this->form_validation->set_rules('total', 'Charge', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
             redirect('booking');
 			return;
 		}
+
+        $charge = $this->input->post("total");
+        $new_charge = str_replace(array('\'', '"', ',', ';', '<', '>'), '', $charge);
+        $_POST["total"]=$new_charge;
 
         $input              = $this->input;
         $kode_ticket        = $this->security->xss_clean($input->post('kode_ticket'));
@@ -123,11 +130,13 @@ class Booking extends CI_Controller
 
         $remarks            = $this->security->xss_clean($input->post('catatan'));
         $tipetujuan         = $this->security->xss_clean($input->post('tipetujuan'));
+        $tipeopen           = $this->security->xss_clean($input->post('tipeopen'));
 
         $payment            = $this->security->xss_clean($input->post('payment'));
         $charge             = $this->security->xss_clean($input->post('total'));
+        
         // echo "<pre>".print_r($nama_tamu_dewasa,true)."</pre>";
-        // echo "<pre>".print_r($depart,true)."</pre>";
+        // echo "<pre>".print_r($tipetujuan,true)."</pre>";
         // die;
         
         
@@ -183,11 +192,11 @@ class Booking extends CI_Controller
         $datas = array(
             'kode_tiket'    => $kode_ticket,
             'tgl_pesan'     => date("Y:m:d H:i:s"),
-            'berangkat'     => ($tipetujuan=="open")?null:$newTglBerangkat,
-            'kembali'       => ($tipetujuan=="open")?null:$newTglKembali,
-            'is_open'       => ($tipetujuan=="open")?"yes":"no",
-            'r_pirckup'     => $r_pickup,
-            'r_dropoff'     => $r_dropoff,
+            'berangkat'     => ($tipeopen=="Open") ? null : $newTglBerangkat,
+            'kembali'       => ($tipeopen=="Open") ? null : (empty($tglkembali) ? null : date("Y-m-d", strtotime($tglkembali))),
+            'is_open'       => ($tipeopen=="Open")?"yes":"no",
+            'r_pickup'      => empty($r_pickup) ? null : $r_pickup,
+            'r_dropoff'     => empty($r_dropoff) ? null : $r_dropoff,
             'pickup'        => $pickup,
             'dropoff'       => $dropoff,
             'depart'        => $depart,
@@ -200,6 +209,9 @@ class Booking extends CI_Controller
             'created_at'    => date("Y:m:d H:i:s"),
             'update_at'    => date("Y:m:d H:i:s"),
         );
+
+        // echo "<pre>".print_r($datas,true)."</pre>";
+        // die;
         
         $result = $this->booking->insert_booking_ticket($datas, $detail_booking);
 
@@ -376,12 +388,17 @@ class Booking extends CI_Controller
 		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim|required');
 		$this->form_validation->set_rules('catatan', 'Remarks', 'trim|required');
 		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
+		$this->form_validation->set_rules('total', 'Charge', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
             redirect('booking/booking_paket');
 			return;
 		}
+
+        $charge = $this->input->post("total");
+        $new_charge = str_replace(array('\'', '"', ',', ';', '<', '>'), '', $charge);
+        $_POST["total"]=$new_charge;
 
         $input              = $this->input;
         $kode_ticket        = $this->security->xss_clean($input->post('kode_ticket'));
@@ -411,6 +428,7 @@ class Booking extends CI_Controller
         $remarks            = $this->security->xss_clean($input->post('catatan'));
         
         $payment            = $this->security->xss_clean($input->post('payment'));
+        $charge             = $this->security->xss_clean($input->post('total'));
         
         
         $temp_dewasa = array();
@@ -473,6 +491,7 @@ class Booking extends CI_Controller
             'id_paket'      => $id_paket,
             'agentid'       => $nama_agent,
             'remarks'       => $remarks,
+            'charge'        => $charge,
             'userid'        => $_SESSION["logged_status"]["username"],
             'created_at'    => date("Y:m:d H:i:s"),
             'update_at'    => date("Y:m:d H:i:s"),

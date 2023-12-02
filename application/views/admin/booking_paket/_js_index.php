@@ -451,7 +451,7 @@
                     $(".display-tgl-berangkat").text(getTglBerangkat);
                     $(".display-tgl-kembali").text(getTglKembali);
                     $(".display-namapaket").text(getPaket);
-                    $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                    // $(".display-total-harga-final").text(harga.toLocaleString("en"));
                     harga = 0;
                 }
             }

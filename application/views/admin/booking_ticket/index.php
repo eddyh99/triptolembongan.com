@@ -57,8 +57,8 @@
                                                 </label>
                                             </div>
                                             <div class="form-check ms-3">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="openradio" value="Open">
-                                                <label class="form-check-label cursor-pointer" for="returnradio">
+                                                <input class="form-check-input cursor-pointer" type="checkbox" name="tipeopen" id="openradio" value="Open">
+                                                <label class="form-check-label cursor-pointer" for="openradio">
                                                     Open
                                                 </label>
                                             </div>
@@ -89,7 +89,7 @@
                                         <div>
                                             <label for="tglberangkat" class="form-label">Tanggal Keberangkatan</label>
                                             <div class="form-control d-flex">
-                                                <input type="text" class="w-100 border-0 cursor-pointer" name="tglberangkat" id="tglberangkat" autocomplete="off" required>
+                                                <input type="text" class="w-100 border-0 cursor-pointer" name="tglberangkat" id="tglberangkat" autocomplete="off">
                                                 <label for="tglberangkat" class="cursor-pointer">
                                                     <i class="ti ti-calendar-event fs-6"></i>
                                                 </label>
@@ -98,7 +98,7 @@
                                         <div class="mt-3">
                                             <label for="tglkembali" class="form-label">Tanggal Kembali</label>
                                             <div class="form-control d-flex">
-                                                <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off" required>
+                                                <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off">
                                                 <label for="tglkembali" class="cursor-pointer">
                                                     <i class="ti ti-calendar-event fs-6"></i>
                                                 </label>
@@ -215,7 +215,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div id="additional-kembali" class="row">
                                 <h2>Kembali</h2>
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-4">
@@ -227,11 +227,16 @@
                                         <label for="dropoff" class="form-label">Drop off</label>
                                         <input type="text" class="form-control" id="dropoff" name="r_dropoff" placeholder="masukkan drop off dimana..." autocomplete="off" maxlength="45">
                                     </div>
-        
-                                    <div class="mb-4 col-12 col-md-4 ">
-                                        <label for="catatan" class="form-label">Remarks</label>
-                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off" maxlength="45">
+
+                                    <div class="col-4">
+                                        <label for="payment" class="form-label">Payment</label>
+                                        <select name="payment" id="payment" class="form-select">
+                                            <?php foreach ($payment as $dt){?>
+                                                <option value="<?=$dt["id"]?>"><?=$dt["payment"]?></option>
+                                            <?php }?>
+                                        </select>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -239,13 +244,7 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-4">
-                                    <label for="payment" class="form-label">Payment</label>
-                                    <select name="payment" id="payment" class="form-select">
-                                        <?php foreach ($payment as $dt){?>
-                                            <option value="<?=$dt["id"]?>"><?=$dt["payment"]?></option>
-                                        <?php }?>
-                                    </select>
-                                    <button id="cekHarga" class="btn btn-dark mt-3">Cek Harga</button>
+                                    <button id="cekHarga" class="btn btn-dark mt-3">Cek Rangkuman</button>
                                     <button type="submit" class="btn btn-primary mt-3">Booking Sekarang</button>
                                 </div>
                                 <div class="col-8">
@@ -334,8 +333,11 @@
                                                         </div>
                                                         <div class="ms-auto text-end">
                                                             <!-- <span class="fs-2">Rp.2.200,000</span> -->
-                                                            <h6 class="mb-0 fw-semibold">
-                                                                Rp.<span class="display-total-harga-final"><input type="number" class="form-control" name="total"></span>
+                                                            <h6 class="mb-0 fw-semibold d-flex align-items-center">
+                                                                <span>Rp.</span>
+                                                                <span class="display-total-harga-final">
+                                                                    <input type="text" class="form-control money-input input-total-rangkuman" name="total">
+                                                                </span>
                                                             </h6>
                                                         </div>
                                                     </div>

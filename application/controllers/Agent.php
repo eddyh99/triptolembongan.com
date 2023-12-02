@@ -115,6 +115,7 @@ class Agent extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
 		$this->form_validation->set_rules('kota', 'Kota', 'trim|required');
 		$this->form_validation->set_rules('kontak', 'Kontak', 'trim|required');
+		$this->form_validation->set_rules('tipe', 'Tipe Agency', 'trim|required');
 
         $input      = $this->input;
         $id_edit    = $this->security->xss_clean($input->post('id_edit'));
@@ -129,6 +130,7 @@ class Agent extends CI_Controller
         $alamat     = $this->security->xss_clean($input->post('alamat'));
         $kota       = $this->security->xss_clean($input->post('kota'));
         $kontak     = $this->security->xss_clean($input->post('kontak'));
+        $tipe       = $this->security->xss_clean($input->post('tipe'));
 
 
         $datas = array(
@@ -136,6 +138,7 @@ class Agent extends CI_Controller
             "alamat"    => $alamat,
             "kota"      => $kota,
             "kontak"    => $kontak,
+            "tipe"      => $tipe,
             "update_at"   => date("Y-m-d H:i:s"),
         );
 

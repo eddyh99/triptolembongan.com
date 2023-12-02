@@ -30,7 +30,7 @@
                                 <th>Adult</th>
                                 <th>Child</th>
                                 <th>FOC</th>
-                                <th>Total</th> 
+                                <th>Charge</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -61,7 +61,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th> 
+                                <th style="text-align:right"></th> 
                             </tr>
                         </tfoot>
                     </table>

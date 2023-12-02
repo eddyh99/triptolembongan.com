@@ -20,9 +20,10 @@
 				{ data: 'alamat' },
 				{ data: 'kota' },
 				{ data: 'kontak' },
+				{ data: 'tipe' },
 			],
             "aoColumnDefs": [{	
-				"aTargets": [5],
+				"aTargets": [6],
 				"mRender": function (data, type, full, meta){
 					button='<a href="<?=base_url()?>agent/edit_agent/'+encodeURI(btoa(full.id))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></i></a>'
 					button = button + '<a href="<?=base_url()?>agent/hapus/'+encodeURI(btoa(full.id))+'" class="del-data btn btn-danger mx-1"><i class="ti ti-trash"></i></a>';

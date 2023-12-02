@@ -255,13 +255,37 @@
     $(document).ready(function(){
         $('.form-check-input').change(function(){
             let selected_value = $("input[name='tipetujuan']:checked").val();
-            if(selected_value == 'One Way'){
-                $(".return-select2").prop("disabled", true);
-            }
+            let selected_open = $("input[name='tipeopen']:checked").val();
+            // console.log(open_value);
             if(selected_value == 'Return'){
                 $(".return-select2").prop("disabled", false);
                 $("#tglkembali").prop("disabled", false);
+                $("#additional-kembali").show();
             }
+
+            if(selected_open == 'Open'){
+                $( "#tglberangkat" ).datepicker('setDate','');
+                $("input[name='tglberangkat']", $('#tglberangkat')).val("");
+                $("#tglberangkat").prop("disabled", true);
+
+                $( "#tglkembali" ).datepicker('setDate','');
+                $("input[name='tglkembali']", $('#tglkembali')).val("");
+                $("#tglkembali").prop("disabled", true);
+            }else{
+                $("#tglberangkat").prop("disabled", false);
+                $("#tglkembali").prop("disabled", false);
+            }
+
+            if(selected_value == 'One Way'){
+                $(".return-select2").prop("disabled", true);
+                $( "#tglkembali" ).datepicker('setDate','');
+                $("input[name='tglkembali']", $('#tglkembali')).val("");
+                $("#tglkembali").prop("disabled", true);
+                $("#additional-kembali").hide();
+            }
+   
+
+      
         });
 
         $(function() {
@@ -279,7 +303,7 @@
                 changeMonth: true,
                 minDate: 0,
                 yearRange: "-100:+20",
-            });
+            }).val('');
         });
     });
 
@@ -481,7 +505,7 @@
                         $(".display-tujuan").text(getTujuan);
                         $(".display-depart").text(getDepart);
                         $(".display-return").text(getReturn);
-                        $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                        // $(".display-total-harga-final").text(harga.toLocaleString("en"));
                         harga = 0;
                     }
                 }else if(getTujuan === 'One Way' && hargaDepart !== undefined){
@@ -542,7 +566,7 @@
                         $(".display-tujuan").text(getTujuan);
                         $(".display-depart").text(getDepart);
                         $(".display-return").text('-');
-                        $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                        // $(".display-total-harga-final").text(harga.toLocaleString("en"));
                         harga = 0;
                     }
 
