@@ -135,6 +135,7 @@ class Laporan extends CI_Controller
             $awal       = date_format(date_create($newtanggal[0]),"Y-m-d");
             $akhir      = date_format(date_create($newtanggal[1]),"Y-m-d");
         }
+        
 
         $result     = $this->booking->list_ticket_byagendate($awal,$akhir,$idagen);
         // echo "<pre>".print_r($result,true)."</pre>";
@@ -181,6 +182,76 @@ class Laporan extends CI_Controller
         );
         $this->load->view('layout/wrapper-dashboard', $data);
     }
+
+
+    public function rangkuman_bulanan()
+    {
+        $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
+        $tipe = $this->security->xss_clean($this->input->post('tipe'));
+
+
+
+        if (empty($tanggal)){
+            $month   = date("m");
+            $year  = date("Y");
+            $tipe = 'company';
+        }else{
+            $month       = substr($tanggal, 0, -5);
+            $year      = substr($tanggal, 3);
+        }
+
+
+        $result     = $this->booking->rangkuman_bulanan($month,$year,$tipe);
+        // echo "<pre>".print_r($result,true)."</pre>";
+        // die;
+        $data = array(
+            'title'             => NAMETITLE . ' - Rangkuman Bulanan',
+            'content'           => 'admin/laporan/bulanan/index',
+            'extra'             => 'admin/laporan/bulanan/js/_js_index',
+            'laporan'           => $result,
+            'agent'             => $this->agent->get_agent(),
+            'dropdown_rangkuman_bulanan'   => 'text-primary'
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function rangkuman_test()
+    {
+        $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
+        $tipe = $this->security->xss_clean($this->input->post('tipe'));
+
+
+
+        if (empty($tanggal)){
+            $month   = date("m");
+            $year  = date("Y");
+            $tipe = 'company';
+        }else{
+            $month       = substr($tanggal, 0, -5);
+            $year      = substr($tanggal, 3);
+        }
+        // print_r($month);
+        // print_r($year);
+        // die;
+
+
+        $result     = $this->booking->rangkuman_bulanan($month,$year);
+        //   echo "<pre>".print_r($result,true)."</pre>";
+        print_r(json_encode($result));
+        die;
+        $data = array(
+            'title'             => NAMETITLE . ' - Rangkuman Bulanan',
+            'content'           => 'admin/laporan/bulanan/test',
+            'extra'             => 'admin/laporan/bulanan/js/_js_index',
+            'laporan'           => $result,
+            // 'idagent'           => (!empty($tanggal))?$idagen:"",
+            // 'laporan_active'    => 'active',
+            'dropdown_rangkuman_bulanan'   => 'text-primary'
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+
 
 
 

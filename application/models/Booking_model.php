@@ -95,6 +95,38 @@ class Booking_model extends CI_Model{
         }
     }
 
+    public function rangkuman_bulanan($month,$year,$tipe)
+    {
+        $sql="SELECT sum((SELECT count(1) as tamu FROM tbl_booking_detail WHERE id=a.id)) as tamu,nama as namaagen, sum(IFNULL(y.harga,0)+IFNULL(z.harga,0)) as rate, sum(a.charge) as charge 
+            FROM tbl_booking a 
+            LEFT JOIN tbl_agen b ON a.agentid=b.id 
+            INNER JOIN tbl_tiket c ON a.depart=c.id 
+            LEFT JOIN tbl_tiket d ON a.return_from=d.id
+            INNER JOIN (
+                SELECT a.harga, a.id_agen, a.id_tiket FROM tbl_agentiket a 
+                        INNER JOIN (
+                            SELECT MAX(berlaku) as tanggal,id_agen,id_tiket FROM tbl_agentiket GROUP BY id_agen,id_tiket
+                        ) x ON a.id_agen=x.id_agen AND a.id_tiket=x.id_tiket AND a.berlaku=x.tanggal
+                    ) y
+            ON b.id=y.id_agen AND a.depart=y.id_tiket
+            LEFT JOIN (
+                SELECT a.harga, a.id_agen, a.id_tiket FROM tbl_agentiket a 
+                        INNER JOIN (
+                            SELECT MAX(berlaku) as tanggal,id_agen,id_tiket FROM tbl_agentiket GROUP BY id_agen,id_tiket
+                        ) x ON a.id_agen=x.id_agen AND a.id_tiket=x.id_tiket AND a.berlaku=x.tanggal
+                    ) z
+            ON b.id=z.id_agen AND a.return_from=z.id_tiket
+            WHERE MONTH(a.tgl_pesan)=? AND YEAR(a.tgl_pesan)=? AND b.tipe=?
+            GROUP BY b.id;
+        ";
+        $query=$this->db->query($sql,array($month,$year,$tipe));
+        if (!$query){
+            return $this->db->error();
+        }else{
+            return $query->result_array();
+        }
+    }
+
     
     public function get_ticket_agent($id_nama)
     {

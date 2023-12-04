@@ -159,16 +159,16 @@
                                 <span class="hide-menu">Rekap Komisi Paket per Agen</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="<?= base_url()?>laporan/rangkuman_bulanan" class="sidebar-link <?= @$dropdown_rangkuman_bulanan?>">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Rangkuman Bulanan</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <!-- <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$laporan_active?>" href="<?= base_url()?>laporan/tiketlist" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-file-analytics"></i>
-                        </span>
-                        <span class="hide-menu">Laporan</span>
-                    </a>
-                </li> -->
             
                 <li class="sidebar-item mb-5 pb-5">
                     <a class="sidebar-link" href="<?= base_url()?>auth/logout" aria-expanded="false">
