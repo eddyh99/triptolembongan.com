@@ -217,7 +217,7 @@ class Booking extends CI_Controller
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
-			redirect('booking/preview_ticket/'.$kode_ticket);
+			redirect('booking/list_booking_ticket');
 			return;
         }else{
             $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
@@ -502,7 +502,7 @@ class Booking extends CI_Controller
 
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
-			redirect('booking/preview_paket/'.$kode_ticket);
+			redirect('booking/list_booking_paket');
 			return;
         }else{
             $this->session->set_flashdata('error', $this->message->error_msg($result["message"]));
