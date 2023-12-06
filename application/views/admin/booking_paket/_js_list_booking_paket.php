@@ -6,13 +6,23 @@
 
     @media print {
         @page {
-            size: 80mm 150mm;
+            size: 80mm 280mm;
             margin: 10mm;
         }
         .booking-paket-print {
             display: block;
             width: 100%;
             height: auto;
+        }
+
+        ol {
+            margin: 10px;
+            padding: 0;
+        }
+
+        ol li {
+            
+            font-size: 10px;
         }
     }
 
@@ -115,11 +125,10 @@
                             var btnPrint = `
                                     <button id="printTiket${full.kode_tiket}" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
                                     <div class="booking-paket-print printTiketPreview${full.kode_tiket} bg-primary">
-                                        <div class="d-flex justify-content-center">
-                                            <img class="text-center d-block" src="<?= base_url()?>assets/img/favicon.png" width="60mm" height="auto">
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
                                         </div>
-                                        <h3 class="text-center fw-bolder">TRIPTO<span class="text-secondary">LEMBONGAN</span></h3>   
-                                        <span class="text-center d-block fst-italic fs-2">Jln Denpasar - Gilimanuk No 1 Mengwi Badung Bali</span>
+                                        <span class="text-center d-block fst-italic fs-2">Jalan Matahari Terbit, Pertokoan ARCADE, No.4, Sanur, Denpasar Selatan</span>
                                         <hr>
                                         <span class="fs-2"><b>Ticket</b>&emsp;&emsp;&nbsp;&ensp; : ${full.kode_tiket}</span>
                                         <br>
@@ -145,6 +154,29 @@
                                         <br>
                                         <br>
                                         <span class="fs-2">Adult: ${full.dws}, Child: ${full.anak}, FOC: ${full.foc}</span>
+                                        <br>
+                                        <hr>
+                                        <div>
+                                            <span><u>Term and Condition : </u></span>
+                                            <ol>
+                                                <li>Cancelation 100% no refundable</li>
+                                                <li>OPEN ticket based on seat avaliability and should be made at least 1 day prior to the guest departure</li>
+                                                <li>Passanger with particular health problem, physical handicap and pregnant woman will travel at their own risk</li>
+                                                <li>Arthamas Express Fast Boat will not responsible for any loss or damage to the luggage during transfering to the island due to the bad weather and the guest personal belonging while joining the trip</li>
+                                                <li>If our boat is unable to departure because of technical problem then we will endeavor to transfer guest to another boat.</li>
+                                                <li>CONNECTING FLIGHT, Arthamas Express Fast Boat does not take any responsibility for any delays or connecting flight that caused by delay vessel or beyond their control (i.e. weather, road blockage/ traffic jam, ceremonies, or other unforessen circumtances)</li>
+                                            </ol>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <span style="font-size:8px;">Guest Sign</span>
+                                                <input type="text" style="width: 25mm;height: 15mm;">
+                                            </div>
+                                            <div>
+                                                <span style="font-size:8px;">Reservation</span>
+                                                <input type="text" style="width: 25mm;height: 15mm;">
+                                            </div>
+                                        </div>
                                     </div>
                             `;
 
