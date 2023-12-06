@@ -1,5 +1,12 @@
 <!-- MAIN CONTENT START -->
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card w-100 vh-100 d-flex justify-content-center align-items-center">
+                <img class="img-fluid" width="150" src="<?= base_url()?>assets/img/favicon.png" alt="">
+            </div>
+        </div>
+    </div>
     <!--  Row 1 -->
     <!-- <div class="row">
         <div class="col-lg-8 d-flex align-items-strech">
@@ -94,7 +101,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div> 
 <!-- MAIN CONTENT END -->
 
 

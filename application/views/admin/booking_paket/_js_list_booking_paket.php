@@ -4,6 +4,7 @@
 		width: 300px;
 	}
 
+
     @media print {
         @page {
             size: 80mm 280mm;
@@ -111,15 +112,29 @@
 
 
                             var btnInfo = `<div class="dropdown me-1">
-                                                <button class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <button class="btn btn-secondary " type="button" data-bs-toggle="modal" data-bs-target="#addinfo${full.kode_tiket}">
                                                     <i class="ti ti-info-circle"></i>
                                                 </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Nama Agen: <b>${full.namaagen}</b></a></li>
-                                                    <li><a class="dropdown-item" href="#">Pickup: <b>${full.pickup}</b></a></li>
-                                                    <li><a class="dropdown-item" href="#">Drop off: <b>${full.dropoff}</b></a></li>
-                                                    <li><a class="dropdown-item" href="#">Payment: <b>${full.payment}</b></a></li>
-                                                </ul>
+                                                <div class="modal fade" id="addinfo${full.kode_tiket}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Additional Information</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h6>Agen : ${full.namaagen}</h6>
+                                                            <h6>Pickup : ${full.pickup}</h6>
+                                                            <h6>Dropoff : ${full.dropoff}</h6>
+                                                            <h6>Payment : ${full.payment}</h6>
+                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>`;
 
                             var btnPrint = `

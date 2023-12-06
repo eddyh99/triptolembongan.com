@@ -23,6 +23,7 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+            <?php if($_SESSION['logged_status']['role'] != 'kasir'){?>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">MASTER</span>
@@ -46,7 +47,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$payment_active?>" href="<?= base_url()?>payment" aria-expanded="false">
                         <span>
-                            <i class="ti ti-address-book"></i>
+                            <i class="ti ti-cash"></i>
                         </span>
                         <span class="hide-menu">Setup Payment</span>
                     </a>
@@ -83,10 +84,13 @@
                         <span class="hide-menu">Paket per Agent</span>
                     </a>
                 </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">TRANSAKSI</span>
-                </li>
+            <?php }?>
+
+            <li class="nav-small-cap">
+                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                <span class="hide-menu">TRANSAKSI</span>
+            </li>
+            <?php if($_SESSION['logged_status']['role'] != 'marketing'){?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$bookticket_active?>" href="<?= base_url()?>booking/list_booking_ticket" aria-expanded="false">
                         <span>
@@ -103,6 +107,9 @@
                         <span class="hide-menu">Booking Paket</span>
                     </a>
                 </li>
+            <?php } ?>
+
+            <?php if($_SESSION['logged_status']['role'] != 'kasir'){?>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow <?= @$laporan_active?>" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
@@ -169,7 +176,7 @@
                         </li>
                     </ul>
                 </li>
-            
+            <?php } ?>
                 <li class="sidebar-item mb-5 pb-5">
                     <a class="sidebar-link" href="<?= base_url()?>auth/logout" aria-expanded="false">
                         <span>
