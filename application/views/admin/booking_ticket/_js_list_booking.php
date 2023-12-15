@@ -50,14 +50,17 @@
         &emsp; // Four spaces gap
     */
 
-    $(document).ready( function () {
 
-        $('#table_list_booking_ticket').DataTable({
+    var bookingtiket=$('#table_list_booking_ticket').DataTable({
             "scrollX": true,
             "order": [ 0, "asc" ],
             "ajax": {
                 "url": "<?=base_url()?>booking/get_list_ticket_agent",
                 "type": "POST",
+                "data": function(d) {
+                    d.tanggal = $("#tanggal").val();
+                    d.tipeticket = $("#tipeticket").val()
+                },
                 "dataSrc":function (data){
                     console.log(data);
                     return data;							
@@ -102,22 +105,19 @@
                         return kembali;
                     }
                 },
-                {   
-                    data: 'reserved',
-                    "sortable": false,  
-                },
-                
-                
-            ],
-            "aoColumnDefs": [
                 {
-                    "render": function(data, type, row){
+                    data: null,
+                    render: function(data, type, row){
                         var jumlah = 0;
                         jumlah = Number(row.dws) + Number(row.anak) + Number(row.foc);
                         return jumlah;
                     },
-                    "targets": 7
                 },
+                {
+                    data:'reserved'
+                }
+            ],
+            "aoColumnDefs": [
                 {	
                     "aTargets": [8],
                     "mRender": function (data, type, full, meta, row){
@@ -262,8 +262,9 @@
             }
         });
 
-    } );
-
+    $("#lihat").on("click",function(){
+        bookingtiket.ajax.reload();
+    })
     $(document).on("click", ".del-data", function(e){
 		e.preventDefault();
 		let url_href = $(this).attr('href');

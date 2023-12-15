@@ -3,9 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Booking_model extends CI_Model{
 
-    public function list_ticket_agent($start, $end)
-    {        
-        $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+    public function list_ticket_agent($start, $end, $tipe)
+    {    
+        if ($start==$end){
+            $end = date('Y-m-d', strtotime($end . ' +1 day'));
+        }
+        if ($tipe=="all"){
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -14,12 +18,61 @@ class Booking_model extends CI_Model{
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
             nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
-        LEFT JOIN tbl_agen b ON a.agentid=b.id 
-        INNER JOIN tbl_tiket c ON a.depart=c.id 
-        LEFT JOIN tbl_tiket d ON a.return_from=d.id
-        INNER JOIN tbl_payment e ON a.payment=e.id
-        WHERE a.berangkat BETWEEN ? AND ?
-        ";
+            LEFT JOIN tbl_agen b ON a.agentid=b.id 
+            INNER JOIN tbl_tiket c ON a.depart=c.id 
+            LEFT JOIN tbl_tiket d ON a.return_from=d.id
+            INNER JOIN tbl_payment e ON a.payment=e.id
+            WHERE a.tgl_pesan BETWEEN ? AND ?
+            ";
+        }elseif ($tipe=="return"){
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
+            concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
+            (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
+            (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            LEFT JOIN tbl_agen b ON a.agentid=b.id 
+            INNER JOIN tbl_tiket c ON a.depart=c.id 
+            LEFT JOIN tbl_tiket d ON a.return_from=d.id
+            INNER JOIN tbl_payment e ON a.payment=e.id
+            WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NOT NULL AND is_open='no'
+            ";
+        }elseif ($tipe=="oneway"){
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
+            concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
+            (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
+            (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            LEFT JOIN tbl_agen b ON a.agentid=b.id 
+            INNER JOIN tbl_tiket c ON a.depart=c.id 
+            LEFT JOIN tbl_tiket d ON a.return_from=d.id
+            INNER JOIN tbl_payment e ON a.payment=e.id
+            WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NULL  AND is_open='no'
+            ";
+        }elseif ($tipe=="open"){
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
+            concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
+            (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+            (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+            (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
+            (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
+            (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            LEFT JOIN tbl_agen b ON a.agentid=b.id 
+            INNER JOIN tbl_tiket c ON a.depart=c.id 
+            LEFT JOIN tbl_tiket d ON a.return_from=d.id
+            INNER JOIN tbl_payment e ON a.payment=e.id
+            WHERE a.tgl_pesan BETWEEN ? AND ? AND a.is_open='yes'
+            ";
+        }
         $query=$this->db->query($sql, array($start, $end));
         if (!$query){
             return $this->db->error();

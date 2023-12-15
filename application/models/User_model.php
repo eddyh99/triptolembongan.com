@@ -5,7 +5,7 @@ class User_model extends CI_Model{
 
     public function get_user()
     {		
-		$sql = "SELECT * FROM tbl_user WHERE is_deleted='no'";
+		$sql = "SELECT a.username, GROUP_CONCAT(b.role) as role FROM tbl_user a INNER JOIN tbl_role b ON a.username=b.username WHERE is_deleted='no'";
 		$query = $this->db->query($sql);
 		if ($query){
 			return $query->result_array();

@@ -61,9 +61,8 @@ class Booking extends CI_Controller
 
     public function get_list_ticket_agent()
     {
-        $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
-        // $ticket = $this->security->xss_clean($this->input->post('tipeticket'));
-
+        $tanggal    = $this->security->xss_clean($this->input->post('tanggal'));
+        $ticket     = $this->security->xss_clean($this->input->post('tipeticket'));
 
         if (empty($tanggal)){
             $start      = date("Y-m-d");
@@ -79,7 +78,7 @@ class Booking extends CI_Controller
         // die;
 
 
-        $result = $this->booking->list_ticket_agent($start, $end);
+        $result = $this->booking->list_ticket_agent($start, $end,$ticket);
         echo json_encode($result);
     }
 
@@ -263,7 +262,7 @@ class Booking extends CI_Controller
         $datas = array(
             'kode_tiket'    => $kode_ticket,
             'tgl_pesan'     => date("Y:m:d H:i:s"),
-            'berangkat'     => ($tipetujuan=="Open") ? null : $newTglBerangkat,
+            'berangkat'     => $newTglBerangkat,
             'kembali'       => ($tipetujuan=="Open") ? null : (empty($tglkembali) ? null : date("Y-m-d", strtotime($tglkembali))),
             'is_open'       => ($tipetujuan=="Open")?"yes":"no",
             'r_pickup'      => empty($r_pickup) ? null : $r_pickup,

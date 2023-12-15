@@ -70,12 +70,18 @@ class User extends CI_Controller
         $role_detail = array();
         $temp['role']   = $dash;
         array_push($role_detail, $temp);
-        $temp['role']   = $stu;
-        array_push($role_detail, $temp);
-        $temp['role']   = $stpy;
-        array_push($role_detail, $temp);
-        $temp['role']   = $sttkt;
-        array_push($role_detail, $temp);
+        if (!empty($stu)){
+            $temp['role']   = $stu;
+            array_push($role_detail, $temp);    
+        }
+        if (!empty($stpy)){
+            $temp['role']   = $stpy;
+            array_push($role_detail, $temp);
+        }
+        if (!empty($stpy)){
+            $temp['role']   = $sttkt;
+            array_push($role_detail, $temp);
+        }
         
 
 
