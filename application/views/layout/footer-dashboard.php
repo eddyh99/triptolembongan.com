@@ -31,6 +31,12 @@
 			vMax: '99999999999',
 			vMin: '0'
 		});
+
+		$('#clock').html(moment().format('H:mm:ss - ddd DD/MM/YY'))
+		window.setInterval(function () {
+			$('#clock').html(moment().format('H:mm:ss - ddd DD/MM/YY'))
+		}, 1000);
+		
 	</script>
 </body>
 

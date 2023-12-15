@@ -16,16 +16,40 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">List Booking Ticket</h5>
+                    <form action="<?=base_url()?>booking/get_list_ticket_agent" method="post">
+                        <div class="row d-flex justify-content-end align-items-end form-group mb-3">
+                            <div class="col-3">
+                                <label class="text-start d-block mb-2">Ticket Type</label>
+                                <select name="tipeticket" class="form-select">
+                                    <option>--- Choose Ticket Type ---</option>
+                                    <option value="all">All</option>
+                                    <option value="oneway">One Way</option>
+                                    <option value="return">Return</option>
+                                    <option value="open">Open</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label class="text-start d-block mb-2">Range Tanggal</label>
+                                <input type="text" id="tanggal" name="tanggal" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="row form-group mb-3">
+                            <div class="col text-end">
+                                <button type="submit" class="btn btn-info">Lihat</button>
+                            </div>
+                        </div>
+                        <h5 class="card-title fw-semibold mb-4">List Booking Ticket</h5>
+                    </form>
                     <table id="table_list_booking_ticket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Kode</th>
+                                <th>Code</th>
+                                <th>Guest</th>
                                 <th>Depart</th>
                                 <th>Date Depart</th>
                                 <th>Return</th>
                                 <th>Date Return</th>
+                                <th>Reserved</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
@@ -34,12 +58,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
-                                <th>Kode</th>
+                                <th>Code</th>
+                                <th>Guest</th>
                                 <th class="th-depart-ticket">Depart</th>
                                 <th>Date Depart</th>
                                 <th class="th-return-ticket">Return</th>
                                 <th>Date Return</th>
+                                <th>Reserved</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>

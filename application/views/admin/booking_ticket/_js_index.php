@@ -34,20 +34,34 @@
                 tap++;
                 $('.wraping-add-booking-dewasa').append(`
                     <div class="adding-booking row">
-                        <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nama-tamu-select2" name="nama_tamu_dewasa[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                             <select name="nasionality_dewasa[]" class="nasionality-select2">
                                 <option value=""></option>
                                 <?php foreach($list_negara as $dt){?>
                                     <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
                                 <?php }?>
                             </select>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nohp-tamu-select2" name="nohp_tamu_dewasa[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select  class="email-tamu-select2" name="email_tamu_dewasa[]">
+                                    <option></option>
+                                </select>
+                            </div>
                         </div>
                         <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-dewasa"></i>
                     </div>
@@ -91,20 +105,34 @@
                 tap++;
                 $('.wraping-add-booking-anak').append(`
                     <div class="adding-booking row">
-                        <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nama-tamu-select2" name="nama_tamu_anak[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                             <select name="nasionality_anak[]" class="nasionality-select2">
                                 <option value=""></option>
                                 <?php foreach($list_negara as $dt){?>
                                     <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
                                 <?php }?>
                             </select>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nohp-tamu-select2" name="nohp_tamu_anak[]" >
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select  class="email-tamu-select2" name="email_tamu_anak[]">
+                                    <option></option>
+                                </select>
+                            </div>
                         </div>
                         <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-anak"></i>
                     </div>
@@ -144,20 +172,34 @@
                 tap++;
                 $('.wraping-add-booking-foc').append(`
                     <div class="adding-booking row">
-                        <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nama-tamu-select2" name="nama_tamu_foc[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                             <select name="nasionality_foc[]" class="nasionality-select2">
                                 <option value=""></option>
                                 <?php foreach($list_negara as $dt){?>
                                     <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
                                 <?php }?>
                             </select>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nohp-tamu-select2" name="nohp_tamu_foc[]" >
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="email-tamu-select2" name="email_tamu_foc[]">
+                                    <option></option>
+                                </select>
+                            </div>
                         </div>
                         <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-foc"></i>
                     </div>
@@ -209,7 +251,7 @@
     // Render Select2 After Append Add Nama tamu and Nasionality
     function renderSelect2() {
         $('.nasionality-select2').select2({
-            placeholder: "nasionality",
+            placeholder: "Nasionality",
             theme: "bootstrap",
             allowClear: true,
             // templateResult: function(item) {
@@ -219,6 +261,22 @@
 
         $('.nama-tamu-select2').select2({
             placeholder: "Nama Tamu",
+            tags: true,
+            selectOnClose: true,
+            allowClear: true,
+            theme: "bootstrap"
+        });
+
+        $('.nohp-tamu-select2').select2({
+            placeholder: "No Hp/WA",
+            tags: true,
+            selectOnClose: true,
+            allowClear: true,
+            theme: "bootstrap"
+        });
+
+        $('.email-tamu-select2').select2({
+            placeholder: "Email",
             tags: true,
             selectOnClose: true,
             allowClear: true,
@@ -255,7 +313,7 @@
     $(document).ready(function(){
         $('.form-check-input').change(function(){
             let selected_value = $("input[name='tipetujuan']:checked").val();
-            let selected_open = $("input[name='tipeopen']:checked").val();
+            // let selected_open = $("input[name='tipeopen']:checked").val();
             // console.log(open_value);
             if(selected_value == 'Return'){
                 $(".return-select2").prop("disabled", false);
@@ -263,20 +321,28 @@
                 $("#additional-kembali").show();
             }
 
-            if(selected_open == 'Open'){
-                $( "#tglberangkat" ).datepicker('setDate','');
-                $("input[name='tglberangkat']", $('#tglberangkat')).val("");
-                $("#tglberangkat").prop("disabled", true);
+            // if(selected_open == 'Open'){
+            //     $( "#tglberangkat" ).datepicker('setDate','');
+            //     $("input[name='tglberangkat']", $('#tglberangkat')).val("");
+            //     $("#tglberangkat").prop("disabled", true);
 
+            //     $( "#tglkembali" ).datepicker('setDate','');
+            //     $("input[name='tglkembali']", $('#tglkembali')).val("");
+            //     $("#tglkembali").prop("disabled", true);
+            // }else{
+            //     $("#tglberangkat").prop("disabled", false);
+            //     $("#tglkembali").prop("disabled", false);
+            // }
+
+            if(selected_value == 'One Way'){
+                $(".return-select2").prop("disabled", true);
                 $( "#tglkembali" ).datepicker('setDate','');
                 $("input[name='tglkembali']", $('#tglkembali')).val("");
                 $("#tglkembali").prop("disabled", true);
-            }else{
-                $("#tglberangkat").prop("disabled", false);
-                $("#tglkembali").prop("disabled", false);
+                $("#additional-kembali").hide();
             }
 
-            if(selected_value == 'One Way'){
+            if(selected_value == 'Open'){
                 $(".return-select2").prop("disabled", true);
                 $( "#tglkembali" ).datepicker('setDate','');
                 $("input[name='tglkembali']", $('#tglkembali')).val("");
@@ -373,6 +439,18 @@
         $("#return_select2").change(function(){
             hargaReturn = $('#return_select2 option:selected').attr('hargaReturn');
         }); 
+
+        
+        $('#nama_agent').on("change", function(e) { 
+            var tipeAgent = $('#nama_agent option:selected').attr('data-tipe');
+            console.log(tipeAgent);
+            if(tipeAgent == 'general'){
+                $('#komisigeneral').removeClass('d-none').addClass('d-flex');;
+            }else{
+                $('#komisigeneral').removeClass('d-flex').addClass('d-none');;
+            }
+        });
+
 
         // Click Cek Harga For Trigger Summary
         $("#cekHarga").click(function(e) {
@@ -570,6 +648,66 @@
                         harga = 0;
                     }
 
+                } else if(getTujuan === 'Open' && hargaDepart !== undefined) {
+                    if(
+                        ((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)) &&
+                        ((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)) &&
+                        ((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null))
+                    ){
+                        setTimeout(function() {
+                            Swal.fire({
+                                html: '<p>Nama tamu atau Nasionality belum diinputkan</p>',
+                                position: 'top',
+                                timer: 3000,
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                                icon: 'error',
+                                timer: 2000,
+                                timerProgressBar: true,
+                            });
+                        }, 100);
+                    }else {
+                        if((tempInput_dewasa == '' || tempInput_dewasa == null) || (tempInputNas_dewasa == '' || tempInputNas_dewasa == null)){
+                            hargaDewasa = 0;
+                            $(".display-dewasa-jumlah").text(0);
+                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                        }else{
+                            hargaDewasa = (hargaDepart * tempInput_dewasa.length);
+                            harga += hargaDewasa;
+                            $(".display-dewasa-jumlah").text(tempInput_dewasa.length);
+                            $(".display-total-harga-dewasa").text(hargaDewasa.toLocaleString("en"));
+                        }
+
+                        if((tempInput_anak == '' || tempInput_anak == null) || (tempInputNas_anak == '' || tempInputNas_anak == null)){
+                            hargaAnak = 0;
+                            $(".display-anak-jumlah").text(0);
+                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                        }else{
+                            hargaAnak = (hargaDepart * tempInput_anak.length);
+                            $(".display-total-harga-anak").text(hargaAnak.toLocaleString("en"));
+                            hargaAnak = 0;
+                            harga += hargaAnak;
+                            $(".display-anak-jumlah").text(tempInput_anak.length);
+                        }
+    
+                        if((tempInput_foc == '' || tempInput_foc == null) || (tempInputNas_foc == '' || tempInputNas_foc == null)){
+                            hargaFOC = 0;
+                            $(".display-foc-jumlah").text(0);
+                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                        }else{
+                            hargaFOC = (hargaDepart * tempInput_foc.length);
+                            $(".display-foc-jumlah").text(tempInput_foc.length);
+                            $(".display-total-harga-foc").text(hargaFOC.toLocaleString("en"));
+                        }
+                        $(".display-nama-agent").text(getNamaAgent);
+                        $(".display-tgl-berangkat").text(getTglBerangkat);
+                        $(".display-tgl-kembali").text(getTglKembali);
+                        $(".display-tujuan").text(getTujuan);
+                        $(".display-depart").text(getDepart);
+                        $(".display-return").text('-');
+                        // $(".display-total-harga-final").text(harga.toLocaleString("en"));
+                        harga = 0;
+                    }
                 } else {
                     setTimeout(function() {
                         Swal.fire({

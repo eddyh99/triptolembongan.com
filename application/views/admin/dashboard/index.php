@@ -1,12 +1,67 @@
 <!-- MAIN CONTENT START -->
 <div class="container-fluid">
     <div class="row">
+        <div class="col-sm-6 col-xl-4">
+            <div class="card bg-primary-subtle shadow-none">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="dash-preview rounded text-bg-primary d-flex align-items-center justify-content-center">
+                            <i class="ti ti-speedboat fs-12"></i>
+                        </div>
+                        <div class="ms-auto text-primary d-flex align-items-center">
+                            <span class="fs-8 fw-bold">10</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-4">
+                        <h3 class="mb-0 fw-semibold fs-7">Departures Today</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6 col-xl-4">
+            <div class="card bg-success-subtle shadow-none">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="dash-preview rounded text-bg-success d-flex align-items-center justify-content-center">
+                            <i class="ti ti-list-check fs-12"></i>
+                        </div>
+                        <div class="ms-auto text-info d-flex align-items-center">
+                            <span class="fs-8 fw-bold text-success">3K</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-4">
+                        <h3 class="mb-0 fw-semibold fs-7">Total Check in</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+            <div class="card bg-danger-subtle shadow-none">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="dash-preview rounded text-bg-danger d-flex align-items-center justify-content-center">
+                            <i class="ti ti-browser-x fs-12"></i>
+                        </div>
+                        <div class="ms-auto text-danger d-flex align-items-center">
+                            <span class="fs-8 fw-bold text-danger">12</span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-4">
+                        <h3 class="mb-0 fw-semibold fs-7">Late Check in</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 
+    <div class="row">
         <div class="col-12">
             <div class="card w-100 vh-100 d-flex justify-content-center align-items-center">
                 <img class="img-fluid" width="150" src="<?= base_url()?>assets/img/favicon.png" alt="">
             </div>
         </div>
-    </div>
+    </div> -->
     <!--  Row 1 -->
     <!-- <div class="row">
         <div class="col-lg-8 d-flex align-items-strech">

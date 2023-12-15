@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Booking_model extends CI_Model{
 
-    public function list_ticket_agent()
+    public function list_ticket_agent($start, $end)
     {        
         $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
@@ -13,19 +13,21 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
         INNER JOIN tbl_payment e ON a.payment=e.id
+        WHERE a.berangkat BETWEEN ? AND ?
         ";
-        $query=$this->db->query($sql);
+        $query=$this->db->query($sql, array($start, $end));
         if (!$query){
             return $this->db->error();
         }else{
             return $query->result_array();
         }
     }
+
 
     public function list_ticket_bydate($start,$end)
     {
@@ -153,12 +155,16 @@ class Booking_model extends CI_Model{
         $this->db->insert("tbl_booking", $datas);
 		$error = $this->db->error();
 		$id = $this->db->insert_id();
+        // echo "<pre>".print_r($id,true)."</pre>";
+        // die;
 
         $detail = array();
         foreach($detail_booking as $dt){
             $temp['id']             = $id;
             $temp['namatamu']       = $dt['namatamu'];
             $temp['nasionality']    = $dt['nasionality'];
+            $temp['nope']           = $dt['nope'];
+            $temp['email']          = $dt['email'];
             $temp['jenis']          = $dt['jenis'];
             array_push($detail, $temp);
         }
@@ -326,6 +332,8 @@ class Booking_model extends CI_Model{
             $temp['id']             = $id;
             $temp['namatamu']       = $dt['namatamu'];
             $temp['nasionality']    = $dt['nasionality'];
+            $temp['nope']           = $dt['nope'];
+            $temp['email']          = $dt['email'];
             $temp['jenis']          = $dt['jenis'];
             array_push($detail, $temp);
         }

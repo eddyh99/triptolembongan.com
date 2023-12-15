@@ -1,4 +1,7 @@
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <style>
     .th-depart-ticket {
 		width: 180px;
@@ -40,14 +43,15 @@
 
 
 <script type="text/javascript">
-/* 
-    TABS :
-    &nbsp; // Regular space
-    &ensp; // Two spaces gap
-    &emsp; // Four spaces gap
-*/
+    /* 
+        TABS :
+        &nbsp; // Regular space
+        &ensp; // Two spaces gap
+        &emsp; // Four spaces gap
+    */
 
     $(document).ready( function () {
+
         $('#table_list_booking_ticket').DataTable({
             "scrollX": true,
             "order": [ 0, "asc" ],
@@ -55,19 +59,17 @@
                 "url": "<?=base_url()?>booking/get_list_ticket_agent",
                 "type": "POST",
                 "dataSrc":function (data){
+                    console.log(data);
                     return data;							
                 }
             },
             "columns": [
-                { 	
-                    data: null,
-                    "sortable": true, 
-                        render: function (data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
-                },
                 {   
                     data: 'kode_tiket',
+                    "sortable": false,  
+                },
+                {   
+                    data: 'namatamu',
                     "sortable": false,  
                 },
                 {   
@@ -100,6 +102,10 @@
                         return kembali;
                     }
                 },
+                {   
+                    data: 'reserved',
+                    "sortable": false,  
+                },
                 
                 
             ],
@@ -110,10 +116,10 @@
                         jumlah = Number(row.dws) + Number(row.anak) + Number(row.foc);
                         return jumlah;
                     },
-                    "targets": 6
+                    "targets": 7
                 },
                 {	
-                    "aTargets": [7],
+                    "aTargets": [8],
                     "mRender": function (data, type, full, meta, row){
                         var btnCancel;
                         if(full.del == 'no'){
@@ -241,6 +247,21 @@
                 },
             ],
         });
+
+        $('#tanggal').daterangepicker({
+            startDate: moment(),
+            endDate: moment(),
+            opens: 'right',
+            locale: {
+                format: 'DD MMM YYYY'
+            },
+            ranges: {
+                'Today': [moment(), moment()],
+                'Tommorow': [moment().add(1, 'days'), moment().add(1, 'days'),],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+            }
+        });
+
     } );
 
     $(document).on("click", ".del-data", function(e){

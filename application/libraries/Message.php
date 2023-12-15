@@ -24,9 +24,17 @@ class Message{
     public function active_msg(){
         return "<font>Data telah aktif</font>";
     }
-
+    
     public function error_active_msg(){
         return "<font>Data gagal/sudah aktif</font>";
+    }
+
+    public function success_checkin(){
+        return "<font>Check in Successfully</font>";
+    }
+
+    public function error_checkin(){
+        return "<font>Check in Failed</font>";
     }
 }
 ?>

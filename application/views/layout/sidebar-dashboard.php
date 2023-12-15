@@ -107,6 +107,14 @@
                         <span class="hide-menu">Booking Paket</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$departure_today_active?>" href="<?= base_url()?>departure/today" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-speedboat"></i>
+                        </span>
+                        <span class="hide-menu">Departure Today</span>
+                    </a>
+                </li>
             <?php } ?>
 
             <?php if($_SESSION['logged_status']['role'] != 'kasir'){?>
@@ -150,7 +158,7 @@
                                 <span class="hide-menu">Transaksi Paket per Agen</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        <!-- <li class="sidebar-item">
                             <a href="<?= base_url()?>laporan/komisi_tiket_agen" class="sidebar-link <?= @$dropdown_komisi_agentiket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
@@ -165,6 +173,58 @@
                                 </div>
                                 <span class="hide-menu">Rekap Komisi Paket per Agen</span>
                             </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link has-arrow <?= @$laporan_active?>" aria-expanded="false">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Rekap Komisi Ticket</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level ms-4">
+                                <li class="sidebar-item active">
+                                    <a href="<?= base_url()?>laporan/tiketlist" class="sidebar-link <?= @$dropdown_tiket?>">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                            <i class="ti ti-circle"></i>
+                                        </div>
+                                        <span class="hide-menu">Per Agent Company</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="<?= base_url()?>laporan/paketlist" class="sidebar-link <?= @$dropdown_paket?>">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-circle"></i>
+                                        </div>
+                                        <span class="hide-menu">Per Agent General</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link has-arrow <?= @$laporan_active?>" aria-expanded="false">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-circle"></i>
+                                </div>
+                                <span class="hide-menu">Rekap Komisi Paket</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse first-level ms-4">
+                                <li class="sidebar-item active">
+                                    <a href="<?= base_url()?>laporan/tiketlist" class="sidebar-link <?= @$dropdown_tiket?>">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                            <i class="ti ti-circle"></i>
+                                        </div>
+                                        <span class="hide-menu">Per Agent Company</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="<?= base_url()?>laporan/paketlist" class="sidebar-link <?= @$dropdown_paket?>">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-circle"></i>
+                                        </div>
+                                        <span class="hide-menu">Per Agent General</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="sidebar-item">
                             <a href="<?= base_url()?>laporan/rangkuman_bulanan" class="sidebar-link <?= @$dropdown_rangkuman_bulanan?>">
@@ -213,6 +273,12 @@
         </ul>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                <li class="nav-item dropdown me-3">
+                    <span id="clock"></span>
+                </li>
+                <li class="nav-item dropdown">
+                    <?= $_SESSION['logged_status']['role']?>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="<?= base_url()?>assets/img/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">

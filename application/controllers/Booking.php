@@ -41,7 +41,15 @@ class Booking extends CI_Controller
 
     public function list_booking_ticket()
     {
- 
+
+        
+        $start      = date("Y-m-d");
+        $end        = date("Y-m-d");
+
+        // echo $start;
+        // echo $end;
+        // die;
+
         $data = array(
             'title'             => NAMETITLE . ' - Booking Ticket',
             'content'           => 'admin/booking_ticket/list_booking',
@@ -53,7 +61,25 @@ class Booking extends CI_Controller
 
     public function get_list_ticket_agent()
     {
-        $result = $this->booking->list_ticket_agent();
+        $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
+        // $ticket = $this->security->xss_clean($this->input->post('tipeticket'));
+
+
+        if (empty($tanggal)){
+            $start      = date("Y-m-d");
+            $end        = date("Y-m-d");
+        }else{
+            $newtanggal	= explode("-",$tanggal);
+            $start      = date_format(date_create($newtanggal[0]),"Y-m-d");
+            $end        = date_format(date_create($newtanggal[1]),"Y-m-d");
+        }
+
+        // echo $start;
+        // echo $end;
+        // die;
+
+
+        $result = $this->booking->list_ticket_agent($start, $end);
         echo json_encode($result);
     }
 
@@ -72,12 +98,22 @@ class Booking extends CI_Controller
 		$this->form_validation->set_rules('nama_agent', 'Nama Agent', 'trim|required');
 		$this->form_validation->set_rules('depart', 'Depart', 'trim|required');
 		$this->form_validation->set_rules('return_from', 'Return From', 'trim');
+
 		$this->form_validation->set_rules('nama_tamu_dewasa', 'Tamu Dewasa', 'trim');
 		$this->form_validation->set_rules('nasionality_dewasa', 'Nasionality Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_dewasa', 'No Hp Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('email_tamu_dewasa', 'Email Tamu Dewasa', 'trim');
+
 		$this->form_validation->set_rules('nama_tamu_anak', 'Tamu anak', 'trim');
 		$this->form_validation->set_rules('nasionality_anak', 'Nasionality Tamu anak', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_anak', 'No Hp Tamu Anak', 'trim');
+		$this->form_validation->set_rules('email_tamu_anak', 'Email Tamu Anak', 'trim');
+
 		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu foc', 'trim');
 		$this->form_validation->set_rules('nasionality_foc', 'Nasionality Tamu foc', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_foc', 'No Hp Tamu foc', 'trim');
+		$this->form_validation->set_rules('email_tamu_foc', 'Email Tamu foc', 'trim');
+
 		$this->form_validation->set_rules('tglberangkat', 'Tanggal Berangkat', 'trim|required');
 		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim');
 		$this->form_validation->set_rules('pickup', 'Pickup', 'trim');
@@ -105,14 +141,20 @@ class Booking extends CI_Controller
         // Tamu Dewasa
         $nama_tamu_dewasa   = $this->security->xss_clean($input->post('nama_tamu_dewasa'));
         $nasionality_dewasa = $this->security->xss_clean($input->post('nasionality_dewasa'));
+        $nohp_dewasa        = $this->security->xss_clean($input->post('nohp_tamu_dewasa'));
+        $email_dewasa       = $this->security->xss_clean($input->post('email_tamu_dewasa'));
 
         // Tamu Anak-anak
         $nama_tamu_anak     = $this->security->xss_clean($input->post('nama_tamu_anak'));
         $nasionality_anak   = $this->security->xss_clean($input->post('nasionality_anak'));
+        $nohp_tamu_anak     = $this->security->xss_clean($input->post('nohp_tamu_anak'));
+        $email_tamu_anak    = $this->security->xss_clean($input->post('email_tamu_anak'));
   
         // Tamu FOC
         $nama_tamu_foc      = $this->security->xss_clean($input->post('nama_tamu_foc'));
         $nasionality_foc    = $this->security->xss_clean($input->post('nasionality_foc'));
+        $nohp_tamu_foc      = $this->security->xss_clean($input->post('nohp_tamu_foc'));
+        $email_tamu_foc     = $this->security->xss_clean($input->post('email_tamu_foc'));
 
         $depart             = $this->security->xss_clean($input->post('depart'));
         $return_from        = $this->security->xss_clean($input->post('return_from'));
@@ -130,7 +172,7 @@ class Booking extends CI_Controller
 
         $remarks            = $this->security->xss_clean($input->post('catatan'));
         $tipetujuan         = $this->security->xss_clean($input->post('tipetujuan'));
-        $tipeopen           = $this->security->xss_clean($input->post('tipeopen'));
+        // $tipeopen           = $this->security->xss_clean($input->post('tipeopen'));
 
         $payment            = $this->security->xss_clean($input->post('payment'));
         $charge             = $this->security->xss_clean($input->post('total'));
@@ -149,14 +191,26 @@ class Booking extends CI_Controller
                 $temp['namatamu']   = $valuetamu;    
                 foreach($nasionality_dewasa as $keynas=>$valuenas){
                     $temp['nasionality']   = $valuenas;
-                    $temp['jenis']   = 'dewasa';
-                    if($keytamu == $keynas){
-                        array_push($temp_dewasa, $temp);
+                    foreach($nohp_dewasa as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_dewasa as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'dewasa';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_dewasa, $temp);
+                            }
+                        }
                     }
-    
+                    
                 }
             }
         }
+
+        // echo "<pre>".print_r($temp_dewasa,true)."</pre>";
+        // die;
 
         // Looping nama tamu Anak
         if(array_filter($nama_tamu_anak)){
@@ -164,11 +218,19 @@ class Booking extends CI_Controller
                 $temp['namatamu']   = $valuetamu;    
                 foreach($nasionality_anak as $keynas=>$valuenas){
                     $temp['nasionality']   = $valuenas;
-                    $temp['jenis']   = 'anak';
-                    if($keytamu == $keynas){
-                        array_push($temp_anak, $temp);
-                    }
-    
+                    foreach($nohp_tamu_anak as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_anak as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'anak';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_anak, $temp);
+                            }
+                        }
+                    }    
                 }
             }
         }
@@ -179,10 +241,19 @@ class Booking extends CI_Controller
                 $temp['namatamu']   = $valuetamu;    
                 foreach($nasionality_foc as $keynas=>$valuenas){
                     $temp['nasionality']   = $valuenas;
-                    $temp['jenis']   = 'foc';
-                    if($keytamu == $keynas){
-                        array_push($temp_foc, $temp);
-                    }
+                    foreach($nohp_tamu_foc as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_foc as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'foc';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_foc, $temp);
+                            }
+                        }
+                    }    
     
                 }
             }
@@ -192,9 +263,9 @@ class Booking extends CI_Controller
         $datas = array(
             'kode_tiket'    => $kode_ticket,
             'tgl_pesan'     => date("Y:m:d H:i:s"),
-            'berangkat'     => ($tipeopen=="Open") ? null : $newTglBerangkat,
-            'kembali'       => ($tipeopen=="Open") ? null : (empty($tglkembali) ? null : date("Y-m-d", strtotime($tglkembali))),
-            'is_open'       => ($tipeopen=="Open")?"yes":"no",
+            'berangkat'     => ($tipetujuan=="Open") ? null : $newTglBerangkat,
+            'kembali'       => ($tipetujuan=="Open") ? null : (empty($tglkembali) ? null : date("Y-m-d", strtotime($tglkembali))),
+            'is_open'       => ($tipetujuan=="Open")?"yes":"no",
             'r_pickup'      => empty($r_pickup) ? null : $r_pickup,
             'r_dropoff'     => empty($r_dropoff) ? null : $r_dropoff,
             'pickup'        => $pickup,
@@ -376,17 +447,27 @@ class Booking extends CI_Controller
         $this->form_validation->set_rules('kode_ticket', 'Kode Tiket', 'trim|required');
 		$this->form_validation->set_rules('nama_agent', 'Nama Agent', 'trim|required');
 		$this->form_validation->set_rules('paket', 'Paket', 'trim|required');
+
 		$this->form_validation->set_rules('nama_tamu_dewasa', 'Tamu Dewasa', 'trim');
 		$this->form_validation->set_rules('nasionality_dewasa', 'Nasionality Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_dewasa', 'No Hp Dewasa', 'trim');
+		$this->form_validation->set_rules('email_tamu_dewasa', 'Email Dewasa', 'trim');
+
 		$this->form_validation->set_rules('nama_tamu_anak', 'Tamu anak', 'trim');
 		$this->form_validation->set_rules('nasionality_anak', 'Nasionality Tamu anak', 'trim');
-		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu foc', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_anak', 'No Hp anak', 'trim');
+		$this->form_validation->set_rules('email_tamu_anak', 'Email anak', 'trim');
+
+		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu FOC', 'trim');
 		$this->form_validation->set_rules('nasionality_foc', 'Nasionality Tamu foc', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_foc', 'No Hp FOC', 'trim');
+		$this->form_validation->set_rules('email_tamu_foc', 'Email FOC', 'trim');
+
 		$this->form_validation->set_rules('tglberangkat', 'Tanggal Berangkat', 'trim|required');
 		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim|required');
 		$this->form_validation->set_rules('pickup', 'Pickup', 'trim|required');
 		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim|required');
-		$this->form_validation->set_rules('catatan', 'Remarks', 'trim|required');
+		$this->form_validation->set_rules('catatan', 'Remarks', 'trim');
 		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
 		$this->form_validation->set_rules('total', 'Charge', 'trim|required');
 
@@ -407,14 +488,20 @@ class Booking extends CI_Controller
         // Tamu Dewasa
         $nama_tamu_dewasa   = $this->security->xss_clean($input->post('nama_tamu_dewasa'));
         $nasionality_dewasa = $this->security->xss_clean($input->post('nasionality_dewasa'));
+        $nohp_tamu_dewasa   = $this->security->xss_clean($input->post('nohp_tamu_dewasa'));
+        $email_tamu_dewasa  = $this->security->xss_clean($input->post('email_tamu_dewasa'));
 
         // Tamu Anak-anak
         $nama_tamu_anak     = $this->security->xss_clean($input->post('nama_tamu_anak'));
         $nasionality_anak   = $this->security->xss_clean($input->post('nasionality_anak'));
+        $nohp_tamu_anak     = $this->security->xss_clean($input->post('nohp_tamu_anak'));
+        $email_tamu_anak    = $this->security->xss_clean($input->post('email_tamu_anak'));
   
         // Tamu FOC
         $nama_tamu_foc      = $this->security->xss_clean($input->post('nama_tamu_foc'));
         $nasionality_foc    = $this->security->xss_clean($input->post('nasionality_foc'));
+        $nohp_tamu_foc      = $this->security->xss_clean($input->post('nohp_tamu_foc'));
+        $email_tamu_foc     = $this->security->xss_clean($input->post('email_tamu_foc'));
 
         $id_paket           = $this->security->xss_clean($input->post('paket'));
 
@@ -440,9 +527,18 @@ class Booking extends CI_Controller
                 $temp['namatamu']   = $valuetamu;    
                 foreach($nasionality_dewasa as $keynas=>$valuenas){
                     $temp['nasionality']   = $valuenas;
-                    $temp['jenis']   = 'dewasa';
-                    if($keytamu == $keynas){
-                        array_push($temp_dewasa, $temp);
+                    foreach($nohp_tamu_dewasa as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_dewasa as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'dewasa';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_dewasa, $temp);
+                            }
+                        }
                     }
     
                 }
@@ -455,10 +551,19 @@ class Booking extends CI_Controller
                 $temp['namatamu']   = $valuetamu;    
                 foreach($nasionality_anak as $keynas=>$valuenas){
                     $temp['nasionality']   = $valuenas;
-                    $temp['jenis']   = 'anak';
-                    if($keytamu == $keynas){
-                        array_push($temp_anak, $temp);
-                    }
+                    foreach($nohp_tamu_anak as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_anak as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'anak';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_anak, $temp);
+                            }
+                        }
+                    }  
     
                 }
             }
@@ -470,16 +575,27 @@ class Booking extends CI_Controller
                 $temp['namatamu']   = $valuetamu;    
                 foreach($nasionality_foc as $keynas=>$valuenas){
                     $temp['nasionality']   = $valuenas;
-                    $temp['jenis']   = 'foc';
-                    if($keytamu == $keynas){
-                        array_push($temp_foc, $temp);
-                    }
+                    foreach($nohp_tamu_foc as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_foc as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'foc';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_foc, $temp);
+                            }
+                        }
+                    }    
     
                 }
             }
         }
 
         $detail_booking_paket = array_merge($temp_dewasa, $temp_anak, $temp_foc);
+        // echo "<pre>".print_r($detail_booking_paket,true)."</pre>";
+        // die;
         $datas = array(
             'kode_tiket'    => $kode_ticket,
             'tgl_pesan'     => date("Y:m:d H:i:s"),
@@ -493,6 +609,7 @@ class Booking extends CI_Controller
             'remarks'       => $remarks,
             'charge'        => $charge,
             'userid'        => $_SESSION["logged_status"]["username"],
+            'checkin_by'    => $_SESSION["logged_status"]["username"],
             'created_at'    => date("Y:m:d H:i:s"),
             'update_at'    => date("Y:m:d H:i:s"),
         );

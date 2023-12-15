@@ -48,7 +48,7 @@ class User extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('passwd', 'Password', 'trim|required');
-		$this->form_validation->set_rules('role', 'Role', 'trim|required');
+		// $this->form_validation->set_rules('role', 'Role', 'trim|required');
 
 
         if ($this->form_validation->run() == FALSE) {
@@ -57,20 +57,43 @@ class User extends CI_Controller
 			return;
 		}
 
-
+        
+        // $role       = $this->security->xss_clean($input->post('role'));
         $input      = $this->input;
         $username   = $this->security->xss_clean($input->post('username'));
         $passwd     = $this->security->xss_clean($input->post('passwd'));
-        $role       = $this->security->xss_clean($input->post('role'));
+        $dash       = $this->security->xss_clean($input->post('dash')); // Dashboard
+        $stu        = $this->security->xss_clean($input->post('stu')); 
+        $stpy        = $this->security->xss_clean($input->post('stpy')); 
+        $sttkt        = $this->security->xss_clean($input->post('sttkt')); 
+
+        $role_detail = array();
+        $temp['role']   = $dash;
+        array_push($role_detail, $temp);
+        $temp['role']   = $stu;
+        array_push($role_detail, $temp);
+        $temp['role']   = $stpy;
+        array_push($role_detail, $temp);
+        $temp['role']   = $sttkt;
+        array_push($role_detail, $temp);
+        
+
+
+
+        // echo "<pre>".print_r($role_detail,true)."</pre>";
+        // die;
 
         $datas = array(
             "username"  => $username, 
             "passwd"    => sha1($passwd),
-            "role"      => $role,
-            "created_at"=> date("Y-m-d H:i:s")
+            // "role"      => $role,
+            "created_at"=> date("Y-m-d H:i:s"),
+            "update_at"=> date("Y-m-d H:i:s")
         );
 
-        $result = $this->user->insert_user($datas);
+        $result = $this->user->insert_user($datas, $role_detail);
+
+
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', $this->message->success_msg());
 			redirect('user');

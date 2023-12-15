@@ -14,19 +14,56 @@ class User_model extends CI_Model{
 		}
 	}
 
-    public function insert_user($datas)
+    public function insert_user($datas, $role_detail)
     {
-        $result = $this->db->insert("tbl_user", $datas);
-        // print_r($this->db->insert(user_TBL, $datas));
-        // die;
-        if ($result == 1){
-            return array(
-                "code"      => 200, 
-                "message"   => ""
+        $this->db->trans_start();
+        $this->db->insert("tbl_user", $datas);
+        $error = $this->db->error();
+        $username = $datas['username'];
+
+
+        $detail = array();
+        foreach($role_detail as $dt){
+            $temp['username']       = $username;
+            $temp['role']           = $dt['role'];
+            array_push($detail, $temp);
+        }
+
+        $this->db->insert_batch('tbl_role', $detail);
+        $this->db->trans_complete();
+
+		if ($this->db->trans_status() == FALSE) {
+			$this->db->trans_rollback();
+            echo $error["message"];
+			return array(
+                "code" => 511, 
+                "message" => $error["message"]
             );
-		}else{
-            return $this->db->error();
+		} else {
+			$this->db->trans_commit();
+            echo "SUKSES";
+			return array(
+                "code" => 200, 
+                "message" => ""
+            );
 		}
+
+
+
+
+
+
+
+
+        // $result = $this->db->insert("tbl_user", $datas);
+        // if ($result == 1){
+        //     return array(
+        //         "code"      => 200, 
+        //         "message"   => ""
+        //     );
+		// }else{
+        //     return $this->db->error();
+		// }
     }
 
     public function get_edit_user($username)

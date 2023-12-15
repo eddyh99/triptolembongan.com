@@ -80,7 +80,7 @@
                             <div class="row wraping-add-booking-dewasa">
                                 <div class="row">
                                     <h4 class="fw-bolder text-decoration-underline">Dewasa</h4>
-                                    <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nama_tamu_dewasa" class="form-label">Nama Tamu</label>
                                         <div class="d-flex align-items-center">
                                             <select id="nama_tamu_dewasa" class="nama-tamu-select2" name="nama_tamu_dewasa[]">
@@ -88,7 +88,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                                    <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                                         <label for="nasionality-select2" class="form-label">Nasionality</label>
                                         <select name="nasionality_dewasa[]" id="nasionality-dewasa-select2" class="nasionality-select2" required>
                                             <option value=""></option>
@@ -96,6 +96,22 @@
                                                 <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                        <label for="nohp_tamu_dewasa" class="form-label">No Hp/WA</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="nohp_tamu_dewasa" class="nohp-tamu-select2" name="nohp_tamu_dewasa[]" >
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                        <label for="email_tamu_dewasa" class="form-label">Email</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="email_tamu_dewasa" class="email-tamu-select2" name="email_tamu_dewasa[]">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-center">
                                         <i class="ti ti-circle-plus add-nama-tamu-dewasa fs-8" style="cursor: pointer;"></i>
@@ -109,7 +125,7 @@
                             <div class="row wraping-add-booking-anak">
                                 <div class="row">
                                     <h4 class="fw-bolder text-decoration-underline">Anak-anak</h4>
-                                    <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nama_tamu_anak" class="form-label">Nama Tamu</label>
                                         <div class="d-flex align-items-center">
                                             <select id="nama_tamu_anak" class="nama-tamu-select2" name="nama_tamu_anak[]">
@@ -118,7 +134,7 @@
                                             <!-- <input type="text" class="form-control" id="nama_tamu_anak" name="nama_tamu_anak[]" placeholder="masukkan nama tamu..."> -->
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                                    <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                                         <label for="nasionality" class="form-label">Nasionality</label>
                                         <select name="nasionality_anak[]" id="nasionality-anak-select2" class="nasionality-select2">
                                             <option value=""></option>
@@ -126,6 +142,22 @@
                                                 <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                        <label for="nohp_tamu_anak" class="form-label">No Hp/WA</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="nohp_tamu_anak" class="nohp-tamu-select2" name="nohp_tamu_anak[]" >
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                        <label for="email_tamu_anak" class="form-label">Email</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="email_tamu_anak" class="email-tamu-select2" name="email_tamu_anak[]">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-center">
                                         <i class="ti ti-circle-plus add-nama-tamu-anak fs-8" style="cursor: pointer;"></i>
@@ -139,7 +171,7 @@
                             <div class="row wraping-add-booking-foc mb-3">
                                 <div class="row">
                                     <h4 class="fw-bolder text-decoration-underline">Free of Charge</h4>
-                                    <div class="mb-4 col-12 col-md-6 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nama_tamu_foc" class="form-label">Nama Tamu</label>
                                         <div class="d-flex align-items-center">
                                             <select id="nama_tamu_foc" class="nama-tamu-select2" name="nama_tamu_foc[]">
@@ -148,7 +180,7 @@
                                             <!-- <input type="text" class="form-control" id="nama_tamu_foc" name="nama_tamu_foc[]" placeholder="masukkan nama tamu..."> -->
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-5 wrap-nasionality">
+                                    <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                                         <label for="nasionality" class="form-label">Nasionality</label>
                                         <select name="nasionality_foc[]" id="nasionality-foc-select2" class="nasionality-select2">
                                             <option value=""></option>
@@ -156,6 +188,22 @@
                                                 <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                        <label for="nohp_tamu_foc" class="form-label">No Hp/WA</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="nohp_tamu_foc" class="nohp-tamu-select2" name="nohp_tamu_foc[]" >
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                        <label for="email_tamu_foc" class="form-label">Email</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="email_tamu_foc" class="email-tamu-select2" name="email_tamu_foc[]">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-center">
                                         <i class="ti ti-circle-plus add-nama-tamu-foc fs-8" style="cursor: pointer;"></i>
@@ -177,7 +225,7 @@
         
                                     <div class="mb-4 col-12 col-md-4 ">
                                         <label for="catatan" class="form-label">Remarks</label>
-                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off" maxlength="45" required>
+                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off" maxlength="45">
                                     </div>
                                 </div>
                             </div>
