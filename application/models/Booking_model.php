@@ -118,7 +118,7 @@ class Booking_model extends CI_Model{
 
     public function list_ticket_byagendate($start,$end,$idagen)
     {
-        $sql="SELECT a.id,a.tgl_pesan,kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
+        $sql="SELECT a.id,a.tgl_pesan, kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc, 
@@ -282,7 +282,7 @@ class Booking_model extends CI_Model{
     // ================= BOOKING PAKET MODEL ====================
     // ================= =================== ====================
 
-    public function list_paket_agent()
+    public function list_paket_agent($start, $end)
     {
         $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan, d.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -290,11 +290,12 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as namatamu, 
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as nasionality,  
-            nama as namaagen, pickup, dropoff, charge,  a.is_deleted as del FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff, charge, a.userid,  a.is_deleted as del FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
-        INNER JOIN tbl_payment d ON a.payment=d.id";
-        $query=$this->db->query($sql);
+        INNER JOIN tbl_payment d ON a.payment=d.id
+        WHERE a.tgl_pesan BETWEEN ? AND ?";
+        $query=$this->db->query($sql, array($start, $end));
         if (!$query){
             return $this->db->error();
         }else{

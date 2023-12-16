@@ -324,7 +324,7 @@
                                                             <h6 class="mb-0 fw-semibold d-flex align-items-center">
                                                                 <span>Rp.</span>
                                                                 <span class="display-total-harga-final">
-                                                                    <input type="text" class="form-control money-input input-total-rangkuman" name="total">
+                                                                    <input type="text" class="form-control money-input input-total-rangkuman" name="total" required>
                                                                 </span>
                                                             </h6>
                                                         </div>

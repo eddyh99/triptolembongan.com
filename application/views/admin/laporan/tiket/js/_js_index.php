@@ -6,6 +6,7 @@
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 <!-- PDF Export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <!-- Moment & Daterangepicker -->
@@ -30,7 +31,7 @@
         $('#table_laporan').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'csv', 'pdf'
+                'excel', 'pdf'
             ], 
             "drawCallback": function () {
                 var api = this.api();

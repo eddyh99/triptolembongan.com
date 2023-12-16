@@ -16,32 +16,45 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
+                    <div class="row d-flex justify-content-end align-items-end form-group mb-3">
+                        <div class="col-4">
+                            <label class="text-start d-block mb-2">Range Tanggal</label>
+                            <input type="text" id="tanggal" name="tanggal" class="form-control" value="" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row form-group mb-3">
+                        <div class="col text-end">
+                            <button id="lihat" class="btn btn-info">Lihat</button>
+                        </div>
+                    </div>
                     <h5 class="card-title fw-semibold mb-4">List Booking Paket</h5>
                     <table id="table_list_booking_paket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Kode</th>
-                                <th>Berangkat</th>
-                                <th>Kembali</th>
+                                <th>Guest</th>
+                                <th>Date Depart</th>
+                                <th>Date Return</th>
                                 <th>Paket</th>
-                                <th class="th-keteranga-paket">Keterangan</th>
-                                <th>Jumlah</th>
-                                <th>Aksi</th>
+                                <th class="th-keteranga-paket">Information</th>
+                                <th>Reserved by</th>
+                                <th>Total</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
                                 <th>Kode</th>
-                                <th>Berangkat</th>
-                                <th>Kembali</th>
+                                <th>Guest</th>
+                                <th>Date Depart</th>
+                                <th>Date Return</th>
                                 <th>Paket</th>
-                                <th>Keterangan</th>
-                                <th>Jumlah</th>
-                                <th>Aksi</th>
+                                <th>Information</th>
+                                <th>Reserved by</th>
+                                <th>Total</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -183,7 +183,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse first-level ms-4">
                                 <li class="sidebar-item active">
-                                    <a href="<?= base_url()?>laporan/tiketlist" class="sidebar-link <?= @$dropdown_tiket?>">
+                                    <a href="<?= base_url()?>laporan/komisi_tiket_agen" class="sidebar-link <?= @$dropdown_komisi_agentiket?>">
                                         <div class="round-16 d-flex align-items-center justify-content-center">
                                             <i class="ti ti-circle"></i>
                                         </div>

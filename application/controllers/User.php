@@ -62,24 +62,130 @@ class User extends CI_Controller
         $input      = $this->input;
         $username   = $this->security->xss_clean($input->post('username'));
         $passwd     = $this->security->xss_clean($input->post('passwd'));
-        $dash       = $this->security->xss_clean($input->post('dash')); // Dashboard
+
+        // Initial List of Side Menu
         $stu        = $this->security->xss_clean($input->post('stu')); 
-        $stpy        = $this->security->xss_clean($input->post('stpy')); 
-        $sttkt        = $this->security->xss_clean($input->post('sttkt')); 
+        $stpy       = $this->security->xss_clean($input->post('stpy')); 
+        $sttkt      = $this->security->xss_clean($input->post('sttkt')); 
+        $stpkt      = $this->security->xss_clean($input->post('stpkt')); 
+        $tpa        = $this->security->xss_clean($input->post('tpa')); 
+        $ppa        = $this->security->xss_clean($input->post('ppa')); 
+        $bootkt     = $this->security->xss_clean($input->post('bootkt')); 
+        $boopkt     = $this->security->xss_clean($input->post('boopkt')); 
+        $depto      = $this->security->xss_clean($input->post('depto')); 
+        $pentkt     = $this->security->xss_clean($input->post('pentkt')); 
+        $ttpa       = $this->security->xss_clean($input->post('ttpa')); 
+        $tppa       = $this->security->xss_clean($input->post('tppa')); 
+        $rkt        = $this->security->xss_clean($input->post('rkt')); 
+        $rkp        = $this->security->xss_clean($input->post('rkp')); 
+        $rabul      = $this->security->xss_clean($input->post('rabul')); 
 
         $role_detail = array();
-        $temp['role']   = $dash;
-        array_push($role_detail, $temp);
+        // $temp['role']   = $dash;
+        // array_push($role_detail, $temp);
+
+        // List Of Side Menu
+
+        // Setup User
         if (!empty($stu)){
             $temp['role']   = $stu;
+            $temp['keterangan']   = 'Setup User';
             array_push($role_detail, $temp);    
         }
-        if (!empty($stpy)){
-            $temp['role']   = $stpy;
+        // Setup Agent
+        if (!empty($stag)){
+            $temp['role']   = $stag;
+            $temp['keterangan']   = 'Setup Agent';
             array_push($role_detail, $temp);
         }
+        // Setup Payment
         if (!empty($stpy)){
+            $temp['role']   = $stpy;
+            $temp['keterangan']   = 'Setup Payment';
+            array_push($role_detail, $temp);
+        }
+        // Setup Ticket
+        if (!empty($sttkt)){
             $temp['role']   = $sttkt;
+            $temp['keterangan']   = 'Setup Ticket';
+            array_push($role_detail, $temp);
+        }
+        // Setup Paket
+        if (!empty($stpkt)){
+            $temp['role']   = $stpkt;
+            $temp['keterangan']   = 'Setup Paket';
+            array_push($role_detail, $temp);
+        }
+        // Ticket per Agent
+        if (!empty($tpa)){
+            $temp['role']   = $tpa;
+            $temp['keterangan']   = 'Ticket per Agent';
+            array_push($role_detail, $temp);
+        }
+        // Paket per Agent
+        if (!empty($ppa)){
+            $temp['role']   = $ppa;
+            $temp['keterangan']   = 'Paket per Agent';
+            array_push($role_detail, $temp);
+        }
+        // Booking Ticket
+        if (!empty($bootkt)){
+            $temp['role']   = $bootkt;
+            $temp['keterangan']   = 'Booking Ticket';
+            array_push($role_detail, $temp);
+        }
+        // Booking Paket
+        if (!empty($boopkt)){
+            $temp['role']   = $boopkt;
+            $temp['keterangan']   = 'Booking Paket';
+            array_push($role_detail, $temp);
+        }
+        // Departure Today
+        if (!empty($depto)){
+            $temp['role']   = $depto;
+            $temp['keterangan']   = 'Departure Today';
+            array_push($role_detail, $temp);
+        }
+        // Pendapatan Ticket
+        if (!empty($pentkt)){
+            $temp['role']   = $pentkt;
+            $temp['keterangan']   = 'Pendapatan Ticket';
+            array_push($role_detail, $temp);
+        }
+        // Pendapatan Paket
+        if (!empty($penpkt)){
+            $temp['role']   = $penpkt;
+            $temp['keterangan']   = 'Pendapatan Paket';
+            array_push($role_detail, $temp);
+        }
+        // Transaksi Ticket per Agent
+        if (!empty($ttpa)){
+            $temp['role']   = $ttpa;
+            $temp['keterangan']   = 'Transaksi Ticket per Agent';
+            array_push($role_detail, $temp);
+        }
+        // Transaksi Paket per Agent
+        if (!empty($tppa)){
+            $temp['role']   = $tppa;
+            $temp['keterangan']   = 'Transaksi Paket per Agent';
+            array_push($role_detail, $temp);
+        }
+        // Rekap Komisi Ticket
+        if (!empty($rkt)){
+            $temp['role']   = $rkt;
+            $temp['keterangan']   = 'Rekap Komisi Ticket';
+            array_push($role_detail, $temp);
+        }
+        // Rekap Komisi Paket
+        if (!empty($rkp)){
+            $temp['role']   = $rkp;
+            $temp['keterangan']   = 'Rekap Komisi Paket';
+            array_push($role_detail, $temp);
+        }
+        // Rangkuman Bulanan
+        if (!empty($rabul)){
+            $temp['role']   = $rabul;
+            $temp['keterangan']   = 'Rangkuman Bulanan';
             array_push($role_detail, $temp);
         }
         
@@ -119,6 +225,9 @@ class User extends CI_Controller
     {
         $id	= base64_decode($this->security->xss_clean($id));
         $result = $this->user->get_edit_user($id);
+
+        echo "<pre>".print_r($result,true)."</pre>";
+        die;
 
         $data = array(
             'title'             => NAMETITLE . ' - Edit user',

@@ -202,8 +202,6 @@ class Laporan extends CI_Controller
 
 
         $result     = $this->booking->rangkuman_bulanan($month,$year,$tipe);
-        // echo "<pre>".print_r($result,true)."</pre>";
-        // die;
         $data = array(
             'title'             => NAMETITLE . ' - Rangkuman Bulanan',
             'content'           => 'admin/laporan/bulanan/index',
