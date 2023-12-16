@@ -116,7 +116,7 @@ class Booking_model extends CI_Model{
         }
     }
 
-    public function list_ticket_byagendate($start,$end,$idagen)
+    public function list_ticket_byagendate($start, $end, $idagen)
     {
         $sql="SELECT a.id,a.tgl_pesan, kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,

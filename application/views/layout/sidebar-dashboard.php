@@ -183,7 +183,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse first-level ms-4">
                                 <li class="sidebar-item active">
-                                    <a href="<?= base_url()?>laporan/komisi_tiket_agen" class="sidebar-link <?= @$dropdown_komisi_agentiket?>">
+                                    <a href="<?= base_url()?>laporan/komisi_tiket_agen/company" class="sidebar-link <?= @$prim_komisi_agentiket_com?>">
                                         <div class="round-16 d-flex align-items-center justify-content-center">
                                             <i class="ti ti-circle"></i>
                                         </div>
@@ -191,7 +191,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="<?= base_url()?>laporan/paketlist" class="sidebar-link <?= @$dropdown_paket?>">
+                                    <a href="<?= base_url()?>laporan/komisi_tiket_agen/general" class="sidebar-link <?= @$prim_komisi_agentiket_gen?>">
                                         <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                         </div>
@@ -209,7 +209,7 @@
                             </a>
                             <ul aria-expanded="false" class="collapse first-level ms-4">
                                 <li class="sidebar-item active">
-                                    <a href="<?= base_url()?>laporan/tiketlist" class="sidebar-link <?= @$dropdown_tiket?>">
+                                    <a href="<?= base_url()?>laporan/komisi_paket_agen/company" class="sidebar-link <?= @$prim_komisi_agenpaket_com?>">
                                         <div class="round-16 d-flex align-items-center justify-content-center">
                                             <i class="ti ti-circle"></i>
                                         </div>
@@ -217,7 +217,7 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="<?= base_url()?>laporan/paketlist" class="sidebar-link <?= @$dropdown_paket?>">
+                                    <a href="<?= base_url()?>laporan/komisi_paket_agen/general" class="sidebar-link <?= @$prim_komisi_agenpaket_gen?>">
                                         <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                         </div>
