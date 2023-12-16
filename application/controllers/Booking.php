@@ -46,10 +46,6 @@ class Booking extends CI_Controller
         $start      = date("Y-m-d");
         $end        = date("Y-m-d");
 
-        // echo $start;
-        // echo $end;
-        // die;
-
         $data = array(
             'title'             => NAMETITLE . ' - Booking Ticket',
             'content'           => 'admin/booking_ticket/list_booking',
@@ -412,7 +408,18 @@ class Booking extends CI_Controller
 
     public function get_list_paket_agent()
     {
-        $result = $this->booking->list_paket_agent();
+        $tanggal    = $this->security->xss_clean($this->input->post('tanggal'));
+
+        if (empty($tanggal)){
+            $start      = date("Y-m-d");
+            $end        = date("Y-m-d");
+        }else{
+            $newtanggal	= explode("-",$tanggal);
+            $start      = date_format(date_create($newtanggal[0]),"Y-m-d");
+            $end        = date_format(date_create($newtanggal[1]),"Y-m-d");
+        }
+
+        $result = $this->booking->list_paket_agent($start, $end);
         echo json_encode($result);
     }
 

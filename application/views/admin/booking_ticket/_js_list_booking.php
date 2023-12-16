@@ -51,7 +51,7 @@
     */
 
 
-    var bookingtiket=$('#table_list_booking_ticket').DataTable({
+    var bookingtiket = $('#table_list_booking_ticket').DataTable({
             "scrollX": true,
             "order": [ 0, "asc" ],
             "ajax": {
@@ -265,6 +265,7 @@
     $("#lihat").on("click",function(){
         bookingtiket.ajax.reload();
     })
+    
     $(document).on("click", ".del-data", function(e){
 		e.preventDefault();
 		let url_href = $(this).attr('href');

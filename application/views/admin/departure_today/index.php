@@ -13,7 +13,7 @@
                                 <th>Guest</th>
                                 <th>Total</th>
                                 <th>Depart</th>
-                                <th>Chekin</th>
+                                <th>Chek In</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,7 +44,7 @@
                                 <th>Guest</th>
                                 <th>Total</th>
                                 <th>Depart</th>
-                                <th>Chekin</th>
+                                <th>Chek In</th>
                             </tr>
                         </tfoot>
                     </table>

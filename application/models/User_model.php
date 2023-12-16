@@ -5,7 +5,8 @@ class User_model extends CI_Model{
 
     public function get_user()
     {		
-		$sql = "SELECT a.username, GROUP_CONCAT(b.role) as role FROM tbl_user a INNER JOIN tbl_role b ON a.username=b.username WHERE is_deleted='no'";
+		$sql = "SELECT a.username, GROUP_CONCAT(b.keterangan) as keterangan FROM tbl_user a 
+                INNER JOIN tbl_role b ON a.username=b.username WHERE is_deleted='no' GROUP BY a.username";
 		$query = $this->db->query($sql);
 		if ($query){
 			return $query->result_array();
@@ -26,6 +27,7 @@ class User_model extends CI_Model{
         foreach($role_detail as $dt){
             $temp['username']       = $username;
             $temp['role']           = $dt['role'];
+            $temp['keterangan']     = $dt['keterangan'];
             array_push($detail, $temp);
         }
 
@@ -47,28 +49,16 @@ class User_model extends CI_Model{
                 "message" => ""
             );
 		}
-
-
-
-
-
-
-
-
-        // $result = $this->db->insert("tbl_user", $datas);
-        // if ($result == 1){
-        //     return array(
-        //         "code"      => 200, 
-        //         "message"   => ""
-        //     );
-		// }else{
-        //     return $this->db->error();
-		// }
     }
 
     public function get_edit_user($username)
     {
-        $sql = "SELECT * FROM tbl_user WHERE username=? AND is_deleted='no'";
+        $sql = "SELECT a.username, GROUP_CONCAT(b.role) FROM tbl_user a 
+                INNER JOIN tbl_role b ON a.username=b.username
+                WHERE a.username=? AND a.is_deleted='no'
+                ORDER BY a.username";
+        // $sql = "SELECT username, role FROM tbl_role
+        //         WHERE username=?";
         $query = $this->db->query($sql, $username);
 		if ($query){
 			return $query->row();

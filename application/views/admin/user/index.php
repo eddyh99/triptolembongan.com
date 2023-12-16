@@ -22,7 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Username</th>
-                                <th>Role</th>
+                                <th class="th-role">Role</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

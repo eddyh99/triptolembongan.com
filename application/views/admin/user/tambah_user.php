@@ -6,7 +6,7 @@
                 
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>
@@ -22,16 +22,16 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php } ?>
-                    <h5 class="card-title fw-semibold mb-4">Tambah Pengguna</h5>
+                    <h5 class="card-title fw-semibold mb-4">Add User</h5>
                     <form action="<?= base_url()?>user/tambah_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="masukkan username..." required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username..." required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="passwd" name="passwd" placeholder="masukkan password..." required>
+                            <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Enter password..." required>
                         </div>
                         <!-- <div class="mb-3 col-3">
                             <label for="role" class="form-label">Role</label>
@@ -45,12 +45,6 @@
                             <label class="form-label">Menu Checklist</label>
                         </div>
                         <div class="col-12 d-flex flex-wrap">
-                            <div class="border border-primary mx-2 p-2 roun mt-2 rounded" 
-                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="Home">
-                                <input type="checkbox" id="dash" name="dash" value="dash" class="form-check-input">
-                                <label for="dash">Dashboard</label>
-                            </div>
                             <div class="border border-primary mx-2 p-2 roun mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
@@ -133,7 +127,7 @@
                                 <label for="rabul">Rangkuman Bulanan</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Daftar</button>
+                        <button type="submit" class="btn btn-primary mt-3">Add User</button>
                   </form>
                 </div>
             </div>

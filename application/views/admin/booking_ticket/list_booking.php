@@ -46,9 +46,9 @@
                                 <th>Date Depart</th>
                                 <th>Return</th>
                                 <th>Date Return</th>
-                                <th>Jumlah</th>
+                                <th>Total</th>
                                 <th>Reserved By</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,9 +61,9 @@
                                 <th>Date Depart</th>
                                 <th class="th-return-ticket">Return</th>
                                 <th>Date Return</th>
-                                <th>Jumlah</th>
+                                <th>Total</th>
                                 <th>Reserved By</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
