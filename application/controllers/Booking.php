@@ -409,7 +409,6 @@ class Booking extends CI_Controller
     public function get_list_paket_agent()
     {
         $tanggal    = $this->security->xss_clean($this->input->post('tanggal'));
-
         if (empty($tanggal)){
             $start      = date("Y-m-d");
             $end        = date("Y-m-d");
