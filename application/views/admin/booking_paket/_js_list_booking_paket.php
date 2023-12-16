@@ -40,13 +40,15 @@
 </style>
 <script type="text/javascript">
         
-    $(document).ready( function () {
         var bookingpaket = $('#table_list_booking_paket').DataTable({
             "scrollX": true,
             "order": [[ 0, "desc" ]],
             "ajax": {
                 "url": "<?=base_url()?>booking/get_list_paket_agent",
                 "type": "POST",
+                "data": function(d) {
+                    d.tanggal = $("#tanggal").val();
+                },
                 "dataSrc":function (data){
                     console.log(data);
                     return data;							
@@ -236,6 +238,5 @@
                 'This Month': [moment().startOf('month'), moment().endOf('month')],
             }
         });
-    } );
 
 </script>

@@ -284,6 +284,9 @@ class Booking_model extends CI_Model{
 
     public function list_paket_agent($start, $end)
     {
+        if ($start==$end){
+            $end = date('Y-m-d', strtotime($end . ' +1 day'));
+        }
         $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, c.namapaket, c.keterangan, d.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_paket_detail WHERE jenis='dewasa' AND id=a.id) as dws,
             (SELECT count(1) as anak  FROM tbl_booking_paket_detail WHERE jenis='anak' AND id=a.id) as anak,
