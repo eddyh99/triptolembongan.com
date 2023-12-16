@@ -226,8 +226,8 @@ class User extends CI_Controller
         $id	= base64_decode($this->security->xss_clean($id));
         $result = $this->user->get_edit_user($id);
 
-        echo "<pre>".print_r($result,true)."</pre>";
-        die;
+        // echo "<pre>".print_r($result,true)."</pre>";
+        // die;
 
         $data = array(
             'title'             => NAMETITLE . ' - Edit user',

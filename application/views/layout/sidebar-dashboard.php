@@ -57,7 +57,7 @@
                         <span>
                             <i class="ti ti-ticket"></i>
                         </span>
-                        <span class="hide-menu">Setup Ticket</span>
+                        <span class="hide-menu">Departure Schedule</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -277,7 +277,7 @@
                     <span id="clock"></span>
                 </li>
                 <li class="nav-item dropdown">
-                    <?= $_SESSION['logged_status']['role']?>
+                    <?= $_SESSION['logged_status']['username']?>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">

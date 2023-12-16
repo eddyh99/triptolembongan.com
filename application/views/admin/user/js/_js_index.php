@@ -46,12 +46,12 @@
 		e.preventDefault();
 		let url_href = $(this).attr('href');
 		Swal.fire({
-			text:"Apakah yakin menghapus data ini?",
+			text:"Are you sure you delete this data?",
 			type: "warning",
 			position: 'center',
 			showCancelButton: true,
-			confirmButtonText: "Hapus",
-			cancelButtonText: "Batal",
+			confirmButtonText: "Delete",
+			cancelButtonText: "Cancel",
 			confirmButtonColor: '#FA896B',
 			closeOnConfirm: true,
 			showLoaderOnConfirm: true,

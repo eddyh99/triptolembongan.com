@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>agent/tambah_agent" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Agent
+                    Add Agent
                 </span>
             </a>
         </div>
@@ -16,17 +16,17 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">List User Agent</h5>
+                    <h5 class="card-title fw-semibold mb-4">List Agents</h5>
                     <table id="table_list_agent" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nama Agent</th>
-                                <th>Alamat</th>
-                                <th>Kota</th>
-                                <th>Kontak</th>
-                                <th>Tipe</th>
-                                <th>Aksi</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Contact</th>
+                                <th>Type</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,11 +35,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nama Agent</th>
-                                <th>Alamat</th>
-                                <th>Kota</th>
-                                <th>Kontak</th>
-                                <th>Tipe</th>
-                                <th>Aksi</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Contact</th>
+                                <th>Type</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
