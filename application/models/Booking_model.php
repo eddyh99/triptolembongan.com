@@ -9,7 +9,7 @@ class Booking_model extends CI_Model{
             $end = date('Y-m-d', strtotime($end . ' +1 day'));
         }
         if ($tipe=="all"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open, 
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -25,7 +25,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ?
             ";
         }elseif ($tipe=="return"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -41,7 +41,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NOT NULL AND is_open='no'
             ";
         }elseif ($tipe=="oneway"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -57,7 +57,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NULL  AND is_open='no'
             ";
         }elseif ($tipe=="open"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -263,6 +263,20 @@ class Booking_model extends CI_Model{
         }else{
             return $query->row();
         }
+    }
+
+    public function update_open($id, $datas)
+    {
+        $this->db->where("id",$id);
+
+		if ($this->db->update("tbl_booking", $datas)){
+            return array(
+                "code"      => 200, 
+                "message"   => ""
+            );
+		}else{
+            return $this->db->error();
+		}
     }
 
     public function hapus_booking_ticket($id, $data)

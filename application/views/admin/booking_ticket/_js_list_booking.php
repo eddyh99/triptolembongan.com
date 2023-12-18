@@ -2,6 +2,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<!-- DATE PICKER -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <style>
     .th-depart-ticket {
 		width: 180px;
@@ -147,7 +151,49 @@
                                                         <h6>Pickup : ${full.pickup}</h6>
                                                         <h6>Dropoff : ${full.dropoff}</h6>
                                                         <h6>Payment : ${full.payment}</h6>
-                        
+                                                        ${(function is_open(){
+                                                            var open =''
+                                                            if(full.kembali == null && full.is_open == 'yes'){
+                                                                open += `
+                                                                    <hr>
+                                                                    <form action="<?= base_url()?>booking/update_open_proses/${full.id}" method="POST">
+                                                                        <div class="col-10">
+                                                                            <label for="return" class="form-label">Tanggal Keberangkatan</label>
+                                                                            <div class="form-control d-flex">
+                                                                                <input type="date" class="w-100 border-0 cursor-pointer" name="return" id="return" autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-success mt-2">Update Open</button>
+                                                                    </form>
+                                                                    
+                                                                `;
+                                                            }
+                                                            return open;
+                                                        })()}
+                                                        
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+
+                        var btnOpen = `<div class="dropdown me-1">
+                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addinfo${full.id}">
+                                                <i class="ti ti-info-circle"></i>
+                                            </button> 
+                                            <div class="modal fade" id="addinfo${full.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Additional Information</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h6>Agen : ${full.namaagen}</h6>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -238,6 +284,8 @@
                         var currentDate = date.format('YYYY-MM-D');
                         var temp;
                         if(moment(full.berangkat).isAfter(currentDate)){
+                            // if(full.kembali == null && ){
+                            // }
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnCancel}</div>`;
                         }else{
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint}</div>`;                                
@@ -265,6 +313,19 @@
     $("#lihat").on("click",function(){
         bookingtiket.ajax.reload();
     })
+
+    $(function() {
+        $('.modal').on('shown.bs.modal', function () {
+            $('#editStartTime').datetimepicker();
+            });
+            $( "#dateReturn" ).datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeYear: true,
+                changeMonth: true,
+                minDate: 0,
+                yearRange: "-100:+20",
+            }).val('');
+        });
     
     $(document).on("click", ".del-data", function(e){
 		e.preventDefault();

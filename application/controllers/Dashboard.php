@@ -14,6 +14,8 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
+        // echo "<pre>".print_r($_SESSION['logged_status']['role']['stu'],true)."</pre>";
+        // die;
 
         $data = array(
             'title'         => NAMETITLE . ' - Dashboard',

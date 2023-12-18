@@ -23,11 +23,23 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-            <?php if($_SESSION['logged_status']['role'] != 'kasir'){?>
+                <?php if(
+                        (!empty($_SESSION['logged_status']['role']['stu'])) || 
+                        (!empty($_SESSION['logged_status']['role']['stag'])) ||
+                        (!empty($_SESSION['logged_status']['role']['stpy'])) ||
+                        (!empty($_SESSION['logged_status']['role']['sttkt'])) ||
+                        (!empty($_SESSION['logged_status']['role']['stpkt'])) ||
+                        (!empty($_SESSION['logged_status']['role']['tpag'])) ||
+                        (!empty($_SESSION['logged_status']['role']['ppag'])) 
+
+                    ){?>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">MASTER</span>
                 </li>
+                <?php }?>
+
+                <?php if(!empty($_SESSION['logged_status']['role']['stu'])) {?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$user_active?>" href="<?= base_url()?>user" aria-expanded="false">
                         <span>
@@ -36,6 +48,10 @@
                         <span class="hide-menu">Setup User</span>
                     </a>
                 </li>
+                <?php }
+                
+                    if(!empty($_SESSION['logged_status']['role']['stag'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$agent_active?>" href="<?= base_url()?>agent" aria-expanded="false">
                         <span>
@@ -44,6 +60,10 @@
                         <span class="hide-menu">Setup Agent</span>
                     </a>
                 </li>
+                <?php }
+                
+                    if(!empty($_SESSION['logged_status']['role']['stpy'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$payment_active?>" href="<?= base_url()?>payment" aria-expanded="false">
                         <span>
@@ -52,6 +72,9 @@
                         <span class="hide-menu">Setup Payment</span>
                     </a>
                 </li>
+                <?php }
+                     if(!empty($_SESSION['logged_status']['role']['sttkt'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$ticket_active?>" href="<?= base_url()?>ticket" aria-expanded="false">
                         <span>
@@ -60,6 +83,9 @@
                         <span class="hide-menu">Departure Schedule</span>
                     </a>
                 </li>
+                <?php }
+                     if(!empty($_SESSION['logged_status']['role']['stpkt'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$paket_active?>" href="<?= base_url()?>paket" aria-expanded="false">
                         <span>
@@ -68,14 +94,20 @@
                         <span class="hide-menu">Setup Paket</span>
                     </a>
                 </li>
+                <?php }
+                     if(!empty($_SESSION['logged_status']['role']['tpag'])) {
+                ?>
                 <li class="sidebar-item">
-                    <a class="sidebar-link <?= @$tpa_active?>" href="<?= base_url()?>ticket/ticket_agent" aria-expanded="false">
-                        <span>
+                    <a class="sidebar-link <?= @$tpag_active?>" href="<?= base_url()?>ticket/ticket_agent" aria-expanded="false">
+                        <spang>
                             <i class="ti ti-currency-dollar"></i>
-                        </span>
+                        </spang>
                         <span class="hide-menu">Ticket per Agent</span>
                     </a>
                 </li>
+                <?php }
+                     if(!empty($_SESSION['logged_status']['role']['ppag'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$ppa_active?>" href="<?= base_url()?>paket/paket_agent" aria-expanded="false">
                         <span>
@@ -84,13 +116,30 @@
                         <span class="hide-menu">Paket per Agent</span>
                     </a>
                 </li>
-            <?php }?>
+                <?php }?>
 
+            <?php if(
+                    (!empty($_SESSION['logged_status']['role']['bootk'])) || 
+                    (!empty($_SESSION['logged_status']['role']['boopk'])) || 
+                    (!empty($_SESSION['logged_status']['role']['depto'])) || 
+                    (!empty($_SESSION['logged_status']['role']['pentk'])) || 
+                    (!empty($_SESSION['logged_status']['role']['penpk'])) || 
+                    (!empty($_SESSION['logged_status']['role']['ttpa'])) || 
+                    (!empty($_SESSION['logged_status']['role']['tppa'])) || 
+                    (!empty($_SESSION['logged_status']['role']['rkt'])) || 
+                    (!empty($_SESSION['logged_status']['role']['rkp'])) || 
+                    (!empty($_SESSION['logged_status']['role']['rabul'])) 
+
+            ){?>
             <li class="nav-small-cap">
                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                 <span class="hide-menu">TRANSAKSI</span>
             </li>
-            <?php if($_SESSION['logged_status']['role'] != 'marketing'){?>
+            <?php }?>
+
+                <?php 
+                    if(!empty($_SESSION['logged_status']['role']['bootk'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$bookticket_active?>" href="<?= base_url()?>booking/list_booking_ticket" aria-expanded="false">
                         <span>
@@ -99,6 +148,9 @@
                         <span class="hide-menu">Booking Ticket</span>
                     </a>
                 </li>
+                <?php } 
+                    if(!empty($_SESSION['logged_status']['role']['boopk'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$bookpaket_active?>" href="<?= base_url()?>booking/list_booking_paket" aria-expanded="false">
                         <span>
@@ -107,6 +159,9 @@
                         <span class="hide-menu">Booking Paket</span>
                     </a>
                 </li>
+                <?php } 
+                    if(!empty($_SESSION['logged_status']['role']['depto'])) {
+                ?>
                 <li class="sidebar-item">
                     <a class="sidebar-link <?= @$departure_today_active?>" href="<?= base_url()?>departure/today" aria-expanded="false">
                         <span>
@@ -115,17 +170,31 @@
                         <span class="hide-menu">Departure Today</span>
                     </a>
                 </li>
-            <?php } ?>
+                <?php } ?>
 
-            <?php if($_SESSION['logged_status']['role'] != 'kasir'){?>
+                
                 <li class="sidebar-item">
+                    <?php if( 
+                            (!empty($_SESSION['logged_status']['role']['pentk'])) || 
+                            (!empty($_SESSION['logged_status']['role']['penpk'])) || 
+                            (!empty($_SESSION['logged_status']['role']['ttpa'])) || 
+                            (!empty($_SESSION['logged_status']['role']['tppa'])) || 
+                            (!empty($_SESSION['logged_status']['role']['rkt'])) || 
+                            (!empty($_SESSION['logged_status']['role']['rkp'])) || 
+                            (!empty($_SESSION['logged_status']['role']['rabul'])) 
+
+                    ){?>
                     <a class="sidebar-link has-arrow <?= @$laporan_active?>" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
                             <i class="ti ti-file-analytics"></i>
                         </span>
                         <span class="hide-menu">Laporan</span>
                     </a>
+                    <?php }?>
                     <ul aria-expanded="false" class="collapse first-level">
+                        <?php 
+                            if(!empty($_SESSION['logged_status']['role']['pentk'])) {
+                        ?>
                         <li class="sidebar-item active">
                             <a href="<?= base_url()?>laporan/tiketlist" class="sidebar-link <?= @$dropdown_tiket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -134,6 +203,9 @@
                                 <span class="hide-menu">Pendapatan Ticket</span>
                             </a>
                         </li>
+                        <?php } 
+                            if(!empty($_SESSION['logged_status']['role']['penpk'])) {
+                        ?>
                         <li class="sidebar-item">
                             <a href="<?= base_url()?>laporan/paketlist" class="sidebar-link <?= @$dropdown_paket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -142,6 +214,9 @@
                                 <span class="hide-menu">Pendapatan Paket</span>
                             </a>
                         </li>
+                        <?php } 
+                            if(!empty($_SESSION['logged_status']['role']['ttpa'])) {
+                        ?>
                         <li class="sidebar-item">
                             <a href="<?= base_url()?>laporan/peragentiket" class="sidebar-link <?= @$dropdown_agentiket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -150,6 +225,9 @@
                                 <span class="hide-menu">Transaksi Tiket per Agen</span>
                             </a>
                         </li>
+                        <?php } 
+                            if(!empty($_SESSION['logged_status']['role']['tppa'])) {
+                        ?>
                         <li class="sidebar-item">
                             <a href="<?= base_url()?>laporan/peragenpaket" class="sidebar-link <?= @$dropdown_agenpaket?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -158,22 +236,9 @@
                                 <span class="hide-menu">Transaksi Paket per Agen</span>
                             </a>
                         </li>
-                        <!-- <li class="sidebar-item">
-                            <a href="<?= base_url()?>laporan/komisi_tiket_agen" class="sidebar-link <?= @$dropdown_komisi_agentiket?>">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Rekap Komisi Tiket per Agen</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="<?= base_url()?>laporan/komisi_paket_agen" class="sidebar-link <?= @$dropdown_komisi_agenpaket?>">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Rekap Komisi Paket per Agen</span>
-                            </a>
-                        </li> -->
+                        <?php } 
+                            if(!empty($_SESSION['logged_status']['role']['rkt'])) {
+                        ?>
                         <li class="sidebar-item">
                             <a href="javascript:void(0)" class="sidebar-link has-arrow <?= @$laporan_active?>" aria-expanded="false">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -200,6 +265,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php } 
+                            if(!empty($_SESSION['logged_status']['role']['rkp'])) {
+                        ?>
                         <li class="sidebar-item">
                             <a href="javascript:void(0)" class="sidebar-link has-arrow <?= @$laporan_active?>" aria-expanded="false">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -226,6 +294,9 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php } 
+                            if(!empty($_SESSION['logged_status']['role']['rabul'])) {
+                        ?>
                         <li class="sidebar-item">
                             <a href="<?= base_url()?>laporan/rangkuman_bulanan" class="sidebar-link <?= @$dropdown_rangkuman_bulanan?>">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
@@ -234,9 +305,11 @@
                                 <span class="hide-menu">Rangkuman Bulanan</span>
                             </a>
                         </li>
+                        <?php } 
+                        ?>
                     </ul>
                 </li>
-            <?php } ?>
+            
                 <li class="sidebar-item mb-5 pb-5">
                     <a class="sidebar-link" href="<?= base_url()?>auth/logout" aria-expanded="false">
                         <span>

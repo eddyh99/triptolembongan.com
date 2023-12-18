@@ -354,6 +354,31 @@ class Booking extends CI_Controller
 
     }
 
+    public function update_open_proses($id)
+    {
+        $input          = $this->input;
+        $id	            = $this->security->xss_clean($id);
+        $return         = $this->security->xss_clean($input->post('return'));   
+
+        $datas = array(
+            "kembali"       => $return,
+            'is_open'       => 'no',
+            "update_at"     => date("Y-m-d H:i:s")
+        );    
+
+        $result = $this->booking->update_open($id, $datas);
+
+        if($result['code'] == 200) {
+            $this->session->set_flashdata('success', 'Success Open Update');
+			redirect('booking/list_booking_ticket');
+			return;
+        }else{
+            $this->session->set_flashdata('error', 'Error Open Update');
+			redirect('booking/list_booking_ticket');
+			return;
+        }
+
+    }
     
     public function hapus_booking_ticket($id)
     {

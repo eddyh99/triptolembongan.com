@@ -49,86 +49,86 @@
                             <div class="border border-primary mx-2 p-2 roun mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
-                                <input type="checkbox" id="stu" name="stu" value="stu" class="form-check-input">
+                                <input type="checkbox" id="stu" name="stu" value="stu" class="form-check-input" <?= ($get_role['stu'] == 'stu') ? checked : ''?>>
                                 <label for="stu">Setup User</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
-                                <input type="checkbox" id="stag" name="stag" value="stag" class="form-check-input">
+                                <input type="checkbox" id="stag" name="stag" value="stag" class="form-check-input" <?= ($get_role['stag'] == 'stag') ? checked : ''?>>
                                 <label for="stag">Setup Agent</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
-                                <input type="checkbox" id="stpy" name="stpy" value="stpy" class="form-check-input">
+                                <input type="checkbox" id="stpy" name="stpy" value="stpy" class="form-check-input" <?= ($get_role['stpy'] == 'stpy') ? checked : ''?>>
                                 <label for="stpy">Setup Payment</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
-                                <input type="checkbox" id="sttkt" name="sttkt" value="sttkt" class="form-check-input">
-                                <label for="sttkt">Setup Ticket</label>
+                                <input type="checkbox" id="sttkt" name="sttkt" value="sttkt" class="form-check-input" <?= ($get_role['sttkt'] == 'sttkt') ? checked : ''?>>
+                                <label for="sttkt">Departure Schedule</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
-                                <input type="checkbox" id="stpkt" name="stpkt" value="stpkt" class="form-check-input">
+                                <input type="checkbox" id="stpkt" name="stpkt" value="stpkt" class="form-check-input" <?= ($get_role['stpkt'] == 'stpkt') ? checked : ''?>>
                                 <label for="stpkt">Setup Paket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top"
                                 data-bs-title="Master">
-                                <input type="checkbox" id="tpa" name="tpa" value="tpa" class="form-check-input">
-                                <label for="tpa">Ticket per Agent</label>
+                                <input type="checkbox" id="tpag" name="tpag" value="tpag" class="form-check-input" <?= ($get_role['tpag'] == 'tpag') ? checked : ''?>>
+                                <label for="tpag">Ticket per Agent</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded"
                                 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Master">
-                                <input type="checkbox" id="ppa" name="ppa" value="ppa" class="form-check-input">
-                                <label for="ppa">Paket per Agent</label>
+                                <input type="checkbox" id="ppag" name="ppag" value="ppag" class="form-check-input" <?= ($get_role['ppag'] == 'ppag') ? checked : ''?>>
+                                <label for="ppag">Paket per Agent</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Transaction">
-                                <input type="checkbox" id="bootkt" name="bootkt" value="bootkt" class="form-check-input">
-                                <label for="bootkt">Booking Ticket</label>
+                                <input type="checkbox" id="bootk" name="bootk" value="bootk" class="form-check-input" <?= ($get_role['bootk'] == 'bootk') ? checked : ''?>>
+                                <label for="bootk">Booking Ticket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Transaction">
-                                <input type="checkbox" id="boopkt" name="boopkt" value="boopkt" class="form-check-input">
-                                <label for="boopkt">Booking Paket</label>
+                                <input type="checkbox" id="boopk" name="boopk" value="boopk" class="form-check-input" <?= ($get_role['boopk'] == 'boopk') ? checked : ''?>>
+                                <label for="boopk">Booking Paket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report ">
-                                <input type="checkbox" id="depto" name="depto" value="depto" class="form-check-input">
+                                <input type="checkbox" id="depto" name="depto" value="depto" class="form-check-input" <?= ($get_role['depto'] == 'depto') ? checked : ''?>>
                                 <label for="depto">Departure Today</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="pentkt" name="pentkt" value="pentkt" class="form-check-input">
-                                <label for="pentkt">Pendapatan Ticket</label>
+                                <input type="checkbox" id="pentk" name="pentk" value="pentk" class="form-check-input" <?= ($get_role['pentk'] == 'pentk') ? checked : ''?>>
+                                <label for="pentk">Pendapatan Ticket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="penpkt" name="penpkt" value="penpkt" class="form-check-input">
-                                <label for="penpkt">Pendapatan Paket</label>
+                                <input type="checkbox" id="penpk" name="penpk" value="penpk" class="form-check-input" <?= ($get_role['penpk'] == 'penpk') ? checked : ''?>>
+                                <label for="penpk">Pendapatan Paket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="ttpa" name="ttpa" value="ttpa" class="form-check-input">
+                                <input type="checkbox" id="ttpa" name="ttpa" value="ttpa" class="form-check-input" <?= ($get_role['ttpa'] == 'ttpa') ? checked : ''?>>
                                 <label for="ttpa">Transaksi Ticket per Agent</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="tppa" name="tppa" value="tppa" class="form-check-input">
+                                <input type="checkbox" id="tppa" name="tppa" value="tppa" class="form-check-input" <?= ($get_role['tppa'] == 'tppa') ? checked : ''?>>
                                 <label for="tppa">Transaksi Paket per Agent</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="rkt" name="rkt" value="rkt" class="form-check-input">
+                                <input type="checkbox" id="rkt" name="rkt" value="rkt" class="form-check-input" <?= ($get_role['rkt'] == 'rkt') ? checked : ''?>>
                                 <label for="rkt">Rekap Komisi Ticket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="rkp" name="rkp" value="rkp" class="form-check-input">
+                                <input type="checkbox" id="rkp" name="rkp" value="rkp" class="form-check-input" <?= ($get_role['rkp'] == 'rkp') ? checked : ''?>>
                                 <label for="rkp">Rekap Komisi Paket</label>
                             </div>
                             <div class="border border-primary p-2 mx-2 mt-2 rounded" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Report">
-                                <input type="checkbox" id="rabul" name="rabul" value="rabul" class="form-check-input">
+                                <input type="checkbox" id="rabul" name="rabul" value="rabul" class="form-check-input" <?= ($get_role['rabul'] == 'rabul') ? checked : ''?>>
                                 <label for="rabul">Rangkuman Bulanan</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Perbaharui</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update</button>
                   </form>
                 </div>
             </div>
