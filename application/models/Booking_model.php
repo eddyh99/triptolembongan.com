@@ -464,5 +464,29 @@ class Booking_model extends CI_Model{
 		}
     }
 
+    public function get_edit_paket($id)
+    {
+        $sql = "SELECT * FROM tbl_booking_paket WHERE id=? AND checkin_by IS NULL AND is_deleted='no'";
+        $query = $this->db->query($sql, $id);
+		if ($query){
+			return $query->row();
+		}else{
+			return $this->db->error();
+		}
+    }
+
+    public function get_editpaket_detail($id)
+    {
+        $sql = "SELECT a.id as 'id_detail', a.namatamu, a.nasionality, a.nope, a.email, a.jenis FROM tbl_booking_paket_detail a
+        INNER JOIN tbl_booking_paket b ON a.id=b.id
+        WHERE a.id=?";
+        $query = $this->db->query($sql, $id);
+		if ($query){
+			return $query->result_array();
+		}else{
+			return $this->db->error();
+		}
+    }
+
 }
 ?>

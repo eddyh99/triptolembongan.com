@@ -42,6 +42,8 @@ class Booking extends CI_Controller
     public function list_booking_ticket()
     {
 
+        // echo "<pre>".print_r($_SESSION,true)."</pre>";
+        // die;
         
         $start      = date("Y-m-d");
         $end        = date("Y-m-d");
@@ -639,7 +641,6 @@ class Booking extends CI_Controller
             'remarks'       => $remarks,
             'charge'        => $charge,
             'userid'        => $_SESSION["logged_status"]["username"],
-            'checkin_by'    => $_SESSION["logged_status"]["username"],
             'created_at'    => date("Y:m:d H:i:s"),
             'update_at'    => date("Y:m:d H:i:s"),
         );
@@ -657,6 +658,40 @@ class Booking extends CI_Controller
 			return;
         }
     }
+
+    public function edit_booking_paket($id)
+    {
+        $id	= base64_decode($this->security->xss_clean($id));
+        $get_ticket = $this->ticket->get_ticket();
+        $get_agent  = $this->agent->get_agent();
+        $get_payment= $this->payment->get_payment();
+
+        $get_booking_paket = $this->booking->get_edit_paket($id);
+        $get_bookingpaket_detail = $this->booking->get_editpaket_detail($id);
+        // echo "<pre>".print_r($get_bookingpaket_detail,true)."</pre>";
+        // print_r(json_encode($get_bookingpaket_detail));
+        // die;
+
+        $data = array(
+            'title'             => NAMETITLE . ' - Edit Booking Paket',
+            'content'           => 'admin/booking_paket/edit_booking_paket',
+            'ticket'            => $get_ticket,
+            'agent'             => $get_agent,
+            'payment'           => $get_payment,
+            'booking_paket'     => $get_booking_paket,
+            'booking_detail'    => $get_bookingpaket_detail,
+            'extra'             => 'admin/booking_paket/_js_edit_booking_paket',
+            'bookpaket_active'  => 'active',
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
+
+    public function get_bookingpaket_detail($id)
+    {
+        $result = $this->booking->get_editpaket_detail($id);
+        echo json_encode($result);
+    }
+
 
     public function preview_paket($tiket)
     {
