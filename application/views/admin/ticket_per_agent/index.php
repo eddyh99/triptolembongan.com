@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>ticket/tambah_ticket_agent" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Ticket per Agent
+                    Add Ticket per Agent
                 </span>
             </a>
         </div>
@@ -21,12 +21,12 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tujuan</th>
-                                <th>Keberangkatan</th>
-                                <th>Nama Agent</th>
+                                <th>Destination</th>
+                                <th>Hour</th>
+                                <th>Agent</th>
                                 <th>No.Telp</th>
-                                <th>Harga</th>
-                                <th>Aksi</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,12 +34,12 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>Tujuan</th>
-                                <th>Keberangkatan</th>
-                                <th>Nama Agent</th>
+                                <th>Destination</th>
+                                <th>Hour</th>
+                                <th>Agent</th>
                                 <th>No.Telp</th>
-                                <th>Harga</th>
-                                <th>Aksi</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

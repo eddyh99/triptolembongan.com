@@ -5,7 +5,7 @@
             <a href="<?= base_url()?>ticket" class="btn btn-outline-primary d-flex align-items-center">
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>
@@ -26,21 +26,16 @@
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <input type="hidden" name="id_edit" value="<?= $ticket->id?>">
                         <div class="mb-3">
-                            <label for="tujuan" class="form-label">Tujuan</label>
+                            <label for="tujuan" class="form-label">Destination</label>
                             <select name="tujuan" id="tujuan" class="form-select">
                                 <option value="Sanur-Lembongan" <?=($ticket->tujuan=="Sanur-Lembongan")?"selected":""?>>Sanur - Lembongan</option>
                                 <option value="Lembongan-Sanur"  <?=($ticket->tujuan=="Lembongan-Sanur")?"selected":""?>>Lembongan - Sanur</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="jam_keberangkatan" class="form-label">Jam Keberangkatan</label>
+                            <label for="jam_keberangkatan" class="form-label">Hours of Departure</label>
                             <input type="text" class="form-control jam_keberangkatan" id="jam_keberangkatan" name="jam_keberangkatan" value="<?= $ticket->berangkat?>">
                         </div>
-
-                        <!-- <div class="mb-3">
-                            <label for="harga" class="form-label ">Harga</label>
-                            <input type="text" class="form-control money-input" id="harga" name="harga" >
-                        </div> -->
                         <button type="submit" class="btn btn-primary mt-3">Update Ticket</button>
                   </form>
                 </div>

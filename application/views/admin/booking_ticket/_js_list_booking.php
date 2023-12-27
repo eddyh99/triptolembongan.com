@@ -204,7 +204,7 @@
                                         </div>`;
 
                         var btnPrint = `
-                            <button id="printTiket${full.kode_tiket}" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
+                            <button id="printTiket${full.kode_tiket}" onClick="valuePrint('${full.kode_tiket}')" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
                             <div class="booking-print printTiketPreview${full.kode_tiket}">
                                 <div class="d-flex justify-content-center mb-2">
                                     <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
@@ -274,11 +274,6 @@
                             </div>
                         `;
 
-                        $(`#printTiket${full.kode_tiket}`).on('click', function(){
-                            $(`.printTiketPreview${full.kode_tiket}`).printThis({
-                                removeScripts: true, 
-                            })
-                        })
                         
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
@@ -296,19 +291,26 @@
             ],
         });
 
-        $('#tanggal').daterangepicker({
-            startDate: moment(),
-            endDate: moment(),
-            opens: 'right',
-            locale: {
-                format: 'DD MMM YYYY'
-            },
-            ranges: {
-                'Today': [moment(), moment()],
-                'Tommorow': [moment().add(1, 'days'), moment().add(1, 'days'),],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-            }
-        });
+    function valuePrint(kode){
+        $(`.printTiketPreview${kode}`).printThis({
+            removeScripts: true, 
+        })
+        return false;
+    }
+
+    $('#tanggal').daterangepicker({
+        startDate: moment(),
+        endDate: moment(),
+        opens: 'right',
+        locale: {
+            format: 'DD MMM YYYY'
+        },
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().add(-1, 'days'), moment().add(-1, 'days'),],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+        }
+    });
 
     $("#lihat").on("click",function(){
         bookingtiket.ajax.reload();
@@ -331,7 +333,7 @@
 		e.preventDefault();
 		let url_href = $(this).attr('href');
 		Swal.fire({
-			text:"Apakah yakin membatalkan data ini?",
+			text:"Are you sure you delete this data?",
 			type: "warning",
 			position: 'center',
 			showCancelButton: true,

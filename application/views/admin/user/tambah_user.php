@@ -127,7 +127,7 @@
                                 <label for="rabul">Rangkuman Bulanan</label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Add User</button>
+                        <button type="submit" class="btn btn-primary mt-3">Save</button>
                   </form>
                 </div>
             </div>

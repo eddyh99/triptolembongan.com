@@ -6,7 +6,7 @@
                 
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>

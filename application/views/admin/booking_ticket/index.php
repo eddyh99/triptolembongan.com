@@ -19,7 +19,7 @@
                             <div class="row">
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-6">
-                                        <label for="kode_ticket" class="form-label">Kode Ticket</label>
+                                        <label for="kode_ticket" class="form-label">Code Ticket</label>
                                         <div class="wrapper-kode-ticket d-flex align-items-center justify-content-between">
                                             <input type="text" class="fw-bold fs-5 text-success border-0" id="kode_ticket" name="kode_ticket" readonly 
                                                 value="TIX<?php $num = mt_rand(100000,999999); printf("%d", $num);?>"/>
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-4 col-12 col-md-6 ">
-                                        <label for="freecharge" class="form-label">Pilih Agen</label>
+                                        <label for="freecharge" class="form-label">Select Agen</label>
                                         <select class="agent-select2" id="nama_agent" name="nama_agent" required>
                                             <option value="undefined"></option>
                                             <?php foreach($agent as $ag){?>
@@ -42,7 +42,7 @@
                             <div class="row">
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-6 ">
-                                        <label for="freecharge" class="form-label">Tujuan</label>
+                                        <label for="freecharge" class="form-label">Type</label>
                                         <div class="d-flex ">
                                             <div class="form-check">
                                                 <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="One Way" >
@@ -87,7 +87,7 @@
                                     <!-- Tanggal Keberangkatan | Kembalii -->
                                     <div class="mb-4 mt-3 col-12 col-md-6 ">
                                         <div>
-                                            <label for="tglberangkat" class="form-label">Tanggal Keberangkatan</label>
+                                            <label for="tglberangkat" class="form-label">Date Depart</label>
                                             <div class="form-control d-flex">
                                                 <input type="text" class="w-100 border-0 cursor-pointer" name="tglberangkat" id="tglberangkat" autocomplete="off">
                                                 <label for="tglberangkat" class="cursor-pointer">
@@ -96,7 +96,7 @@
                                             </div>
                                         </div>
                                         <div class="mt-3">
-                                            <label for="tglkembali" class="form-label">Tanggal Kembali</label>
+                                            <label for="tglkembali" class="form-label">Date Return</label>
                                             <div class="form-control d-flex">
                                                 <input type="text" class="w-100 border-0 cursor-pointer" name="tglkembali" id="tglkembali" autocomplete="off">
                                                 <label for="tglkembali" class="cursor-pointer">
@@ -112,9 +112,9 @@
                             <!-- DEWASA -->
                             <div class="row wraping-add-booking-dewasa">
                                 <div class="row">
-                                    <h4 class="fw-bolder text-decoration-underline">Dewasa</h4>
+                                    <h4 class="fw-bolder text-decoration-underline">Adult</h4>
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
-                                        <label for="nama_tamu_dewasa" class="form-label">Nama Tamu</label>
+                                        <label for="nama_tamu_dewasa" class="form-label">Guest Name</label>
                                         <div class="d-flex align-items-center">
                                             <select id="nama_tamu_dewasa" class="nama-tamu-select2" name="nama_tamu_dewasa[]" required>
                                                 <option></option>
@@ -157,9 +157,9 @@
                             <!-- ANAK -->
                             <div class="row wraping-add-booking-anak">
                                 <div class="row">
-                                    <h4 class="fw-bolder text-decoration-underline">Anak-anak</h4>
+                                    <h4 class="fw-bolder text-decoration-underline">Child</h4>
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
-                                        <label for="nama_tamu_anak" class="form-label">Nama Tamu</label>
+                                        <label for="nama_tamu_anak" class="form-label">Guest Name</label>
                                         <div class="d-flex align-items-center">
                                             <select id="nama_tamu_anak" class="nama-tamu-select2" name="nama_tamu_anak[]">
                                                 <option></option>
@@ -245,39 +245,39 @@
                             </div>
 
                             <div class="row">
-                                <h2>Berangkat</h2>
+                                <h2 class="text-decoration-underline">Depart</h2>
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-4">
                                         <label for="pickup" class="form-label">Pickup</label>
-                                        <input type="text" class="form-control" id="pickup" name="pickup" placeholder="masukkan pickup dimana..." autocomplete="off" maxlength="45" required>
+                                        <input type="text" class="form-control" id="pickup" name="pickup" placeholder="Enter Pickup..." autocomplete="off" maxlength="45" required>
                                     </div>
         
                                     <div class="mb-4 col-12 col-md-4 ">
                                         <label for="dropoff" class="form-label">Drop off</label>
-                                        <input type="text" class="form-control" id="dropoff" name="dropoff" placeholder="masukkan drop off dimana..." autocomplete="off" maxlength="45" required>
+                                        <input type="text" class="form-control" id="dropoff" name="dropoff" placeholder="Enter Drop Off ..." autocomplete="off" maxlength="45" required>
                                     </div>
         
                                     <div class="mb-4 col-12 col-md-4 ">
                                         <label for="catatan" class="form-label">Remarks</label>
-                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="masukkan catatan tamu..." autocomplete="off" maxlength="45">
+                                        <input type="text" class="form-control" id="catatan" name="catatan" placeholder="Enter Remarks..." autocomplete="off" maxlength="45">
                                     </div>
                                 </div>
                             </div>
                             <div id="additional-kembali" class="row">
-                                <h2>Kembali</h2>
+                                <h2 class="text-decoration-underline">Return</h2>
                                 <div class="row">
                                     <div class="mb-4 col-12 col-md-4">
                                         <label for="pickup" class="form-label">Pickup</label>
-                                        <input type="text" class="form-control" id="pickup" name="r_pickup"  placeholder="masukkan pickup dimana..." autocomplete="off" maxlength="45">
+                                        <input type="text" class="form-control" id="pickup" name="r_pickup"  placeholder="Enter Pickup..." autocomplete="off" maxlength="45">
                                     </div>
         
                                     <div class="mb-4 col-12 col-md-4 ">
                                         <label for="dropoff" class="form-label">Drop off</label>
-                                        <input type="text" class="form-control" id="dropoff" name="r_dropoff" placeholder="masukkan drop off dimana..." autocomplete="off" maxlength="45">
+                                        <input type="text" class="form-control" id="dropoff" name="r_dropoff" placeholder="Enter Drop Off..." autocomplete="off" maxlength="45">
                                     </div>
 
                                     <div class="col-4">
-                                        <label for="payment" class="form-label">Payment</label>
+                                        <label for="payment" class="form-label">Select Payment</label>
                                         <select name="payment" id="payment" class="form-select">
                                             <?php foreach ($payment as $dt){?>
                                                 <option value="<?=$dt["id"]?>"><?=$dt["payment"]?></option>
@@ -292,8 +292,8 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-4">
-                                    <button id="cekHarga" class="btn btn-dark mt-3">Cek Rangkuman</button>
-                                    <button type="submit" class="btn btn-primary mt-3">Booking Sekarang</button>
+                                    <button id="cekHarga" class="btn btn-dark mt-3">Check Summary</button>
+                                    <button type="submit" class="btn btn-primary mt-3">Booking Now</button>
                                 </div>
                                 <div class="col-8">
                                     <div class="mb-4 col-12">
@@ -304,15 +304,15 @@
                                                     <div>
                                                         <h5 class="card-title fw-semibold">Summary Booking Ticket</h5>
                                                         <p class="card-subtitle mb-2">
-                                                            Agen: <span class="fw-bolder display-nama-agent">-</span>
+                                                            Agent: <span class="fw-bolder display-nama-agent">-</span>
                                                         </p>
                                                     </div>
                                                     <div>
                                                         <p class="card-subtitle mb-2">
-                                                            Keberangkatan: <span class="display-tgl-berangkat">-</span>
+                                                            Depart: <span class="display-tgl-berangkat">-</span>
                                                         </p>
                                                         <p class="card-subtitle mb-2">
-                                                            Kembali: <span class="display-tgl-kembali">-</span>
+                                                            Return: <span class="display-tgl-kembali">-</span>
                                                         </p>
                                                     </div>
 
@@ -321,7 +321,7 @@
                                                     <div class="d-flex align-items-center gap-3 py-3">
                                                         <div>
                                                             <h6 class="mb-0 fw-semibold">
-                                                                Tujuan: <span class="display-tujuan">-</span>
+                                                                Destination: <span class="display-tujuan">-</span>
                                                             </h6>
                                                             <span class="fs-2">
                                                                 Depart: <span class="display-depart">-</span>
@@ -334,9 +334,9 @@
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
                                                         <div>
-                                                            <h6 class="mb-0 fw-semibold">Dewasa</h6>
+                                                            <h6 class="mb-0 fw-semibold">Adult</h6>
                                                             <span class="fs-2">
-                                                                <span class="display-dewasa-jumlah">0</span> Orang
+                                                                <span class="display-dewasa-jumlah">0</span> Person
                                                             </span>
                                                         </div>
                                                         <!-- <div class="ms-auto text-end">
@@ -348,9 +348,9 @@
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3 border-bottom">
                                                         <div>
-                                                            <h6 class="mb-0 fw-semibold">Anak - Anak</h6>
+                                                            <h6 class="mb-0 fw-semibold">Child</h6>
                                                             <span class="fs-2">
-                                                                <span class="display-anak-jumlah">0</span> Orang
+                                                                <span class="display-anak-jumlah">0</span> Person
                                                             </span>
                                                         </div>
                                                         <!-- <div class="ms-auto text-end">
@@ -364,7 +364,7 @@
                                                         <div>
                                                             <h6 class="mb-0 fw-semibold">Free of Charge</h6>
                                                             <span class="fs-2">
-                                                                <span class="display-foc-jumlah">0</span> Orang    
+                                                                <span class="display-foc-jumlah">0</span> Person    
                                                             </span>
                                                         </div>
                                                         <!-- <div class="ms-auto text-end">
@@ -376,7 +376,7 @@
                                                     </div>
                                                     <div class="d-flex align-items-center gap-3 py-3">
                                                         <div>
-                                                            <h6 class="mb-0 fw-semibold">Total Keseluruhan</h6>
+                                                            <h6 class="mb-0 fw-semibold">Total</h6>
                                                             <!-- <span class="fs-2">2 Orang</span> -->
                                                         </div>
                                                         <div class="ms-auto text-end">
@@ -391,7 +391,7 @@
                                                     </div>
                                                     <div id="komisigeneral" class="d-none align-items-center gap-3 py-3">
                                                         <div>
-                                                            <h6 class="mb-0 fw-semibold">Komisi</h6>
+                                                            <h6 class="mb-0 fw-semibold">Commission</h6>
                                                         </div>
                                                         <div class="ms-auto text-end">
                                                             <h6 class="mb-0 fw-semibold d-flex align-items-center">

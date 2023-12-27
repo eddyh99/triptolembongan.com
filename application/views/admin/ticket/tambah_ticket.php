@@ -5,7 +5,7 @@
             <a href="<?= base_url()?>ticket" class="btn btn-outline-primary d-flex align-items-center">
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>
@@ -21,21 +21,21 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php } ?>
-                    <h5 class="card-title fw-semibold mb-4">Tambah Ticket</h5>
+                    <h5 class="card-title fw-semibold mb-4">Add Ticket</h5>
                     <form action="<?= base_url()?>ticket/tambah_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="mb-3">
-                            <label for="tujuan" class="form-label">Tujuan</label>
+                            <label for="tujuan" class="form-label">Destination</label>
                             <select name="tujuan" id="tujuan" class="form-select">
                                 <option value="Sanur-Lembongan">Sanur - Lembongan</option>
                                 <option value="Lembongan-Sanur">Lembongan - Sanur</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="jam_keberangkatan" class="form-label">Jam Keberangkatan</label>
+                            <label for="jam_keberangkatan" class="form-label">Hours of Departure</label>
                             <input type="text" class="form-control jam_keberangkatan" id="jam_keberangkatan" name="jam_keberangkatan" >
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Tambah Ticket</button>
+                        <button type="submit" class="btn btn-primary mt-3">Save</button>
                   </form>
                 </div>
             </div>

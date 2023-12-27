@@ -218,99 +218,15 @@ class User extends CI_Controller
     {
         $id	= base64_decode($this->security->xss_clean($id));
         $result = $this->user->get_edit_user($id);
-        $user_role = $result->role;
+        $user_role = explode(",", $result->role);
 
         $get_role = array();
-        // echo "<pre>".print_r($result,true)."</pre>";
-        // die;
-        // Setup User
-        if(stristr($user_role, 'stu') !== FALSE) {
-            $get_role['stu']   = 'stu'; 
-        }
-        
-        // Setup Agent
-        if(stristr($user_role, 'stag') !== FALSE) {
-            $get_role['stag']   = 'stag';
-        }
-        
-        // Setup Payment
-        if(stristr($user_role, 'stpy') !== FALSE) {
-            $get_role['stpy']   = 'stpy';
-        }
-        
-        // Departure Schedule
-        if(stristr($user_role, 'sttkt') !== FALSE) {
-            $get_role['sttkt']   = 'sttkt';
+
+        foreach ($user_role as $dt){
+            $get_role[$dt]=$dt;
         }
 
-        // Setup Paket
-        if(stristr($user_role, 'stpkt') !== FALSE) {
-            $get_role['stpkt']   = 'stpkt';
-        }
-        
-        // Ticket per Agent
-        if(stristr($user_role, 'tpag') !== FALSE) {
-            $get_role['tpag']   = 'tpag';
-        }
-        
-        // Paket per Agent
-        if(stristr($user_role, 'ppag') !== FALSE) {
-            $get_role['ppag']   = 'ppag';
-        }
 
-        // Booking Ticket
-        if(stristr($user_role, 'bootk') !== FALSE) {
-            $get_role['bootk']   = 'bootk';
-        }
-        
-        // Booking Paket 
-        if(stristr($user_role, 'boopk') !== FALSE) {
-            $get_role['boopk']   = 'boopk';
-        }
-        
-        // Departure Today
-        if(stristr($user_role, 'depto') !== FALSE) {
-            $get_role['depto']   = 'depto';
-        }
-        
-        // Pendapatan Ticket
-        if(stristr($user_role, 'pentk') !== FALSE) {
-            $get_role['pentk']   = 'pentk';
-        }
-
-        // Pendapatan Paket
-        if(stristr($user_role, 'penpk') !== FALSE) {
-            $get_role['penpk']   = 'penpk';
-        }
-
-        // Transaksi Ticket per Agent
-        if(stristr($user_role, 'ttpa') !== FALSE) {
-            $get_role['ttpa']   = 'ttpa';
-        }
-        
-        // Transaksi Paket per Agent
-        if(stristr($user_role, 'tppa') !== FALSE) {
-            $get_role['tppa']   = 'tppa';
-        }
-
-        // Rekap Komisi Ticket
-        if(stristr($user_role, 'rkt') !== FALSE) {
-            $get_role['rkt']   = 'rkt';
-        }
-
-        // Rekap Komisi Paket
-        if(stristr($user_role, 'rkp') !== FALSE) {
-            $get_role['rkp']   = 'rkp';
-        }
-
-        // Rangkuman Bulanan
-        if(stristr($user_role, 'rabul') !== FALSE) {
-            $get_role['rabul']   = 'rabul';
-        }
-
-        // echo "<pre>".print_r($get_role,true)."</pre>";
-        // die;
-        
         $data = array(
             'title'             => NAMETITLE . ' - Edit user',
             'content'           => 'admin/user/edit_user',

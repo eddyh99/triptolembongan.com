@@ -2,7 +2,7 @@
 <aside class="left-sidebar">
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="./index.html" class="text-nowrap logo-img">
+            <a href="#" class="text-nowrap logo-img">
                 <img src="<?= base_url()?>assets/img/logo.png" width="130" alt="" />
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -133,7 +133,7 @@
             ){?>
             <li class="nav-small-cap">
                 <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                <span class="hide-menu">TRANSAKSI</span>
+                <span class="hide-menu">TRANSACTION</span>
             </li>
             <?php }?>
 
@@ -188,7 +188,7 @@
                         <span class="d-flex">
                             <i class="ti ti-file-analytics"></i>
                         </span>
-                        <span class="hide-menu">Laporan</span>
+                        <span class="hide-menu">Report</span>
                     </a>
                     <?php }?>
                     <ul aria-expanded="false" class="collapse first-level">
@@ -200,7 +200,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Pendapatan Ticket</span>
+                                <span class="hide-menu">Ticket Income</span>
                             </a>
                         </li>
                         <?php } 
@@ -211,7 +211,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Pendapatan Paket</span>
+                                <span class="hide-menu">Paket Income</span>
                             </a>
                         </li>
                         <?php } 
@@ -222,7 +222,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Transaksi Tiket per Agen</span>
+                                <span class="hide-menu">Transaction Ticket per Agent</span>
                             </a>
                         </li>
                         <?php } 
@@ -233,7 +233,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Transaksi Paket per Agen</span>
+                                <span class="hide-menu">Transaction Paket per Agent</span>
                             </a>
                         </li>
                         <?php } 
@@ -302,7 +302,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Rangkuman Bulanan</span>
+                                <span class="hide-menu">Monthly Summary</span>
                             </a>
                         </li>
                         <?php } 

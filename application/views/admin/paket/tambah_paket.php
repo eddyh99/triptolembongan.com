@@ -6,7 +6,7 @@
                 
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>
@@ -22,18 +22,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php } ?>
-                    <h5 class="card-title fw-semibold mb-4">Tambah Paket</h5>
+                    <h5 class="card-title fw-semibold mb-4">Add Paket</h5>
                     <form action="<?= base_url()?>paket/tambah_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="mb-3">
-                            <label for="nama_agent" class="form-label">Nama Paket</label>
-                            <input type="text" class="form-control" id="namapaket" name="namapaket" placeholder="masukkan nama Paket..." required>
+                            <label for="nama_agent" class="form-label">Paket Name</label>
+                            <input type="text" class="form-control" id="namapaket" name="namapaket" placeholder="Enter Paket Name..." required>
                         </div>
                         <div class="mb-3">
-                            <label for="alamat" class="form-label">Keterangan</label>
+                            <label for="alamat" class="form-label">Infomation</label>
                             <textarea id="keterangan" name="keterangan" class="form-control" rows="10" cols="5"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                        <button type="submit" class="btn btn-primary mt-3">Save</button>
                   </form>
                 </div>
             </div>

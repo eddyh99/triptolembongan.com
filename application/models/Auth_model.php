@@ -10,8 +10,6 @@ class Auth_model extends CI_Model{
 				WHERE a.username=? AND a.passwd=sha1(?)
 				GROUP BY a.username";
 		$query = $this->db->query($sql, $mdata);
-		// echo "<pre>".print_r($query,	true)."</pre>";
-        // die;
         
 		if ($query->num_rows()>0){
 			return $query->row();

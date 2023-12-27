@@ -260,7 +260,7 @@
         });
 
         $('.nama-tamu-select2').select2({
-            placeholder: "Nama Tamu",
+            placeholder: "Guest Name",
             tags: true,
             selectOnClose: true,
             allowClear: true,

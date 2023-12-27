@@ -144,7 +144,7 @@
                                         </div>`;
 
                         var btnPrint = `
-                                <button id="printTiket${full.kode_tiket}" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
+                                <button id="printTiket${full.kode_tiket}" onClick="valuePrint('${full.kode_tiket}')" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
                                 <div class="booking-paket-print printTiketPreview${full.kode_tiket} bg-primary">
                                     <div class="d-flex justify-content-center mb-2">
                                         <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
@@ -201,11 +201,11 @@
                                 </div>
                         `;
 
-                        $(`#printTiket${full.kode_tiket}`).on('click', function(){
-                            $(`.printTiketPreview${full.kode_tiket}`).printThis({
-                                removeScripts: true, 
-                            })
-                        })
+                        // $(`#printTiket${full.kode_tiket}`).on('click', function(){
+                        //     $(`.printTiketPreview${full.kode_tiket}`).printThis({
+                        //         removeScripts: true, 
+                        //     })
+                        // })
                         
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
@@ -221,6 +221,14 @@
             ],
         });
 
+
+        function valuePrint(kode){
+            $(`.printTiketPreview${kode}`).printThis({
+                removeScripts: true, 
+            })
+            return false;
+        }
+
         $("#lihat").on("click",function(){
             bookingpaket.ajax.reload();
         })
@@ -234,7 +242,7 @@
             },
             ranges: {
                 'Today': [moment(), moment()],
-                'Tommorow': [moment().add(1, 'days'), moment().add(1, 'days'),],
+                'Yesterday': [moment().add(-1, 'days'), moment().add(-1, 'days'),],
                 'This Month': [moment().startOf('month'), moment().endOf('month')],
             }
         });

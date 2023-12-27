@@ -21,7 +21,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama Agent</th>
+                                <th>Agent</th>
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>Contact</th>
@@ -34,7 +34,7 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>Nama Agent</th>
+                                <th>Agent</th>
                                 <th>Address</th>
                                 <th>City</th>
                                 <th>Contact</th>
