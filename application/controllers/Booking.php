@@ -668,7 +668,7 @@ class Booking extends CI_Controller
 
         $get_booking_paket = $this->booking->get_edit_paket($id);
         $get_bookingpaket_detail = $this->booking->get_editpaket_detail($id);
-        // echo "<pre>".print_r($get_bookingpaket_detail,true)."</pre>";
+        // echo "<pre>".print_r($get_booking_paket,true)."</pre>";
         // print_r(json_encode($get_bookingpaket_detail));
         // die;
 
@@ -692,6 +692,195 @@ class Booking extends CI_Controller
         echo json_encode($result);
     }
 
+    public function edit_booking_paket_proses()
+    {
+        $this->form_validation->set_rules('kode_ticket', 'Kode Tiket', 'trim|required');
+		$this->form_validation->set_rules('nama_agent', 'Nama Agent', 'trim|required');
+		$this->form_validation->set_rules('paket', 'Paket', 'trim|required');
+
+		$this->form_validation->set_rules('nama_tamu_dewasa', 'Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nasionality_dewasa', 'Nasionality Tamu Dewasa', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_dewasa', 'No Hp Dewasa', 'trim');
+		$this->form_validation->set_rules('email_tamu_dewasa', 'Email Dewasa', 'trim');
+
+		$this->form_validation->set_rules('nama_tamu_anak', 'Tamu anak', 'trim');
+		$this->form_validation->set_rules('nasionality_anak', 'Nasionality Tamu anak', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_anak', 'No Hp anak', 'trim');
+		$this->form_validation->set_rules('email_tamu_anak', 'Email anak', 'trim');
+
+		$this->form_validation->set_rules('nama_tamu_foc', 'Tamu FOC', 'trim');
+		$this->form_validation->set_rules('nasionality_foc', 'Nasionality Tamu foc', 'trim');
+		$this->form_validation->set_rules('nohp_tamu_foc', 'No Hp FOC', 'trim');
+		$this->form_validation->set_rules('email_tamu_foc', 'Email FOC', 'trim');
+
+		$this->form_validation->set_rules('tglberangkat', 'Tanggal Berangkat', 'trim|required');
+		$this->form_validation->set_rules('tglkembali', 'Tanggal Kembali', 'trim|required');
+		$this->form_validation->set_rules('pickup', 'Pickup', 'trim|required');
+		$this->form_validation->set_rules('dropoff', 'Drop Off', 'trim|required');
+		$this->form_validation->set_rules('catatan', 'Remarks', 'trim');
+		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
+		$this->form_validation->set_rules('total', 'Charge', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
+            redirect('booking/booking_paket');
+			return;
+		}
+
+        $charge = $this->input->post("total");
+        $new_charge = str_replace(array('\'', '"', ',', ';', '<', '>'), '', $charge);
+        $_POST["total"]=$new_charge;
+
+        $input              = $this->input;
+        $id                 = $this->security->xss_clean($input->post('id_bookingpaket'));
+        $kode_ticket        = $this->security->xss_clean($input->post('kode_ticket'));
+        $nama_agent          = $this->security->xss_clean($input->post('nama_agent'));
+
+        // Tamu Dewasa
+        $nama_tamu_dewasa   = $this->security->xss_clean($input->post('nama_tamu_dewasa'));
+        $nasionality_dewasa = $this->security->xss_clean($input->post('nasionality_dewasa'));
+        $nohp_tamu_dewasa   = $this->security->xss_clean($input->post('nohp_tamu_dewasa'));
+        $email_tamu_dewasa  = $this->security->xss_clean($input->post('email_tamu_dewasa'));
+
+        // Tamu Anak-anak
+        $nama_tamu_anak     = $this->security->xss_clean($input->post('nama_tamu_anak'));
+        $nasionality_anak   = $this->security->xss_clean($input->post('nasionality_anak'));
+        $nohp_tamu_anak     = $this->security->xss_clean($input->post('nohp_tamu_anak'));
+        $email_tamu_anak    = $this->security->xss_clean($input->post('email_tamu_anak'));
+  
+        // Tamu FOC
+        $nama_tamu_foc      = $this->security->xss_clean($input->post('nama_tamu_foc'));
+        $nasionality_foc    = $this->security->xss_clean($input->post('nasionality_foc'));
+        $nohp_tamu_foc      = $this->security->xss_clean($input->post('nohp_tamu_foc'));
+        $email_tamu_foc     = $this->security->xss_clean($input->post('email_tamu_foc'));
+
+        $id_paket           = $this->security->xss_clean($input->post('paket'));
+
+        $tglberangkat       = $this->security->xss_clean($input->post('tglberangkat'));
+        $newTglBerangkat    = date("Y-m-d", strtotime($tglberangkat));  
+        $tglkembali         = $this->security->xss_clean($input->post('tglkembali'));
+        $newTglKembali      = date("Y-m-d", strtotime($tglkembali)); 
+        
+        $pickup             = $this->security->xss_clean($input->post('pickup'));
+        $dropoff            = $this->security->xss_clean($input->post('dropoff'));
+        $remarks            = $this->security->xss_clean($input->post('catatan'));
+        
+        $payment            = $this->security->xss_clean($input->post('payment'));
+        $charge             = $this->security->xss_clean($input->post('total'));
+        
+        
+        $temp_dewasa = array();
+        $temp_anak = array();
+        $temp_foc = array();
+        
+        // Looping nama tamu Dewasa
+        if(array_filter($nama_tamu_dewasa)){
+            foreach($nama_tamu_dewasa as $keytamu=>$valuetamu){
+                $temp['namatamu']   = $valuetamu;    
+                foreach($nasionality_dewasa as $keynas=>$valuenas){
+                    $temp['nasionality']   = $valuenas;
+                    foreach($nohp_tamu_dewasa as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_dewasa as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'dewasa';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_dewasa, $temp);
+                            }
+                        }
+                    }
+    
+                }
+            }
+        }
+
+        // Looping nama tamu Anak
+        if(array_filter($nama_tamu_anak)){
+            foreach($nama_tamu_anak as $keytamu=>$valuetamu){
+                $temp['namatamu']   = $valuetamu;    
+                foreach($nasionality_anak as $keynas=>$valuenas){
+                    $temp['nasionality']   = $valuenas;
+                    foreach($nohp_tamu_anak as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_anak as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'anak';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_anak, $temp);
+                            }
+                        }
+                    }  
+    
+                }
+            }
+        }
+
+        // Looping nama tamu FOC
+        if(array_filter($nama_tamu_foc)){
+            foreach($nama_tamu_foc as $keytamu=>$valuetamu){
+                $temp['namatamu']   = $valuetamu;    
+                foreach($nasionality_foc as $keynas=>$valuenas){
+                    $temp['nasionality']   = $valuenas;
+                    foreach($nohp_tamu_foc as $keynohp=>$valuenohp){
+                        $temp['nope']   = $valuenohp;
+                        foreach($email_tamu_foc as $keyemail=>$valueemail){
+                            $temp['email']   = $valueemail;
+                            $temp['jenis']   = 'foc';
+                            if(
+                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
+                               ){
+                                array_push($temp_foc, $temp);
+                            }
+                        }
+                    }    
+    
+                }
+            }
+        }
+
+        $detail_booking_paket = array_merge($temp_dewasa, $temp_anak, $temp_foc);
+        // echo "<pre>".print_r($detail_booking_paket,true)."</pre>";
+        // die;
+        $datas = array(
+            'kode_tiket'    => $kode_ticket,
+            'tgl_pesan'     => date("Y:m:d H:i:s"),
+            'berangkat'     => $newTglBerangkat,
+            'kembali'       => $newTglKembali,
+            'pickup'        => $pickup,
+            'dropoff'       => $dropoff,
+            'payment'       => $payment,
+            'id_paket'      => $id_paket,
+            'agentid'       => $nama_agent,
+            'remarks'       => $remarks,
+            'charge'        => $charge,
+            'userid'        => $_SESSION["logged_status"]["username"],
+            'created_at'    => date("Y:m:d H:i:s"),
+            'update_at'    => date("Y:m:d H:i:s"),
+        );
+        
+        
+        $result = $this->booking->update_booking_paket($id, $datas, $detail_booking_paket);
+        
+        // echo "<pre>".print_r($datas,true)."</pre>";
+        // die;
+
+        if($result['code'] == 200) {
+            $this->session->set_flashdata('success', 'Update Success');
+			redirect('booking/list_booking_paket');
+			return;
+        }else{
+            $this->session->set_flashdata('error', 'Update Failed');
+			redirect('booking/list_booking_paket');
+			return;
+        }
+    }
 
     public function preview_paket($tiket)
     {

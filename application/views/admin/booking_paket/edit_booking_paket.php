@@ -13,8 +13,9 @@
                         </div>
                     <?php } ?>
                     <h5 class="card-title fw-semibold mb-4">Booking Paket</h5>
-                    <form action="<?= base_url()?>booking/booking_paket_proses" method="POST">
+                    <form action="<?= base_url()?>booking/edit_booking_paket_proses" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
+                        <input type="hidden" id="id_bookingpaket" name="id_bookingpaket" value="<?= $booking_paket->id ?>">
                         <div class="row">
                             <div class="row">
                                 <div class="row">
@@ -173,19 +174,20 @@
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nama_tamu_anak" class="form-label">Guest Name</label>
                                         <div class="d-flex align-items-center">
-                                            <?php  
-                                                foreach($booking_detail as $dt){
-                                                    if($dt['jenis'] == 'anak'){
-                                                
-                                            ?>
-                                                <select class="nama-tamu-select2" name="nama_tamu_anak[]">
-                                                    <option value="<?= $dt['namatamu']?>"><?= $dt['namatamu']?></option>
-                                                </select>
+                                            <!-- <select class="nama-tamu-select2" name="nama_tamu_anak[]">
+                                                <option></option>
+                                            </select> -->
+                                            <?php foreach($booking_detail as $dt){ ?>
+                                                <?php if($dt['jenis'] == 'anak'){?>
+                                                    <select class="nama-tamu-select2" name="nama_tamu_anak[]">
+                                                        <option value="<?= $dt['namatamu']?>"><?= $dt['namatamu']?></option>
+                                                    </select>
                                             <?php 
-                                                break;
+                                                break; 
                                                     }
                                                 }
                                             ?>
+                                  
                                         </div>
                                     </div>
                                     <div class="mb-4 col-12 col-md-3 wrap-nasionality">
@@ -457,7 +459,7 @@
                                                             <h6 class="mb-0 fw-semibold d-flex align-items-center">
                                                                 <span>Rp.</span>
                                                                 <span class="display-total-harga-final">
-                                                                    <input type="text" class="form-control money-input input-total-rangkuman" name="total" required>
+                                                                    <input type="text" class="form-control money-input input-total-rangkuman" name="total" value="<?= $booking_paket->charge?>" required>
                                                                 </span>
                                                             </h6>
                                                         </div>

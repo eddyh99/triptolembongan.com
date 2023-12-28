@@ -488,5 +488,53 @@ class Booking_model extends CI_Model{
 		}
     }
 
+    public function update_booking_paket($id, $datas, $detail_booking_paket)
+    {
+        $this->db->trans_start();
+        $sqlDelete = "DELETE tbl_booking_paket, tbl_booking_paket_detail FROM tbl_booking_paket 
+        INNER JOIN tbl_booking_paket_detail ON tbl_booking_paket.id=tbl_booking_paket_detail.id
+        WHERE tbl_booking_paket.id=?";
+		$this->db->query($sqlDelete,array($id));
+
+        $this->db->insert("tbl_booking_paket", $datas);
+		$error = $this->db->error();
+		$id = $this->db->insert_id();
+        // echo "<pre>".print_r($ins,true)."</pre>";
+        // die;
+
+        $detail = array();
+        foreach($detail_booking_paket as $dt){
+            $temp['id']             = $id;
+            $temp['namatamu']       = $dt['namatamu'];
+            $temp['nasionality']    = $dt['nasionality'];
+            $temp['nope']           = $dt['nope'];
+            $temp['email']          = $dt['email'];
+            $temp['jenis']          = $dt['jenis'];
+            array_push($detail, $temp);
+        }
+        // echo "<pre>".print_r($detail,true)."</pre>";
+        // die;
+        $this->db->insert_batch('tbl_booking_paket_detail', $detail);
+        $this->db->trans_complete();
+
+		if ($this->db->trans_status() == FALSE) {
+			$this->db->trans_rollback();
+            trigger_error("Commit failed"); // throw my own error, sadly never thrown :(
+            echo $error["message"];
+			return array(
+                "code" => 511, 
+                "message" => $error["message"]
+            );
+		} else {
+			$this->db->trans_commit();
+            echo "SUKSES";
+			return array(
+                "code" => 200, 
+                "message" => ""
+            );
+		}
+
+    }
+
 }
 ?>

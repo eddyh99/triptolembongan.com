@@ -85,6 +85,22 @@
         }, 100);
     </script>
 <?php } ?>
+<?php if(isset($_SESSION["error"])) { ?>
+    <script>
+        setTimeout(function() {
+            Swal.fire({
+                html: '<?= $_SESSION['error'] ?>',
+                position: 'top',
+                timer: 3000,
+                showCloseButton: true,
+                showConfirmButton: false,
+                icon: 'error',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+        }, 100);
+    </script>
+<?php } ?>
 <!-- SWEET ALERT END -->
 
 

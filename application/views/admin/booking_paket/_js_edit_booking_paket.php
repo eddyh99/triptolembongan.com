@@ -191,53 +191,171 @@
     });
 
 
+    // SHOW DATA EDIT
     $(document).ready(function() {
         $.ajax({  
             url: "<?=base_url()?>booking/get_bookingpaket_detail/"+'<?= $booking_paket->id?>',
             type: "post",
             success: function(response) {
                 var data = JSON.parse(response);
-                const newData = [...data];
-                newData.splice(0, 1);
-                console.log(newData);
-                newData.forEach((el) => {
+
+                const dataDewasa = [];
+                const dataAnak = [];
+                const dataFOC = [];
+                data.forEach((el) => {
                     if(el.jenis == 'dewasa'){
-                        $('.wraping-add-booking-dewasa').append(`
-                            <div class="adding-booking row">
-                                <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
-                                    <div class="d-flex align-items-center">
-                                        <select class="nama-tamu-select2" name="nama_tamu_dewasa[]">
-                                            <option value="${el.namatamu}">${el.namatamu}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-4 col-12 col-md-3 wrap-nasionality">
-                                    <select name="nasionality_dewasa[]" class="nasionality-select2">
-                                        <option value="${el.nasionality} selected">${el.nasionality}</option>
-                                        <?php foreach($list_negara as $dt){?>
-                                            <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                                <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
-                                    <div class="d-flex align-items-center">
-                                        <select class="nohp-tamu-select2" name="nohp_tamu_dewasa[]">
-                                            <option value="${el.nope}">${el.nope}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
-                                    <div class="d-flex align-items-center">
-                                        <select  class="email-tamu-select2" name="email_tamu_dewasa[]">
-                                            <option value="${el.email}">${el.email}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-dewasa"></i>
-                            </div>
-                        `);
+                        dataDewasa.push(
+                            {
+                                id_detail: el.id_detail,
+                                namatamu: el.namatamu,
+                                nasionality: el.nasionality,
+                                nope: el.nope,
+                                email: el.email,
+                                jenis: el.jenis,
+                            }
+                        )
+                    }
+
+                    if(el.jenis == 'anak'){
+                        dataAnak.push(
+                            {
+                                id_detail: el.id_detail,
+                                namatamu: el.namatamu,
+                                nasionality: el.nasionality,
+                                nope: el.nope,
+                                email: el.email,
+                                jenis: el.jenis,
+                            }
+                        )
+                    }
+                    if(el.jenis == 'foc'){
+                        dataFOC.push(
+                            {
+                                id_detail: el.id_detail,
+                                namatamu: el.namatamu,
+                                nasionality: el.nasionality,
+                                nope: el.nope,
+                                email: el.email,
+                                jenis: el.jenis,
+                            }
+                        )
                     }
                 });
+                
+                dataDewasa.splice(0, 1);
+                dataDewasa.forEach((el) => {
+                    $('.wraping-add-booking-dewasa').append(`
+                        <div class="adding-booking row">
+                            <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select class="nama-tamu-select2" name="nama_tamu_dewasa[]">
+                                        <option value="${el.namatamu}">${el.namatamu}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                                <select name="nasionality_dewasa[]" class="nasionality-select2">
+                                    <option value="${el.nasionality} selected">${el.nasionality}</option>
+                                    <?php foreach($list_negara as $dt){?>
+                                        <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select class="nohp-tamu-select2" name="nohp_tamu_dewasa[]">
+                                        <option value="${el.nope}">${el.nope}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select  class="email-tamu-select2" name="email_tamu_dewasa[]">
+                                        <option value="${el.email}">${el.email}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-dewasa"></i>
+                        </div>
+                    `);
+                })
+                
+                dataAnak.splice(0, 1);
+                dataAnak.forEach((el) => {
+                    $('.wraping-add-booking-anak').append(`
+                        <div class="adding-booking row">
+                            <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select class="nama-tamu-select2" name="nama_tamu_anak[]">
+                                        <option value="${el.namatamu}">${el.namatamu}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                                <select name="nasionality_anak[]" class="nasionality-select2">
+                                    <option value="${el.nasionality} selected">${el.nasionality}</option>
+                                    <?php foreach($list_negara as $dt){?>
+                                        <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select class="nohp-tamu-select2" name="nohp_tamu_anak[]">
+                                        <option value="${el.nope}">${el.nope}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select  class="email-tamu-select2" name="email_tamu_anak[]">
+                                        <option value="${el.email}">${el.email}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-anak"></i>
+                        </div>
+                    `);
+                })
+                
+                dataFOC.splice(0, 1);
+                dataFOC.forEach((el) => {
+                    $('.wraping-add-booking-foc').append(`
+                        <div class="adding-booking row">
+                            <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select class="nama-tamu-select2" name="nama_tamu_foc[]">
+                                        <option value="${el.namatamu}">${el.namatamu}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                                <select name="nasionality_foc[]" class="nasionality-select2">
+                                    <option value="${el.nasionality} selected">${el.nasionality}</option>
+                                    <?php foreach($list_negara as $dt){?>
+                                        <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select class="nohp-tamu-select2" name="nohp_tamu_foc[]">
+                                        <option value="${el.nope}">${el.nope}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                <div class="d-flex align-items-center">
+                                    <select  class="email-tamu-select2" name="email_tamu_foc[]">
+                                        <option value="${el.email}">${el.email}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-foc"></i>
+                        </div>
+                    `);
+                })
+
                 renderSelect2();
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -260,9 +378,226 @@
         $(".wraping-add-booking-dewasa").on("click", ".remove-add-book-dewasa", function(e) {
             e.preventDefault();
             $(this).parent('div').remove();
-            tap--;
+            // tap--;
+        })
+
+        $(".wraping-add-booking-anak").on("click", ".remove-add-book-anak", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            // tap--;
+        })
+
+        $(".wraping-add-booking-foc").on("click", ".remove-add-book-foc", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            // tap--;
         })
     })
 
+    // ADDING FOR NAMA TAMU & NATIONALITY DEWASA
+    $(document).ready(function() {
+        var max_taps = 30;
+        var tap = 1;
+        $(".add-nama-tamu-dewasa").click(function(e) {
+            e.preventDefault();
+            if (tap < max_taps) {
+                tap++;
+                $('.wraping-add-booking-dewasa').append(`
+                    <div class="adding-booking row">
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nama-tamu-select2" name="nama_tamu_dewasa[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                            <select name="nasionality_dewasa[]" class="nasionality-select2">
+                                <option value=""></option>
+                                <?php foreach($list_negara as $dt){?>
+                                    <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nohp-tamu-select2" name="nohp_tamu_dewasa[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select  class="email-tamu-select2" name="email_tamu_dewasa[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-dewasa"></i>
+                    </div>
+                `);
+                // $(".wrap-nama-tamu").append('<div class="d-flex align-items-center mt-2 nama-tamu-add"><input type="text" class="form-control" id="nama_tamu" name="nama_tamu[]" placeholder="masukkan nama tamu..."></div>'); //add input box
+                // $(".wrap-nasionality").append('<div class="d-flex align-items-center mt-2"><select name="nasionality[]" class="nasionality-select2"><?php foreach($list_negara as $dt){?><option value="<?= $dt['name']?>"><?= $dt['name']?></option><?php }?></select></div>'); 
+                // $(".wrap-jenis-penumpang").append('<div class="d-flex align-items-center mt-2"> <select class="jenis-penumpang-select2" name="jenis_penumpang[]"><option ></option><option value="Dewasa">Dewasa</option><option value="Anak-Anak">Anak-Anak</option><option value="FOC">FOC</option></select><i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-booking"></i></div>'); 
+                // $(".wrap-jenis-penumpang").append('<i style="cursor: pointer;" class="ti ti-circle-minus fs-8 ms-2 text-danger remove-add-book"></i>'); 
+            } else {
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Dewasa Sudah Maximal, Buat Booking Paket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
+            }
+            renderSelect2();
+        });
+
+        $(".wraping-add-booking-dewasa").on("click", ".remove-add-book-dewasa", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            tap--;
+        })
+
+    });
+
+    // ADDING FOR NAMA TAMU & NATIONALITY ANAK
+    $(document).ready(function() {
+        var max_taps = 30;
+        var tap = 1;
+        $(".add-nama-tamu-anak").click(function(e) {
+            e.preventDefault();
+            if (tap < max_taps) {
+                tap++;
+                $('.wraping-add-booking-anak').append(`
+                    <div class="adding-booking row">
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nama-tamu-select2" name="nama_tamu_anak[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                            <select name="nasionality_anak[]" class="nasionality-select2">
+                                <option value=""></option>
+                                <?php foreach($list_negara as $dt){?>
+                                    <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nohp-tamu-select2" name="nohp_tamu_anak[]" >
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select  class="email-tamu-select2" name="email_tamu_anak[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-anak"></i>
+                    </div>
+                `);
+            } else {
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu Anak Sudah Maximal, Buat Booking Paket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
+            }
+            renderSelect2();
+        });
+
+        $(".wraping-add-booking-anak").on("click", ".remove-add-book-anak", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            tap--;
+        })
+
+    });
+    
+    // ADDING FOR NAMA TAMU & NATIONALITY FOC
+    $(document).ready(function() {
+        var max_taps = 30;
+        var tap = 1;
+        $(".add-nama-tamu-foc").click(function(e) {
+            e.preventDefault();
+            if (tap < max_taps) {
+                tap++;
+                $('.wraping-add-booking-foc').append(`
+                    <div class="adding-booking row">
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nama-tamu-select2" name="nama_tamu_foc[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                            <select name="nasionality_foc[]" class="nasionality-select2">
+                                <option value=""></option>
+                                <?php foreach($list_negara as $dt){?>
+                                    <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="nohp-tamu-select2" name="nohp_tamu_foc[]" >
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select class="email-tamu-select2" name="email_tamu_foc[]">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-foc"></i>
+                    </div>
+                `);
+            } else {
+                setTimeout(function() {
+                    Swal.fire({
+                        html: 'Tamu FOC Sudah Maximal, Buat Booking Paket Lagi Berikutnya',
+                        position: 'top',
+                        timer: 3000,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        icon: 'info',
+                        timer: 2000,
+                        timerProgressBar: true,
+                    });
+                }, 100);
+            }
+            renderSelect2();
+        });
+
+        $(".wraping-add-booking-foc").on("click", ".remove-add-book-foc", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            tap--;
+        })
+
+    });
+    
 
 </script>
