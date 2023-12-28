@@ -131,6 +131,7 @@
                         }else if(full.del == 'yes') {
                             btnCancel = '<button disabled class="del-data btn btn-warning"><i class="ti ti-x"></i></button>';
                         }
+                        var btnEdit = '<a href="<?=base_url()?>booking/edit_booking_ticket/'+encodeURI(btoa(full.id))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></a>';
 
                         var chargePrint = parseInt(full.charge);
                         chargePrint = chargePrint.toLocaleString("en")
@@ -204,7 +205,7 @@
                                         </div>`;
 
                         var btnPrint = `
-                            <button id="printTiket${full.kode_tiket}" onClick="valuePrint('${full.kode_tiket}')" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
+                            <button id="printTiket${full.kode_tiket}" onClick="valuePrint('${full.kode_tiket}')" class="btn btn-warning me-1"><i class="ti fs-5 ti-printer"></i></button>
                             <div class="booking-print printTiketPreview${full.kode_tiket}">
                                 <div class="d-flex justify-content-center mb-2">
                                     <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
@@ -278,10 +279,8 @@
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
                         var temp;
-                        if(moment(full.berangkat).isAfter(currentDate)){
-                            // if(full.kembali == null && ){
-                            // }
-                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnCancel}</div>`;
+                        if(moment(full.berangkat).isAfter(currentDate) && full.checkin_by == null){
+                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnEdit}</div>`;
                         }else{
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint}</div>`;                                
                         }
