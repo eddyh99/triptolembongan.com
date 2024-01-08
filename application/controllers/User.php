@@ -48,7 +48,7 @@ class User extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('passwd', 'Password', 'trim|required');
-		// $this->form_validation->set_rules('role', 'Role', 'trim|required');
+		$this->form_validation->set_rules('lokasi', 'Location', 'trim|required');
 
 
         if ($this->form_validation->run() == FALSE) {
@@ -62,6 +62,7 @@ class User extends CI_Controller
         $input      = $this->input;
         $username   = $this->security->xss_clean($input->post('username'));
         $passwd     = $this->security->xss_clean($input->post('passwd'));
+        $lokasi     = $this->security->xss_clean($input->post('lokasi'));
 
         // Initial List of Side Menu
         $stu        = $this->security->xss_clean($input->post('stu')); 
@@ -194,7 +195,7 @@ class User extends CI_Controller
         $datas = array(
             "username"  => $username, 
             "passwd"    => sha1($passwd),
-            // "role"      => $role,
+            "lokasi"    => $lokasi,
             "created_at"=> date("Y-m-d H:i:s"),
             "update_at"=> date("Y-m-d H:i:s")
         );
@@ -243,7 +244,7 @@ class User extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('passwd', 'Password', 'trim');
-		// $this->form_validation->set_rules('role', 'Role', 'trim|required');
+		$this->form_validation->set_rules('lokasi', 'Location', 'trim|required');
 
 
         if ($this->form_validation->run() == FALSE) {
@@ -256,19 +257,19 @@ class User extends CI_Controller
         $input      = $this->input;
         $username   = $this->security->xss_clean($input->post('username'));
         $passwd     = $this->security->xss_clean($input->post('passwd'));
-        // $role       = $this->security->xss_clean($input->post('role'));
+        $lokasi     = $this->security->xss_clean($input->post('lokasi'));
 
         $delete_role = $this->user->delete_role($username);
         
         if (!empty($passwd)){
             $datas = array(
                 "passwd"    => sha1($passwd),
-                // "role"      => $role,
+                "lokasi"    => $lokasi,
                 "update_at"=> date("Y-m-d H:i:s")
             );    
         }else{
             $datas = array(
-                // "role"      => $role,
+                "lokasi"      => $lokasi,
                 "update_at"=> date("Y-m-d H:i:s")
             ); 
         }

@@ -33,14 +33,13 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Enter password..." required>
                         </div>
-                        <!-- <div class="mb-3 col-3">
-                            <label for="role" class="form-label">Role</label>
-                            <select name="role" id="role" class="form-select">
-                                <option value="kasir">Kasir</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="admin">Admin</option>
+                        <div class="mb-3 col-3">
+                            <label for="role" class="form-label">Location</label>
+                            <select name="lokasi" id="lokasi" class="form-select">
+                                <option value="Sanur">Sanur</option>
+                                <option value="Lembongan">Lembongan</option>
                             </select>
-                        </div> -->
+                        </div>
                         <div class="col-12 d-flex">
                             <label class="form-label">Menu Checklist</label>
                         </div>

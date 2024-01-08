@@ -47,7 +47,9 @@
                         <thead>
                             <tr>
                                 <th>Kode</th>
-                                <th>Jumlah Tamu</th>
+                                <th>Adult</th>
+                                <th>Child</th>
+                                <th>FOC</th>
                                 <th>Charge</th>
                                 <th>Harga Agen</th>
                                 <th>Selisih Komisi</th>
@@ -59,15 +61,25 @@
                                     <td><?=$dt["kode_tiket"]?></td>
                                     <td>
                                         <?php 
-                                            echo $dt["dws"]+$dt["anak"]+$dt["foc"];
+                                            echo $dt["dws"];
                                         ?>
                                     </td>
                                     <td>
+                                        <?php 
+                                            echo $dt["anak"];
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                            echo $dt["foc"];
+                                        ?>
+                                    </td>                                    
+                                    <td style="text-align:right">
                                         <?php
                                             echo number_format($dt["charge"],0,".",",");
                                         ?>
                                     </td>
-                                    <td>
+                                    <td style="text-align:right">
                                         <?php
                                             if (!empty($dt["return_from"])){
                                                 $total=$dt["dws"]+$dt["anak"];

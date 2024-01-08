@@ -598,6 +598,12 @@
             tap--;
         })
 
+        $("#main-anak").on("click",function(e){
+            e.preventDefault();
+            $(".main-row-anak").remove();
+            tap--;
+        })
+
     });
     
     // ADDING FOR NAMA TAMU & NATIONALITY FOC
@@ -664,7 +670,12 @@
             $(this).parent('div').remove();
             tap--;
         })
-
+        
+        $("#main-foc").on("click",function(e){
+            e.preventDefault();
+            $(".main-row-foc").remove();
+            tap--;         
+        })
     });
 
     var tipeAgent = $('#nama_agent option:selected').attr('data-tipe');

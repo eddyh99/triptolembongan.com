@@ -13,7 +13,7 @@
                                 <th>Guest</th>
                                 <th>Total</th>
                                 <th>Depart</th>
-                                <th>Chek In</th>
+                                <th>Check In</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +34,7 @@
                                         <?php } else {?>
                                             <button disabled class="btn btn-success"><i class="ti ti-check"></i></button>
                                         <?php } ?>
+                                        <button onClick="valuePrint('<?=$dt["dropoff"]?>','<?=$dt["dws"]?>','<?=$dt["anak"]?>','<?=$dt["foc"]?>')" class="btn btn-warning me-1"><i class="ti fs-5 ti-printer"></i></button>
                                     </td>
                                 </tr>
                             <?php }?>
@@ -44,7 +45,7 @@
                                 <th>Guest</th>
                                 <th>Total</th>
                                 <th>Depart</th>
-                                <th>Chek In</th>
+                                <th>Check In</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -52,6 +53,20 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="printTagPreview">
+    <div class="d-flex justify-content-center mt-5 mb-2">
+        <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
+    </div>
+    <span class="text-center d-block fst-italic fs-2">Jalan Matahari Terbit, Pertokoan ARCADE, No.4, Sanur, Denpasar Selatan</span>
+    <hr>
+    <span class="fs-2 text-center"><h1>Drop Off&emsp;&emsp;&nbsp;&ensp; : <span id="dropoff"></span></h1></span>
+    <br>
+    <span class="fs-2 text-center d-block">
+        Adult: <span id="adult"></span>, Child: <span id="child"></span>, FOC: <span id="foc"></span>
+    </span>
+    <br>
 </div>
 
 <!-- SWEET ALERT START -->

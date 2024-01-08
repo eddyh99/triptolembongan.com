@@ -47,11 +47,13 @@ class Booking extends CI_Controller
         
         $start      = date("Y-m-d");
         $end        = date("Y-m-d");
+        $tiket      = $this->ticket->get_ticket();
 
         $data = array(
             'title'             => NAMETITLE . ' - Booking Ticket',
             'content'           => 'admin/booking_ticket/list_booking',
             'extra'             => 'admin/booking_ticket/_js_list_booking',
+            'tiket'             => $tiket,
             'bookticket_active' => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);
@@ -426,8 +428,7 @@ class Booking extends CI_Controller
         $payment            = $this->security->xss_clean($input->post('payment'));
         $charge             = $this->security->xss_clean($input->post('total'));
         $komisi             = $this->security->xss_clean($input->post('komisi'));
-        
-        
+                
         $temp_dewasa = array();
         $temp_anak = array();
         $temp_foc = array();
@@ -529,7 +530,7 @@ class Booking extends CI_Controller
         );
 
         $result = $this->booking->update_booking_ticket($id, $datas, $detail_booking);
-        
+
         if($result['code'] == 200) {
             $this->session->set_flashdata('success', 'Berhasil Booking');
 			redirect('booking/list_booking_ticket');

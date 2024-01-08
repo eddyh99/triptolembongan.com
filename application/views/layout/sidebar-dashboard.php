@@ -170,6 +170,14 @@
                         <span class="hide-menu">Departure Today</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$passangerlist_active?>" href="<?= base_url()?>departure/passangerlist" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-speedboat"></i>
+                        </span>
+                        <span class="hide-menu">Passanger List</span>
+                    </a>
+                </li>
                 <?php } ?>
 
                 

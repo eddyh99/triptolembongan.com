@@ -59,6 +59,7 @@ class Auth extends CI_Controller
 			$temp_session = array(
 				'username'  => $result->username,
 				'role'      => $get_role,
+				'lokasi'	=> $result->lokasi,
 				'is_login'  => true
 			);
 		

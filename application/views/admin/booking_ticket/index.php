@@ -22,7 +22,7 @@
                                         <label for="kode_ticket" class="form-label">Code Ticket</label>
                                         <div class="wrapper-kode-ticket d-flex align-items-center justify-content-between">
                                             <input type="text" class="fw-bold fs-5 text-success border-0" id="kode_ticket" name="kode_ticket" readonly 
-                                                value="TIX<?php $num = mt_rand(100000,999999); printf("%d", $num);?>"/>
+                                                value="DRC<?php $num = mt_rand(100000,999999); printf("%d", $num);?>"/>
                                             <i class="ti ti-ticket fs-6 text-success"></i>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                         <select name="nasionality_dewasa[]" id="nasionality-dewasa-select2" class="nasionality-select2">
                                             <option value=""></option>
                                             <?php foreach($list_negara as $dt){?>
-                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                                <option value="<?= $dt['name']?>" <?php echo ($dt["name"]=="Indonesia")? "selected" :""?>><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -172,7 +172,7 @@
                                         <select name="nasionality_anak[]" id="nasionality-anak-select2" class="nasionality-select2">
                                             <option value=""></option>
                                             <?php foreach($list_negara as $dt){?>
-                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                                <option value="<?= $dt['name']?>" <?php echo ($dt["name"]=="Indonesia")? "selected" :""?>><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -218,7 +218,7 @@
                                         <select name="nasionality_foc[]" id="nasionality-foc-select2" class="nasionality-select2">
                                             <option value=""></option>
                                             <?php foreach($list_negara as $dt){?>
-                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                                <option value="<?= $dt['name']?>"  <?php echo ($dt["name"]=="Indonesia")? "selected" :""?>><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
                                     </div>
