@@ -45,4 +45,24 @@
 		scrollbar: true
 	});
 
+	$(document).on("click", ".del-data", function(e){
+		e.preventDefault();
+		let url_href = $(this).attr('href');
+		Swal.fire({
+			text:"Are you sure you delete this data?",
+			type: "warning",
+			position: 'center',
+			showCancelButton: true,
+			confirmButtonText: "Delete",
+			cancelButtonText: "Cancel",
+			confirmButtonColor: '#FA896B',
+			closeOnConfirm: true,
+			showLoaderOnConfirm: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				document.location.href = url_href;
+			}
+		})
+	});
+
 </script>

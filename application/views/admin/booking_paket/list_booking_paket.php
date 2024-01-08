@@ -18,13 +18,16 @@
                 <div class="card-body">
                     <div class="row d-flex justify-content-end align-items-end form-group mb-3">
                         <div class="col-4">
-                            <label class="text-start d-block mb-2">Range Tanggal</label>
+                            <label class="text-start d-block mb-2">Range Date</label>
                             <input type="text" id="tanggal" name="tanggal" class="form-control" value="" autocomplete="off">
                         </div>
                     </div>
                     <div class="row form-group mb-3">
                         <div class="col text-end">
-                            <button id="lihat" class="btn btn-info">Lihat</button>
+                            <button id="lihat" class="btn btn-info">  
+                                <i class="ti ti-filter fs-5 me-1"></i>
+                                Filter
+                            </button>
                         </div>
                     </div>
                     <h5 class="card-title fw-semibold mb-4">List Booking Paket</h5>
@@ -76,6 +79,22 @@
                 showCloseButton: true,
                 showConfirmButton: false,
                 icon: 'success',
+                timer: 2000,
+                timerProgressBar: true,
+            });
+        }, 100);
+    </script>
+<?php } ?>
+<?php if(isset($_SESSION["error"])) { ?>
+    <script>
+        setTimeout(function() {
+            Swal.fire({
+                html: '<?= $_SESSION['error'] ?>',
+                position: 'top',
+                timer: 3000,
+                showCloseButton: true,
+                showConfirmButton: false,
+                icon: 'error',
                 timer: 2000,
                 timerProgressBar: true,
             });

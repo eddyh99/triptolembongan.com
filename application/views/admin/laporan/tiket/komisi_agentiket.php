@@ -5,15 +5,29 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
-                    <form action="<?=base_url()?>laporan/komisi_tiket_agen" method="post">
+                    <form action="<?=base_url()?>laporan/komisi_tiket_agen/<?=$tipeagent_url?>" method="post">
                         <div class="row d-flex justify-content-end align-items-end form-group mb-3">
                             <div class="col-3">
-                                <label class="text-start d-block mb-2">Nama Agen</label>
+                                <label class="text-start d-block mb-2">Name Agent</label>
                                 <select name="agen" class="form-select">
-                                    <option>--- Pilih Nama Agent ---</option>
-                                    <?php foreach ($agent as $dt){?>
-                                        <option value="<?=$dt["id"]?>" <?php echo ($dt["id"]==$idagent)?"selected":""?>><?=$dt["nama"]?></option>
-                                    <?php }?>
+                                    <?php 
+                                        foreach ($agent as $dt){
+                                            if($tipeagent_url == 'company'){
+                                                if($dt['tipe'] == 'company'){
+                                    ?>
+                                                <option value="<?=$dt["id"]?>" <?php echo ($dt["id"]==$idagent)?"selected":""?>><?=$dt["nama"]?></option>
+                                    
+                                    <?php 
+                                                }
+                                            } else if($tipeagent_url == 'general') {
+                                                if($dt['tipe'] == 'general'){
+                                    ?>
+                                                <option value="<?=$dt["id"]?>" <?php echo ($dt["id"]==$idagent)?"selected":""?>><?=$dt["nama"]?></option>
+                                    <?php 
+                                                }
+                                            }
+                                        }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-4">

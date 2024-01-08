@@ -22,14 +22,14 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php } ?>
-                    <h5 class="card-title fw-semibold mb-4">Tambah Payment</h5>
+                    <h5 class="card-title fw-semibold mb-4">Add Payment</h5>
                     <form action="<?= base_url()?>payment/tambah_process" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="mb-3">
                             <label for="nama_agent" class="form-label">Payment</label>
-                            <input type="text" class="form-control" id="payment" name="payment" placeholder="masukkan payment...">
+                            <input type="text" class="form-control" id="payment" name="payment" placeholder="Enter payment...">
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Daftar</button>
+                        <button type="submit" class="btn btn-primary mt-3">Save</button>
                   </form>
                 </div>
             </div>

@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>user/tambah_user" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Pengguna
+                    Add User
                 </span>
             </a>
         </div>
@@ -16,14 +16,14 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">List Pengguna</h5>
+                    <h5 class="card-title fw-semibold mb-4">List Users</h5>
                     <table id="table_list_user" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th class="th-role">Role</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +33,7 @@
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th>Role</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

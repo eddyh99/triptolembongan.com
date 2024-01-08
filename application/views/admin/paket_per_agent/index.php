@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>paket/tambah_paket_agent" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Paket per Agent
+                    Add Paket per Agent
                 </span>
             </a>
         </div>
@@ -22,11 +22,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Paket</th>
-                                <th>Keterangan</th>
-                                <th>Nama Agent</th>
+                                <th>Information</th>
+                                <th>Agent</th>
                                 <th>No.Telp</th>
-                                <th>Harga</th>
-                                <th>Aksi</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,11 +35,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Paket</th>
-                                <th>Keterangan</th>
-                                <th>Nama Agent</th>
+                                <th>Information</th>
+                                <th>Agent</th>
                                 <th>No.Telp</th>
-                                <th>Harga</th>
-                                <th>Aksi</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

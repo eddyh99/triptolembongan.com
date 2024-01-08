@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>ticket/tambah_ticket" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Ticket
+                    Add Ticket
                 </span>
             </a>
         </div>
@@ -16,14 +16,14 @@
         <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">List Ticket</h5>
+                    <h5 class="card-title fw-semibold mb-4">List Tickets</h5>
                     <table id="table_list_ticket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Tujuan</th>
-                                <th>Jam</th>
-                                <th>Aksi</th>
+                                <th>Destination</th>
+                                <th>Hour</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,9 +31,9 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>Tujuan</th>
-                                <th>Jam</th>
-                                <th>Aksi</th>
+                                <th>Destination</th>
+                                <th>Hour</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

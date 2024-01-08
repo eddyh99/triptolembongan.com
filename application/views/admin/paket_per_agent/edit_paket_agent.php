@@ -5,7 +5,7 @@
             <a href="<?= base_url()?>paket/paket_agent" class="btn btn-outline-primary d-flex align-items-center">
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>
@@ -26,24 +26,24 @@
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <div class="row">
                             <div class="mb-4 col-6">
-                                <label for="berlaku" class="form-label">Nama Agent</label>
+                                <label for="berlaku" class="form-label">Agent Name</label>
                                 <select class="nama-agent" name="id_agent">
                                     <option value="<?= $paket_agent['0']['id_nama']?>"><?= $paket_agent['0']['nama']?></option>
                                 </select>
                             </div>
                             <div class="mb-4 col-6">
-                            <label for="berlaku" class="form-label">Paket Agent</label>
+                            <label for="berlaku" class="form-label">Agent Paket</label>
                                 <select class="paket" name="id_paket">
                                     <option value="<?= $paket_agent['0']['id']?>"><?= $paket_agent['0']['namapaket']?></option>
                                 </select>
                             </div>
                          
                             <div class="mb-3 col-6">
-                                <label for="harga" class="form-label ">Harga</label>
-                                <input type="text" class="form-control money-input" id="harga" name="harga" >
+                                <label for="harga" class="form-label ">Price</label>
+                                <input type="text" class="form-control money-input" id="harga" name="harga" placeholder="Enter New Price...">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Edit Paket</button>
+                        <button type="submit" class="btn btn-primary mt-3">Update Paket</button>
                   </form>
                 </div>
             </div>

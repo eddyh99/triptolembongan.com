@@ -47,13 +47,21 @@ class Auth extends CI_Controller
 		);
 
 		$result = $this->auth->VerifyLogin($datas);
-
+		$user_role = explode(",", $result->role);
+	
+		$get_role = array();
+		foreach ($user_role as $dt){
+            $get_role[$dt]=$dt;
+        }
+        
+		
 		if(!empty($result)){
 			$temp_session = array(
 				'username'  => $result->username,
-				'role'      => $result->role,
+				'role'      => $get_role,
 				'is_login'  => true
 			);
+		
 			$this->session->set_userdata('logged_status', $temp_session);
 			$this->session->set_flashdata('success_log', "Selamat datang <b>".$result->username."</b>");
 			redirect('dashboard');

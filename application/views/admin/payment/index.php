@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>payment/tambah_payment" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Payment
+                    Add Payment
                 </span>
             </a>
         </div>
@@ -22,7 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Payment</th>
-                                <th>Aksi</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>

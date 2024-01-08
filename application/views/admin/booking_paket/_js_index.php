@@ -385,6 +385,16 @@
             hargaPaket = $('#paket_select2 option:selected').attr('hargaPaket');
         }); 
 
+        $('#nama_agent').on("change", function(e) { 
+            var tipeAgent = $('#nama_agent option:selected').attr('data-tipe');
+            console.log(tipeAgent);
+            if(tipeAgent == 'general'){
+                $('#komisigeneral').removeClass('d-none').addClass('d-flex');;
+            }else{
+                $('#komisigeneral').removeClass('d-flex').addClass('d-none');;
+            }
+        });
+
         // Click Cek Harga For Trigger Summary
         $("#cekHarga").click(function(e) {
             e.preventDefault();

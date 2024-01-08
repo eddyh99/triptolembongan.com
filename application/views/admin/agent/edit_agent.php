@@ -6,7 +6,7 @@
                 
                 <i class="ti ti-chevron-left fs-5 me-2"></i>
                 <span>
-                    Kembali
+                    Back
                 </span>
             </a>
         </div>
@@ -27,7 +27,7 @@
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <input type="hidden" name="id_edit" value="<?= $agent->id?>">
                         <div class="mb-4 col-12 col-md-6 ">
-                            <label for="freecharge" class="form-label">Tipe Agent</label>
+                            <label for="freecharge" class="form-label">Agent Type</label>
                             <div class="d-flex ">
                                 <div class="form-check">
                                     <input class="form-check-input cursor-pointer" type="radio" name="tipe" id="general" value="general" checked="<?php echo ($agent->tipe == 'general') ? 'checked' : ''?>">
@@ -44,20 +44,20 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nama_agent" class="form-label">Nama Agent</label>
-                            <input type="text" class="form-control" id="nama_agent" name="nama_agent" value="<?= $agent->nama?>" placeholder="masukkan nama agent..." required>
+                            <label for="nama_agent" class="form-label">Agent Name</label>
+                            <input type="text" class="form-control" id="nama_agent" name="nama_agent" value="<?= $agent->nama?>" placeholder="Enter Agent Name..." required>
                         </div>
                         <div class="mb-3">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $agent->alamat?>" placeholder="masukkan alamat..." required>
+                            <label for="alamat" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $agent->alamat?>" placeholder="Enter Agent Address..." required>
                         </div>
                         <div class="mb-3">
-                            <label for="kota" class="form-label">Kota</label>
-                            <input type="text" class="form-control" id="kota" name="kota" value="<?= $agent->kota?>" placeholder="masukkan kota..." required>
+                            <label for="kota" class="form-label">City</label>
+                            <input type="text" class="form-control" id="kota" name="kota" value="<?= $agent->kota?>" placeholder="Enter Agent City..." required>
                         </div>
                         <div class="mb-3">
-                            <label for="kontak" class="form-label">Kontak</label>
-                            <input type="number" class="form-control" id="kontak" name="kontak" value="<?= $agent->kontak?>" placeholder="masukkan kontak..." required>
+                            <label for="kontak" class="form-label">Contact</label>
+                            <input type="number" class="form-control" id="kontak" name="kontak" value="<?= $agent->kontak?>" placeholder="Enter Agent Contact..." required>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Update Agent</button>
                   </form>

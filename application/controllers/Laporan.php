@@ -121,11 +121,11 @@ class Laporan extends CI_Controller
     }
 
 
-    public function komisi_tiket_agen()
+    public function komisi_tiket_agen($tipeagent_url)
     {
         $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
         $idagen = $this->security->xss_clean($this->input->post('agen'));
-
+        
         if (empty($tanggal)){
             $awal   = date("Y-m-d");
             $akhir  = date("Y-m-d");
@@ -135,30 +135,35 @@ class Laporan extends CI_Controller
             $awal       = date_format(date_create($newtanggal[0]),"Y-m-d");
             $akhir      = date_format(date_create($newtanggal[1]),"Y-m-d");
         }
-        
+
+        if($tipeagent_url == 'company'){
+            $active_com = 'text-primary';
+        }else if($tipeagent_url == 'general'){
+            $active_gen = 'text-primary';
+        }
 
         $result     = $this->booking->list_ticket_byagendate($awal,$akhir,$idagen);
-        // echo "<pre>".print_r($result,true)."</pre>";
-        // die;
+
         $data = array(
             'title'             => NAMETITLE . ' - Laporan Komisi Ticket per Agen',
             'content'           => 'admin/laporan/tiket/komisi_agentiket',
             'extra'             => 'admin/laporan/tiket/js/_js_komisi_agentiket',
             'laporan'           => $result,
             'agent'             => $this->agent->get_agent(),
+            'tipeagent_url'     => $tipeagent_url,          
             'idagent'           => (!empty($tanggal))?$idagen:"",
-            // 'laporan_active'    => 'active',
-            'dropdown_komisi_agentiket'   => 'text-primary'
+            'prim_komisi_agenpaket_com'   => (!empty($active_com)) ? $active_com : '',
+            'prim_komisi_agenpaket_gen'   => (!empty($active_gen)) ? $active_gen : ''
         );
         $this->load->view('layout/wrapper-dashboard', $data);
     }
 
-    public function komisi_paket_agen()
+
+    public function komisi_paket_agen($tipeagent_url)
     {
         $tanggal = $this->security->xss_clean($this->input->post('tanggal'));
         $idagen = $this->security->xss_clean($this->input->post('agen'));
-        // print_r($tanggal);
-        // die;
+
         if (empty($tanggal)){
             $awal   = date("Y-m-d");
             $akhir  = date("Y-m-d");
@@ -168,6 +173,15 @@ class Laporan extends CI_Controller
             $awal       = date_format(date_create($newtanggal[0]),"Y-m-d");
             $akhir      = date_format(date_create($newtanggal[1]),"Y-m-d");
         }
+
+
+        if($tipeagent_url == 'company'){
+            $active_com = 'text-primary';
+        }else if($tipeagent_url == 'general'){
+            $active_gen = 'text-primary';
+        }
+        
+
         $result     = $this->booking->list_paket_byagendate($awal,$akhir,$idagen);
         $data = array(
             'title'             => NAMETITLE . ' - Laporan Komisi Paket per Agen',
@@ -175,10 +189,11 @@ class Laporan extends CI_Controller
             'extra'             => 'admin/laporan/paket/js/_js_komisi_agenpaket',
             'laporan'           => $result,
             'agent'             => $this->agent->get_agent(),
+            'tipeagent_url'     => $tipeagent_url, 
             'idagent'           => (!empty($tanggal))?$idagen:"",
             'tanggal'           => $tanggal,
-            // 'laporan_active'    => 'active',
-            'dropdown_komisi_agenpaket'   => 'text-primary'
+            'prim_komisi_agentiket_com'   => (!empty($active_com)) ? $active_com : '',
+            'prim_komisi_agentiket_gen'   => (!empty($active_gen)) ? $active_gen : ''
         );
         $this->load->view('layout/wrapper-dashboard', $data);
     }

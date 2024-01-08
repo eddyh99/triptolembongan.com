@@ -113,6 +113,8 @@
                             btnCancel = '<button disabled class="del-data btn btn-warning"><i class="ti ti-x"></i></button>';
                         }
 
+                        var btnEdit = '<a href="<?=base_url()?>booking/edit_booking_paket/'+encodeURI(btoa(full.id))+'" class="btn btn-success "><i class="ti ti-pencil-minus fs-4"></a>';
+
                         var chargePrint = parseInt(full.charge);
                         chargePrint = chargePrint.toLocaleString("en")
 
@@ -144,7 +146,7 @@
                                         </div>`;
 
                         var btnPrint = `
-                                <button id="printTiket${full.kode_tiket}" class="btn btn-success me-1"><i class="ti fs-5 ti-printer"></i></button>
+                                <button id="printTiket${full.kode_tiket}" onClick="valuePrint('${full.kode_tiket}')" class="btn btn-warning me-1"><i class="ti fs-5 ti-printer"></i></button>
                                 <div class="booking-paket-print printTiketPreview${full.kode_tiket} bg-primary">
                                     <div class="d-flex justify-content-center mb-2">
                                         <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
@@ -201,17 +203,17 @@
                                 </div>
                         `;
 
-                        $(`#printTiket${full.kode_tiket}`).on('click', function(){
-                            $(`.printTiketPreview${full.kode_tiket}`).printThis({
-                                removeScripts: true, 
-                            })
-                        })
+                        // $(`#printTiket${full.kode_tiket}`).on('click', function(){
+                        //     $(`.printTiketPreview${full.kode_tiket}`).printThis({
+                        //         removeScripts: true, 
+                        //     })
+                        // })
                         
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
                         var temp;
-                        if(moment(full.berangkat).isAfter(currentDate)){
-                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnCancel}</div>`;
+                        if(moment(full.berangkat).isAfter(currentDate) && full.checkin_by == null){
+                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnEdit}</div>`;
                         }else{
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint}</div>`;;
                         }
@@ -220,6 +222,14 @@
                 },
             ],
         });
+
+
+        function valuePrint(kode){
+            $(`.printTiketPreview${kode}`).printThis({
+                removeScripts: true, 
+            })
+            return false;
+        }
 
         $("#lihat").on("click",function(){
             bookingpaket.ajax.reload();
@@ -234,7 +244,7 @@
             },
             ranges: {
                 'Today': [moment(), moment()],
-                'Tommorow': [moment().add(1, 'days'), moment().add(1, 'days'),],
+                'Yesterday': [moment().add(-1, 'days'), moment().add(-1, 'days'),],
                 'This Month': [moment().startOf('month'), moment().endOf('month')],
             }
         });

@@ -6,7 +6,7 @@
             <a href="<?= base_url()?>paket/tambah_paket" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-plus fs-5 me-2"></i>
                 <span>
-                    Tambah Paket
+                    Add Paket
                 </span>
             </a>
         </div>
@@ -22,8 +22,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Paket</th>
-                                <th class="th-keteranga-paket">Keterangan</th>
-                                <th>Aksi</th>
+                                <th class="th-keteranga-paket">Information</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,8 +32,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Paket</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
+                                <th>Information</th>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -53,12 +53,10 @@ class User_model extends CI_Model{
 
     public function get_edit_user($username)
     {
-        $sql = "SELECT a.username, GROUP_CONCAT(b.role) FROM tbl_user a 
+        $sql = "SELECT a.username, GROUP_CONCAT(b.role) as role FROM tbl_user a 
                 INNER JOIN tbl_role b ON a.username=b.username
                 WHERE a.username=? AND a.is_deleted='no'
                 ORDER BY a.username";
-        // $sql = "SELECT username, role FROM tbl_role
-        //         WHERE username=?";
         $query = $this->db->query($sql, $username);
 		if ($query){
 			return $query->row();
@@ -67,17 +65,45 @@ class User_model extends CI_Model{
 		}
     }
 
-    public function edit_user($username, $datas)
+    public function delete_role($username)
     {
-        $this->db->where("username",$username);
+        $sql ="DELETE FROM tbl_role WHERE username=?";
+        $query = $this->db->query($sql, array($username));
+    }
 
-		if ($this->db->update("tbl_user", $datas)){
-            return array(
-                "code"      => 200, 
-                "message"   => ""
+    public function edit_user($username, $datas, $role_detail)
+    {
+
+        $this->db->trans_start();
+        $this->db->where("username",$username);
+        $this->db->update("tbl_user", $datas);
+        $error = $this->db->error();
+
+        $detail = array();
+        foreach($role_detail as $dt){
+            $temp['username']       = $username;
+            $temp['role']           = $dt['role'];
+            $temp['keterangan']     = $dt['keterangan'];
+            array_push($detail, $temp);
+        }
+
+        $this->db->insert_batch('tbl_role', $detail);
+        $this->db->trans_complete();
+
+		if ($this->db->trans_status() == FALSE) {
+			$this->db->trans_rollback();
+            echo $error["message"];
+			return array(
+                "code" => 511, 
+                "message" => $error["message"]
             );
-		}else{
-            return $this->db->error();
+		} else {
+			$this->db->trans_commit();
+            echo "SUKSES";
+			return array(
+                "code" => 200, 
+                "message" => ""
+            );
 		}
     }
 

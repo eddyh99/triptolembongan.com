@@ -9,7 +9,7 @@ class Booking_model extends CI_Model{
             $end = date('Y-m-d', strtotime($end . ' +1 day'));
         }
         if ($tipe=="all"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open, 
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -17,7 +17,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
             LEFT JOIN tbl_agen b ON a.agentid=b.id 
             INNER JOIN tbl_tiket c ON a.depart=c.id 
             LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -25,7 +25,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ?
             ";
         }elseif ($tipe=="return"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -33,7 +33,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
             LEFT JOIN tbl_agen b ON a.agentid=b.id 
             INNER JOIN tbl_tiket c ON a.depart=c.id 
             LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -41,7 +41,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NOT NULL AND is_open='no'
             ";
         }elseif ($tipe=="oneway"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -49,7 +49,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
             LEFT JOIN tbl_agen b ON a.agentid=b.id 
             INNER JOIN tbl_tiket c ON a.depart=c.id 
             LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -57,7 +57,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NULL  AND is_open='no'
             ";
         }elseif ($tipe=="open"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, 
+            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -65,7 +65,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
             LEFT JOIN tbl_agen b ON a.agentid=b.id 
             INNER JOIN tbl_tiket c ON a.depart=c.id 
             LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -116,7 +116,7 @@ class Booking_model extends CI_Model{
         }
     }
 
-    public function list_ticket_byagendate($start,$end,$idagen)
+    public function list_ticket_byagendate($start, $end, $idagen)
     {
         $sql="SELECT a.id,a.tgl_pesan, kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart,concat(d.tujuan,' - ',d.berangkat) as return_from, 
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -265,6 +265,20 @@ class Booking_model extends CI_Model{
         }
     }
 
+    public function update_open($id, $datas)
+    {
+        $this->db->where("id",$id);
+
+		if ($this->db->update("tbl_booking", $datas)){
+            return array(
+                "code"      => 200, 
+                "message"   => ""
+            );
+		}else{
+            return $this->db->error();
+		}
+    }
+
     public function hapus_booking_ticket($id, $data)
     {
         $this->db->where("id",$id);
@@ -277,6 +291,78 @@ class Booking_model extends CI_Model{
             return $this->db->error();
 		}
     }
+
+    public function get_edit_ticket($id)
+    {
+        $sql = "SELECT * FROM tbl_booking WHERE id=? AND checkin_by IS NULL AND is_deleted='no'";
+        $query = $this->db->query($sql, $id);
+		if ($query){
+			return $query->row();
+		}else{
+			return $this->db->error();
+		}
+    }
+
+    public function get_edit_ticket_detail($id)
+    {
+        $sql = "SELECT a.id as 'id_detail', a.namatamu, a.nasionality, a.nope, a.email, a.jenis FROM tbl_booking_detail a
+        INNER JOIN tbl_booking b ON a.id=b.id
+        WHERE a.id=?";
+        $query = $this->db->query($sql, $id);
+		if ($query){
+			return $query->result_array();
+		}else{
+			return $this->db->error();
+		}
+    }
+
+
+    public function update_booking_ticket($id, $datas, $detail_booking)
+    {
+        $this->db->trans_start();
+        $sqlDelete = "DELETE tbl_booking, tbl_booking_detail FROM tbl_booking 
+        INNER JOIN tbl_booking_detail ON tbl_booking.id=tbl_booking_detail.id
+        WHERE tbl_booking.id=?";
+		$this->db->query($sqlDelete, array($id));
+
+        $this->db->insert("tbl_booking", $datas);
+		$error = $this->db->error();
+		$id = $this->db->insert_id();
+
+        $detail = array();
+        foreach($detail_booking as $dt){
+            $temp['id']             = $id;
+            $temp['namatamu']       = $dt['namatamu'];
+            $temp['nasionality']    = $dt['nasionality'];
+            $temp['nope']           = $dt['nope'];
+            $temp['email']          = $dt['email'];
+            $temp['jenis']          = $dt['jenis'];
+            array_push($detail, $temp);
+        }
+        // echo "<pre>".print_r($detail,true)."</pre>";
+        // die;
+        $this->db->insert_batch('tbl_booking_detail', $detail);
+        $this->db->trans_complete();
+
+		if ($this->db->trans_status() == FALSE) {
+			$this->db->trans_rollback();
+            echo $error["message"];
+			return array(
+                "code" => 511, 
+                "message" => $error["message"]
+            );
+		} else {
+			$this->db->trans_commit();
+            echo "SUKSES";
+			return array(
+                "code" => 200, 
+                "message" => ""
+            );
+		}
+
+    }
+
+    
 
     // ================= =================== ====================
     // ================= BOOKING PAKET MODEL ====================
@@ -293,7 +379,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_paket_detail WHERE jenis='foc' AND id=a.id) as foc, 
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as namatamu, 
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_paket_detail.id) rn FROM tbl_booking_paket_detail) t WHERE rn=1 AND t.id=a.id) as nasionality,  
-            nama as namaagen, pickup, dropoff, charge, a.userid,  a.is_deleted as del FROM tbl_booking_paket a 
+            nama as namaagen, pickup, dropoff, charge, checkin_by, a.userid,  a.is_deleted as del FROM tbl_booking_paket a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_paket c ON a.id_paket=c.id
         INNER JOIN tbl_payment d ON a.payment=d.id
@@ -448,6 +534,78 @@ class Booking_model extends CI_Model{
 		}else{
             return $this->db->error();
 		}
+    }
+
+    public function get_edit_paket($id)
+    {
+        $sql = "SELECT * FROM tbl_booking_paket WHERE id=? AND checkin_by IS NULL AND is_deleted='no'";
+        $query = $this->db->query($sql, $id);
+		if ($query){
+			return $query->row();
+		}else{
+			return $this->db->error();
+		}
+    }
+
+    public function get_editpaket_detail($id)
+    {
+        $sql = "SELECT a.id as 'id_detail', a.namatamu, a.nasionality, a.nope, a.email, a.jenis FROM tbl_booking_paket_detail a
+        INNER JOIN tbl_booking_paket b ON a.id=b.id
+        WHERE a.id=?";
+        $query = $this->db->query($sql, $id);
+		if ($query){
+			return $query->result_array();
+		}else{
+			return $this->db->error();
+		}
+    }
+
+    public function update_booking_paket($id, $datas, $detail_booking_paket)
+    {
+        $this->db->trans_start();
+        $sqlDelete = "DELETE tbl_booking_paket, tbl_booking_paket_detail FROM tbl_booking_paket 
+        INNER JOIN tbl_booking_paket_detail ON tbl_booking_paket.id=tbl_booking_paket_detail.id
+        WHERE tbl_booking_paket.id=?";
+		$this->db->query($sqlDelete,array($id));
+
+        $this->db->insert("tbl_booking_paket", $datas);
+		$error = $this->db->error();
+		$id = $this->db->insert_id();
+        // echo "<pre>".print_r($ins,true)."</pre>";
+        // die;
+
+        $detail = array();
+        foreach($detail_booking_paket as $dt){
+            $temp['id']             = $id;
+            $temp['namatamu']       = $dt['namatamu'];
+            $temp['nasionality']    = $dt['nasionality'];
+            $temp['nope']           = $dt['nope'];
+            $temp['email']          = $dt['email'];
+            $temp['jenis']          = $dt['jenis'];
+            array_push($detail, $temp);
+        }
+        // echo "<pre>".print_r($detail,true)."</pre>";
+        // die;
+        $this->db->insert_batch('tbl_booking_paket_detail', $detail);
+        $this->db->trans_complete();
+
+		if ($this->db->trans_status() == FALSE) {
+			$this->db->trans_rollback();
+            trigger_error("Commit failed"); // throw my own error, sadly never thrown :(
+            echo $error["message"];
+			return array(
+                "code" => 511, 
+                "message" => $error["message"]
+            );
+		} else {
+			$this->db->trans_commit();
+            echo "SUKSES";
+			return array(
+                "code" => 200, 
+                "message" => ""
+            );
+		}
+
     }
 
 }
