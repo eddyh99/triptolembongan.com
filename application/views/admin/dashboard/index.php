@@ -10,7 +10,7 @@
                             <i class="ti ti-checkup-list fs-12"></i>
                         </div>
                         <div class="ms-auto text-info d-flex align-items-center">
-                            <span class="fs-8 fw-bold text-success">40</span>
+                            <span class="fs-8 fw-bold text-success"><?=@$booking?></span>
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4">
@@ -28,7 +28,7 @@
                             <i class="ti ti-speedboat fs-12"></i>
                         </div>
                         <div class="ms-auto text-primary d-flex align-items-center">
-                            <span class="fs-8 fw-bold">10</span>
+                            <span class="fs-8 fw-bold"><?=@$depart?></span>
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4">
@@ -46,7 +46,7 @@
                             <i class="ti ti-list-check fs-12"></i>
                         </div>
                         <div class="ms-auto text-danger d-flex align-items-center">
-                            <span class="fs-8 fw-bold text-danger">12</span>
+                            <span class="fs-8 fw-bold text-danger"><?=@$checkin?></span>
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between mt-4">

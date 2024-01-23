@@ -159,7 +159,7 @@
                                                                     <hr>
                                                                     <form action="<?= base_url()?>booking/update_open_proses/${full.id}" method="POST">
                                                                         <div class="col-10">
-                                                                            <label for="return" class="form-label">Tanggal Keberangkatan</label>
+                                                                            <label for="return" class="form-label">Tanggal Kembali</label>
                                                                             <div class="form-control d-flex">
                                                                                 <input type="date" class="w-100 border-0 cursor-pointer" name="return" id="return" autocomplete="off">
                                                                             </div>

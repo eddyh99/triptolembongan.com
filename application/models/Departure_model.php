@@ -27,6 +27,44 @@ class Departure_model extends CI_Model{
         }
     }
 
+    public function totaltoday($now,$lokasi){
+        if ($lokasi=="sanur"){
+            $sql="SELECT sum(total) as total FROM (
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id WHERE a.berangkat = ? AND tujuan like 'Sanur%'
+                UNION ALL
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.return_from=b.id WHERE kembali = ? AND tujuan like 'Lembongan%'
+                ) x
+            ";
+        }else{
+            $sql="SELECT sum(total) as total FROM (
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id WHERE a.berangkat = ? AND tujuan like 'Lembongan%'
+                UNION ALL
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.return_from=b.id WHERE kembali = ? AND tujuan like 'Sanur%'
+                ) x
+            ";
+        }
+        $query=$this->db->query($sql,array($now,$now));
+        return $query->row()->total;
+    }
+
+    public function totalcheckin($now,$lokasi){
+        if ($lokasi=="sanur"){
+            $sql="SELECT sum(total) as total FROM (
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id WHERE a.berangkat = ? AND tujuan like 'Sanur%' AND checkin_by IS NOT NULL
+                UNION ALL
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id WHERE kembali = ? AND tujuan like 'Lembongan%' AND checkin_return IS NOT NULL
+                ) x";
+        }else{
+            $sql="SELECT sum(total) as total FROM (
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id WHERE a.berangkat = ? AND tujuan like 'Lembongan%' AND checkin_by IS NOT NULL
+                UNION ALL
+                SELECT count(1) as total FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id WHERE kembali = ? AND tujuan like 'Sanur%' AND checkin_return IS NOT NULL
+                ) x";
+        }
+        $query=$this->db->query($sql,array($now,$now));
+        return $query->row()->total;
+    }
+
     public function departure_today_checkin($start, $end)
     {        
         $sql="SELECT namatamu, nasionality, kode_tiket, IFNULL(kembali,NULL) as ow, c.payment 
