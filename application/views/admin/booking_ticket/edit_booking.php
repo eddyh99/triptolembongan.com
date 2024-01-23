@@ -107,7 +107,7 @@
                             <div class="row wraping-add-booking-dewasa">
                                 <div class="row">
                                     <h4 class="fw-bolder text-decoration-underline">Adult</h4>
-                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
                                         <label for="nama_tamu_dewasa" class="form-label">Guest Name</label>
                                         <div class="d-flex align-items-center">
                                             <?php  
@@ -125,7 +125,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                                    <div class="mb-4 col-12 col-md wrap-nasionality">
                                         <label for="nasionality-select2" class="form-label">Nasionality</label>
                                         <?php  
                                             foreach($booking_detail as $dt){
@@ -149,7 +149,7 @@
                                             }
                                         ?>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
                                         <label for="nohp_tamu_dewasa" class="form-label">No Hp/WA</label>
                                         <div class="d-flex align-items-center">
                                             <?php  
@@ -167,7 +167,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
                                         <label for="email_tamu_dewasa" class="form-label">Email</label>
                                         <div class="d-flex align-items-center">
                                             <?php  
@@ -183,6 +183,15 @@
                                                     }
                                                 }
                                             ?>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
+                                        <label for="jnskel_dewasa" class="form-label">Sex</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="jnskel_dewasa" class="form-select" name="jnskel_dewasa[]">
+                                                <option value="pria" <?php echo ($dt["jenis"]=="dewasa")? ($dt["jnskel"]=="pria")?"selected":"":"" ?> >Pria</option>
+                                                <option value="wanita" <?php echo ($dt["jenis"]=="dewasa")? ($dt["jnskel"]=="wanita")?"selected":"":"" ?>>Wanita</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-center">

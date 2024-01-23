@@ -147,18 +147,21 @@ class Booking extends CI_Controller
         $nasionality_dewasa = $this->security->xss_clean($input->post('nasionality_dewasa'));
         $nohp_dewasa        = $this->security->xss_clean($input->post('nohp_tamu_dewasa'));
         $email_dewasa       = $this->security->xss_clean($input->post('email_tamu_dewasa'));
+        $jnskel_dewasa      = $this->security->xss_clean($input->post('jnskel_dewasa'));
 
         // Tamu Anak-anak
         $nama_tamu_anak     = $this->security->xss_clean($input->post('nama_tamu_anak'));
         $nasionality_anak   = $this->security->xss_clean($input->post('nasionality_anak'));
         $nohp_tamu_anak     = $this->security->xss_clean($input->post('nohp_tamu_anak'));
         $email_tamu_anak    = $this->security->xss_clean($input->post('email_tamu_anak'));
+        $jnskel_anak        = $this->security->xss_clean($input->post('jnskel_anak'));
   
         // Tamu FOC
         $nama_tamu_foc      = $this->security->xss_clean($input->post('nama_tamu_foc'));
         $nasionality_foc    = $this->security->xss_clean($input->post('nasionality_foc'));
         $nohp_tamu_foc      = $this->security->xss_clean($input->post('nohp_tamu_foc'));
         $email_tamu_foc     = $this->security->xss_clean($input->post('email_tamu_foc'));
+        $jnskel_foc         = $this->security->xss_clean($input->post('jnskel_foc'));
 
         $depart             = $this->security->xss_clean($input->post('depart'));
         $return_from        = $this->security->xss_clean($input->post('return_from'));
@@ -201,11 +204,14 @@ class Booking extends CI_Controller
                         foreach($email_dewasa as $keyemail=>$valueemail){
                             $temp['email']   = $valueemail;
                             $temp['jenis']   = 'dewasa';
-                            if(
-                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
-                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
-                               ){
-                                array_push($temp_dewasa, $temp);
+                            foreach ($jnskel_dewasa as $keyjnskel=>$vjnskel){
+                                $temp["jnskel"]=$vjnskel;
+                                if(
+                                    ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                    ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail) && ($keyjnskel == $keyemail)
+                                ){
+                                    array_push($temp_dewasa, $temp);
+                                }
                             }
                         }
                     }
@@ -214,8 +220,6 @@ class Booking extends CI_Controller
             }
         }
 
-        // echo "<pre>".print_r($temp_dewasa,true)."</pre>";
-        // die;
 
         // Looping nama tamu Anak
         if(array_filter($nama_tamu_anak)){
@@ -228,11 +232,14 @@ class Booking extends CI_Controller
                         foreach($email_tamu_anak as $keyemail=>$valueemail){
                             $temp['email']   = $valueemail;
                             $temp['jenis']   = 'anak';
-                            if(
-                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
-                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
-                               ){
-                                array_push($temp_anak, $temp);
+                            foreach ($jnskel_anak as $keyjnskel=>$vjnskel){
+                                $temp["jnskel"]=$vjnskel;
+                                if(
+                                    ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                    ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail) && ($keyjnskel == $keyemail)
+                                ){
+                                    array_push($temp_anak, $temp);
+                                }
                             }
                         }
                     }    
@@ -251,11 +258,14 @@ class Booking extends CI_Controller
                         foreach($email_tamu_foc as $keyemail=>$valueemail){
                             $temp['email']   = $valueemail;
                             $temp['jenis']   = 'foc';
-                            if(
-                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
-                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
-                               ){
-                                array_push($temp_foc, $temp);
+                            foreach ($jnskel_foc as $keyjnskel=>$vjnskel){
+                                $temp["jnskel"]=$vjnskel;
+                                if(
+                                    ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                    ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail) && ($keyjnskel == $keyemail)
+                                ){
+                                    array_push($temp_foc, $temp);
+                                }
                             }
                         }
                     }    
@@ -265,6 +275,8 @@ class Booking extends CI_Controller
         }
 
         $detail_booking = array_merge($temp_dewasa, $temp_anak, $temp_foc);
+        //echo "<pre>".print_r($detail_booking,true)."</pre>";
+        //die;
         $datas = array(
             'kode_tiket'    => $kode_ticket,
             'tgl_pesan'     => date("Y:m:d H:i:s"),
@@ -394,18 +406,20 @@ class Booking extends CI_Controller
         $nasionality_dewasa = $this->security->xss_clean($input->post('nasionality_dewasa'));
         $nohp_dewasa        = $this->security->xss_clean($input->post('nohp_tamu_dewasa'));
         $email_dewasa       = $this->security->xss_clean($input->post('email_tamu_dewasa'));
-
+        $jnskel_dewasa      = $this->security->xss_clean($input->post('jnskel_dewasa'));
         // Tamu Anak-anak
         $nama_tamu_anak     = $this->security->xss_clean($input->post('nama_tamu_anak'));
         $nasionality_anak   = $this->security->xss_clean($input->post('nasionality_anak'));
         $nohp_tamu_anak     = $this->security->xss_clean($input->post('nohp_tamu_anak'));
         $email_tamu_anak    = $this->security->xss_clean($input->post('email_tamu_anak'));
+        $jnskel_anak        = $this->security->xss_clean($input->post('jnskel_anak'));
   
         // Tamu FOC
         $nama_tamu_foc      = $this->security->xss_clean($input->post('nama_tamu_foc'));
         $nasionality_foc    = $this->security->xss_clean($input->post('nasionality_foc'));
         $nohp_tamu_foc      = $this->security->xss_clean($input->post('nohp_tamu_foc'));
         $email_tamu_foc     = $this->security->xss_clean($input->post('email_tamu_foc'));
+        $jnskel_foc         = $this->security->xss_clean($input->post('jnskel_foc'));
 
         $depart             = $this->security->xss_clean($input->post('depart'));
         $return_from        = $this->security->xss_clean($input->post('return_from'));
@@ -443,11 +457,14 @@ class Booking extends CI_Controller
                         foreach($email_dewasa as $keyemail=>$valueemail){
                             $temp['email']   = $valueemail;
                             $temp['jenis']   = 'dewasa';
-                            if(
-                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
-                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
-                               ){
-                                array_push($temp_dewasa, $temp);
+                            foreach ($jnskel_dewasa as $keyjnskel=>$vjnskel){
+                                $temp["jnskel"]=$vjnskel;
+                                if(
+                                    ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                    ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail) && ($keyjnskel == $keyemail)
+                                ){
+                                    array_push($temp_foc, $temp);
+                                }
                             }
                         }
                     }
@@ -470,11 +487,14 @@ class Booking extends CI_Controller
                         foreach($email_tamu_anak as $keyemail=>$valueemail){
                             $temp['email']   = $valueemail;
                             $temp['jenis']   = 'anak';
-                            if(
-                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
-                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
-                               ){
-                                array_push($temp_anak, $temp);
+                            foreach ($jnskel_anak as $keyjnskel=>$vjnskel){
+                                $temp["jnskel"]=$vjnskel;
+                                if(
+                                    ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                    ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail) && ($keyjnskel == $keyemail)
+                                ){
+                                    array_push($temp_foc, $temp);
+                                }
                             }
                         }
                     }    
@@ -493,11 +513,14 @@ class Booking extends CI_Controller
                         foreach($email_tamu_foc as $keyemail=>$valueemail){
                             $temp['email']   = $valueemail;
                             $temp['jenis']   = 'foc';
-                            if(
-                                ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
-                                ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail)
-                               ){
-                                array_push($temp_foc, $temp);
+                            foreach ($jnskel_foc as $keyjnskel=>$vjnskel){
+                                $temp["jnskel"]=$vjnskel;
+                                if(
+                                    ($keytamu == $keynas) && ($keytamu == $keynohp) && ($keytamu == $keyemail) && 
+                                    ($keynas == $keynohp) && ($keynas == $keyemail) && ($keynohp == $keyemail) && ($keyjnskel == $keyemail)
+                                ){
+                                    array_push($temp_foc, $temp);
+                                }
                             }
                         }
                     }    

@@ -34,14 +34,14 @@
                 tap++;
                 $('.wraping-add-booking-dewasa').append(`
                     <div class="adding-booking row">
-                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nama-tamu-select2" name="nama_tamu_dewasa[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                        <div class="mb-4 col-12 col-md wrap-nasionality">
                             <select name="nasionality_dewasa[]" class="nasionality-select2">
                                 <option value=""></option>
                                 <?php foreach($list_negara as $dt){?>
@@ -49,17 +49,25 @@
                                 <?php }?>
                             </select>
                         </div>
-                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nohp-tamu-select2" name="nohp_tamu_dewasa[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select  class="email-tamu-select2" name="email_tamu_dewasa[]">
                                     <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select id="jnskel_dewasa" class="form-select" name="jnskel_dewasa[]">
+                                    <option value="pria">Pria</option>
+                                    <option value="wanita">Wanita</option>
                                 </select>
                             </div>
                         </div>
@@ -105,14 +113,14 @@
                 tap++;
                 $('.wraping-add-booking-anak').append(`
                     <div class="adding-booking row">
-                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nama-tamu-select2" name="nama_tamu_anak[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                        <div class="mb-4 col-12 col-md wrap-nasionality">
                             <select name="nasionality_anak[]" class="nasionality-select2">
                                 <option value=""></option>
                                 <?php foreach($list_negara as $dt){?>
@@ -120,17 +128,25 @@
                                 <?php }?>
                             </select>
                         </div>
-                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nohp-tamu-select2" name="nohp_tamu_anak[]" >
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select  class="email-tamu-select2" name="email_tamu_anak[]">
                                     <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select id="jnskel_anak" class="form-select" name="jnskel_anak[]">
+                                    <option value="pria">Pria</option>
+                                    <option value="wanita">Wanita</option>
                                 </select>
                             </div>
                         </div>
@@ -172,14 +188,14 @@
                 tap++;
                 $('.wraping-add-booking-foc').append(`
                     <div class="adding-booking row">
-                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nama-tamu-select2" name="nama_tamu_foc[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                        <div class="mb-4 col-12 col-md wrap-nasionality">
                             <select name="nasionality_foc[]" class="nasionality-select2">
                                 <option value=""></option>
                                 <?php foreach($list_negara as $dt){?>
@@ -187,20 +203,28 @@
                                 <?php }?>
                             </select>
                         </div>
-                        <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="nohp-tamu-select2" name="nohp_tamu_foc[]" >
                                     <option></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
                             <div class="d-flex align-items-center">
                                 <select class="email-tamu-select2" name="email_tamu_foc[]">
                                     <option></option>
                                 </select>
                             </div>
                         </div>
+                        <div class="mb-4 col-12 col-md wrap-nama-tamu">
+                            <div class="d-flex align-items-center">
+                                <select id="jnskel_foc" class="form-select" name="jnskel_foc[]">
+                                    <option value="pria">Pria</option>
+                                    <option value="wanita">Wanita</option>
+                                </select>
+                            </div>
+                        </div>                        
                         <i style="cursor: pointer;" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-foc"></i>
                     </div>
                 `);

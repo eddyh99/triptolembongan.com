@@ -12,6 +12,7 @@ class Departure extends CI_Controller
 		}
 
         $this->load->model('Departure_model', 'departure');
+        $this->load->model('Ticket_model', 'ticket');
     }
 
 
@@ -21,7 +22,7 @@ class Departure extends CI_Controller
                 
         $start      = date("Y-m-d");
         $end        = date("Y-m-d");
-
+        $get_ticket = $this->ticket->get_ticket();
         if ($_SESSION["logged_status"]["lokasi"]=="Sanur"){
             $result = $this->departure->departure_today($start, $end);
         }else{
@@ -33,6 +34,7 @@ class Departure extends CI_Controller
             'content'           => 'admin/departure_today/index',
             'extra'             => 'admin/departure_today/js/_js_index',
             'result'            => $result,
+            "tiket"             => $get_ticket,
             'departure_today_active' => 'active',
         );
         $this->load->view('layout/wrapper-dashboard', $data);

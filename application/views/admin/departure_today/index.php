@@ -12,7 +12,14 @@
                                 <th>Code</th>
                                 <th>Guest</th>
                                 <th>Total</th>
-                                <th>Depart</th>
+                                <th>
+                                    <select id="depart" class="form-select">
+                                        <option value=""> -- All -- </option>
+                                        <?php foreach($tiket as $dt){?>
+                                            <option value="<?=$dt["tujuan"]." - ".$dt["berangkat"]?>"><?=$dt["tujuan"]." - ".$dt["berangkat"]?></option>
+                                        <?php }?>
+                                    </select>
+                                </th>
                                 <th>Check In</th>
                             </tr>
                         </thead>

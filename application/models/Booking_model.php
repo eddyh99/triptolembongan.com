@@ -219,6 +219,7 @@ class Booking_model extends CI_Model{
             $temp['nope']           = $dt['nope'];
             $temp['email']          = $dt['email'];
             $temp['jenis']          = $dt['jenis'];
+            $temp['jnskel']          = $dt['jnskel'];            
             array_push($detail, $temp);
         }
         // echo "<pre>".print_r($detail,true)."</pre>";
@@ -305,7 +306,7 @@ class Booking_model extends CI_Model{
 
     public function get_edit_ticket_detail($id)
     {
-        $sql = "SELECT a.id as 'id_detail', a.namatamu, a.nasionality, a.nope, a.email, a.jenis FROM tbl_booking_detail a
+        $sql = "SELECT a.id as 'id_detail', a.namatamu, a.nasionality, a.nope, a.email, a.jenis,jnskel FROM tbl_booking_detail a
         INNER JOIN tbl_booking b ON a.id=b.id
         WHERE a.id=?";
         $query = $this->db->query($sql, $id);
@@ -337,6 +338,7 @@ class Booking_model extends CI_Model{
             $temp['nope']           = $dt['nope'];
             $temp['email']          = $dt['email'];
             $temp['jenis']          = $dt['jenis'];
+            $temp['jnskel']         = $dt['jnskel'];
             array_push($detail, $temp);
         }
         // echo "<pre>".print_r($detail,true)."</pre>";
