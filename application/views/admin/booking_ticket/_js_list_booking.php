@@ -98,14 +98,6 @@
                     data: 'return_from', 
                     "sortable": false, 
                 },
-                {
-                    data: 'pickup',
-                    "sortable":false
-                },
-                {
-                    data: 'dropoff',
-                    "sortable":false
-                },
                 { 
                     data: null,
                     "sortable": false, 
@@ -116,6 +108,14 @@
                         }
                         return kembali;
                     }
+                },
+                {
+                    data: 'pickup',
+                    "sortable":false
+                },
+                {
+                    data: 'dropoff',
+                    "sortable":false
                 },
                 {
                     data: null,
