@@ -110,6 +110,14 @@
                     }
                 },
                 {
+                    data: 'pickup',
+                    "sortable":false
+                },
+                {
+                    data: 'dropoff',
+                    "sortable":false
+                },
+                {
                     data: null,
                     render: function(data, type, row){
                         var jumlah = 0;
@@ -123,7 +131,7 @@
             ],
             "aoColumnDefs": [
                 {	
-                    "aTargets": [8],
+                    "aTargets": [10],
                     "mRender": function (data, type, full, meta, row){
                         var btnCancel;
                         if(full.del == 'no'){
@@ -159,7 +167,7 @@
                                                                     <hr>
                                                                     <form action="<?= base_url()?>booking/update_open_proses/${full.id}" method="POST">
                                                                         <div class="col-10">
-                                                                            <label for="return" class="form-label">Tanggal Keberangkatan</label>
+                                                                            <label for="return" class="form-label">Tanggal Kembali</label>
                                                                             <div class="form-control d-flex">
                                                                                 <input type="date" class="w-100 border-0 cursor-pointer" name="return" id="return" autocomplete="off">
                                                                             </div>
@@ -207,7 +215,7 @@
                         var btnPrint = `
                             <button id="printTiket${full.kode_tiket}" onClick="valuePrint('${full.kode_tiket}')" class="btn btn-warning me-1"><i class="ti fs-5 ti-printer"></i></button>
                             <div class="booking-print printTiketPreview${full.kode_tiket}">
-                                <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center mt-5 mb-2">
                                     <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
                                 </div>
                                 <span class="text-center d-block fst-italic fs-2">Jalan Matahari Terbit, Pertokoan ARCADE, No.4, Sanur, Denpasar Selatan</span>
@@ -245,7 +253,7 @@
                                 <span class="fs-2"><b>R_DropOff</b>&nbsp; : ${(full.r_dropoff != null) ? full.r_dropoff : ''}</span>
                                 <br>
                                 <br>
-                                <span class="fs-2"><b><u>Charge</u></b>&emsp;&emsp; : ${chargePrint}</span>
+                                <span class="fs-2"><b><u>Remarks</u></b>&emsp;&emsp; : ${full.remarks}</span>
                                 <br>
                                 <br>
                                 <span class="fs-2">Adult: ${full.dws}, Child: ${full.anak}, FOC: ${full.foc}</span>
@@ -275,14 +283,86 @@
                             </div>
                         `;
 
+                        var btnPrint2 = `
+                            <button id="printTiket${full.kode_tiket}" onClick="valuePrint2('${full.kode_tiket}')" class="btn btn-danger me-1"><i class="ti fs-5 ti-printer"></i></button>
+                            <div class="booking-print print2TiketPreview${full.kode_tiket}">
+                                <div class="d-flex justify-content-center mt-5 mb-2">
+                                    <img class="text-center d-block img-fluid" src="<?= base_url()?>assets/img/arthamas.png" width="100mm" height="auto">
+                                </div>
+                                <span class="text-center d-block fst-italic fs-2">Jalan Matahari Terbit, Pertokoan ARCADE, No.4, Sanur, Denpasar Selatan</span>
+                                <hr>
+                                <span class="fs-2"><b>Ticket</b>&emsp;&emsp;&nbsp;&ensp; : ${full.kode_tiket}</span>
+                                <br>
+                                <span class="fs-2 "><b>Agent</b>&emsp;&emsp;&nbsp;&ensp; : ${full.namaagen}</span>
+                                <br>
+                                <span class="fs-2"><b>Tamu</b>&emsp;&emsp;&ensp;&nbsp;&ensp; : ${full.namatamu}</span>
+                                <br>
+                                <span class="fs-2"><b>Country</b>&emsp;&nbsp;&ensp; : ${full.nasionality}</span>
+                                <br>
+                                <span class="fs-2"><b>Tipe Trip</b>&emsp;&nbsp;&ensp; : ${(full.depart != null) && (full.return_from != null) ? 'Return' : 'One Way' }</span>
+                                <br>
+                                <br>
+                                <span class="fs-2"><b>Depart</b>&emsp;&ensp;&nbsp;&ensp; : ${full.p_depart}</span>
+                                <br>
+                                <span class="fs-2"><b>Date</b>&emsp;&emsp;&ensp;&nbsp;&ensp; : ${(full.berangkat != null) ? full.berangkat.split("-").reverse().join("-") : ''}</span>
+                                <br>
+                                <span class="fs-2"><b>Time</b>&emsp;&emsp;&ensp;&nbsp;&ensp; : ${full.p_time}</span>
+                                <br>
+                                <span class="fs-2"><b>Pickup</b>&emsp;&ensp;&nbsp;&ensp; : ${full.pickup}</span>
+                                <br>
+                                <span class="fs-2"><b>DropOff</b>&emsp;&ensp; : ${full.dropoff}</span>
+                                <br>
+                                <br>
+                                <span class="fs-2"><b>R_Depart</b>&emsp; : ${(full.r_depart != null) ? full.r_depart : ''}</span>
+                                <br>
+                                <span class="fs-2"><b>R_Date</b>&emsp;&emsp; : ${(full.kembali != null) ? full.kembali.split("-").reverse().join("-") : ''}</span>
+                                <br>
+                                <span class="fs-2"><b>R_Time</b>&emsp;&emsp; : ${(full.r_time != null) ? full.r_time : ''}</span>
+                                <br>
+                                <span class="fs-2"><b>R_Pickup</b>&emsp; : ${(full.r_pickup != null) ? full.r_pickup : ''}</span>
+                                <br>
+                                <span class="fs-2"><b>R_DropOff</b>&nbsp; : ${(full.r_dropoff != null) ? full.r_dropoff : ''}</span>
+                                <br>
+                                <br>
+                                <span class="fs-2"><b><u>Remarks</u></b>&emsp;&emsp; : ${full.remarks}</span>
+                                <br>
+                                <span class="fs-2"><b><u>Charge</u></b>&emsp;&emsp; : ${chargePrint}</span>
+                                <br>
+                                <br>
+                                <span class="fs-2">Adult: ${full.dws}, Child: ${full.anak}, FOC: ${full.foc}</span>
+                                <br>
+                                <hr>
+                                <div>
+                                    <span><u>Term and Condition : </u></span>
+                                    <ol>
+                                        <li>Cancelation 100% no refundable</li>
+                                        <li>OPEN ticket based on seat avaliability and should be made at least 1 day prior to the guest departure</li>
+                                        <li>Passanger with particular health problem, physical handicap and pregnant woman will travel at their own risk</li>
+                                        <li>Arthamas Express Fast Boat will not responsible for any loss or damage to the luggage during transfering to the island due to the bad weather and the guest personal belonging while joining the trip</li>
+                                        <li>If our boat is unable to departure because of technical problem then we will endeavor to transfer guest to another boat.</li>
+                                        <li>CONNECTING FLIGHT, Arthamas Express Fast Boat does not take any responsibility for any delays or connecting flight that caused by delay vessel or beyond their control (i.e. weather, road blockage/ traffic jam, ceremonies, or other unforessen circumtances)</li>
+                                    </ol>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <span style="font-size:8px;">Guest Sign</span>
+                                        <input type="text" style="width: 25mm;height: 15mm;">
+                                    </div>
+                                    <div>
+                                        <span style="font-size:8px;">Reservation</span>
+                                        <input type="text" style="width: 25mm;height: 15mm;">
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                         
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
                         var temp;
                         if(moment(full.berangkat).isSameOrAfter(currentDate) && full.checkin_by == null){
-                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnEdit}</div>`;
+                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnPrint2} ${btnEdit}</div>`;
                         }else{
-                            temp = `<div class="d-flex">${btnInfo} ${btnPrint}</div>`;                                
+                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnPrint2}</div>`;                                
                         }
                         return temp;
                     }
@@ -292,6 +372,13 @@
 
     function valuePrint(kode){
         $(`.printTiketPreview${kode}`).printThis({
+            removeScripts: true, 
+        })
+        return false;
+    }
+
+    function valuePrint2(kode){
+        $(`.print2TiketPreview${kode}`).printThis({
             removeScripts: true, 
         })
         return false;
@@ -314,6 +401,14 @@
     $("#lihat").on("click",function(){
         bookingtiket.ajax.reload();
     })
+
+    $("#depart").on("change",function(){
+        console.log(this.value);
+        bookingtiket
+            .columns( 2 )
+            .search( this.value )
+            .draw();
+    });
 
     $(function() {
         $('.modal').on('shown.bs.modal', function () {

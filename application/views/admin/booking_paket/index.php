@@ -22,7 +22,7 @@
                                         <label for="kode_ticket" class="form-label">Code Ticket</label>
                                         <div class="wrapper-kode-ticket d-flex align-items-center justify-content-between">
                                             <input type="text" class="fw-bold fs-5 text-success border-0" id="kode_ticket" name="kode_ticket" readonly 
-                                                value="TIX<?php $num = mt_rand(100000,999999); printf("%d", $num);?>"/>
+                                                value="DRC<?php $num = mt_rand(100000,999999); printf("%d", $num);?>"/>
                                             <i class="ti ti-ticket fs-6 text-success"></i>
                                         </div>
                                     </div>

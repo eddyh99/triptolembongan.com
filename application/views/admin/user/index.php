@@ -23,6 +23,7 @@
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th class="th-role">Role</th>
+                                <th>Lokasi</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <th>ID</th>
                                 <th>Username</th>
                                 <th>Role</th>
+                                <th>Lokasi</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>

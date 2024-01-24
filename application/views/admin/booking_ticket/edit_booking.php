@@ -107,7 +107,7 @@
                             <div class="row wraping-add-booking-dewasa">
                                 <div class="row">
                                     <h4 class="fw-bolder text-decoration-underline">Adult</h4>
-                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
                                         <label for="nama_tamu_dewasa" class="form-label">Guest Name</label>
                                         <div class="d-flex align-items-center">
                                             <?php  
@@ -125,7 +125,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-3 wrap-nasionality">
+                                    <div class="mb-4 col-12 col-md wrap-nasionality">
                                         <label for="nasionality-select2" class="form-label">Nasionality</label>
                                         <?php  
                                             foreach($booking_detail as $dt){
@@ -149,7 +149,7 @@
                                             }
                                         ?>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
                                         <label for="nohp_tamu_dewasa" class="form-label">No Hp/WA</label>
                                         <div class="d-flex align-items-center">
                                             <?php  
@@ -167,7 +167,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
                                         <label for="email_tamu_dewasa" class="form-label">Email</label>
                                         <div class="d-flex align-items-center">
                                             <?php  
@@ -185,8 +185,17 @@
                                             ?>
                                         </div>
                                     </div>
+                                    <div class="mb-4 col-12 col-md wrap-nama-tamu">
+                                        <label for="jnskel_dewasa" class="form-label">Sex</label>
+                                        <div class="d-flex align-items-center">
+                                            <select id="jnskel_dewasa" class="form-select" name="jnskel_dewasa[]">
+                                                <option value="pria" <?php echo ($dt["jenis"]=="dewasa")? ($dt["jnskel"]=="pria")?"selected":"":"" ?> >Pria</option>
+                                                <option value="wanita" <?php echo ($dt["jenis"]=="dewasa")? ($dt["jnskel"]=="wanita")?"selected":"":"" ?>>Wanita</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-1 d-flex align-items-center">
-                                        <i class="ti ti-circle-plus add-nama-tamu-dewasa fs-8" style="cursor: pointer;"></i>
+                                    <i class="ti ti-circle-plus add-nama-tamu-dewasa fs-8" style="cursor: pointer;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +208,7 @@
                                     <h4 class="fw-bolder text-decoration-underline">Child</h4>
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nama_tamu_anak" class="form-label">Guest Name</label>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center main-row-anak">
                                             <?php foreach($booking_detail as $dt){ ?>
                                                 <?php if($dt['jenis'] == 'anak'){?>
                                                     <select class="nama-tamu-select2" name="nama_tamu_anak[]">
@@ -214,6 +223,7 @@
                                     </div>
                                     <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                                         <label for="nasionality" class="form-label">Nasionality</label>
+                                        <div class="d-flex align-items-center main-row-anak">
                                         <?php  
                                             foreach($booking_detail as $dt){
                                                 if($dt['jenis'] == 'anak'){
@@ -235,10 +245,11 @@
                                                 }
                                             }
                                         ?>
+                                        </div>
                                     </div>
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nohp_tamu_anak" class="form-label">No Hp/WA</label>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center main-row-anak">
                                             <?php  
                                                 foreach($booking_detail as $dt){
                                                     if($dt['jenis'] == 'anak'){
@@ -256,7 +267,7 @@
                                     </div>
                                     <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
                                         <label for="email_tamu_anak" class="form-label">Email</label>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center main-row-anak">
                                             <?php  
                                                 foreach($booking_detail as $dt){
                                                     if($dt['jenis'] == 'anak'){
@@ -274,6 +285,7 @@
                                     </div>
                                     <div class="col-md-1 d-flex align-items-center">
                                         <i class="ti ti-circle-plus add-nama-tamu-anak fs-8" style="cursor: pointer;"></i>
+                                        <i style="cursor: pointer;" id="main-anak" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-dewasa"></i>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +298,7 @@
                                     <h4 class="fw-bolder text-decoration-underline">Free of Charge</h4>
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nama_tamu_foc" class="form-label">Nama Tamu</label>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center main-row-foc">
                                             <?php  
                                                 foreach($booking_detail as $dt){
                                                     if($dt['jenis'] == 'foc'){
@@ -304,6 +316,7 @@
                                     </div>
                                     <div class="mb-4 col-12 col-md-3 wrap-nasionality">
                                         <label for="nasionality" class="form-label">Nasionality</label>
+                                        <div class="d-flex align-items-center main-row-foc">
                                         <?php  
                                             foreach($booking_detail as $dt){
                                                 if($dt['jenis'] == 'foc'){
@@ -325,10 +338,11 @@
                                                 }
                                             }
                                         ?>
+                                        </div>
                                     </div>
                                     <div class="mb-4 col-12 col-md-3 wrap-nama-tamu">
                                         <label for="nohp_tamu_foc" class="form-label">No Hp/WA</label>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center main-row-foc">
                                             <?php  
                                                 foreach($booking_detail as $dt){
                                                     if($dt['jenis'] == 'foc'){
@@ -346,7 +360,7 @@
                                     </div>
                                     <div class="mb-4 col-12 col-md-2 wrap-nama-tamu">
                                         <label for="email_tamu_foc" class="form-label">Email</label>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center main-row-foc">
                                             <?php  
                                                 foreach($booking_detail as $dt){
                                                     if($dt['jenis'] == 'foc'){
@@ -364,6 +378,7 @@
                                     </div>
                                     <div class="col-md-1 d-flex align-items-center">
                                         <i class="ti ti-circle-plus add-nama-tamu-foc fs-8" style="cursor: pointer;"></i>
+                                        <i style="cursor: pointer;" id="main-foc" class="d-block col-md-1 ti ti-circle-minus fs-8 text-danger remove-add-book-dewasa"></i>
                                     </div>
                                 </div>
                             </div>

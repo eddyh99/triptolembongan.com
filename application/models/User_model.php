@@ -5,7 +5,7 @@ class User_model extends CI_Model{
 
     public function get_user()
     {		
-		$sql = "SELECT a.username, GROUP_CONCAT(b.keterangan) as keterangan FROM tbl_user a 
+		$sql = "SELECT a.username, GROUP_CONCAT(b.keterangan) as keterangan, a.lokasi FROM tbl_user a 
                 INNER JOIN tbl_role b ON a.username=b.username WHERE is_deleted='no' GROUP BY a.username";
 		$query = $this->db->query($sql);
 		if ($query){
@@ -53,7 +53,7 @@ class User_model extends CI_Model{
 
     public function get_edit_user($username)
     {
-        $sql = "SELECT a.username, GROUP_CONCAT(b.role) as role FROM tbl_user a 
+        $sql = "SELECT a.username, GROUP_CONCAT(b.role) as role, a.lokasi FROM tbl_user a 
                 INNER JOIN tbl_role b ON a.username=b.username
                 WHERE a.username=? AND a.is_deleted='no'
                 ORDER BY a.username";
