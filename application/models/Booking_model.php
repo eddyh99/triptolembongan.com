@@ -9,7 +9,7 @@ class Booking_model extends CI_Model{
             $end = date('Y-m-d', strtotime($end . ' +1 day'));
         }
         if ($tipe=="all"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open, a.remarks, a.pickup, a.dropoff,
+            $sql="SELECT a.id, kode_tiket, a.berangkat, IF(is_open='yes','Open',a.kembali) as kembali, a.is_open, a.remarks, a.pickup, a.dropoff,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
@@ -57,7 +57,7 @@ class Booking_model extends CI_Model{
             WHERE a.tgl_pesan BETWEEN ? AND ? AND a.kembali IS NULL  AND is_open='no'
             ";
         }elseif ($tipe=="open"){
-            $sql="SELECT a.id, kode_tiket, a.berangkat, a.kembali, a.is_open, a.remarks,a.pickup, a.dropoff,
+            $sql="SELECT a.id, kode_tiket, a.berangkat, IF(is_open='yes','Open',a.kembali) as kembali, a.is_open, a.remarks,a.pickup, a.dropoff,
             concat(c.tujuan,' - ',c.berangkat) as depart, c.tujuan as p_depart, c.berangkat as p_time,
             concat(d.tujuan,' - ',d.berangkat) as return_from, d.tujuan as r_depart, d.berangkat as r_time, e.payment as payment,
             (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
