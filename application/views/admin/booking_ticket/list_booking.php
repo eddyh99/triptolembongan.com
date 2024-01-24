@@ -73,6 +73,8 @@
                                 <th>Date Depart</th>
                                 <th class="th-return-ticket">Return</th>
                                 <th>Date Return</th>
+                                <th>Pickup</th>
+                                <th>Dropoff</th>
                                 <th>Total</th>
                                 <th>Reserved By</th>
                                 <th>Action</th>

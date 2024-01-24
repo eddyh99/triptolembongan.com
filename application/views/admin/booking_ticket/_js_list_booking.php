@@ -131,7 +131,7 @@
             ],
             "aoColumnDefs": [
                 {	
-                    "aTargets": [8],
+                    "aTargets": [10],
                     "mRender": function (data, type, full, meta, row){
                         var btnCancel;
                         if(full.del == 'no'){
