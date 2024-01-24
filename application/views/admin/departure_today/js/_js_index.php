@@ -8,14 +8,14 @@
     }
 </style>
 <script>
-    $("#table_list_booking_paket").DataTable({
+    var bookingtiket = $("#table_list_booking_paket").DataTable({
         "ordering": false
     });
 
     $("#depart").on("change",function(){
         console.log(this.value);
         bookingtiket
-            .columns( 2 )
+            .columns( 3 )
             .search( this.value )
             .draw();
     });
