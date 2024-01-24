@@ -212,7 +212,7 @@
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
                         var temp;
-                        if(moment(full.berangkat).isAfter(currentDate) && full.checkin_by == null){
+                        if(moment(full.berangkat).isSameOrAfter(currentDate) && full.checkin_by == null){
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnEdit}</div>`;
                         }else{
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint}</div>`;;

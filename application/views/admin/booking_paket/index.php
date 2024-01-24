@@ -93,7 +93,7 @@
                                         <select name="nasionality_dewasa[]" id="nasionality-dewasa-select2" class="nasionality-select2" required>
                                             <option value=""></option>
                                             <?php foreach($list_negara as $dt){?>
-                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                                <option value="<?= $dt['name']?>" <?php echo ($dt['name']=="Indonesia" ? "selected":"")?>><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -139,7 +139,7 @@
                                         <select name="nasionality_anak[]" id="nasionality-anak-select2" class="nasionality-select2">
                                             <option value=""></option>
                                             <?php foreach($list_negara as $dt){?>
-                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                                <option value="<?= $dt['name']?>" <?php echo ($dt['name']=="Indonesia" ? "selected":"")?>><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
                                     </div>
@@ -185,7 +185,7 @@
                                         <select name="nasionality_foc[]" id="nasionality-foc-select2" class="nasionality-select2">
                                             <option value=""></option>
                                             <?php foreach($list_negara as $dt){?>
-                                                <option value="<?= $dt['name']?>"><?= $dt['name']?></option>
+                                                <option value="<?= $dt['name']?>" <?php echo ($dt['name']=="Indonesia" ? "selected":"")?>><?= $dt['name']?></option>
                                             <?php }?>
                                         </select>
                                     </div>
