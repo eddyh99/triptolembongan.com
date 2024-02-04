@@ -37,7 +37,8 @@
                                     <td><?= $dt['depart']?></td>
                                     <td>
                                         <?php if(empty($dt['checkin_by'])){?>
-                                            <a href="<?= base_url()?>departure/checkin/<?= base64_encode($dt['id'])?>" class="btn btn-warning"><i class="ti ti-clock-edit fs-6"></i></a>
+                                            <a href="<?= base_url()?>departure/checkin/<?= base64_encode($dt['id'])?>" class="btn btn-warning me-1"><i class="ti ti-clock-edit fs-6 "></i></a>
+                                            <a href="<?= base_url()?>booking/edit_booking_ticket/<?= base64_encode($dt['id'])?>" class="btn btn-success"><i class="ti  ti-pencil-minus fs-6"></i></a>
                                         <?php } else {?>
                                             <button disabled class="btn btn-success"><i class="ti ti-check"></i></button>
                                         <?php } ?>

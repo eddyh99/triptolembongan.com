@@ -495,9 +495,6 @@ class Booking extends CI_Controller
             }
         }
 
-        // echo "<pre>".print_r($temp_dewasa,true)."</pre>";
-        // die;
-
         // Looping nama tamu Anak
         if(array_filter($nama_tamu_anak)){
             foreach($nama_tamu_anak as $keytamu=>$valuetamu){
