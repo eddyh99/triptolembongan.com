@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 12:22 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost:3306
+-- Generation Time: Feb 04, 2024 at 05:23 AM
+-- Server version: 10.3.39-MariaDB-cll-lve
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,16 +38,14 @@ CREATE TABLE `tbl_agen` (
   `userid` varchar(10) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_agen`
 --
 
 INSERT INTO `tbl_agen` (`id`, `nama`, `alamat`, `kota`, `kontak`, `tipe`, `is_deleted`, `userid`, `created_at`, `update_at`) VALUES
-(1, 'Gede Wirya', 'JALAN TAMAN AYU II B1 GIRI ASRI LINGKUNGAN MUMBUL', 'Badung', '081353523256', 'general', 'yes', 'admin', '2023-12-06 08:02:09', '2023-12-22 08:52:46'),
-(2, 'Surya Travel', 'Jalan Merdeka No. 2 Denpasar', 'Denpasar', '0361912345', 'company', 'no', 'admin', '2023-12-06 08:02:44', NULL),
-(3, 'Air Travel', 'Jalan Tukad Air  No. 2 Denpasar', 'Denpasar', '036187654', 'company', 'no', 'admin', '2023-12-06 08:03:22', NULL);
+(1, '12GO ASIA', 'Singapore', 'Singapore', '6289531578466', 'company', 'no', 'admin', '2024-01-09 11:46:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,16 +63,7 @@ CREATE TABLE `tbl_agenpaket` (
   `userid` varchar(10) NOT NULL,
   `created_at` datetime NOT NULL,
   `update_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_agenpaket`
---
-
-INSERT INTO `tbl_agenpaket` (`id`, `id_agen`, `id_paket`, `berlaku`, `berakhir`, `harga`, `userid`, `created_at`, `update_at`) VALUES
-(1, 2, 1, '2023-12-06 08:16:53', NULL, 1000000, 'admin', '2023-12-06 08:16:53', '0000-00-00 00:00:00'),
-(2, 2, 2, '2023-12-06 08:17:05', NULL, 1000000, 'admin', '2023-12-06 08:17:05', '0000-00-00 00:00:00'),
-(3, 2, 3, '2023-12-06 08:17:15', NULL, 1000000, 'admin', '2023-12-06 08:17:15', '0000-00-00 00:00:00');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -92,18 +81,19 @@ CREATE TABLE `tbl_agentiket` (
   `userid` varchar(10) NOT NULL,
   `created_at` datetime NOT NULL,
   `update_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_agentiket`
 --
 
 INSERT INTO `tbl_agentiket` (`id`, `id_agen`, `id_tiket`, `berlaku`, `berakhir`, `harga`, `userid`, `created_at`, `update_at`) VALUES
-(1, 2, 1, '2023-12-06 08:06:57', NULL, 300000, 'admin', '2023-12-06 08:06:57', '0000-00-00 00:00:00'),
-(2, 2, 2, '2023-12-06 08:10:17', NULL, 300000, 'admin', '2023-12-06 08:10:17', '0000-00-00 00:00:00'),
-(3, 2, 3, '2023-12-06 08:16:09', NULL, 300000, 'admin', '2023-12-06 08:16:09', '0000-00-00 00:00:00'),
-(4, 2, 5, '2023-12-06 08:16:22', NULL, 300000, 'admin', '2023-12-06 08:16:22', '0000-00-00 00:00:00'),
-(5, 2, 4, '2023-12-06 08:16:38', NULL, 300000, 'admin', '2023-12-06 08:16:38', '0000-00-00 00:00:00');
+(1, 1, 1, '2024-01-09 11:51:08', NULL, 100000, 'admin', '2024-01-09 11:51:08', '0000-00-00 00:00:00'),
+(2, 1, 2, '2024-01-09 11:51:38', NULL, 100000, 'admin', '2024-01-09 11:51:38', '0000-00-00 00:00:00'),
+(3, 1, 3, '2024-01-09 11:52:00', NULL, 100000, 'admin', '2024-01-09 11:52:00', '0000-00-00 00:00:00'),
+(4, 1, 4, '2024-01-09 11:52:15', NULL, 100000, 'admin', '2024-01-09 11:52:15', '0000-00-00 00:00:00'),
+(5, 1, 5, '2024-01-09 11:52:30', NULL, 100000, 'admin', '2024-01-09 11:52:30', '0000-00-00 00:00:00'),
+(6, 1, 6, '2024-01-09 11:52:39', NULL, 100000, 'admin', '2024-01-09 11:52:39', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -135,41 +125,37 @@ CREATE TABLE `tbl_booking` (
   `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no',
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_booking`
 --
 
 INSERT INTO `tbl_booking` (`id`, `kode_tiket`, `tgl_pesan`, `berangkat`, `kembali`, `pickup`, `r_pickup`, `r_dropoff`, `dropoff`, `depart`, `is_open`, `return_from`, `agentid`, `remarks`, `payment`, `charge`, `komisi`, `userid`, `checkin_by`, `checkin_return`, `is_deleted`, `created_at`, `update_at`) VALUES
-(1, 'TIX995397', '2023-12-06 08:19:25', '2023-12-06', '2023-12-07', 'Hotel Cakra', 'Pelabuhan', 'Hotel Cakra', 'Pelabuhan', 4, 'no', 5, 2, 'TBA', 1, 1500000, 0, 'admin', NULL, NULL, 'no', '2023-12-06 08:19:25', '2023-12-06 08:19:25'),
-(2, 'TIX363297', '2023-12-10 18:25:04', '2023-12-10', '2023-12-13', 'Pelabuhan Sanur', 'Sea La Vie', 'Pelabuhan Sanur', 'Sea La Vie', 4, 'no', 5, 2, 'Jemput', 1, 1000000, 0, 'admin', NULL, NULL, 'no', '2023-12-10 18:25:04', '2023-12-10 18:25:04'),
-(3, 'TIX375865', '2023-12-11 15:28:09', '2023-12-11', '2023-12-12', 'hotel', 'pelabuhan', 'hotel', 'pelabuhan', 4, 'no', 5, 2, '-', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-11 15:28:09', '2023-12-11 15:28:09'),
-(4, 'TIX375865', '2023-12-11 15:28:12', '2023-12-11', '2023-12-12', 'hotel', 'pelabuhan', 'hotel', 'pelabuhan', 4, 'no', 5, 2, '-', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-11 15:28:12', '2023-12-11 15:28:12'),
-(5, 'TIX887126', '2023-12-14 04:20:24', NULL, NULL, 'pickup beach', NULL, NULL, 'dropoff beach', 1, 'yes', NULL, 2, 'remarks', 1, 4000000, 0, 'admin', NULL, NULL, 'no', '2023-12-14 04:20:24', '2023-12-14 04:20:24'),
-(6, 'TIX715905', '2023-12-14 09:21:32', '2023-12-14', NULL, 'asd', NULL, NULL, 'asd', 1, 'no', NULL, 2, 'asd', 1, 700000, 0, 'admin', NULL, NULL, 'no', '2023-12-14 09:21:32', '2023-12-14 09:21:32'),
-(7, 'TIX238581', '2023-12-14 09:32:41', '2023-12-19', NULL, 'cas', NULL, NULL, 'cas', 1, 'no', NULL, 2, 'cas', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-14 09:32:41', '2023-12-14 09:32:41'),
-(8, 'TIX831126', '2023-12-15 00:16:05', '2023-12-16', NULL, 'assss', NULL, NULL, 'asss', 1, 'no', NULL, 2, 'sass', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-15 00:16:05', '2023-12-15 00:16:05'),
-(9, 'TIX336719', '2023-12-15 00:31:35', NULL, NULL, 'cccc', NULL, NULL, 'ccccc', 1, 'yes', NULL, 2, 'ccccc', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-15 00:31:35', '2023-12-15 00:31:35'),
-(10, 'TIX954219', '2023-12-15 00:33:21', '2023-12-16', '2023-12-19', 'aa', 'aaaaa', 'ddddd', 'ddd', 1, 'no', 1, 2, 'rrrr', 1, 10000000, 0, 'admin', 'admin', NULL, 'no', '2023-12-15 00:33:21', '2023-12-15 00:33:21'),
-(11, 'TIX267935', '2023-12-15 02:41:33', '2023-12-15', NULL, 'hotel', NULL, NULL, 'pelabuhan', 2, 'no', NULL, 2, '', 1, 10000000, 0, 'admin', 'kasir', NULL, 'no', '2023-12-15 02:41:33', '2023-12-15 06:10:23'),
-(12, 'TIX398168', '2023-12-15 05:25:42', '2023-12-15', '2023-12-18', 'qqqqq', 'qqq', 'qqq', 'qqqqq', 2, 'no', 5, 2, 'qqq', 1, 700000, 0, 'admin', 'kasir', NULL, 'no', '2023-12-15 05:25:42', '2023-12-15 06:10:21'),
-(14, 'TIX186969', '2023-12-15 08:37:14', '2023-12-15', NULL, 'ccc', NULL, NULL, 'ccc', 5, 'no', NULL, 2, 'ccc', 1, 700000, 0, 'admin', NULL, NULL, 'no', '2023-12-15 08:37:14', '2023-12-15 08:37:14'),
-(15, 'TIX810719', '2023-12-15 08:38:53', '2023-12-20', NULL, 'aaa', NULL, NULL, 'sss', 1, 'no', NULL, 2, 'ddd', 1, 1500000, 0, 'admin', NULL, NULL, 'no', '2023-12-15 08:38:53', '2023-12-15 08:38:53'),
-(16, 'TIX394293', '2023-12-16 12:22:06', '2023-12-16', '2023-12-18', 'aaa', 'aa', 'aaa', 'aaa', 1, 'no', 2, 2, 'aaa', 1, 1000000, 0, 'admin', NULL, NULL, 'no', '2023-12-16 12:22:06', '2023-12-16 12:22:06'),
-(17, 'TIX676372', '2023-12-16 12:48:12', '2023-12-17', NULL, 'ppp', NULL, NULL, 'dddd', 1, 'yes', NULL, 2, 'rrr', 1, 1500000, 0, 'admin', NULL, NULL, 'no', '2023-12-16 12:48:12', '2023-12-16 12:48:12'),
-(18, 'TIX665161', '2023-12-16 12:49:37', '2023-12-18', NULL, 'asd', NULL, NULL, 'asd', 2, 'yes', NULL, 2, 'sad', 1, 700000, 0, 'admin', NULL, NULL, 'no', '2023-12-16 12:49:37', '2023-12-16 12:49:37'),
-(19, 'TIX656570', '2023-12-18 07:21:39', '2023-12-21', '2023-12-21', 'asd', NULL, NULL, 'asd', 1, 'yes', NULL, 2, 'asd', 1, 1000000, 0, 'ari', NULL, NULL, 'no', '2023-12-18 07:21:39', '2023-12-18 08:06:51'),
-(20, 'TIX760949', '2023-12-18 07:30:08', '2023-12-21', NULL, 'aaa', NULL, NULL, 'aaa', 1, 'no', NULL, 2, 'aaa', 1, 500000, 0, 'ari', NULL, NULL, 'no', '2023-12-18 07:30:08', '2023-12-18 07:30:08'),
-(21, 'TIX240081', '2023-12-18 08:15:38', '2023-12-27', '2023-12-30', 'fff', NULL, NULL, 'fff', 4, 'no', NULL, 2, 'fff', 1, 1000000, 0, 'ari', NULL, NULL, 'no', '2023-12-18 08:15:38', '2023-12-18 08:15:59'),
-(22, 'TIX339988', '2023-12-26 14:16:20', '2023-12-27', '2023-12-29', 'pantai', 'pantai', 'hotel sanur', 'hotel nusa penida', 5, 'no', 4, 2, 'slowly', 1, 4000000, 0, 'admin', NULL, NULL, 'no', '2023-12-26 14:16:20', '2023-12-26 14:16:20'),
-(23, 'TIX388427', '2023-12-29 08:00:00', '2023-12-29', NULL, 'Sini Saja', NULL, NULL, 'situ yah', 5, 'no', NULL, 2, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-29 08:00:00', '2023-12-29 08:00:15'),
-(24, 'TIX165620', '2023-12-29 08:16:25', '2023-12-30', NULL, 'pickup harbour', NULL, NULL, 'drop off hotel', 5, 'yes', NULL, 2, 'remarks', 1, 1000000, 0, 'admin', 'admin', NULL, 'no', '2023-12-29 08:16:25', '2023-12-30 13:24:23'),
-(25, 'TIX314605', '2023-12-30 07:43:47', '2023-12-30', '2023-12-31', 'habour', NULL, NULL, 'habour', 4, 'no', 5, 2, '', 1, 700000, 0, 'admin', NULL, NULL, 'no', '2023-12-30 07:43:47', '2023-12-30 07:43:47'),
-(26, 'TIX332926', '2023-12-30 07:48:24', '2024-01-01', NULL, 'Harbour', NULL, NULL, 'Harbour', 4, 'no', NULL, 2, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2023-12-30 07:48:24', '2023-12-30 07:48:24'),
-(27, 'TIX248328', '2024-01-04 15:34:44', '2024-01-06', '2024-01-08', 'mercure', 'krisna home stay 12.00-12.30', 'jimbaran mcd', 'krisna homestay', 4, 'no', 5, 2, 'include', 1, 2000000, 0, 'admin', NULL, NULL, 'no', '2024-01-04 15:34:44', '2024-01-04 15:34:44'),
-(28, 'DRC932300', '2024-01-08 14:48:01', '2024-01-09', NULL, 'Disini', NULL, NULL, 'Disana', 5, 'no', NULL, 2, 'no at all', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-01-08 14:48:01', '2024-01-08 14:48:01'),
-(39, 'DRC614347', '2024-01-08 15:45:10', '2024-01-08', NULL, 'Sanur', NULL, NULL, 'Lembongan', 5, 'no', NULL, 2, 'no at all', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-01-08 15:45:10', '2024-01-08 15:45:10');
+(1, 'DRC882439', '2024-01-09 12:58:34', '2024-01-10', NULL, 'OT', NULL, NULL, 'OT', 1, 'no', NULL, 1, '', 1, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-09 12:58:34', '2024-01-09 12:58:34'),
+(2, 'DRC893117', '2024-01-09 14:37:06', '2024-01-09', '2024-01-11', 'ot', 'ot', 'ot', 'ot', 2, 'no', 5, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-09 14:37:06', '2024-01-09 14:37:06'),
+(3, 'DRC976361', '2024-01-09 14:38:14', '2024-01-09', '2024-01-10', 'ot', 'ot', 'ot', 'ot', 3, 'no', 5, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-09 14:38:14', '2024-01-09 14:38:14'),
+(5, 'DRC421409', '2024-01-11 10:34:34', '2024-01-15', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-11 10:34:34', '2024-01-11 10:34:34'),
+(6, 'DRC579794', '2024-01-11 10:36:11', '2024-01-11', '2024-01-13', 'ot', 'ot', 'ot', 'ot', 1, 'no', 6, 1, 'check in 3.30', 4, 0, 0, 'admin', 'admin', NULL, 'no', '2024-01-11 10:36:11', '2024-01-11 10:51:37'),
+(7, 'DRC166213', '2024-01-11 10:37:53', '2024-01-18', '2024-01-20', 'Sanur  Guest House', 'Indiana Kenanga', 'Hardrock kuta', 'Lembongan Guest House', 3, 'no', 5, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-11 10:37:53', '2024-01-11 10:37:53'),
+(10, 'DRC738997', '2024-01-11 10:43:26', '2024-01-13', NULL, 'Legian beach hotel', NULL, NULL, 'ddive concept', 2, 'no', NULL, 1, '', 1, 650000, 0, 'admin', NULL, NULL, 'no', '2024-01-11 10:43:26', '2024-01-11 10:43:26'),
+(12, 'DRC970123', '2024-01-11 10:46:02', '2024-01-19', NULL, 'OT', NULL, NULL, 'OT', 4, 'no', NULL, 1, '', 1, 75000, 0, 'admin', NULL, NULL, 'no', '2024-01-11 10:46:02', '2024-01-11 10:46:02'),
+(13, 'DRC414558', '2024-01-11 10:46:39', '2024-01-19', NULL, 'ot', NULL, NULL, 'ot', 2, 'no', NULL, 1, '', 1, 75000, 0, 'admin', NULL, NULL, 'no', '2024-01-11 10:46:39', '2024-01-11 10:46:39'),
+(14, 'DRC155938', '2024-01-11 11:17:50', '2024-01-11', '2024-01-20', 'hardrock kuta', 'bali belva', 'potato seminyak', 'bali belva', 2, 'no', 4, 1, 'include pick up time 07.00-07.15', 1, 2000000, 0, 'admin', 'admin', NULL, 'no', '2024-01-11 11:17:50', '2024-01-11 11:18:19'),
+(15, 'DRC731588', '2024-01-11 11:35:12', '2024-01-15', '2024-01-17', 'OT', 'OT', 'OT', 'OT', 6, 'no', 1, 1, '', 1, 250000, 0, 'admin', NULL, NULL, 'no', '2024-01-11 11:35:12', '2024-01-11 11:35:12'),
+(16, 'DRC103212', '2024-01-11 14:35:32', '2024-01-11', '2024-01-13', 'ot', 'ot', 'ot', 'ot', 3, 'no', 4, 1, '', 4, 0, 0, 'admin', 'admin', NULL, 'no', '2024-01-11 14:35:32', '2024-01-11 14:35:44'),
+(17, 'DRC259936', '2024-01-11 15:46:18', '2024-01-13', '2024-01-14', 'OT', NULL, NULL, 'OT', 2, 'no', 4, 1, '', 1, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-11 15:46:18', '2024-01-11 15:46:18'),
+(18, 'DRC448140', '2024-01-13 10:05:07', '2024-01-13', '2024-01-23', 'ot', 'ot', 'ot', 'ot', 2, 'no', 5, 1, 'ot check in 12.30', 1, 300000, 0, 'admin', NULL, NULL, 'no', '2024-01-13 10:05:07', '2024-01-13 10:05:07'),
+(19, 'DRC139870', '2024-01-13 10:06:51', '2024-01-13', '2024-02-01', 'ot', 'ot', 'ot', 'ot', 1, 'no', 6, 1, 'ot check in 3.30', 1, 300000, 0, 'admin', 'admin', NULL, 'no', '2024-01-13 10:06:51', '2024-01-13 10:10:03'),
+(20, 'DRC494884', '2024-01-13 10:13:22', '2024-01-13', NULL, 'ot', NULL, NULL, 'ot', 6, 'no', NULL, 1, 'ot', 1, 100000, 0, 'admin', NULL, NULL, 'no', '2024-01-13 10:13:22', '2024-01-13 10:13:22'),
+(21, 'DRC724606', '2024-01-13 10:18:18', '2024-01-27', '2024-02-02', 'ot', 'ot', 'ot', 'ot', 1, 'no', 5, 1, 'ot check in 12.30', 1, 300000, 0, 'admin', NULL, NULL, 'no', '2024-01-13 10:18:18', '2024-01-13 10:18:18'),
+(22, 'DRC319553', '2024-01-24 07:54:33', '2024-01-24', '2024-01-30', 'Sini', NULL, NULL, 'Sana', 6, 'no', NULL, 1, 'Ga tau', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-01-24 07:54:33', '2024-01-24 07:55:36'),
+(23, 'DRC335844', '2024-01-29 13:34:13', '2024-01-30', NULL, 'OT', NULL, NULL, 'OT', 1, 'no', NULL, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-01-29 13:34:13', '2024-01-29 13:34:13'),
+(24, 'DRC613530', '2024-01-29 13:49:15', '2024-01-30', '2024-01-31', 'AIRPORT', 'INDIANA KENANGA', 'GRAND INNA KUTA', 'LEMBONGAN BEACH CLUB', 2, 'no', 4, 1, '', 1, 1300000, 0, 'admin', NULL, NULL, 'no', '2024-01-29 13:49:15', '2024-01-29 13:49:15'),
+(25, 'DRC695500', '2024-01-29 15:23:27', '2024-01-29', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 150000, 0, 'admin', 'admin', NULL, 'no', '2024-01-29 15:23:27', '2024-01-29 15:25:11'),
+(26, 'DRC110930', '2024-01-29 15:45:13', '2024-01-30', '2024-02-14', 'ot', 'ot', 'ot', 'ot', 1, 'no', 5, 1, 'ot check in 12.00', 1, 600000, 0, 'admin', NULL, NULL, 'no', '2024-01-29 15:45:13', '2024-01-29 15:45:13'),
+(27, 'DRC106618', '2024-01-30 12:16:52', '2024-01-30', NULL, 'ot', NULL, NULL, 'batu karang', 3, 'yes', NULL, 1, '', 1, 250000, 0, 'admin', NULL, NULL, 'no', '2024-01-30 12:16:52', '2024-01-30 12:16:52'),
+(28, 'DRC311488', '2024-02-01 17:49:47', '2024-02-08', '2024-02-09', 'mercure', 'lembongan hostel', 'maya sanur', 'lemnbongan hostel', 1, 'no', 6, 1, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-02-01 17:49:47', '2024-02-01 17:49:47');
 
 -- --------------------------------------------------------
 
@@ -184,72 +170,55 @@ CREATE TABLE `tbl_booking_detail` (
   `nasionality` varchar(100) NOT NULL,
   `nope` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `jenis` enum('dewasa','anak','foc') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `jenis` enum('dewasa','anak','foc') NOT NULL,
+  `jnskel` enum('pria','wanita') NOT NULL DEFAULT 'pria'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_booking_detail`
 --
 
-INSERT INTO `tbl_booking_detail` (`unik`, `id`, `namatamu`, `nasionality`, `nope`, `email`, `jenis`) VALUES
-(1, 1, 'Putu Andi', 'Indonesia', '', '', 'dewasa'),
-(2, 1, 'Nyoman Gede', 'Indonesia', '', '', 'dewasa'),
-(3, 1, 'Alex', 'United Kingdom of Great Britain and Northern Ireland (the),', '', '', 'dewasa'),
-(4, 2, 'Adi', 'Indonesia', '', '', 'dewasa'),
-(5, 2, 'Ani', 'Indonesia', '', '', 'dewasa'),
-(6, 2, 'Budi', 'Indonesia', '', '', 'anak'),
-(7, 2, 'Nyoman', 'Indonesia', '', '', 'foc'),
-(8, 3, 'Adi', 'Indonesia', '', '', 'dewasa'),
-(9, 4, 'Adi', 'Indonesia', '', '', 'dewasa'),
-(10, 5, 'dessy', 'Afghanistan', '', '', 'dewasa'),
-(11, 5, 'anak dessy', 'Afghanistan', '', '', 'anak'),
-(12, 5, 'anak dessy 2', 'Afghanistan', '', '', 'anak'),
-(13, 6, 'aaaa', 'Afghanistan', '', '', 'dewasa'),
-(14, 6, 'bbb', 'Algeria', '', '', 'dewasa'),
-(15, 6, 'dddd', 'Belgium', '', '', 'dewasa'),
-(16, 6, 'cccc', 'Albania', '', '', 'anak'),
-(17, 6, 'eeee', 'Benin', '', '', 'anak'),
-(18, 7, 'aaaa', 'Afghanistan', '1111', 'a@.com', 'dewasa'),
-(19, 7, 'bbb', 'Bahrain', '', '', 'dewasa'),
-(20, 7, 'cccc', 'Bhutan', '3333', 'c@.com', 'anak'),
-(21, 7, 'dddd', 'Canada', '', '', 'anak'),
-(22, 7, 'eeee', 'Bermuda', '555', 'e@.com', 'foc'),
-(23, 7, 'fffffff', 'Cocircte dIvoire', '', '', 'foc'),
-(24, 8, 'a', 'Afghanistan', '', '', 'dewasa'),
-(25, 9, 'ari', 'Indonesia', '111111111', '', 'dewasa'),
-(26, 9, 'ariana', 'Indonesia', '222222', '', 'anak'),
-(27, 10, 'bebe', 'Aland Islands', '0000000', 'a@a.com', 'dewasa'),
-(28, 10, 'baba anak', 'Belarus', '123', '', 'anak'),
-(29, 10, 'Dede', 'Belarus', '', '', 'foc'),
-(30, 11, 'fahri', 'Afghanistan', '111111', '', 'dewasa'),
-(31, 11, 'Lady Gaga', 'Benin', '', 'gaga@gmail.com', 'foc'),
-(32, 12, 'Ari', 'Bahrain', '1111111', '', 'dewasa'),
-(33, 12, 'Rade', 'Antarctica', '', '', 'dewasa'),
-(34, 12, 'Raffi Ahmad', 'Albania', '', '', 'foc'),
-(35, 14, 'Babe', 'Afghanistan', '', '', 'dewasa'),
-(36, 15, 'aaa', 'Afghanistan', '', '', 'dewasa'),
-(37, 15, 'bbbb', 'American Samoa', '', '', 'dewasa'),
-(38, 15, 'ccccc', 'Algeria', '', '', 'dewasa'),
-(39, 15, 'dddd', 'American Samoa', '', '', 'dewasa'),
-(40, 16, 'hehehe', 'Afghanistan', '', '', 'dewasa'),
-(41, 16, 'foc', 'Afghanistan', '', '', 'foc'),
-(42, 17, 'jjj', 'Afghanistan', '111', '', 'dewasa'),
-(43, 18, 'ssss', 'Afghanistan', '1111', '', 'dewasa'),
-(44, 19, 'dede', 'Afghanistan', '1111', '', 'dewasa'),
-(45, 20, 'cek', 'Andorra', '', '', 'dewasa'),
-(46, 21, 'xxx', 'Afghanistan', '', '', 'dewasa'),
-(47, 22, 'Ari Putra', 'Indonesia', '081231231213', '', 'dewasa'),
-(48, 23, 'badu', 'Indonesia', '08123912381', 'badu@badu.com', 'dewasa'),
-(49, 23, 'rudi', 'Indonesia', '081234812931', 'rudi@rudi.com', 'dewasa'),
-(50, 24, 'Handi', 'Indonesia', '085123123123', 'handi@.com', 'dewasa'),
-(51, 24, 'yes', 'Indonesia', '081212312312', 'yes@gmail.com', 'dewasa'),
-(52, 25, 'gede', 'Indonesia', '87762000722', '', 'dewasa'),
-(53, 26, 'Kadek', 'Indonesia', '087762000722', '', 'dewasa'),
-(54, 27, 'susan', 'Indonesia', '', '', 'dewasa'),
-(55, 27, 'mira', 'Indonesia', '', '', 'anak'),
-(56, 27, 'sarah', 'Indonesia', '', '', 'foc'),
-(57, 28, 'Bagus', 'Indonesia', '081234712819', '', 'dewasa'),
-(82, 39, 'Rudiman', 'Indonesia', '', '', 'dewasa');
+INSERT INTO `tbl_booking_detail` (`unik`, `id`, `namatamu`, `nasionality`, `nope`, `email`, `jenis`, `jnskel`) VALUES
+(1, 1, 'sarah', 'Germany', '', '', 'dewasa', 'pria'),
+(2, 2, 'mirah', 'Indonesia', '', '', 'dewasa', 'pria'),
+(3, 2, 'nikol', 'Indonesia', '', '', 'anak', 'pria'),
+(4, 2, 'sisi', 'Indonesia', '', '', 'foc', 'pria'),
+(5, 3, 'riko', 'Indonesia', '', '', 'dewasa', 'pria'),
+(7, 5, 'siska', 'Indonesia', '', '', 'dewasa', 'pria'),
+(8, 6, 'yohanes', 'Ireland', '', '', 'dewasa', 'pria'),
+(9, 7, 'umi', 'Indonesia', '', '', 'dewasa', 'pria'),
+(10, 7, 'putri', 'Indonesia', '', '', 'anak', 'pria'),
+(15, 10, 'gilbert', 'British Indian Ocean Territory (the),', '0154212246554', 'gilbert@gmail.com', 'dewasa', 'pria'),
+(19, 12, 'Diah', 'Indonesia', '', '', 'dewasa', 'pria'),
+(20, 12, 'Gung silvi', 'Indonesia', '', '', 'foc', 'pria'),
+(21, 13, 'mita', 'Indonesia', '', '', 'dewasa', 'pria'),
+(22, 14, 'alexander', 'Kuwait', '', '', 'dewasa', 'pria'),
+(23, 14, 'miami', 'Kuwait', '', '', 'dewasa', 'pria'),
+(24, 14, 'raju', 'Kuwait', '', '', 'dewasa', 'pria'),
+(25, 14, 'nana', 'Kuwait', '', '', 'dewasa', 'pria'),
+(26, 15, 'Indratama', 'Indonesia', '', '', 'dewasa', 'pria'),
+(27, 15, 'onez', 'Indonesia', '', '', 'anak', 'pria'),
+(28, 15, 'iketut parthy', 'Indonesia', '', '', 'foc', 'pria'),
+(29, 16, 'gunawan', 'Indonesia', '', '', 'dewasa', 'pria'),
+(30, 17, 'kim jenny', 'Korea (the Democratic Peoples Republic of),', '+16824558622', 'kim@gmail.com', 'dewasa', 'pria'),
+(31, 17, 'rose', 'Korea (the Democratic Peoples Republic of),', '', '', 'foc', 'pria'),
+(32, 18, 'yumi', 'Indonesia', '', '', 'dewasa', 'pria'),
+(33, 18, 'parta', 'Indonesia', '', '', 'dewasa', 'pria'),
+(34, 19, 'jack karmen', 'Indonesia', '', '', 'dewasa', 'pria'),
+(35, 19, 'putri yanti', 'Indonesia', '', '', 'dewasa', 'pria'),
+(36, 20, 'alex', 'Iceland', '', '', 'dewasa', 'pria'),
+(37, 21, 'arik', 'Indonesia', '', '', 'dewasa', 'pria'),
+(38, 21, 'cas', '', '', '', 'dewasa', 'pria'),
+(39, 22, 'Bayu', 'Indonesia', '', '', 'dewasa', 'pria'),
+(40, 23, 'SAMSUL', 'Indonesia', '1234567890', 'SAMSUL.003@GMAIL.COM', 'dewasa', 'pria'),
+(41, 24, 'iwan', 'Japan', '1542005151', 'iman@gmail.com', 'dewasa', 'pria'),
+(42, 24, 'sri', 'Iraq', '', '', 'anak', 'wanita'),
+(43, 25, 'HAN BIN', 'Korea (the Democratic Peoples Republic of),', '+62115868975', 'HANBIN@GMAIL.COM', 'dewasa', 'pria'),
+(44, 26, 'sugiono', 'Japan', '', '', 'dewasa', 'pria'),
+(45, 26, 'sumanto', '', '', '', 'dewasa', 'pria'),
+(46, 27, 'justin', 'Canada', '', '', 'dewasa', 'pria'),
+(47, 27, 'ben', 'Iran (Islamic Republic of),', '', '', 'foc', 'pria'),
+(48, 28, 'sari', 'Indonesia', '', '', 'dewasa', 'pria');
 
 -- --------------------------------------------------------
 
@@ -276,15 +245,7 @@ CREATE TABLE `tbl_booking_paket` (
   `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no',
   `created_at` datetime NOT NULL,
   `update_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_booking_paket`
---
-
-INSERT INTO `tbl_booking_paket` (`id`, `kode_tiket`, `tgl_pesan`, `berangkat`, `kembali`, `pickup`, `dropoff`, `id_paket`, `agentid`, `remarks`, `payment`, `charge`, `komisi`, `userid`, `checkin_by`, `is_deleted`, `created_at`, `update_at`) VALUES
-(1, 'TIX430756', '2023-12-14 09:58:10', '2023-12-15', '2023-12-23', 'asd', 'asd', 1, 2, 'asd', 1, 1500000, 0, 'admin', NULL, 'no', '2023-12-14 09:58:10', '2023-12-14 09:58:10'),
-(2, 'TIX552847', '2023-12-16 13:29:37', '2023-12-16', '2023-12-24', 'aaa', 'aaa', 3, 2, 'aaa', 1, 10000000, 0, 'admin', 'admin', 'no', '2023-12-16 13:29:37', '2023-12-16 13:29:37');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -299,21 +260,7 @@ CREATE TABLE `tbl_booking_paket_detail` (
   `nope` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `jenis` enum('dewasa','anak','foc') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_booking_paket_detail`
---
-
-INSERT INTO `tbl_booking_paket_detail` (`id`, `namatamu`, `nasionality`, `nope`, `email`, `jenis`) VALUES
-(1, 'aaa', 'Afghanistan', '111', 'a@.com', 'dewasa'),
-(1, 'bbbb', 'Australia', '', '', 'dewasa'),
-(1, 'cccc', 'Algeria', '3333', 'c@.com', 'anak'),
-(1, 'ddd', 'Bahrain', '', '', 'anak'),
-(1, 'eeee', 'Aruba', '', '', 'anak'),
-(1, 'fff', 'Aland Islands', '77777', 'f@.com', 'foc'),
-(1, 'ggg', 'Albania', '', '', 'foc'),
-(2, 'add', 'Afghanistan', '', '', 'dewasa');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -329,16 +276,7 @@ CREATE TABLE `tbl_paket` (
   `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no',
   `created_at` datetime NOT NULL,
   `update_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_paket`
---
-
-INSERT INTO `tbl_paket` (`id`, `namapaket`, `keterangan`, `userid`, `is_deleted`, `created_at`, `update_at`) VALUES
-(1, 'Paket I', 'Paket I', 'admin', 'no', '2023-12-06 08:06:22', '0000-00-00 00:00:00'),
-(2, 'Paket II', 'Paket II', 'admin', 'no', '2023-12-06 08:06:34', '0000-00-00 00:00:00'),
-(3, 'Paket III', 'Paket III', 'admin', 'no', '2023-12-06 08:06:43', '0000-00-00 00:00:00');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -353,7 +291,7 @@ CREATE TABLE `tbl_payment` (
   `userid` varchar(10) NOT NULL,
   `created_at` datetime NOT NULL,
   `update_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_payment`
@@ -375,7 +313,7 @@ CREATE TABLE `tbl_role` (
   `username` varchar(10) NOT NULL,
   `role` varchar(5) NOT NULL,
   `keterangan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_role`
@@ -420,19 +358,19 @@ CREATE TABLE `tbl_tiket` (
   `userid` varchar(10) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_tiket`
 --
 
 INSERT INTO `tbl_tiket` (`id`, `tujuan`, `berangkat`, `is_deleted`, `userid`, `created_at`, `update_at`) VALUES
-(1, 'Sanur-Lembongan', '07:00:00', 'no', 'admin', '2023-12-06 08:04:43', NULL),
-(2, 'Sanur-Lembongan', '08:00:00', 'no', 'admin', '2023-12-06 08:04:50', NULL),
-(3, 'Sanur-Lembongan', '09:00:00', 'no', 'admin', '2023-12-06 08:04:56', NULL),
-(4, 'Sanur-Lembongan', '11:00:00', 'no', 'admin', '2023-12-06 08:05:37', NULL),
-(5, 'Lembongan-Sanur', '12:00:00', 'no', 'admin', '2023-12-06 08:05:45', NULL),
-(6, 'Lembongan-Sanur', '14:00:00', 'no', 'admin', '2023-12-06 08:05:55', NULL);
+(1, 'Sanur-Lembongan', '09:15:00', 'no', 'admin', '2024-01-09 11:47:13', '2024-01-09 11:49:18'),
+(2, 'Sanur-Lembongan', '14:30:00', 'no', 'admin', '2024-01-09 11:48:54', NULL),
+(3, 'Sanur-Lembongan', '17:00:00', 'no', 'admin', '2024-01-09 11:49:32', NULL),
+(4, 'Lembongan-Sanur', '08:15:00', 'no', 'admin', '2024-01-09 11:49:55', NULL),
+(5, 'Lembongan-Sanur', '13:00:00', 'no', 'admin', '2024-01-09 11:50:07', NULL),
+(6, 'Lembongan-Sanur', '16:00:00', 'no', 'admin', '2024-01-09 11:50:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -448,7 +386,7 @@ CREATE TABLE `tbl_user` (
   `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no',
   `created_at` datetime DEFAULT NULL,
   `update_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tbl_user`
@@ -566,43 +504,43 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_agen`
 --
 ALTER TABLE `tbl_agen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_agenpaket`
 --
 ALTER TABLE `tbl_agenpaket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_agentiket`
 --
 ALTER TABLE `tbl_agentiket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_booking`
 --
 ALTER TABLE `tbl_booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `tbl_booking_detail`
 --
 ALTER TABLE `tbl_booking_detail`
-  MODIFY `unik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `unik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tbl_booking_paket`
 --
 ALTER TABLE `tbl_booking_paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_paket`
 --
 ALTER TABLE `tbl_paket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_payment`

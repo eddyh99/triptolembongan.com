@@ -178,6 +178,14 @@
                         <span class="hide-menu">Passanger List</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link <?= @$total_active?>" href="<?= base_url()?>booking/totalbooking" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-speedboat"></i>
+                        </span>
+                        <span class="hide-menu">Total Passanger</span>
+                    </a>
+                </li>
                 <?php } ?>
 
                 

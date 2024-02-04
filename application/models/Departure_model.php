@@ -47,6 +47,58 @@ class Departure_model extends CI_Model{
         return $query->row()->total;
     }
 
+    public function reservasilist($now,$lokasi){
+        if ($lokasi=="sanur"){
+            $sql="SELECT kode_tiket, berangkat, kembali, depart, return_from, dws, anak, foc FROM (
+                SELECT kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart, 
+                    concat(d.tujuan,' - ',d.berangkat) as return_from,
+                    (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+                    (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+                    (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc
+                 FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id
+                 INNER JOIN tbl_tiket c ON a.depart=c.id 
+                 LEFT JOIN tbl_tiket d ON a.return_from=d.id
+                 WHERE a.berangkat = ? AND b.tujuan like 'Sanur%'
+                UNION ALL
+                SELECT kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart, 
+                    concat(d.tujuan,' - ',d.berangkat) as return_from,
+                    (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+                    (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+                    (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc
+                 FROM tbl_booking a INNER JOIN tbl_tiket b ON a.return_from=b.id
+                 INNER JOIN tbl_tiket c ON a.depart=c.id 
+                 LEFT JOIN tbl_tiket d ON a.return_from=d.id
+                 WHERE kembali = ? AND b.tujuan like 'Lembongan%'
+                ) x
+            ";
+        }else{
+            $sql="SELECT kode_tiket, berangkat, kembali, depart, return_from, dws, anak, foc FROM (
+                SELECT kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart, 
+                    concat(d.tujuan,' - ',d.berangkat) as return_from,
+                    (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+                    (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+                    (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc
+                FROM tbl_booking a INNER JOIN tbl_tiket b ON a.depart=b.id 
+                INNER JOIN tbl_tiket c ON a.depart=c.id 
+                LEFT JOIN tbl_tiket d ON a.return_from=d.id
+                WHERE a.berangkat = ? AND b.tujuan like 'Lembongan%'
+                UNION ALL
+                SELECT kode_tiket, a.berangkat, a.kembali, concat(c.tujuan,' - ',c.berangkat) as depart, 
+                    concat(d.tujuan,' - ',d.berangkat) as return_from,
+                    (SELECT count(1) as dws FROM tbl_booking_detail WHERE jenis='dewasa' AND id=a.id) as dws,
+                    (SELECT count(1) as anak  FROM tbl_booking_detail WHERE jenis='anak' AND id=a.id) as anak,
+                    (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc 
+                FROM tbl_booking a INNER JOIN tbl_tiket b ON a.return_from=b.id 
+                INNER JOIN tbl_tiket c ON a.depart=c.id 
+                LEFT JOIN tbl_tiket d ON a.return_from=d.id
+                WHERE kembali = ? AND b.tujuan like 'Sanur%'
+                ) x
+            ";
+        }
+        $query=$this->db->query($sql,array($now,$now));
+        return $query->result_array();
+    }
+
     public function totalcheckin($now,$lokasi){
         if ($lokasi=="sanur"){
             $sql="SELECT sum(total) as total FROM (

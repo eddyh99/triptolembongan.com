@@ -12,6 +12,7 @@ class Booking extends CI_Controller
 		}
 
         $this->load->model('Booking_model', 'booking');
+        $this->load->model('Departure_model', 'departure');
         $this->load->model('Ticket_model', 'ticket');
         $this->load->model('Agent_model', 'agent');
         $this->load->model('Harga_model', 'harga');
@@ -38,7 +39,28 @@ class Booking extends CI_Controller
         $this->load->view('layout/wrapper-dashboard', $data);
     }
 
+    public function totalbooking(){       
+        $data = array(
+            'title'             => NAMETITLE . ' - Booking Ticket',
+            'content'           => 'admin/booking_ticket/totalbooking',
+            'extra'             => 'admin/booking_ticket/_js_total',
+            'total_active'      => 'active',
+            'tiket'            =>  $this->ticket->get_ticket()
+        );
+        $this->load->view('layout/wrapper-dashboard', $data);
+    }
 
+    public function list_booking(){
+        $tanggal    = $this->security->xss_clean($this->input->post('tanggal'));
+        $tanggal = date_format(date_create($tanggal),"Y-m-d");
+        if ($_SESSION["logged_status"]["lokasi"]=="Sanur"){
+            $depart         = $this->departure->reservasilist($tanggal,"sanur");
+        }else{
+            $depart         = $this->departure->reservasilist($tanggal,"lembongan");
+        }
+        echo json_encode($depart);
+
+    }
     public function list_booking_ticket()
     {
 
