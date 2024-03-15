@@ -20,6 +20,8 @@
                                         <?php }?>
                                     </select>
                                 </th>
+                                <th>Pickup</th>
+                                <th>Dropoff</th>
                                 <th>Check In</th>
                             </tr>
                         </thead>
@@ -44,6 +46,8 @@
                                         <?php } ?>
                                         <button onClick="valuePrint('<?=$dt["dropoff"]?>','<?=$dt["dws"]?>','<?=$dt["anak"]?>','<?=$dt["foc"]?>')" class="btn btn-warning me-1"><i class="ti fs-5 ti-printer"></i></button>
                                     </td>
+									<td><?=$dt["pickup"]?></td>
+									<td><?=$dt["dropoff"]?></td>
                                 </tr>
                             <?php }?>
                         </tbody>
@@ -53,6 +57,8 @@
                                 <th>Guest</th>
                                 <th>Total</th>
                                 <th>Depart</th>
+                                <th>Pickup</th>
+                                <th>Dropoff</th>
                                 <th>Check In</th>
                             </tr>
                         </tfoot>

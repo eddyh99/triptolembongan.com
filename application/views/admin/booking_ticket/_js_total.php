@@ -33,8 +33,8 @@
             },
             "drawCallback": function () {
     			  var api = this.api();
-    			  var total=Number(api.column(5, {filter: 'applied'}).cache('search').reduce( function (a, b) {return Number(a) + Number(b);}, 0 ));
-    			  $( api.column( 5 ).footer() ).html(
+    			  var total=Number(api.column(8, {filter: 'applied'}).cache('search').reduce( function (a, b) {return Number(a) + Number(b);}, 0 ));
+    			  $( api.column( 8 ).footer() ).html(
     				total
     			  );
     		},    
@@ -62,6 +62,24 @@
                 {
                     data: null,
                     render: function(data, type, row){
+                        return Number(row.dws);
+                    },
+                },
+                {
+                    data: null,
+                    render: function(data, type, row){
+                        return Number(row.anak);
+                    },
+                },
+                {
+                    data: null,
+                    render: function(data, type, row){
+                        return Number(row.foc);
+                    },
+                },
+                {
+                    data: null,
+                    render: function(data, type, row){
                         var jumlah = 0;
                         jumlah = Number(row.dws) + Number(row.anak) + Number(row.foc);
                         return Number(jumlah);
@@ -82,5 +100,10 @@
             .search( this.value )
             .draw();
     });
-
+    $("#return").on("change",function(){
+        bookingtiket
+            .columns( 4 )
+            .search( this.value )
+            .draw();
+    });
 </script>

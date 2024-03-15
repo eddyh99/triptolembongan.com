@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 04, 2024 at 05:23 AM
+-- Generation Time: Mar 15, 2024 at 08:17 AM
 -- Server version: 10.3.39-MariaDB-cll-lve
--- PHP Version: 8.2.12
+-- PHP Version: 8.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -155,7 +155,43 @@ INSERT INTO `tbl_booking` (`id`, `kode_tiket`, `tgl_pesan`, `berangkat`, `kembal
 (25, 'DRC695500', '2024-01-29 15:23:27', '2024-01-29', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 150000, 0, 'admin', 'admin', NULL, 'no', '2024-01-29 15:23:27', '2024-01-29 15:25:11'),
 (26, 'DRC110930', '2024-01-29 15:45:13', '2024-01-30', '2024-02-14', 'ot', 'ot', 'ot', 'ot', 1, 'no', 5, 1, 'ot check in 12.00', 1, 600000, 0, 'admin', NULL, NULL, 'no', '2024-01-29 15:45:13', '2024-01-29 15:45:13'),
 (27, 'DRC106618', '2024-01-30 12:16:52', '2024-01-30', NULL, 'ot', NULL, NULL, 'batu karang', 3, 'yes', NULL, 1, '', 1, 250000, 0, 'admin', NULL, NULL, 'no', '2024-01-30 12:16:52', '2024-01-30 12:16:52'),
-(28, 'DRC311488', '2024-02-01 17:49:47', '2024-02-08', '2024-02-09', 'mercure', 'lembongan hostel', 'maya sanur', 'lemnbongan hostel', 1, 'no', 6, 1, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-02-01 17:49:47', '2024-02-01 17:49:47');
+(28, 'DRC311488', '2024-02-01 17:49:47', '2024-02-08', '2024-02-09', 'mercure', 'lembongan hostel', 'maya sanur', 'lemnbongan hostel', 1, 'no', 6, 1, '', 1, 500000, 0, 'admin', 'admin', NULL, 'no', '2024-02-01 17:49:47', '2024-02-08 11:04:27'),
+(29, 'DRC348889', '2024-02-09 14:21:00', '2024-02-10', NULL, 'ot', NULL, NULL, 'ot', 1, 'no', NULL, 1, '', 1, 150000, 0, 'admin', 'admin', NULL, 'no', '2024-02-09 14:21:00', '2024-02-10 09:51:37'),
+(30, 'DRC857579', '2024-02-09 14:22:36', '2024-02-10', '2024-02-10', 'harmoni', 'mahagiri', 'hyatt', 'lbc', 1, 'no', 6, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-02-09 14:22:36', '2024-02-09 14:22:36'),
+(31, 'DRC272821', '2024-02-10 12:43:15', '2024-02-13', NULL, 'mercure', NULL, NULL, 'mahagiri', 1, 'no', NULL, 1, 'extra  pu 500.000', 1, 650000, 0, 'admin', NULL, NULL, 'no', '2024-02-10 12:43:15', '2024-02-10 12:43:15'),
+(32, 'DRC746928', '2024-02-10 12:49:52', '2024-02-12', '2024-02-13', 'hyatt', 'LBC', 'GRAND INNA', 'LBC', 1, 'no', 4, 1, '', 1, 200000, 0, 'admin', NULL, NULL, 'no', '2024-02-10 12:49:52', '2024-02-10 12:49:52'),
+(33, 'DRC669669', '2024-02-10 13:45:04', '2024-02-12', NULL, 'OHANA', NULL, NULL, 'GRIYA SANTRIAN', 5, 'no', NULL, 1, '', 1, 400000, 0, 'admin', NULL, NULL, 'no', '2024-02-10 13:45:04', '2024-02-10 13:45:04'),
+(34, 'DRC706495', '2024-02-17 12:21:41', '2024-02-18', NULL, 'OT', NULL, NULL, 'OT', 1, 'no', NULL, 1, 'SUKA BOONG', 1, 100000, 0, 'admin', NULL, NULL, 'no', '2024-02-17 12:21:41', '2024-02-17 12:21:41'),
+(35, 'DRC279982', '2024-02-17 12:22:35', '2024-02-18', NULL, 'OT', NULL, NULL, 'OT', 1, 'no', NULL, 1, '', 1, 75000, 0, 'admin', NULL, NULL, 'no', '2024-02-17 12:22:35', '2024-02-17 12:22:35'),
+(36, 'DRC983938', '2024-02-17 12:25:36', '2024-02-18', '2024-02-20', 'OT', 'OT', 'OT', 'OT', 1, 'no', 6, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-02-17 12:25:36', '2024-02-17 12:25:36'),
+(37, 'DRC151458', '2024-02-17 12:27:32', '2024-02-18', '2024-02-21', 'OT', 'OT', 'OT', 'OT', 2, 'no', 6, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-02-17 12:27:32', '2024-02-17 12:27:32'),
+(38, 'DRC290155', '2024-02-17 12:29:30', '2024-02-19', '2024-02-22', 'MERCURE SANUR', 'MAHAGIRI', 'GRAND HYATT', 'BATUKARANG', 3, 'no', 4, 1, '', 1, 650000, 0, 'admin', NULL, NULL, 'no', '2024-02-17 12:29:30', '2024-02-17 12:29:30'),
+(39, 'DRC325832', '2024-02-20 12:55:54', '2024-02-22', NULL, 'ot', NULL, NULL, 'ot', 1, 'no', NULL, 1, '', 1, 100000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 12:55:54', '2024-02-20 12:55:54'),
+(40, 'DRC221413', '2024-02-20 12:56:48', '2024-02-22', NULL, 'ot', NULL, NULL, 'ot', 1, 'no', NULL, 1, '', 1, 100000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 12:56:48', '2024-02-20 12:56:48'),
+(41, 'DRC462314', '2024-02-20 12:58:27', '2024-02-22', NULL, 'mercure', NULL, NULL, 'lbc', 1, 'no', NULL, 1, 'collect extra pu 500.000', 1, 1000000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 12:58:27', '2024-02-20 12:58:27'),
+(42, 'DRC314053', '2024-02-20 12:59:47', '2024-02-22', NULL, 'uluwatu', NULL, NULL, 'mahagiri', 2, 'no', NULL, 1, 'collect extra PU 250.000', 1, 1500000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 12:59:47', '2024-02-20 12:59:47'),
+(43, 'DRC725009', '2024-02-20 13:01:58', '2024-02-22', '2024-02-22', 'LEGIAN BEACH HOTEL', 'OT', 'HYATT SANUR', 'OT', 1, 'no', 6, 1, '', 1, 2500000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 13:01:58', '2024-02-20 13:01:58'),
+(44, 'DRC245155', '2024-02-20 13:02:54', '2024-02-22', NULL, 'OT', NULL, NULL, 'OT', 1, 'yes', NULL, 1, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 13:02:54', '2024-02-20 13:02:54'),
+(45, 'DRC206871', '2024-02-20 13:04:08', '2024-02-21', '2024-02-23', 'PULL MAN', 'BOBO', 'GRAND INNA', 'MAHAGIRI', 1, 'no', 4, 1, '', 1, 1350000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 13:04:08', '2024-02-20 13:04:08'),
+(46, 'DRC981231', '2024-02-20 13:37:23', '2024-02-21', '2024-02-23', 'KFC', 'AQUA NUSA', 'MOVENPICK', 'OHANA', 1, 'no', 4, 1, '', 4, 0, 0, 'admin', NULL, NULL, 'no', '2024-02-20 13:37:23', '2024-02-20 13:37:23'),
+(47, 'DRC569841', '2024-02-20 13:40:29', '2024-02-20', NULL, 'OT', NULL, NULL, 'BATUKARANG', 3, 'yes', NULL, 1, '', 1, 150000, 0, 'admin', 'admin', NULL, 'no', '2024-02-20 13:40:29', '2024-02-20 13:42:00'),
+(48, 'DRC592819', '2024-02-20 15:18:00', '2024-02-20', NULL, 'OT', NULL, NULL, 'OT', 3, 'yes', NULL, 1, '', 1, 250000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 15:18:00', '2024-02-20 15:18:00'),
+(50, 'DRC326370', '2024-02-20 16:10:07', '2024-02-20', '2024-02-21', 'ubud coco supermarket', 'acala', 'potao head', 'radya homestay', 3, 'no', 4, 1, '', 1, 1300000, 0, 'admin', NULL, NULL, 'no', '2024-02-20 16:10:07', '2024-02-20 16:10:07'),
+(51, 'DRC552139', '2024-03-02 13:35:43', '2024-03-02', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 100000, 0, 'admin', 'admin', NULL, 'no', '2024-03-02 13:35:43', '2024-03-02 14:00:43'),
+(52, 'DRC596685', '2024-03-02 13:37:12', '2024-03-02', NULL, 'mercure sanur', NULL, NULL, 'pondok baruna', 3, 'no', NULL, 1, '', 1, 400000, 0, 'admin', NULL, NULL, 'no', '2024-03-02 13:37:12', '2024-03-02 13:37:12'),
+(53, 'DRC807396', '2024-03-02 13:38:20', '2024-03-02', NULL, 'OT', NULL, NULL, 'Ohanas', 3, 'no', NULL, 1, '', 1, 800000, 0, 'admin', NULL, NULL, 'no', '2024-03-02 13:38:20', '2024-03-02 13:38:20'),
+(54, 'DRC321269', '2024-03-02 13:39:08', '2024-03-02', NULL, 'OT', NULL, NULL, 'World divingg', 3, 'no', NULL, 1, 'collecct extra pu 200.000', 1, 600000, 0, 'admin', NULL, NULL, 'no', '2024-03-02 13:39:08', '2024-03-02 13:39:08'),
+(55, 'DRC287116', '2024-03-02 13:40:07', '2024-03-02', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 700000, 0, 'admin', NULL, NULL, 'no', '2024-03-02 13:40:07', '2024-03-02 13:40:07'),
+(56, 'DRC189300', '2024-03-02 13:54:37', '2024-03-02', '2024-03-03', 'grand inna', 'aqua nusa', 'plaza renon', 'the sampan', 3, 'no', 6, 1, 'collect extra 500.000', 1, 1500000, 0, 'admin', NULL, NULL, 'no', '2024-03-02 13:54:37', '2024-03-02 13:54:37'),
+(57, 'DRC798547', '2024-03-02 13:55:41', '2024-03-02', NULL, 'OT', NULL, NULL, 'OT', 3, 'yes', NULL, 1, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-03-02 13:55:41', '2024-03-02 13:55:41'),
+(58, 'DRC172441', '2024-03-06 11:33:53', '2024-03-06', '2024-03-07', 'mercure', 'Mahagiri', 'Jimbaran', 'LBC', 2, 'no', 4, 1, '', 1, 650000, 0, 'admin', 'admin', NULL, 'no', '2024-03-06 11:33:53', '2024-03-06 11:45:18'),
+(59, 'DRC738838', '2024-03-06 11:40:13', '2024-03-07', '2024-03-08', 'OT', 'gogo lemb', 'ot', 'gogo lemb', 4, 'no', 3, 1, '', 1, 500000, 0, 'admin', NULL, NULL, 'no', '2024-03-06 11:40:13', '2024-03-06 11:40:13'),
+(60, 'DRC693707', '2024-03-06 11:40:51', '2024-03-07', NULL, 'OT', NULL, NULL, 'OT', 4, 'no', NULL, 1, '', 1, 250000, 0, 'admin', NULL, NULL, 'no', '2024-03-06 11:40:51', '2024-03-06 11:40:51'),
+(62, 'DRC928180', '2024-03-06 11:46:48', '2024-03-07', NULL, 'OT', NULL, NULL, 'OT', 1, 'no', 5, 1, '', 1, 700000, 0, 'admin', NULL, NULL, 'no', '2024-03-06 11:46:48', '2024-03-06 11:46:48'),
+(63, 'DRC467823', '2024-03-06 11:47:26', '2024-03-07', NULL, 'OT', NULL, NULL, 'OT', 3, 'yes', NULL, 1, '', 1, 666666, 0, 'admin', NULL, NULL, 'no', '2024-03-06 11:47:26', '2024-03-06 11:47:26'),
+(64, 'DRC340315', '2024-03-06 11:49:20', '2024-03-06', NULL, 'ot', NULL, NULL, 'ot', 2, 'yes', NULL, 1, '', 1, 799999, 0, 'admin', 'admin', NULL, 'no', '2024-03-06 11:49:20', '2024-03-06 11:49:33'),
+(65, 'DRC424579', '2024-03-06 12:15:14', '2024-03-08', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 70000, 0, 'admin', NULL, NULL, 'no', '2024-03-06 12:15:14', '2024-03-06 12:15:14'),
+(66, 'DRC452619', '2024-03-06 12:17:08', '2024-03-06', NULL, 'ot', NULL, NULL, 'ot', 3, 'no', NULL, 1, '', 1, 250000, 0, 'admin', 'admin', NULL, 'no', '2024-03-06 12:17:08', '2024-03-06 12:17:20');
 
 -- --------------------------------------------------------
 
@@ -218,7 +254,64 @@ INSERT INTO `tbl_booking_detail` (`unik`, `id`, `namatamu`, `nasionality`, `nope
 (45, 26, 'sumanto', '', '', '', 'dewasa', 'pria'),
 (46, 27, 'justin', 'Canada', '', '', 'dewasa', 'pria'),
 (47, 27, 'ben', 'Iran (Islamic Republic of),', '', '', 'foc', 'pria'),
-(48, 28, 'sari', 'Indonesia', '', '', 'dewasa', 'pria');
+(48, 28, 'sari', 'Indonesia', '', '', 'dewasa', 'pria'),
+(49, 29, 'mita', 'Indonesia', '', '', 'dewasa', 'wanita'),
+(50, 29, 'diah', 'Indonesia', '+628113883334', 'diah@123.com', 'anak', 'wanita'),
+(51, 30, 'indra', 'Indonesia', '0812354879552', 'indra@gmail.com', 'dewasa', 'pria'),
+(52, 31, 'sarah', 'Indonesia', '08113859644', '', 'dewasa', 'wanita'),
+(53, 32, 'ones', 'Indonesia', '', '', 'dewasa', 'pria'),
+(54, 32, 'susi', '', '', '', 'dewasa', 'pria'),
+(55, 32, 'osi', 'Indonesia', '', '', 'anak', 'pria'),
+(56, 32, 'nesi (infant)', 'Indonesia', '', '', 'foc', 'pria'),
+(57, 33, 'DODI', 'Indonesia', '', '', 'dewasa', 'pria'),
+(58, 34, 'PARTA', 'Indonesia', '0811235577954', 'PARTA@GMAIL.COM', 'dewasa', 'pria'),
+(59, 35, 'RICO', 'Indonesia', '', '', 'dewasa', 'pria'),
+(60, 36, 'PUTRI', 'Indonesia', '', '', 'dewasa', 'wanita'),
+(61, 36, 'JACK', '', '', '', 'dewasa', 'pria'),
+(62, 36, 'YUMI', 'Indonesia', '', '', 'anak', 'wanita'),
+(63, 37, 'YOGI', 'Indonesia', '', '', 'dewasa', 'pria'),
+(64, 37, 'ONES', 'Indonesia', '', '', 'anak', 'pria'),
+(65, 37, 'KOMANG', 'Indonesia', '', '', 'foc', 'pria'),
+(66, 38, 'MITA', 'Indonesia', '', '', 'dewasa', 'wanita'),
+(67, 39, 'sarah', 'Indonesia', '', '', 'dewasa', 'pria'),
+(68, 40, 'yogik', 'Indonesia', '', '', 'dewasa', 'pria'),
+(69, 41, 'mita', 'Indonesia', '', '', 'dewasa', 'pria'),
+(70, 41, 'sisi', 'Indonesia', '', '', 'anak', 'pria'),
+(71, 42, 'didik', 'Indonesia', '', '', 'dewasa', 'pria'),
+(72, 42, 'angga', '', '', '', 'dewasa', 'pria'),
+(73, 43, 'mirah', 'Indonesia', '', '', 'dewasa', 'pria'),
+(74, 43, 'gandi', '', '', '', 'dewasa', 'pria'),
+(75, 43, 'roni', 'Indonesia', '', '', 'anak', 'pria'),
+(76, 44, 'MIMIN', 'Indonesia', '', '', 'dewasa', 'pria'),
+(77, 45, 'BIBI', 'Indonesia', '', '', 'dewasa', 'pria'),
+(78, 45, 'PAMAN', '', '', '', 'dewasa', 'pria'),
+(79, 46, 'ANNIE', 'Indonesia', '', '', 'dewasa', 'pria'),
+(80, 46, 'YUMI', 'Indonesia', '', '', 'anak', 'pria'),
+(81, 46, 'PARTA', 'Indonesia', '', '', 'foc', 'pria'),
+(82, 47, 'INDRA', 'Indonesia', '', '', 'dewasa', 'pria'),
+(83, 48, 'MUNI', 'Indonesia', '', '', 'dewasa', 'pria'),
+(85, 50, 'susan', 'Indonesia', '', '', 'dewasa', 'pria'),
+(86, 51, 'rico', 'Indonesia', '0811239211639', 'rico@gmail.com', 'dewasa', 'pria'),
+(87, 52, 'mita', 'Indonesia', '08113883334', 'mita@gmail.com', 'dewasa', 'wanita'),
+(88, 53, 'diah', 'Indonesia', '05120000', 'diah@gmail.com', 'dewasa', 'wanita'),
+(89, 53, 'yogik', 'British Indian Ocean Territory (the),', '', '', 'dewasa', 'pria'),
+(90, 54, 'dodik', 'Indonesia', '', '', 'dewasa', 'pria'),
+(91, 55, 'indra', 'Indonesia', '', '', 'dewasa', 'pria'),
+(92, 55, 'gung silvvi', 'Indonesia', '', '', 'anak', 'wanita'),
+(93, 56, 'anik', 'India', '245420032', '', 'dewasa', 'wanita'),
+(94, 56, 'basir', 'Indonesia', '', '', 'anak', 'pria'),
+(95, 56, 'cetta', 'Indonesia', '', '', 'foc', 'pria'),
+(96, 57, 'sastra', 'Indonesia', '', '', 'dewasa', 'wanita'),
+(97, 58, 'dodi', 'Indonesia', '', '', 'dewasa', 'pria'),
+(98, 59, 'mita', 'Indonesia', '', '', 'dewasa', 'pria'),
+(99, 60, 'sinta', 'Indonesia', '', '', 'dewasa', 'pria'),
+(101, 62, 'mira', 'Indonesia', '', '', 'dewasa', 'pria'),
+(102, 63, 'yogi', 'Indonesia', '', '', 'dewasa', 'pria'),
+(103, 64, 'sarah', 'Indonesia', '', '', 'dewasa', 'pria'),
+(104, 65, 'putri', 'Indonesia', '', '', 'dewasa', 'pria'),
+(105, 65, 'jack', 'Indonesia', '', '', 'anak', 'pria'),
+(106, 66, 'wiwin', 'Indonesia', '', '', 'dewasa', 'pria'),
+(107, 66, 'wawan', 'Indonesia', '', '', 'anak', 'pria');
 
 -- --------------------------------------------------------
 
@@ -522,13 +615,13 @@ ALTER TABLE `tbl_agentiket`
 -- AUTO_INCREMENT for table `tbl_booking`
 --
 ALTER TABLE `tbl_booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `tbl_booking_detail`
 --
 ALTER TABLE `tbl_booking_detail`
-  MODIFY `unik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `unik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `tbl_booking_paket`

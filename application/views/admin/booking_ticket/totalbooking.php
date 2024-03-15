@@ -27,13 +27,23 @@
                                 <th>Date Return</th>
                                 <th width="200px">
                                     <select id="depart" class="form-select">
-                                        <option value=""> -- All -- </option>
+                                        <option value=""> -- Depart All -- </option>
                                         <?php foreach($tiket as $dt){?>
                                             <option value="<?=$dt["tujuan"]." - ".$dt["berangkat"]?>"><?=$dt["tujuan"]." - ".$dt["berangkat"]?></option>
                                         <?php }?>
                                     </select>
                                 </th>
-                                <th width="200px">Return</th>
+                                <th width="200px">
+                                    <select id="return" class="form-select">
+                                        <option value=""> -- Return All -- </option>
+                                        <?php foreach($tiket as $dt){?>
+                                            <option value="<?=$dt["tujuan"]." - ".$dt["berangkat"]?>"><?=$dt["tujuan"]." - ".$dt["berangkat"]?></option>
+                                        <?php }?>
+                                    </select>
+                                </th>
+								<th>Adult</th>
+								<th>Child</th>
+								<th>FOC</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -41,6 +51,9 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>

@@ -2,6 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.13.7/api/sum().js"></script>
 
 <!-- DATE PICKER -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -70,6 +71,13 @@
                     return data;							
                 }
             },
+			"drawCallback": function () {
+    			  var api = this.api();
+    			  var total=Number(api.column(8, {filter: 'applied'}).cache('search').reduce( function (a, b) {return Number(a) + Number(b);}, 0 ));
+    			  $( api.column( 8 ).footer() ).html(
+    				total
+    			  );
+    		},		
             "columns": [
                 {   
                     data: 'kode_tiket',

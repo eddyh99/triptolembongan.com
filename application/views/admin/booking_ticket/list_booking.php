@@ -67,17 +67,17 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Code</th>
-                                <th>Guest</th>
-                                <th class="th-depart-ticket">Depart</th>
-                                <th>Date Depart</th>
-                                <th class="th-return-ticket">Return</th>
-                                <th>Date Return</th>
-                                <th>Pickup</th>
-                                <th>Dropoff</th>
-                                <th>Total</th>
-                                <th>Reserved By</th>
-                                <th>Action</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>

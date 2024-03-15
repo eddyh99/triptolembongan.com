@@ -12,7 +12,7 @@ class Departure_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, checkin_by, a.userid as reserved, a.is_deleted as del,a.pickup, a.dropoff FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id
@@ -119,7 +119,7 @@ class Departure_model extends CI_Model{
 
     public function departure_today_checkin($start, $end)
     {        
-        $sql="SELECT namatamu, nasionality, kode_tiket, IFNULL(kembali,NULL) as ow, c.payment 
+        $sql="SELECT namatamu, nasionality, jenis, kode_tiket, IFNULL(kembali,NULL) as ow, c.payment 
         FROM `tbl_booking` a INNER JOIN tbl_booking_detail b ON a.id=b.id 
         INNER JOIN tbl_payment c ON a.payment=c.id
         WHERE a.berangkat BETWEEN ? AND ?  AND checkin_by IS NOT NULL
@@ -141,7 +141,7 @@ class Departure_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as namatamu,  
             (SELECT nasionality FROM(SELECT *, ROW_NUMBER() OVER(PARTITION BY tbl_booking_detail.id) rn FROM tbl_booking_detail) t WHERE rn=1 AND t.id=a.id) as nasionality, 
-            nama as namaagen, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, checkin_by, a.userid as reserved, a.is_deleted as del,a.r_pickup as pickup, a.r_dropoff as dropoff FROM tbl_booking a 
         LEFT JOIN tbl_agen b ON a.agentid=b.id 
         INNER JOIN tbl_tiket c ON a.depart=c.id 
         LEFT JOIN tbl_tiket d ON a.return_from=d.id

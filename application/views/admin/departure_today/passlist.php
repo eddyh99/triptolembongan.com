@@ -10,6 +10,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Sex</th>
                                 <th>Nationality</th>
                                 <th>OW</th>
                                 <th>Return</th>
@@ -21,6 +22,16 @@
                             <?php foreach($result as $dt){?>
                                 <tr>
                                     <td><?= $dt['namatamu']?></td>
+                                    <td><?php
+											if ($dt['jenis']=="dewasa"){
+												echo "Adult";
+											}elseif ($dt['jenis']=="anak"){
+												echo "Child";
+											}else{
+												echo "FOC";
+											}
+										?>
+									</td>
                                     <td><?= $dt['nasionality']?></td>
                                     <td><?=empty($dt["ow"])?"":"yes"?></td>
                                     <td><?=empty($dt["ow"])?"yes":""?></td>
@@ -32,6 +43,7 @@
                         <tfoot>
                             <tr>
                                 <th>Name</th>
+                                <th>Sex</th>
                                 <th>Nationality</th>
                                 <th>OW</th>
                                 <th>Return</th>
