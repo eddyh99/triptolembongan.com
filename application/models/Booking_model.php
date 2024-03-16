@@ -17,7 +17,7 @@ class Booking_model extends CI_Model{
             (SELECT count(1) as foc  FROM tbl_booking_detail WHERE jenis='foc' AND id=a.id) as foc,
             (SELECT namatamu FROM tbl_booking_detail bd INNER JOIN (SELECT MIN(unik) as unik FROM tbl_booking_detail WHERE jenis='dewasa' GROUP BY id) bdu ON bd.unik=bdu.unik AND bd.id=a.id) as namatamu,  
             (SELECT nasionality FROM tbl_booking_detail bd INNER JOIN (SELECT MIN(unik) as unik FROM tbl_booking_detail WHERE jenis='dewasa' GROUP BY id) bdu ON bd.unik=bdu.unik AND bd.id=a.id) as nasionality, 
-            nama as namaagen, pickup, dropoff, r_pickup, r_dropoff, charge, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
+            nama as namaagen, pickup, dropoff, tgl_pesan, r_pickup, r_dropoff, charge, checkin_by, a.userid as reserved, a.is_deleted as del FROM tbl_booking a 
             LEFT JOIN tbl_agen b ON a.agentid=b.id 
             INNER JOIN tbl_tiket c ON a.depart=c.id 
             LEFT JOIN tbl_tiket d ON a.return_from=d.id

@@ -354,7 +354,7 @@ class Booking extends CI_Controller
         $get_booking_detail = $this->booking->get_edit_ticket_detail($id);
 
         // echo "<pre>".print_r($get_booking,true)."</pre>";
-        // print_r(json_encode($get_booking_detail));
+        // print_r(json_encode($get_booking));
         // die;
         $data = array(
             'title'             => NAMETITLE . ' - Booking Ticket',
@@ -403,6 +403,7 @@ class Booking extends CI_Controller
 		$this->form_validation->set_rules('payment', 'Payment', 'trim|required');
 		$this->form_validation->set_rules('total', 'Charge', 'trim|required');
 		$this->form_validation->set_rules('komisi', 'Charge', 'trim');
+		$this->form_validation->set_rules('tgl_pesan', 'Tanggal Pesan', 'trim');
 
         if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error', $this->message->error_msg(validation_errors()));
@@ -464,6 +465,7 @@ class Booking extends CI_Controller
         $payment            = $this->security->xss_clean($input->post('payment'));
         $charge             = $this->security->xss_clean($input->post('total'));
         $komisi             = $this->security->xss_clean($input->post('komisi'));
+        $tgl_pesan             = $this->security->xss_clean($input->post('tgl_pesan'));
                 
         $temp_dewasa = array();
         $temp_anak = array();
@@ -551,7 +553,7 @@ class Booking extends CI_Controller
         $detail_booking = array_merge($temp_dewasa, $temp_anak, $temp_foc);
         $datas = array(
             'kode_tiket'    => $kode_ticket,
-            'tgl_pesan'     => date("Y:m:d H:i:s"),
+            'tgl_pesan'     => $tgl_pesan,
             'berangkat'     => $newTglBerangkat,
             'kembali'       => ($tipetujuan=="Open") ? null : (empty($tglkembali) ? null : date("Y-m-d", strtotime($tglkembali))),
             'is_open'       => ($tipetujuan=="Open")?"yes":"no",

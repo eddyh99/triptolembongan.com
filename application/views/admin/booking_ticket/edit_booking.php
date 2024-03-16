@@ -16,6 +16,7 @@
                     <form action="<?= base_url()?>booking/edit_booking_ticket_proses" method="POST">
                         <input type="hidden" id="token" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>">
                         <input type="hidden" id="id_bookingticket" name="id_bookingticket" value="<?= $booking_ticket->id?>">
+                        <input type="hidden" name="tgl_pesan" value="<?= $booking_ticket->tgl_pesan?>">
                         <div class="row">
                             <div class="row">
                                 <div class="row">
@@ -46,19 +47,19 @@
                                         <label for="freecharge" class="form-label">Type</label>
                                         <div class="d-flex ">
                                             <div class="form-check">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="One Way" <?= ($booking_ticket->return_from == null && $booking_ticket->is_open == 'no') ? checked  : ''?>>
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="onewayradio" value="One Way" <?= ($booking_ticket->return_from == null && $booking_ticket->is_open == 'no') ? 'checked'  : ''?>>
                                                 <label class="form-check-label cursor-pointer" for="onewayradio">
                                                     One Way
                                                 </label>
                                             </div>
                                             <div class="form-check ms-3">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="Return"  <?= ($booking_ticket->return_from != null && $booking_ticket->is_open == 'no') ? checked  : ''?>>
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="returnradio" value="Return" <?= ($booking_ticket->return_from != null && $booking_ticket->is_open == 'no') ? 'checked'  : ''?>>
                                                 <label class="form-check-label cursor-pointer" for="returnradio">
                                                     Return
                                                 </label>
                                             </div>
                                             <div class="form-check ms-3">
-                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="openradio" value="Open"  <?= ($booking_ticket->return_from == null && $booking_ticket->is_open == 'yes') ? checked  : ''?>>
+                                                <input class="form-check-input cursor-pointer" type="radio" name="tipetujuan" id="openradio" value="Open"  <?= ($booking_ticket->return_from == null && $booking_ticket->is_open == 'yes') ? 'checked'  : ''?>>
                                                 <label class="form-check-label cursor-pointer" for="openradio">
                                                     Open
                                                 </label>
@@ -432,7 +433,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <button id="cekHarga" class="btn btn-dark mt-3">Check Summary</button>
-                                    <button type="submit" class="btn btn-primary mt-3">Booking Now</button>
+                                    <button type="submit" class="btn btn-primary mt-3">Edit Booking</button>
                                 </div>
                                 <div class="col-8">
                                     <div class="mb-4 col-12">

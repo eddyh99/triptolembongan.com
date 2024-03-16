@@ -150,7 +150,17 @@
                         var btnEdit = '<a href="<?=base_url()?>booking/edit_booking_ticket/'+encodeURI(btoa(full.id))+'" class="btn btn-success"><i class="ti ti-pencil-minus fs-4"></a>';
 
                         var chargePrint = parseInt(full.charge);
-                        chargePrint = chargePrint.toLocaleString("en")
+                        chargePrint = chargePrint.toLocaleString("en");
+
+                        var tgl_pesan = full.tgl_pesan.slice(0, 10).split("-").join("-");
+                        // console.log(moment().subtract('months', 1).unix());
+
+                        const getDaysDiff = (start_date, end_date, date_format = 'YYYY-MM-DD') => {
+                            const getDateAsArray = (date) => {
+                                return moment(date.split(/\D+/), date_format);
+                            }
+                            return getDateAsArray(end_date).diff(getDateAsArray(start_date), 'days') + 1;
+                        }
 
                         var btnInfo = `<div class="dropdown me-1">
                                             <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addinfo${full.kode_tiket}">
@@ -367,8 +377,9 @@
                         var date = moment();
                         var currentDate = date.format('YYYY-MM-D');
                         var temp;
+
                         if(moment(full.berangkat).isSameOrAfter(currentDate) && full.checkin_by == null){
-                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnPrint2} ${btnEdit}</div>`;
+                            temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnPrint2} ${(getDaysDiff(`${full.tgl_pesan.slice(0, 10).split("-").join("-")}`, '<?= date('Y-m-d')?>') < 30) ? `${btnEdit}` : ''}</div>`;
                         }else{
                             temp = `<div class="d-flex">${btnInfo} ${btnPrint} ${btnPrint2}</div>`;                                
                         }
